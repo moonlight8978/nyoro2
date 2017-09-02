@@ -1,4 +1,19 @@
-<%= form_for(@album) do |f| %>
+<div class="b-box b-box-p">
+  <%= form_for(@album) do |f| %>
+    <div class="form-group">
+      <%= f.label :title, 'タイトル', class: class_string(loz: false, lozzz: true) %>
+      <%= f.text_field :title, class: class_string('form-control' => true, 'is-invalid' => @album.errors.messages[:title].present?) %>
+      <div class="invalid-feedback">
+        <%= @album.errors.messages[:title] %>
+      </div>
+    </div>
+    
+    <%= f.submit %>
+  <% end %>
+</div>
+
+
+<!-- <%= form_for(@album) do |f| %>
   <% if @album.errors.any? %>
     <div class="">
       <div class="">
@@ -22,4 +37,4 @@
   <%= f.text_field :image %><br>  
 
   <%= f.submit %>
-<% end %>
+<% end %> -->

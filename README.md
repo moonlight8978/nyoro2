@@ -39,3 +39,10 @@
 ### Resources
 * [VGMdb](http://vgmdb.net/)
 * ...
+
+### Learning Materials
+* [Official RoR beginner guide](http://guides.rubyonrails.org/getting_started.html)
+* [Official RoR API](http://api.rubyonrails.org/)
+* [Ajax in RoR](http://guides.rubyonrails.org/working_with_javascript_in_rails.html)
+* [Simple Divise setup](https://launchschool.com/blog/how-to-use-devise-in-rails-for-authentication)
+* [Search with Sunspot](https://github.com/sunspot/sunspot/wiki)

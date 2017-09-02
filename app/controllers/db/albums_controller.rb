@@ -38,10 +38,12 @@ class Db::AlbumsController < ApplicationController
   
   def edit
     @album = Db::Album.find(params[:id])
+    @album_title = @album.title
   end
   
   def update
     @album = Db::Album.find(params[:id])
+    @album_title = @album.title
     @album.assign_attributes(album_params)
     
     (render plain: '何も変わらなかった。' and return) unless @album.changed?
@@ -49,6 +51,7 @@ class Db::AlbumsController < ApplicationController
     if @album.save
       redirect_to @album
     else
+      p @album.errors
       render 'edit'
     end
   end

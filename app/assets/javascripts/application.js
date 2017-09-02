@@ -23,33 +23,33 @@
 //= require_tree .
 
 (function () {
-    const wow = new WOW({
-        offset: 100
+  const wow = new WOW({
+    offset: 100
+  });
+  
+  $(document).on('ready turbolinks:load', () => {
+    $(".lazy").lazyload({
+      effect : 'fadeIn'
     });
+    wow.init();
+    $(document).on('click', '.loz-link', () => console.log('loz'));
+    const $loading = $('.loading');
     
-    $(document).on('ready turbolinks:load', () => {
-    	$(".lazy").lazyload({
-    		effect : 'fadeIn'
-    	});
-    	wow.init();
-        $(document).on('click', '.loz-link', () => console.log('loz'));
-        const $loading = $('.loading');
-			
-        $(document)
-            .on('ajax:send', '.pagination a', (event, xhr) => {
-				NProgress.start();
-                console.log('send');
-            })
-            .on('ajax:complete', '.pagination a', (event, xhr, status) => {
-                console.log('complete');
-            })
-    });
-	
-	$(document).on('turbolinks:click', function() {
-		NProgress.start();
-	});
-	$(document).on('turbolinks:render', function() {
-		NProgress.done();
-		NProgress.remove();
-	});
+    $(document)
+      .on('ajax:send', '.pagination a', (event, xhr) => {
+        NProgress.start();
+        console.log('send');
+      })
+      .on('ajax:complete', '.pagination a', (event, xhr, status) => {
+        console.log('complete');
+      })
+  });
+  
+  // $(document).on('turbolinks:click', function() {
+  // 	NProgress.start();
+  // });
+  // $(document).on('turbolinks:render', function() {
+  // 	NProgress.done();
+  // 	NProgress.remove();
+  // });
 })();
