@@ -27,7 +27,7 @@ class Db::AlbumsController < ApplicationController
     @albums = Db::Album.all
       .order(_order => _direction)
       .page(params[:page] || 1)
-      .per(params[:per_page] || 1)
+      .per(params[:per_page] || 10)
       
     respond_to do |format|
       format.html
@@ -45,12 +45,14 @@ class Db::AlbumsController < ApplicationController
     @album = Db::Album.find(params[:id])
     @album_title = @album.title
     @album.assign_attributes(album_params)
-    
-    (render plain: '何も変わらなかった。' and return) unless @album.changed?
+    p params[:db_album][:image]
+    # (render plain: '何も変わらなかった。' and return) unless @album.changed?
     
     if @album.save
+      p @album
       redirect_to @album
     else
+      p @album
       p @album.errors
       render 'edit'
     end

@@ -13,7 +13,7 @@
             .then((url) => {
                 element.css({ backgroundImage: `url('${url}')` });
             }).catch((e) => {
-                element.css({ backgroundImage: 'url("placeholder.jpg")' });
+                element.css({ backgroundImage: 'url("no_image_available.jpg")' });
             });
     }
     

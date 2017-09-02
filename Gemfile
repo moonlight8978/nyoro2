@@ -26,6 +26,9 @@ gem 'omniauth-google-oauth2', '~> 0.5.2'
 gem 'omniauth-facebook', '~> 4.0'
 gem 'omniauth-twitter', '~> 1.4'
 gem 'faraday', '~> 0.9.2'
+gem 'i18n', '~> 0.8.6'
+gem 'carrierwave', '~> 1.1'
+# gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
