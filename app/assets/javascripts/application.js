@@ -20,20 +20,23 @@
 
 //= require rails-ujs
 //= require turbolinks
+//= require_self
 //= require_tree .
+var $loading;
 
 (function () {
   const wow = new WOW({
     offset: 100
   });
   
-  $(document).on('ready turbolinks:load', () => {
+  $(document).on('turbolinks:load', () => {
+    wow.init();
     $(".lazy").lazyload({
       effect : 'fadeIn'
     });
-    wow.init();
-    $(document).on('click', '.loz-link', () => console.log('loz'));
-    const $loading = $('.loading');
+    console.log('turbolinks')
+    
+    $loading = $('.loading');
     
     $(document)
       .on('ajax:send', '.pagination a', (event, xhr) => {
@@ -42,14 +45,10 @@
       })
       .on('ajax:complete', '.pagination a', (event, xhr, status) => {
         console.log('complete');
-      })
+      });
   });
   
-  // $(document).on('turbolinks:click', function() {
-  // 	NProgress.start();
-  // });
-  // $(document).on('turbolinks:render', function() {
-  // 	NProgress.done();
-  // 	NProgress.remove();
-  // });
+  $(document).ready(function () {
+    $(document).on('click', '.loz-link', () => console.log('loz'));
+  });
 })();

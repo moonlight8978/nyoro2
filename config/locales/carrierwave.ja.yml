@@ -11,4 +11,4 @@ ja:
       mini_magick_processing_error: "Failed to manipulate with MiniMagick, maybe it is not an image? Original Error: %{e}"
       min_size_error: "File size should be greater than %{min_size}"
       max_size_error: "File size should be less than %{max_size}"
-      extension_whitelist_error: "%{extension}は謹慎です。%{allowed_types}だけが許可されています。"
+      extension_whitelist_error: "%{extension}は禁止です。%{allowed_types}だけが許可されています。"

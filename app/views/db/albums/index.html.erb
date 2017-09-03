@@ -15,20 +15,17 @@
 <% end %>
 
 <% content_for :title do %>
-<div class="page-title">
-  <div class="container">
-    <h3>アルバムリスト</h3>
-    <h6>Album list</h6>
+  <div class="page-title">
+    <div class="container">
+      <h3>アルバムリスト</h3>
+      <h6>Album list</h6>
+    </div>
   </div>
-</div>
 <% end %>
 
-<%= render 'components/utils_index' %>
+<!-- Modal trigger is inside this component -->
+<%= render 'db/albums/index/utils' %>
 
 <div id="dbAlbumList">
-  <%= render 'album_list' %>
+  <%= render 'db/albums/index/album_list' %>
 </div>
-
-<%= link_to 'New album', new_db_album_path, { class: 'loz-link' } %><br>
-
-<%= render 'components/sidebar_db' %>

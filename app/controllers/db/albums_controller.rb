@@ -1,4 +1,6 @@
 class Db::AlbumsController < ApplicationController
+  before_action :db_sidebar, only: [:show, :index]
+  
   def new
     @title = '新しいアルバムを作る'
     @album = Db::Album.new
@@ -75,5 +77,9 @@ private
     params.require(:db_album).permit(
       :title, :title_en, :title_pronounce, :image
     )
+  end
+  
+  def db_sidebar
+    @sidebar = :db
   end
 end

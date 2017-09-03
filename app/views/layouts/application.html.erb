@@ -43,11 +43,19 @@
             </div>
             <div class="col-lg-3">
               <%= yield :sidebar %>
+              
+              <% if @sidebar == :db %>
+                <%= render 'components/sidebar_db' %>
+              <% elsif @sidebar == :shop %>
+                <%= render 'components/sidebar_shop' %>
+              <% end %>
             </div>
           </div>
         </div>
       <% end %>
     </div>
+    
+    <%= yield :modals %>
     
     <%= render 'layouts/footer' unless @no_footer %>
   </body>

@@ -1,0 +1,32 @@
+.b-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+}
+
+.b-description-text {
+  white-space: pre-line;
+}
+
+.b-ruby {
+  position: relative;
+  height: #{1.5 + 0.6 * 1.5}rem;
+  
+  .b-rb, .b-kanji {
+    position: absolute;
+    top: 0.9rem;
+    left: 0;
+    right: 0;
+    font-size: 1rem;
+  }
+  
+  .b-rt, .b-furigana {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 15px;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+  }
+}
