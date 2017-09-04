@@ -1,5 +1,6 @@
 class Db::AlbumsController < ApplicationController
   before_action :db_sidebar, only: [:show, :index]
+  before_action :authenticate_user!, only: [:edit, :update, :new, :create, :destroy]
   
   def new
     @title = '新しいアルバムを作る'
@@ -9,7 +10,9 @@ class Db::AlbumsController < ApplicationController
   def create
     @album = Db::Album.create(album_params)
     
-    unless @album.errors.any? 
+    unless @album.errors.any?
+      log = @album.log_create(current_user, @album.title, params[:description])
+      ActionCable.server.broadcast('logs', render_logs)
       redirect_to @album
     else
       render 'new'
@@ -51,13 +54,20 @@ class Db::AlbumsController < ApplicationController
     # (render plain: '何も変わらなかった。' and return) unless @album.changed?
     
     if @album.save
-      p @album
+      log = @album.log_update(current_user, @album.title, params[:description])
+      ActionCable.server.broadcast('logs', render_logs)
       redirect_to @album
     else
-      p @album
-      p @album.errors
       render 'edit'
     end
+  end
+  
+  def destroy
+    @album = Db::Album.find(params[:id])
+    log = @album.log_destroy(current_user, @album.title, params[:description])
+    @album.destroy
+    ActionCable.server.broadcast('logs', render_logs)
+    redirect_to db_albums_path
   end
   
   def search
@@ -81,5 +91,11 @@ private
   
   def db_sidebar
     @sidebar = :db
+    @logs = Feature::Log.db_log.page(1).per(10)
+  end
+  
+  def render_logs
+    logs = Feature::Log.db_log.page(1).per(10)
+    render_to_string partial: 'feature/logs/log', locals: { logs: logs }
   end
 end

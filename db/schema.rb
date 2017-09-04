@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830121040) do
+ActiveRecord::Schema.define(version: 20170904044810) do
 
   create_table "db_albums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -22,6 +22,40 @@ ActiveRecord::Schema.define(version: 20170830121040) do
     t.index ["created_at"], name: "index_db_albums_on_created_at"
     t.index ["title_pronounce"], name: "index_db_albums_on_title_pronounce"
     t.index ["updated_at"], name: "index_db_albums_on_updated_at"
+  end
+
+  create_table "feature_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_feature_comments_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_feature_comments_on_user_id"
+  end
+
+  create_table "feature_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.string "loggable_type"
+    t.bigint "loggable_id"
+    t.string "classification"
+    t.string "action"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.index ["classification", "action"], name: "index_feature_logs_on_classification_and_action"
+    t.index ["classification"], name: "index_feature_logs_on_classification"
+    t.index ["loggable_type", "loggable_id"], name: "index_feature_logs_on_loggable_type_and_loggable_id"
+    t.index ["user_id"], name: "index_feature_logs_on_user_id"
+  end
+
+  create_table "user_roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_user_roles_on_name"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -49,6 +83,12 @@ ActiveRecord::Schema.define(version: 20170830121040) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+  end
+
+  create_table "users_user_roles", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+    t.index ["user_id", "role_id"], name: "index_users_user_roles_on_user_id_and_role_id"
   end
 
 end

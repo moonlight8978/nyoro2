@@ -1,4 +1,7 @@
 class Db::Album < ApplicationRecord
+  include Commentable
+  include Loggable
+  
   validates :title, 
     presence: { message: 'タイトルを空にすることはできません。' }
   validates :title_en,

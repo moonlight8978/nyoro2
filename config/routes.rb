@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: redirect('/warning')
   
+  mount ActionCable.server => '/cable'
+  
   get '/warning', to: 'warning#index'
   get 'home', to: 'home#index'
   

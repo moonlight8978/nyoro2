@@ -14,3 +14,19 @@
     margin-bottom: .5rem;
   }
 }
+
+.b-box-row {
+  position: relative;
+  padding: 1rem;
+  
+  &:not(:last-child):after {
+    content: "";
+    display: block;
+    height: 1px;
+    position: absolute;
+    right: 10px;
+    left: 10px;
+    bottom: 0;
+    background-color: $border-color;
+  }
+}

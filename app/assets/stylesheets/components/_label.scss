@@ -1,0 +1,10 @@
+.b-label {
+  font-size: 0.75rem;
+  padding: 0 5px 2px;
+  color: white;
+  background-color: $purple;
+  
+  &.create { background-color: $green; }
+  &.update { background-color: $blue; }
+  &.destroy { background-color: $red; }
+}
