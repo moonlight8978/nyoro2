@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :omniauthable
-  
+  mount_uploader :avatar, AvatarUploader
   def is_admin?
     self.roles.pluck(:name).include?('admin')
   end

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+      
   root to: redirect('/warning')
   
   mount ActionCable.server => '/cable'
@@ -12,8 +15,7 @@ Rails.application.routes.draw do
       collection do
         get 'search'
       end
+      resources :comments, controller: 'albums/comments'
     end
   end
-  
-  get '/sign_in', to: 'users/registrations#edit'
 end

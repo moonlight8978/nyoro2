@@ -8,6 +8,7 @@ class Db::AlbumsController < ApplicationController
   end
   
   def create
+    @title = '新しいアルバムを作る'
     @album = Db::Album.create(album_params)
     
     unless @album.errors.any?
@@ -21,6 +22,8 @@ class Db::AlbumsController < ApplicationController
   
   def show
     @album = Db::Album.find(params[:id])
+    @comment = Feature::Comment.new
+    @comments = @album.comments.eager_load(:user).page(1).per(10)
     @title = @album.title
   end
   
@@ -43,11 +46,13 @@ class Db::AlbumsController < ApplicationController
   
   def edit
     @album = Db::Album.find(params[:id])
+    @title = "#{@album.title}を直す"
     @album_title = @album.title
   end
   
   def update
     @album = Db::Album.find(params[:id])
+    @title = "#{@album.title}を直す"
     @album_title = @album.title
     @album.assign_attributes(album_params)
     p params[:db_album][:image]
@@ -64,6 +69,7 @@ class Db::AlbumsController < ApplicationController
   
   def destroy
     @album = Db::Album.find(params[:id])
+    @title = "#{@album.title}を消す"
     log = @album.log_destroy(current_user, @album.title, params[:description])
     @album.destroy
     ActionCable.server.broadcast('logs', render_logs)

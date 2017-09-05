@@ -1,0 +1,16 @@
+<% if user_signed_in? %>
+  <%= form_for(@comment, url: db_album_comments_path(@album)) do |f| %>
+    <div class="">
+      <div class="" style="width: 40px;">
+        <div class="b-img-placeholder b-img-placeholder-avatar b-ratio-1_1">
+          <div class="b-img-thumb" data-background-image="<%= current_user.avatar_url %>">
+          </div>
+        </div>
+      </div>
+      <%= f.text_area :body, rows: 1 %>
+    </div>
+    <%= f.submit %>
+  <% end %>
+<% else %>
+  ログインのが必要です。
+<% end %>

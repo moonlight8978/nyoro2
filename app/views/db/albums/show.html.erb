@@ -63,6 +63,23 @@
   </div>
 </div>
 
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">
+    コメント
+  </h6>
+  
+  <div class="">
+    <%= render 'components/comment_form' %>
+  </div>
+  
+  <%= render partial: 'components/comments', 
+    locals: { 
+      commentable: @album,
+      comments: @comments 
+    } 
+  %>
+</div>
+
 <% content_for :modals do %>
   <%= render partial: 'components/confirm_destroy', 
     locals: { 
