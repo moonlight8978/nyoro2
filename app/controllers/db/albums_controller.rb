@@ -39,7 +39,7 @@ class Db::AlbumsController < ApplicationController
       
     respond_to do |format|
       format.html
-      format.js
+      format.js 
       format.json { render json: @albums, status: :ok }
     end
   end
@@ -102,6 +102,6 @@ private
   
   def render_logs
     logs = Feature::Log.db_log.page(1).per(10)
-    render_to_string partial: 'feature/logs/log', locals: { logs: logs }
+    render_to_string partial: 'components/logs', locals: { logs: logs }
   end
 end

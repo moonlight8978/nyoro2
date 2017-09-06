@@ -1,6 +1,20 @@
-.loading { 
+.b-loading { 
   background: transparent url('loading_dual_ring.gif') no-repeat center center;
   background-size: contain;
   height: 24px;
   display: none; 
+  
+  &.show {
+    display: block; 
+  }
+}
+
+.b-loading-inline {
+  @extend .b-loading;
+  width: 16px;
+  vertical-align: bottom;
+  
+  &.show {
+    display: inline-block; 
+  }
 }

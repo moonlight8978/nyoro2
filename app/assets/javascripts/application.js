@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require axios/dist/axios.min
 //= require tether/dist/js/tether.min
 //= require popper.js/dist/umd/popper.min
 //= require bootstrap/dist/js/bootstrap.min

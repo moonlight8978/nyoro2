@@ -7,11 +7,13 @@ class Db::Albums::CommentsController < ApplicationController
     @comments = @album.comments.includes(:user)
       .page(params[:page] || 1)
       .per(params[:per_page] || 10)
-      
+    
+    asd = render_to_string 'index'
+    
     respond_to do |format|
       format.html
-      format.json { render json: @comments }
-      format.js
+      format.js { head :not_found unless @comments.any? }
+      format.json
     end
   end
   
