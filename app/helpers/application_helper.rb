@@ -14,4 +14,9 @@ module ApplicationHelper
       '</ol></div>'
     content_for(:breadcrumb, _breadcrumb.html_safe)
   end
+  
+  def comments_for(commentable, initial_comments, *params)
+    render partial: 'components/comments/container', 
+      locals: { commentable: commentable, initial_comments: initial_comments }
+  end
 end

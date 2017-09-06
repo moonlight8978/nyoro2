@@ -1,0 +1,30 @@
+.comment-form {
+  display: flex;
+  
+  .comment-user-avatar {
+    flex: 0 0 40px;
+    width: 40px;
+  }
+  
+  .comment-input {
+    flex: 1 0 auto;
+    padding: 0 1rem 0 .5rem;
+    height: 40px;
+    
+    textarea { 
+      height: 100%;
+      resize: none; 
+    }
+  }
+  
+  .comment-submit {
+    flex: 0 0 auto;
+    height: 40px;
+    
+    button {
+      padding: 0 1rem;  
+      height: 100%;
+    }
+  }
+}
+

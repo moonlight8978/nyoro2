@@ -18,4 +18,7 @@ Rails.application.routes.draw do
       resources :comments, controller: 'albums/comments'
     end
   end
+  
+  resource :user, only: :show
+  resources :users
 end

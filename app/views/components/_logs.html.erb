@@ -1,32 +1,18 @@
 <% logs.each do |log| %>
   <div class="b-box-row">
-    <div class="b-ellipsis pb-2">
+    <div class="b-ellipsis pb-1">
       <%= link_to log.title, log.loggable %>
     </div>
     
-    <div class="" style="display: flex;">
-      <div style="width: 40px; flex: 0 0 40px;">
-        <div class="b-img-placeholder b-img-placeholder-avatar b-ratio-1_1">
-          <div class="b-img-thumb" data-background-image="/assets/vanilla.png">
-            
-          </div>
-        </div>
+    <div class="ellipsis">
+      <%= link_to (log.user.user_name || '無名') + 'さん', user_path(log.user) %>
+    </div>
+    
+    <div class="" style="display: flex; justify-content: space-between;">
+      <div class="" style="font-size: 0.75rem;">
+        <%= log.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
       </div>
-      
-      <div class="pl-2" style="flex: 0 0 calc(100% - 40px); width: calc(100% - 40px);">
-        <div class="" style="display: flex; justify-content: space-between;">
-          <div class="ellipsis pr-2" style="">
-            <%= (log.user.user_name || '無名') %>さん
-          </div>
-          <div>
-            <div class="b-label <%= log.action %>"><%= log.action %></div>
-          </div>
-        </div>
-        
-        <div class="" style="text-align: right;font-size: 0.75rem;">
-          <%= log.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
-        </div>
-      </div>
+      <div class="b-label <%= log.action %>"><%= log.action %></div>
     </div>
   </div>
 <% end %>

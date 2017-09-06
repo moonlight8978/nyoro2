@@ -8,12 +8,9 @@ class Db::Albums::CommentsController < ApplicationController
       .page(params[:page] || 1)
       .per(params[:per_page] || 10)
     
-    asd = render_to_string 'index'
-    
     respond_to do |format|
-      format.html
       format.js { head :not_found unless @comments.any? }
-      format.json
+      format.json { render json: @comments }
     end
   end
   

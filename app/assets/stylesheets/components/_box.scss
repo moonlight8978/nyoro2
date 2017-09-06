@@ -15,7 +15,15 @@
   }
 }
 
-.b-box-row {
+.b-box-another {
+  padding: 1rem;
+  background: #f6f7f9;
+  
+  &.top { border-bottom: 1px solid #ddd; }
+  &.bottom { border-top: 1px solid #ddd; }
+}
+
+.b-box .b-box-row {
   position: relative;
   padding: 1rem;
   

@@ -1,0 +1,34 @@
+<% comments.each do |comment| %>
+  <div class="b-box-row">
+    <div class="">
+      <%= comment.body || '無名' %>
+    </div>
+    <div class="d-flex">
+      <div class="" style="width: 40px; flex: 0 0 40px">
+        <div class="b-img-placeholder b-img-placeholder-avatar b-ratio-1_1">
+          <div class="b-img-thumb" data-background-image="<%= comment.user.avatar_url %>">
+            
+          </div>
+        </div>
+      </div>
+      <div class="" style="flex: 1 0 calc(100% - 40px);">
+        <%= link_to (comment.user.user_name || '無名') + 'さん', user_path(comment.user) %>
+        <span> | </span>
+        <%= comment.created_at %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% unless comments.last_page? %>
+  <div class="px-3 py-2" id="wrapper<%= comments.current_page %>">
+    <%= link_to '他のコメントを見る',
+      polymorphic_path([commentable, :comments], page: comments.next_page), 
+      class: 'b-more-comments', 
+      'data-target' => '#commentList', 
+      'data-loading' => '#commentLoading' + comments.current_page.to_s,
+      'data-wrapper' => '#wrapper' + comments.current_page.to_s
+    %>
+    <div class="b-loading b-loading-inline" id="commentLoading<%= comments.current_page %>"></div>
+  </div>
+<% end %>
