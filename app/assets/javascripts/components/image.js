@@ -11,11 +11,8 @@ function loadImage(element) {
   if (!element.data('loaded')) {
     checkImage(element.data('backgroundImage'))
       .then((url) => {
-        console.log('yes');
         element.css({ backgroundImage: `url('${url}')` });
       }, (e) => {
-        console.log(e);
-        console.log('tach cmnr');
         element.css({ backgroundImage: 'url("/assets/no_image_available.jpg")' });
       })
       .then(() => element.data('loaded', 1));

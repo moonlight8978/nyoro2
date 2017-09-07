@@ -38,3 +38,12 @@
     background-color: $border-color;
   }
 }
+
+.b-box-row:hover .b-box-row-options { display: block; }
+
+.b-box-row-options {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: .5rem;
+}

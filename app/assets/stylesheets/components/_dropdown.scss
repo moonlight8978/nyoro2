@@ -3,3 +3,12 @@
     position: static;
   }
 }
+
+.b-dropdown-toggle-icon {
+  padding: 2px 9px;
+  
+  &:hover {
+    background-color: #f0f0f0;
+    border-radius: 50% !important;
+  }
+}

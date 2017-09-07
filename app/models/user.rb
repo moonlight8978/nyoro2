@@ -23,6 +23,10 @@ class User < ApplicationRecord
     self.roles.pluck(:name).include?('banned')
   end
   
+  def is_current_user?(current_user)
+    current_user && current_user.id == self.id
+  end
+  
 private
 
   def set_default_role

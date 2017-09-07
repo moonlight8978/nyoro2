@@ -1,39 +1,38 @@
 <div class="row">
   <% @albums.each do |album| %>
     <div class="col-md-6 mb-3">
-      <div class="b-box b-box-p h-100">
+      <div class="b-box b-box-p h-100 b-item">
         <div class="row">
-          <div class="col-4 col-md-5">
+          <div class="col-4 col-md-5 b-item-img">
             <div class="b-img-placeholder b-ratio-1_1">
               <div class="b-img-thumb" data-background-image="<%= album.image_url.to_s %>">
               </div>
             </div>
           </div>
           
-          <div class="col-8 col-md-7 d-flex flex-column text-center">
-            <div class="">
-              <div class="">
+          <div class="col-8 col-md-7 b-item-info">
+            <div class="b-item-info-head">
+              <div class="b-text-3l">
                 <%= link_to album.title, db_album_path(album), 
                   title: album.title_pronounce
                 %>
               </div>
-              <div class="d-flex">
-                <div class="pr-2 text-right" style="flex: 0 0 50%;">
-                  <i class="fa fa-fw fa-clock-o" title="読むにかかる時間"></i>
-                  30:22
-                </div>
-                <div class="pl-2 text-left" style="flex: 0 0 50%;">
-                  <i class="fa fa-star" title="ユーザーレーティング"></i>
-                  10
+              <div class="mt-1">
+                <div class="row">
+                  <div class="col-6 pr-2 text-right">
+                    <i class="fa fa-fw fa-clock-o" title="読むにかかる時間"></i>
+                    30:22
+                  </div>
+                  <div class="col-6 pl-2 text-left">
+                    <i class="fa fa-star" title="ユーザーレーティング"></i>
+                    10
+                  </div>
                 </div>
               </div>
-              
-              <div class="line w-100">
-                
-              </div>
+              <div class="line w-100 mt-2"></div>
             </div>
             
-            <div class="d-flex flex-column justify-content-center" style="flex: 1 0 auto;">
+            <div class="b-item-info-body">
               <div class="">
                 <div class="b-font-80">
                   発売日

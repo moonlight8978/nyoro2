@@ -1,0 +1,20 @@
+.b-item {
+  .b-item-img { padding-right: 0; }
+  
+  .b-item-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .b-item-info-head {
+    flex: none;
+  }
+  
+  .b-item-info-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 0 auto;
+  }
+}

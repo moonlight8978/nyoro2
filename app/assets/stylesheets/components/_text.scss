@@ -30,3 +30,7 @@
     letter-spacing: 2px;
   }
 }
+
+.b-text-3l {
+  @include text-limit-lines(2, 1.5, 1);
+}

@@ -1,8 +1,5 @@
 <% comments.each do |comment| %>
   <div class="b-box-row">
-    <div class="">
-      <%= comment.body || '無名' %>
-    </div>
     <div class="d-flex">
       <div class="" style="width: 40px; flex: 0 0 40px">
         <div class="b-img-placeholder b-img-placeholder-avatar b-ratio-1_1">
@@ -11,24 +8,39 @@
           </div>
         </div>
       </div>
-      <div class="" style="flex: 1 0 calc(100% - 40px);">
-        <%= link_to (comment.user.user_name || '無名') + 'さん', user_path(comment.user) %>
-        <span> | </span>
-        <%= comment.created_at %>
+      <div class="pl-3" style="flex: 1 0 calc(100% - 40px);">
+        <div class="b-font-95">
+          <strong>
+            <%= link_to (comment.user.user_name || '無名') + 'さん', 
+              user_path(comment.user), 
+              class: 'b-author b-link' 
+            %>
+          </strong>
+          
+          <span>・</span>
+          <span class="b-font-90"><%= j_full_date(comment.created_at) %></span>
+        </div>
+        <p class="b-description-text m-0"><%= comment.body || '無名' %></p>
       </div>
     </div>
+    
+    <% if comment.user.is_current_user?(current_user) %>
+      <%= render 'components/comments/options', locals: { comment: comment } %>
+    <% end %>
   </div>
 <% end %>
 
 <% unless comments.last_page? %>
   <div class="px-3 py-2" id="wrapper<%= comments.current_page %>">
-    <%= link_to '他のコメントを見る',
-      polymorphic_path([commentable, :comments], page: comments.next_page), 
+    <%= link_to polymorphic_path([commentable, :comments], page: comments.next_page), 
       class: 'b-more-comments', 
       'data-target' => '#commentList', 
       'data-loading' => '#commentLoading' + comments.current_page.to_s,
-      'data-wrapper' => '#wrapper' + comments.current_page.to_s
+      'data-wrapper' => '#wrapper' + comments.current_page.to_s do
     %>
+      <i class="fa fa-fw fa-caret-down"></i>
+      <span>他のコメントを見る</span>
+    <% end %>
     <div class="b-loading b-loading-inline" id="commentLoading<%= comments.current_page %>"></div>
   </div>
 <% end %>

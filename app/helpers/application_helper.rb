@@ -19,4 +19,8 @@ module ApplicationHelper
     render partial: 'components/comments/container', 
       locals: { commentable: commentable, initial_comments: initial_comments }
   end
+  
+  def j_full_date(full_date)
+    full_date.strftime('%Y年%m月%d日 - %H:%M:%S')
+  end
 end

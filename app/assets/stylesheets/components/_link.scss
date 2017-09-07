@@ -1,3 +1,18 @@
 .b-link-no-decoration {
   text-decoration: none !important;
 }
+
+.b-author.b-link {
+  color: #494b4e;
+  font-weight: 600;
+  
+  &:hover {
+    
+  }
+}
+
+.b-as-link {
+  &:hover {
+    color: $link-hover-color;
+  }
+}

@@ -53,3 +53,7 @@ var $loading;
     $(document).on('click', '.loz-link', () => console.log('loz'));
   });
 })();
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
