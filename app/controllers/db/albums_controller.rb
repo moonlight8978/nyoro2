@@ -23,7 +23,7 @@ class Db::AlbumsController < ApplicationController
   def show
     @album = Db::Album.find(params[:id])
     @comment = Feature::Comment.new
-    @comments = @album.comments.eager_load(:user).page(1).per(10)
+    @comments = @album.comments.eager_load(:user).page(1).per(5)
     @title = @album.title
   end
   

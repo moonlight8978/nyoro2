@@ -1,0 +1,3 @@
+setTimeout(function () {
+  $('.utils-nsfw-toggle').html("<%= escape_javascript(nsfw_status ? 'ON' : 'OFF') %>");
+}, 10);

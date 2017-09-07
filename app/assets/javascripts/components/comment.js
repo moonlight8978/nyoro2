@@ -10,13 +10,13 @@
 //       $($(this).data('loading')).removeClass('show');
 //     }, 3000);
 //   });
-axios.defaults.headers.common['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr('content');
 
 $(document)
   .on('click', '.b-more-comments', async function (event) {
     event.preventDefault();
     const $this = $(this);
     const url = $this.attr('href');
+    
     if (url) {
       $this.attr('href', '');
       const $loading = $($this.data('loading'));
@@ -27,18 +27,28 @@ $(document)
       
       await setTimeout(function () {
         axios
-          .get(url, { headers: { 'Accept': 'application/javascript', 'X-Requested-With': 'XMLHttpRequest', } })
-          .then((response) => {
-            console.log(response);
-            $target.append(response.data);
-            loadAllImages();
-            $wrapper.remove();
+          .get(url, { 
+            headers: { 'Accept': 'application/javascript' } 
           })
-          .catch(error => {
-            $loading.removeClass('show');
-            console.log(error)
-          })
-          .then(() => $this.attr('href', url));
+          .then(_then)
+          .catch(_catch)
+          .then(_finally);
       }, 3000);
-    }
+      
+      function _then(response) {
+        console.log(response);
+        $target.append(response.data);
+        loadAllImages();
+        $wrapper.remove();
+      }
+      
+      function _catch(error) {
+        $loading.removeClass('show');
+        console.log(error);
+      }
+      
+      function _finally() {
+        $this.attr('href', url);
+      }
+    } // end if
   })

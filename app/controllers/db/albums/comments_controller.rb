@@ -6,11 +6,18 @@ class Db::Albums::CommentsController < ApplicationController
     
     @comments = @album.comments.includes(:user)
       .page(params[:page] || 1)
-      .per(params[:per_page] || 10)
+      .per(params[:per_page] || 5)
     
     respond_to do |format|
-      format.js { head :not_found unless @comments.any? }
       format.json { render json: @comments }
+      format.js do
+        if @comments.any?
+          render partial: 'components/comments/list', 
+            locals: { commentable: @album, comments: @comments }
+        else 
+          head :bad_request
+        end
+      end
     end
   end
   

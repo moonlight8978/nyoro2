@@ -90,17 +90,13 @@
           <span>&#9660;</span>
         </span>
         
-        <div class="dropdown-menu" aria-labelledby="hideNsfw" 
-          ng-click="vm.fixDropdown($event)"
-        >
+        <div class="dropdown-menu dropdown-off-autoclose" aria-labelledby="hideNsfw">
           <div class="dropdown-item">
-            <label class="switch-button">
-              <input type="checkbox" ng-model="vm.hideNsfw">
-              <div class="slider"></div>
-            </label>
-            <span class="">
-              18+コンテンツ {{ vm.hideNsfw ? 'OFF' : 'ON'}}。
-            </span>
+            <%= link_to nsfw_status ? 'ON' : 'OFF', utilities_nsfw_path, 
+              class: 'btn-c btn-c-5 btn-c-5-sakura px-3 py-1 utils-nsfw-toggle',
+              'data-disable-with' => '読み中...', method: :post, remote: true
+            %>
+            18+コンテンツ
           </div>
         </div>
       </div>

@@ -23,4 +23,8 @@ module ApplicationHelper
   def j_full_date(full_date)
     full_date.strftime('%Y年%m月%d日 - %H:%M:%S')
   end
+  
+  def nsfw_status
+    session[:nsfw]
+  end
 end

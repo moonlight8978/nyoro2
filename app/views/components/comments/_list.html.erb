@@ -9,16 +9,13 @@
         </div>
       </div>
       <div class="pl-3" style="flex: 1 0 calc(100% - 40px);">
-        <div class="b-font-95">
-          <strong>
-            <%= link_to (comment.user.user_name || '無名') + 'さん', 
-              user_path(comment.user), 
-              class: 'b-author b-link' 
-            %>
-          </strong>
-          
+        <div>
+          <%= link_to (comment.user.user_name || '無名') + 'さん', 
+            user_path(comment.user), 
+            class: 'b-author b-link' 
+          %>
           <span>・</span>
-          <span class="b-font-90"><%= j_full_date(comment.created_at) %></span>
+          <span class="b-font-85"><%= j_full_date(comment.created_at) %></span>
         </div>
         <p class="b-description-text m-0"><%= comment.body || '無名' %></p>
       </div>

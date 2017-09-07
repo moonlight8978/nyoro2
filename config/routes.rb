@@ -21,4 +21,8 @@ Rails.application.routes.draw do
   
   resource :user, only: :show
   resources :users
+  
+  namespace :utilities do
+    post 'nsfw'
+  end
 end

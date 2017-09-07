@@ -1,11 +1,14 @@
 <% logs.each do |log| %>
   <div class="b-box-row">
-    <div class="b-ellipsis pb-1">
+    <div class="b-ellipsis">
       <%= link_to log.title, log.loggable %>
     </div>
     
     <div class="ellipsis">
-      <%= link_to (log.user.user_name || '無名') + 'さん', user_path(log.user) %>
+      <%= link_to (log.user.user_name || '無名') + 'さん', 
+        user_path(log.user),
+        class: 'b-link b-author'
+      %>
     </div>
     
     <div class="" style="display: flex; justify-content: space-between;">

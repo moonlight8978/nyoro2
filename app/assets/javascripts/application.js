@@ -23,6 +23,20 @@
 //= require turbolinks
 //= require_self
 //= require_tree .
+
+// Libs init
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
+// Configs
+axios.defaults.headers.common['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr('content');
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+//
+
+//
 var $loading;
 
 (function () {
@@ -40,20 +54,14 @@ var $loading;
     $loading = $('.loading');
     
     $(document)
-      .on('ajax:send', '.pagination a', (event, xhr) => {
+      .on('ajax:send', '[data-remote="true"]', (event, xhr) => {
         NProgress.start();
         console.log('send');
       })
-      .on('ajax:complete', '.pagination a', (event, xhr, status) => {
+      .on('ajax:complete', '[data-remote="true"]', (event, xhr, status) => {
+        NProgress.inc();
+        NProgress.done();
         console.log('complete');
       });
   });
-  
-  $(document).ready(function () {
-    $(document).on('click', '.loz-link', () => console.log('loz'));
-  });
 })();
-
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-});
