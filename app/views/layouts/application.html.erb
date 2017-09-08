@@ -4,6 +4,7 @@
     <title><%= @title %></title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -39,7 +40,7 @@
         <div class="container py-4">
           <div class="row">
             <div class="col-lg-9">
-              <%= yield :utils %>
+              <%= render 'components/utils/container' %>
               <%= yield %>
             </div>
             <div class="col-lg-3">

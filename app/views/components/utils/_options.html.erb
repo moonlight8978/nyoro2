@@ -1,0 +1,32 @@
+<div class="dropdown-menu dropdown-menu-right" aria-labelledby="crud">
+  <% if defined?(new_path) %>
+    <%= link_to new_path, class: 'b-link b-link-no-decoration' do %>
+      <div class="dropdown-item">
+        <i class="fa fa-fw fa-plus"></i>
+        <span>新しい<%= name %>を作る</span>
+      </div>
+    <% end %> 
+  <% end %>
+  
+  <% if defined?(edit_path) %>
+    <%= link_to edit_path, 
+      class: 'b-link b-link-no-decoration' do 
+    %>
+      <div class="dropdown-item">
+        <i class="fa fa-fw fa-pencil"></i>
+        <span>この<%= name %>を編集する</span>
+      </div>
+    <% end %>
+  <% end %>
+  
+  <% if defined?(destroy_path) %>
+    <a href="javascript:void(0)" class="b-link b-link-no-decoration"
+      data-toggle="modal" data-target="#confirmDestroyModal"
+    >
+      <div class="dropdown-item">
+        <i class="fa fa-fw fa-times"></i>
+        <span>この<%= name %>を削除する</span>
+      </div>
+    </a>
+  <% end %>
+</div>

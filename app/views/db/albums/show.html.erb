@@ -7,11 +7,17 @@
 
 <%= page_title(@album.title, @album.title_en) %>
 
-<%= render 'db/albums/show/utils' %>
+<% content_for :options do %>
+  <%= render partial: 'components/utils/options', locals: {
+    name: 'アルバム',
+    edit_path: edit_db_album_path(@album),
+    destroy_path: db_album_path(@album)
+  } %>
+<% end %>
 
 <div class="b-box b-box-p">
   <div class="row">
-    <div class="col-5 col-md-4 pr-0">
+    <div class="col-6 col-sm-5 col-md-4 pr-0">
       <div class="b-img-placeholder b-ratio-1_1">
         <div class="b-img-thumb" 
           data-background-image="<%= @album.image_url.to_s %>"
@@ -20,7 +26,7 @@
       </div>
     </div>
     
-    <div class="col-7 col-md-8">
+    <div class="col-sm-7 col-md-8 pt-3 pt-sm-0">
       <table class="b-table b-table-hidden-th">
         <tbody>
           <tr>

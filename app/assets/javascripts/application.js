@@ -30,6 +30,10 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
 
+$(document).ready(() => {
+  $('[data-toggle="dropdown"]').dropdown();
+});
+
 // Configs
 axios.defaults.headers.common['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr('content');
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

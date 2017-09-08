@@ -5,14 +5,18 @@
 //   </div>
 // </div>
 
-.page-title {
+.page-title, .b-page-title {
   padding: 15px 0;
   background-color: $white;
   box-shadow: 0 2px 4px $box-shadow__color;
-  min-height: 91px;
-
-  h6 {
-    font-size: 0.9em;
+  
+  .b-big-title {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+  }
+  
+  .b-small-title {
+    font-size: 0.9rem;
     font-weight: 600;
     text-transform: uppercase;
   }

@@ -26,6 +26,7 @@
 * sidekiq - redis: `$ sudo apt-get install redis-server`
 * Node.js
 * Yarn
+* ngrok: `$ ./ngrok http 3000`
 
 ##### Database - MySQL
 * Username: `root`

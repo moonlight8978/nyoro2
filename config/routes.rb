@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
       
   root to: redirect('/warning')
@@ -11,6 +12,8 @@ Rails.application.routes.draw do
   get 'home', to: 'home#index'
   
   namespace :db do
+    get '', action: :index
+    
     resources :albums do
       collection do
         get 'search'

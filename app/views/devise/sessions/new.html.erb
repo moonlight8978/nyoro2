@@ -1,26 +1,60 @@
-<h2>Log in</h2>
-<div>asdasdads</div>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+<div class="pt-5"></div>
+<div class="pt-4"></div>
+<div class="pt-3"></div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container pb-3 px-4">
+  <h3 class="mt-4 text-center mb-5 d-none d-md-block">ログイン</h3>
+  <div class="login-container">
+    <div class="row">
+      <div class="col-md-6">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-group b-form-group">
+            <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+            <%= f.label :email, 'メール' %>
+          </div>
+        
+          <div class="form-group b-form-group">
+            <%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
+            <%= f.label :password, 'パスワード' %>
+          </div>
+        
+          <% if devise_mapping.rememberable? -%>
+            <div class="form-check">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end -%>
+        
+          <div class="form-group text-center">
+            <%= f.submit "ログイン", class: 'btn-c btn-c-5 btn-c-5-sakura submit-btn' %>
+          </div>
+          
+          <div class="b-form-link">
+            <%= render "devise/shared/links" %>
+          </div>
+        <% end %>
+      </div>
+        
+      <div class="social-login col-md-6">
+        <div>
+          <a href="#" class="google">
+            <i></i>
+            <span>Googleアカウントでログイン</span>
+          </a>
+        </div>
+        <div>
+          <a href="#" class="twitter">
+            <i></i>
+            <span>Twitterアカウントでログイン</span>
+          </a>
+        </div>
+        <div>
+          <a href="#" class="facebook">
+            <i></i>
+            <span>Facebookアカウントでログイン</span>
+          </a>
+        </div>
+      </div>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

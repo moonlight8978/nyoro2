@@ -4,6 +4,8 @@ module ApplicationHelper
       locals: { big_title: big_title, small_title: small_title }
   end
   
+  # link_array: [{ path: , name: }]
+  # last: name
   def breadcrumb(*link_array, last)
     links = link_array.map do |link|
       "<li class='breadcrumb-item'><a href='#{link[:path]}'>#{link[:name]}</a></li>"

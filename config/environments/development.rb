@@ -73,5 +73,5 @@ Rails.application.configure do
   }
   
   # Websocket
-  config.action_cable.url = 'ws://localhost:3000/cable'
+  config.action_cable.url = 'ws://2c04bab9.ngrok.io/cable'
 end

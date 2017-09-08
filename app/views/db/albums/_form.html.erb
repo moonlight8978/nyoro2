@@ -11,7 +11,7 @@
     </div>
   
     <div class="row">
-      <div class="col-6">
+      <div class="col-sm-6">
         <div class="form-group b-form-group">
           <%= f.text_field :title_pronounce, class: class_string('form-control' => true, 'is-invalid' => @album.errors.messages[:title_pronounce].present?) %>
           <%= f.label :title_pronounce, 'タイトル（発音）*' %>
@@ -23,7 +23,7 @@
         </div>
       </div>
       
-      <div class="col-6">
+      <div class="col-sm-6">
         <div class="form-group b-form-group">
           <%= f.text_field :title_en, class: class_string('form-control' => true, 'is-invalid' => @album.errors.messages[:title_en].present?) %>
           <%= f.label :title_en, 'タイトル（英語／ローマ字）*' %>
@@ -37,7 +37,15 @@
     </div>
     
     <div class="row">
-      <div class="col-9">
+      <div class="col-6 col-sm-3">
+        <div class="b-img-placeholder b-ratio-1_1">
+          <div class="b-img-thumb" 
+            data-background-image="<%= @album.image_url.to_s %>">
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-9 pt-3 pt-sm-0">
         <div class="form-group b-form-group">
           <input type="text" name="" value="asdasdasdasd" class="form-control">
           <label for="">写真のURL</label>
@@ -50,14 +58,6 @@
             <% @album.errors.messages[:image].each do |message| %>
               <div><%= message %></div>
             <% end %>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-3">
-        <div class="b-img-placeholder b-ratio-1_1">
-          <div class="b-img-thumb" 
-            data-background-image="<%= @album.image_url.to_s %>">
           </div>
         </div>
       </div>

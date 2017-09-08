@@ -1,12 +1,12 @@
 <nav class="navbar fixed-top navbar-inverse navbar-expand-md 
   animated fadeInDown" id="navbar">
-  <button class="navbar-toggler" type="button">
+  <button class="navbar-toggler" type="button" data-target="#sidebarSm" id="sidebarSmToggle">
     <i class="fa fa-fw fa-bars"></i>
   </button>
   
   <div class="container">
-    <a class="navbar-brand d-md-none" href="/home">にょろにょろ</a>
-
+    <%= link_to 'にょろにょろ', home_path, class: 'd-md-none navbar-brand' %>
+    
     <div class="collapse navbar-collapse w-100">
       <div class="-main">
         <ul class="navbar-nav">
@@ -14,35 +14,30 @@
             <%= link_to 'ホーム', home_path, { class: 'nav-link' } %>
           </li>
           <li class="nav-item">
-            <%= link_to 'アルバム', db_albums_path, { class: 'nav-link' } %>
+            <a href="javascript:void(0)" class="nav-link">ショップ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">
-              企業情報
-            </a>
+            <%= link_to 'DB', db_path, { class: 'nav-link' } %>
           </li>
-          <li class="nav-item">
-            <a class="nav-link">
-              接触
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              企業
             </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="#">企業について</a>
+              <a class="dropdown-item" href="#">利用規約</a>
+              <a class="dropdown-item" href="#">連絡情報</a>
+              <a class="dropdown-item" href="#">ヘルプ</a>
+            </div>
           </li>
         </ul>
         <!-- END navbar left -->
         <form class="form-inline search-form" id="searchForm"
           name="navSearchForm">
-          <!-- <select class="custom-select" id="searchCate" ng-model="vm.search.category" required>
-            <option value="">カテゴリ</option>
-            <option value="novel">ビジュアルノベル</option>
-            <option value="novelRelease">ノベルの発売</option>
-            <option value="album">アルバム</option>
-            <option value="albumRelease">アルバムの発売</option>
-            <option value="novelProduct">美少女ゲーム(製品)</option>
-            <option value="albumProduct">アルバム(製品)</option>
-            <option value="character">キュラクター</option>
-            <option value="tag">タグ</option>
-          </select> -->
-          <!-- <div class="input-group search-cate-wrap" ng-class="{ 'has-danger': navSearchForm.$submitted && navSearchForm.category.$invalid }">
-            <select class="form-control search-cate" name="category" id="searchCate" ng-model="vm.search.category" required>
+          <div class="input-group search-cate-wrap">
+            <select class="form-control search-cate" name="category" 
+              id="searchCate" required
+            >
               <option value="">カテゴリ</option>
               <option value="novel">ビジュアルノベル</option>
               <option value="novelRelease">ノベルの発売</option>
@@ -53,21 +48,11 @@
               <option value="character">キュラクター</option>
               <option value="tag">タグ</option>
             </select>
-          </div> -->
-          <!-- <div class="stylish-input-group" id="inputGroup">
-            <input class="form-control mr-sm-2" id="searchInput" type="text"
-              placeholder="探しましょう" ng-model="vm.search.query"
-              autocomplete="off" ng-change="vm.search()" ng-trim="false" required>
-            <button type="button" class="clear-search-input" ng-click="vm.clearInput()">
-              &#10006;
-            </button>
-            <button type="submit" id="searchSubmit">
-              <i class="fa fa-search"></i>
-            </button> -->
+          </div>
 
           <div class="input-group search-query-wrap">
             <input class="form-control search-query" id="searchInput"
-              name="query" type="text" placeholder="探しましょう"
+              name="query" type="text" placeholder="検索..."
               autocomplete="off" required
             >
             <div class="btn-group">
@@ -127,3 +112,5 @@
   </div>
   <!-- container -->
 </nav>
+
+<%= render 'layouts/sidebar_sm' %>

@@ -1,33 +1,11 @@
-<% content_for :breadcrumb do %>
-  <div class="container">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <%= link_to 'ホーム', home_path %>
-      </li>
-      <li class="breadcrumb-item">
-        <a href="#">データベース</a>
-      </li>
-      <li class="breadcrumb-item">
-        <%= link_to 'アルバムリスト', db_albums_path %>
-      </li>
-      <li class="breadcrumb-item active">
-        <span><%= @album_title %>を直す</span>
-      </li>
-    </ol>
-  </div>
-<% end %>
+<%= breadcrumb( 
+  { path: home_path, name: 'ホーム' },
+  { path: db_path, name: 'データベース' },
+  { path: db_albums_path, name: 'アルバムリスト' },
+  { path: db_album_path(@album), name: @album_title },
+  '編集'
+) %>
 
-<% content_for :title do %>
-  <div class="page-title">
-    <div class="container">
-      <h3><%= @album_title %>を直す</h3>
-      <h6>Edit album</h6>
-    </div>
-  </div>
-<% end %>
-
-<% content_for :utils do %>
-  
-<% end %>
+<%= page_title("#{@album_title}を編集する", "Edit #{@album_title}") %>
 
 <%= render 'form' %>

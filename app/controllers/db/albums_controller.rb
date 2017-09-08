@@ -3,12 +3,12 @@ class Db::AlbumsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :new, :create, :destroy]
   
   def new
-    @title = '新しいアルバムを作る'
+    @title = UtilService::PageTitle.set '新しいアルバムを作る'
     @album = Db::Album.new
   end
   
   def create
-    @title = '新しいアルバムを作る'
+    @title = UtilService::PageTitle.set '新しいアルバムを作る'
     @album = Db::Album.create(album_params)
     
     unless @album.errors.any?
@@ -22,13 +22,13 @@ class Db::AlbumsController < ApplicationController
   
   def show
     @album = Db::Album.find(params[:id])
+    @title = UtilService::PageTitle.set @album.title
     @comment = Feature::Comment.new
     @comments = @album.comments.eager_load(:user).page(1).per(5)
-    @title = @album.title
   end
   
   def index
-    @title = 'アルバムリスト'
+    @title = UtilService::PageTitle.set 'アルバムリスト'
     _order = params[:sort].present? ? params[:sort] : :title_pronounce
     _direction = params[:reverse_sort].present? ? :desc : :asc
     
@@ -46,13 +46,13 @@ class Db::AlbumsController < ApplicationController
   
   def edit
     @album = Db::Album.find(params[:id])
-    @title = "#{@album.title}を直す"
+    @title = UtilService::PageTitle.set "#{@album.title}を直す"
     @album_title = @album.title
   end
   
   def update
     @album = Db::Album.find(params[:id])
-    @title = "#{@album.title}を直す"
+    @title = UtilService::PageTitle.set "#{@album.title}を直す"
     @album_title = @album.title
     @album.assign_attributes(album_params)
     p params[:db_album][:image]
@@ -69,7 +69,7 @@ class Db::AlbumsController < ApplicationController
   
   def destroy
     @album = Db::Album.find(params[:id])
-    @title = "#{@album.title}を消す"
+    @title = UtilService::PageTitle.set "#{@album.title}を消す"
     log = @album.log_destroy(current_user, @album.title, params[:description])
     @album.destroy
     ActionCable.server.broadcast('logs', render_logs)
@@ -77,7 +77,7 @@ class Db::AlbumsController < ApplicationController
   end
   
   def search
-    @title = "Search results for #{params[:q]}"
+    @title = UtilService::PageTitle.set "Search results for #{params[:q]}"
     search = Db::Album.search do
       keywords params[:q], highlight: true
       order_by(:title_pronounce, :asc)
@@ -93,11 +93,6 @@ private
     params.require(:db_album).permit(
       :title, :title_en, :title_pronounce, :image
     )
-  end
-  
-  def db_sidebar
-    @sidebar = :db
-    @logs = Feature::Log.db_log.page(1).per(10)
   end
   
   def render_logs

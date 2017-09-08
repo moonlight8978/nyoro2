@@ -28,6 +28,11 @@ protected
     permission_denied unless current_user.is_moderator?
   end
   
+  def db_sidebar
+    @sidebar = :db
+    @logs = Feature::Log.db_log.page(1).per(10)
+  end
+  
 private 
 
   def not_found
