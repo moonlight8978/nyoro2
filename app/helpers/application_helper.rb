@@ -29,4 +29,18 @@ module ApplicationHelper
   def nsfw_status
     session[:nsfw]
   end
+  
+  def img_thumb(img, ratio, avatar = false)
+    render partial: 'components/img_thumb', locals: { 
+      img: img, ratio: ratio, avatar: avatar 
+    }
+  end
+  
+  def current_user_avatar
+    if user_signed_in?
+      img_thumb(current_user.avatar_url || '/assets/unknown-user.png', '1_1', true)
+    else
+      img_thumb('/assets/unknown-user.png', '1_1', true)
+    end
+  end
 end

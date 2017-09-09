@@ -1,5 +1,118 @@
 <div class="b-sidebar-sm" id="sidebarSm">
-  <div class="">
-    
+  <div class="b-sidebar-sm-content" id="sidebarSmContent">
+    <div class="b-sidebar-sm-header">
+      <div class="d-flex">
+        <div class="b-avatar">
+          <%= current_user_avatar %>
+        </div>
+        <% if user_signed_in? %>
+          <div class="user-utilities">
+            <a class="ml-3">
+              <i class="fa fa-fw fa-history"></i>
+            </a>
+            
+            <a class="ml-2">
+              <i class="fa fa-fw fa-bell-o"></i>
+            </a>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="mt-3">
+        <% if user_signed_in? %>
+          <div class="b-ellipsis font-weight-bold">
+            <a href="#"><%= current_user.user_name || '無名' %>さん</a>
+          </div>
+        <% else %>
+          
+          <div class="">
+            <%= link_to 'ログイン', new_user_session_path %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="b-sidebar-sm-body">
+      <ul class="list-group b-list-group list-group-item-action top-level">
+        <%= link_to '#' do %>
+          <li class="list-group-item b-list-group-item list-group-item-action top-level">
+            ショップ
+          </li>
+        <% end %>
+        <%= link_to 'javascript:void(0)',
+          'data-toggle': 'collapse', 'aria-expanded': false, 
+          'data-target': '#databaseLinks' do 
+        %>
+          <li class="list-group-item b-list-group-item list-group-item-action top-level">
+            データベース
+          </li>
+        <% end %>
+        <div class="collapse" id="databaseLinks">
+          <ul class="list-group b-list-group list-group-item-action">
+            <%= link_to db_path do %>
+              <li class="list-group-item b-list-group-item list-group-item-action">
+                <div class="">
+                  DB
+                </div>
+              </li>
+            <% end %>
+            <%= link_to '#' do %>
+              <li class="list-group-item b-list-group-item list-group-item-action">
+                <div class="">
+                  最近の活動
+                </div>
+              </li>
+            <% end %>
+            <%= link_to '#' do %>
+              <li class="list-group-item b-list-group-item list-group-item-action">
+                <div class="border-0">
+                  最近のコメント
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <%= link_to 'javascript:void(0)', 
+          'data-toggle': 'collapse', 'aria-expanded': false, 
+          'data-target': '#companyInfo' do 
+        %>
+          <li class="list-group-item b-list-group-item list-group-item-action top-level">
+            企業
+          </li>
+        <% end %>
+        <div class="collapse" id="companyInfo">
+          <ul class="list-group b-list-group list-group-item-action">
+            <%= link_to '#' do %>
+              <li class="list-group-item b-list-group-item list-group-item-action">
+                <div class="">
+                  企業について
+                </div>
+              </li>
+            <% end %>
+            <%= link_to '#' do %>
+              <li class="list-group-item b-list-group-item list-group-item-action">
+                <div class="">
+                  利用規約
+                </div>
+              </li>
+            <% end %>
+            <%= link_to '#' do %>
+              <li class="list-group-item b-list-group-item list-group-item-action">
+                <div class="">
+                  連絡情報
+                </div>
+              </li>
+            <% end %>
+            <%= link_to '#' do %>
+              <li class="list-group-item b-list-group-item list-group-item-action">
+                <div class="border-0">
+                  ヘルプ
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <li class="list-group-item b-list-group-item list-group-item-action top-level"></li>
+      </ul>
+    </div>
   </div>
 </div>

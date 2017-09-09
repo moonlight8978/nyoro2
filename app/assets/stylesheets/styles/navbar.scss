@@ -11,8 +11,9 @@
 
 .navbar-toggler {
   position: absolute;
-  z-index: 999;
+  z-index: 1;
   color: $text-color__nav !important;
+  height: 100%;
 }
 
 .navbar-brand {
@@ -238,7 +239,7 @@ nav .-user {
     min-width: 0;
     color: #999;
 
-    .title { color: #fff; }
+    .title { color: $white; }
 
     .title-en {
       overflow: hidden;
@@ -250,181 +251,92 @@ nav .-user {
 
 // sidebar
 
-.sidebar-left-wrap {
+.b-sidebar-sm {
+  width: 100vw;
   height: 100vh;
-  width: 100%;
+  display: none;
   position: fixed;
-  z-index: 5555;
-  top: 0;
-  left: -100%;
-  transition: left 0.5s ease;
-  &.active {
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0,0,0,0.4);
+  z-index: 5000;
+  @include responsive(md) {
+    display: none !important;
   }
 }
 
-.sidebar-left {
-  position: relative;
-  width: 100%;
+.b-sidebar-sm-content {
+  position: absolute;
   height: 100%;
-  background-color: rgba(10, 10, 10, 1);
-  overflow-x: hidden;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
-  white-space: nowrap;
-  @include responsive-px(310px) { width: 300px; }
-
-  &::-webkit-scrollbar {
-    display: none;
+  width: 75%;
+  left: -75%;
+  overflow-y: auto;
+  background-color: $white;
+  @include transition-slow(left);
+  @include responsive(sm) {
+    width: 50%;
+    left: -50%;
   }
+}
 
+.b-sidebar-sm.active .b-sidebar-sm-content {
+  left: 0;
+}
 
-  i, a, span {
-    color: #c1c1c1;
-    cursor: pointer;
-    &:active, &:visited, &:focus {
-      color: #c1c1c1;
+.b-sidebar-sm-header {
+  padding: 1rem;
+  background-color: $blue;
+  
+  a, span, i { 
+    color: $white; 
+  }
+  
+  .user-utilities {
+    display: flex;
+    i {
+      transition: color .15s ease;
     }
-  }
-
-  a:hover {
-    color: #eaeaea;
-    i, a, span { color: #eaeaea; }
-  }
-
-  .sidebar-toggler {
-    position: absolute;
-    right: 0;
-    top: 0;
-    color: #fff;
-    display: inline-block;
-    padding: 10px;
-    z-index: 5678;
-    cursor: pointer;
-  }
-
-  .list-item-wrap.link {
-    font-size: 0.8rem;
-    &:hover {
-      background-color: #09C294;
-    }
-  }
-
-  .list-group-item {
-    // display: block;
-    // overflow-x: hidden;
-    // text-overflow: ellipsis;
-    // white-space: nowrap;
-    &.has-sub-menu {
-      position: relative;
-
-      &::after {
-        position: absolute;
-        right: 20px;
-        font-weight: 900;
-      }
-    }
-
-    div {
-      flex: none;
-    }
-  }
-
-  .list-item-wrap {
-    &[aria-expanded='false'] .has-sub-menu::after {
-      content: '\0002B';
-    }
-
-    &[aria-expanded='true'] .has-sub-menu::after {
-      content: '\02212';
-    }
-  }
-
-  .main-menu {
-    li {
-      background-color: transparent;
-      border: 0;
-      flex-wrap: nowrap;
-      padding: 1rem 1.25rem;
-    }
-
-    i { margin-right: 10px; }
-  }
-
-  .sub-menu {
-    > .list-item-wrap {
-      padding-left: 2rem;
-
-      &:not(:last-child) li {
-        border-bottom: 1px solid #eaeaea;
-      }
-    }
-  }
-
-  .name {
-    font-weight: 500;
-  }
-
-  .utility-container {
-    margin-left: 2rem;
-    flex: 1 1 auto !important;
-    min-width: 0;
-    text-align: center !important;
-
-    .user-name { text-align: center; }
-
-    .utilities {
-      i { margin-right: 0; }
-
-      span {
-        padding-right: 5px;
-        padding-left: 5px;
+    
+    a {
+      padding: 0.5rem 0;
+      width: 40px;
+      text-align: center;
+      border-radius: 50% !important;
+      transition: background-color .15s ease;
+      
+      &:hover {
+        i { color: $black; }
+        background-color: $white;
       }
     }
   }
 }
 
-.avatar {
-  width: 60px;
-  height: 60px;
-
-  .avatar-thumb {
-    background-image: url('/assets/img/unknown-user.png');
-    border: solid 1px #fff;
-    border-radius: 50% !important;
-    box-shadow: 0px 0px 2px 1px rgba(170, 170, 170, 0.7);
+.b-sidebar-sm-body {
+  padding: 0.25rem 1rem;
+  
+  .b-list-group.top-level {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    width: auto;
+  }
+  
+  .b-list-group-item.top-level {
+    font-weight: bold;
+    border: 0;
+  }
+  
+  .b-list-group-item:not(.top-level) {
+    margin-bottom: 0;
+    padding: 0 0 0 2rem;
+    border: 0;
+    
+    div { 
+      padding: 0.75rem 1.25rem 0.75rem 0;
+      border-bottom: 1px solid $border-color;
+    }
+  }
+  
+  a, span { 
+    color: $black; 
+    text-decoration: none !important;
   }
 }
-
-.ratio-1_1::before {
-  padding-bottom: 1 / 1 * 100%;
-}
-
-.ratio-5_6::before {
-  padding-bottom: 6 / 5 * 100%;
-}
-
-body {
-  @include transition-slow(background-color);
-  &.active {
-
-  }
-}
-
-// body {
-//   position: relative;
-//   left: 0;
-//   @include transition-slow(left);
-//   &.active {
-//     left: 300px;
-//   }
-// }
-
-// nav {
-//   @include transition-slow(left);
-//   &.active {
-//     left: 300px;
-//   }
-// }

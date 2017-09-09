@@ -1,15 +1,13 @@
 (function () {
   let $navbar;
   
-  function scrollNav() {
-    window.addEventListener('scroll', function (event) {
-      if (window.scrollY == 0) {
-        $navbar.removeClass('active');
-        
-      } else {
-        $navbar.addClass('active');
-      }
-    });
+  function scrollNav(event) {
+    if (this.scrollY == 0) {
+      $navbar.removeClass('active');
+      
+    } else {
+      $navbar.addClass('active');
+    }
   }
   
   $(document).on('turbolinks:load', () => {
@@ -17,14 +15,15 @@
   });
   
   $(document).ready(() => {
-    if (!$navbar) {
-      $navbar = $('#navbar');
-    }
-    scrollNav();
+    $navbar || ($navbar = $('#navbar'));
+    window.addEventListener('scroll', scrollNav, false);
   });
   
   $(document).on('focusin', '#searchForm', formFocusin);
-  $(document).on('focusout', '#searchForm', formFocusout)
+  $(document).on('focusout', '#searchForm', formFocusout);
+  $(document).on('click', '#sidebarSmToggle', toggleSidebarSm);
+  $(document).on('click', '#sidebarSm', offSidebarSm);
+  $(document).on('click', '#sidebarSmContent', stopBubbling);
   
   function formFocusin() {
     $('.-main .nav-item').each(function () {
@@ -41,10 +40,7 @@
   function checkTarget(event) {
     $(window).off('click', checkTarget);
     const searchForm = $('#searchForm');
-    console.log('check');
-    console.log(event.target)
-    let trigger = $(event.target).closest('#searchForm');
-    // console.log(trigger);
+    let trigger = $(event.target).closest(searchForm);
     if (trigger[0] != searchForm[0]) {
       $('#searchCate').fadeOut(500);
       searchForm.removeClass('active');
@@ -52,5 +48,21 @@
         $(this).removeClass('invisible');
       });
     }
+  }
+  
+  function toggleSidebarSm(event) {
+    const $sidebar = $('#sidebarSm');
+    $sidebar.fadeIn(500);
+    $sidebar.addClass('active');
+    
+  }
+  
+  function offSidebarSm(event) {
+    $(this).removeClass('active');
+    $(this).fadeOut(500);
+  }
+  
+  function stopBubbling(event) {
+    event.stopPropagation();
   }
 })();

@@ -27,6 +27,11 @@
   }
 }
 
+.b-avatar {
+  width: 40px;
+  flex: 0 0 40px;
+}
+
 .b-ratio-1_1::before {
   padding-bottom: 1 / 1 * 100%;
 }
