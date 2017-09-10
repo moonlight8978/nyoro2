@@ -8,6 +8,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  
   &::after {
     position: absolute;
     left: 0;
@@ -20,23 +21,23 @@
 }
 
 #section-1 {
-  min-height: 100vh;
+  height: 100vh;
 }
 
 #section-2 {
-  min-height: 500px;
+  height: 500px;
 }
 
 #section-3 {
-  min-height: 80vh;
+  height: 80vh;
 }
 
 #section-4 {
-  min-height: 500px;
+  height: 500px;
 }
 
 #section-5 {
-  min-height: 80vh;
+  height: 80vh;
 }
 
 .hide {
@@ -44,7 +45,7 @@
 }
 
 .content-between-parallax {
-  padding: 80px 0;
+  padding: 80px 15px;
   h1, h2 {
     text-align: center;
     margin-bottom: 40px;
@@ -122,53 +123,47 @@
   @include responsive(lg) {
     transform: translateY(-50.4%); // fix blurry
   }
-
-  h1 {
+  
+  
+  .welcome {
+    font-size: 2.5rem;
+    font-weight: bold;
     line-height: 1.3;
     @include responsive(md) { font-size: 3em; }
     @include responsive(lg) { font-size: 4em; }
   }
 
   p {
-    margin-top: 1rem;
-    margin-bottom: 2.67rem;
+    width: 75%;
+    margin: 1rem auto 2.67rem auto;
     line-height: 1.5;
+    
+    @include responsive(sm) { width: 100%;}
   }
 }
 
 // faq section
 
 .faq-block {
-  position: relative;
-  @include responsive(md) {
-    padding-top: 30px;
-  }
-  @include responsive(lg) {
-    padding-top: 0;
-    padding-left: 15 + 60px;
-    padding-right: 15 + 25px;
-  }
-
-  i {
-    position: absolute;
-    font-size: 2.5em;
-    @include responsive(md) {
-      top: -10px;
-      font-size: 3em;
-      left: 50%;
-      transform: translateX(-50%);
+  .faq-block-header {
+    text-align: center;
+    
+    i {
+      font-size: 2rem;
     }
-    @include responsive(lg) {
-      font-size: 2.5em;
-      left: 20px;
-      top: 1rem;
-    }
+    
+    i, span { vertical-align: middle; }
   }
-
-  p {
-    font-size: 0.95rem;
-    line-height: 1.3;
-    text-align: justify;
+  
+  .faq-block-body {
+    margin: auto;
+    width: 80%;
+    @include responsive(sm) { width: 100%; }
+    
+    p {
+      font-size: 0.95rem;
+      text-align: justify;
+    }
   }
 }
 
@@ -181,25 +176,31 @@
 .content-inside.database {
   // fix blurry
   transform: translateY(-50.2%);
+  
   .counting {
     display: flex;
     justify-content: center;
     margin-top: 3rem;
 
     .count-wrap {
-      padding-right: 1.5rem;
-      padding-left: 1.5rem;
+      padding-right: .85rem;
+      padding-left: .85rem;
+      @include responsive(sm) { 
+        padding-left: 1.5rem; 
+        padding-right: 1.5rem;
+      }
     }
   }
 
   .count {
     position: relative;
-    width: 80px;
-    height: 80px;
     display: inline-block;
-    line-height: 80px;
-    font-size: 1.2em;
+    font-size: 0.8rem;
     font-family: 'Raleway';
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    
     &:before {
       position: absolute;
       width: 100%;
@@ -213,11 +214,17 @@
       outline-offset: -7px;
       box-shadow: 0 0 5px 1px #eaeaea;
     }
+    
+    @include responsive(sm) {
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      font-size: 1.2rem;
+    }
   }
 
   h6 {
-    margin-top: 2.33rem;
-    margin-bottom: 1rem;
+    margin: 2.33rem -.5rem 1rem -.5rem;
   }
 
   .btn-c {
@@ -230,20 +237,31 @@
   text-align: center;
   margin-top: 3rem;
   justify-content: center;
+  
   .feature-wrap {
-    padding-left: 10px;
-    padding-right: 10px;
+    flex: 0 0 50%;
+    padding: 15px;
+    @include responsive(sm) {
+      flex: 0 0 200px;
+    }
+    @include responsive(md) {
+      flex: 0 0 180px;
+    }
   }
 }
 
 .feature {
   padding: 15px;
-  width: 150px;
+  width: 100%;
   box-shadow: 0px 0px 5px 1px rgba(170, 170, 170, 0.7);
+  text-align: center;
+  
   i {
     position: relative;
-    font-size: 3.5em;
+    font-size: 2.5rem;
     padding-bottom: 1rem;
+    @include responsive(sm) { font-size: 3.5rem; }
+    
     &:after {
       position: absolute;
       bottom: 0;
@@ -255,8 +273,10 @@
       background-color: #aaa;
     }
   }
-  h3 {
+  
+  h5 {
     margin-top: .5rem;
+    @include responsive(sm) { font-size: 1.75rem; }
   }
 }
 
@@ -264,11 +284,11 @@
 
 .content-inside.the-team {
   transform: translateY(-50%);
-
-  h2 {
+  
+  h3 {
     font-weight: 200;
   }
-
+  
   .team {
     display: flex;
     justify-content: center;
@@ -276,19 +296,25 @@
   }
 
   .member-wrap {
-    padding: 0 2rem;
-    flex: none;
+    padding: 0;
+    flex: 0 0 100px;
+    @include responsive(sm) { flex: 0 0 120px; }
   }
 
   .avatar {
     position: relative;
-    width: 80px;
-    height: 80px;
-
+    width: 60px;
+    height: 60px;
+    
+    @include responsive(sm) {
+      width: 80px;
+      height: 80px;
+    }
+    
     .avatar-thumb {
       position: absolute;
       top: 0;
-      left: 0;
+      left: 20px;
       width: 100%;
       height: 100%;
       background-image: url('/assets/vanilla.png');
@@ -311,16 +337,6 @@
 }
 
 // quotes, service
-
-.quote-container {
-  display: flex;
-
-  .quote-wrap {
-    padding-left: 20px;
-    padding-right: 20px;
-    flex: 0 0 50%;
-  }
-}
 
 .quote {
   position: relative;
@@ -378,6 +394,7 @@
   p {
     color: #ddd;
     margin: 1.5rem auto;
+    width: 80%;
     @include responsive(md) { width: 50%; }
     @include responsive(lg) { width: 30%; }
   }

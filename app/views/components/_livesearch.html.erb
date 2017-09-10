@@ -1,0 +1,21 @@
+<% unless no_img %>
+  <% results.each do |result| %>
+    <%= link_to db_album_path(result) do %>
+      <div class="result">
+        <div class="result-image-wrap b-img-placeholder b-ratio-1_1">
+          <div class="b-img-thumb" data-background-image="<%= result.image_url %>"></div>
+        </div>
+        <div class="result-info">
+          <div class="title">
+            <%= result.title %>
+          </div>
+          <div class="title-en">
+            <%= result.title_en %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+
+<% end %>

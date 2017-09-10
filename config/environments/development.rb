@@ -73,5 +73,6 @@ Rails.application.configure do
   }
   
   # Websocket
-  config.action_cable.url = 'ws://cb4f5ccf.ngrok.io/cable'
+  config.action_cable.url = "ws://#{ENV['DOMAIN']}:#{ENV['PORT']}/cable"
+  config.web_console.whitelisted_ips = ENV['WHITELISTED_IPS']
 end

@@ -47,3 +47,9 @@
   max-height: #{$line-height * $lines * $font-size}rem;
   overflow: hidden;
 }
+
+@mixin no-outline() {
+  &:focus {
+    outline: none;
+  }
+}

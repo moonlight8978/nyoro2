@@ -85,6 +85,15 @@ class Db::AlbumsController < ApplicationController
     end
     
     @albums = search.results
+    
+    respond_to do |format|
+      format.html
+      format.js do 
+        render partial: 'components/livesearch', locals: {
+          results: @albums, no_img: false
+        } 
+      end
+    end
   end
 
 private

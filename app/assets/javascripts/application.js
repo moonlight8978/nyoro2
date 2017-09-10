@@ -45,7 +45,7 @@ var $loading;
 
 (function () {
   const wow = new WOW({
-    offset: 100
+    offset: 150
   });
   
   $(document).on('turbolinks:load', () => {

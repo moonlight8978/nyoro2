@@ -1,6 +1,28 @@
 (function () {
   let $navbar;
+  let timeout;
+  // Navbar animation
+  $(document).on('turbolinks:load', () => {
+    $navbar = $('#navbar');
+    clearTimeout(timeout);
+  });
   
+  $(document).ready(() => {
+    $navbar || ($navbar = $('#navbar'));
+    window.addEventListener('scroll', scrollNav, false);
+  });
+  
+  // Search bar animation
+  $(document).on('focusin', '#searchForm', formFocusin);
+  $(document).on('focusout', '#searchForm', formFocusout);
+  $(document).on('click', '#sidebarSmToggle', toggleSidebarSm);
+  $(document).on('click', '#sidebarSm', offSidebarSm);
+  $(document).on('click', '#sidebarSmContent', stopBubbling);
+  
+  // Live search
+  $(document).on('input', '#searchInput', liveSearch);
+  
+  // functions declare
   function scrollNav(event) {
     if (this.scrollY == 0) {
       $navbar.removeClass('active');
@@ -9,21 +31,6 @@
       $navbar.addClass('active');
     }
   }
-  
-  $(document).on('turbolinks:load', () => {
-    $navbar = $('#navbar');
-  });
-  
-  $(document).ready(() => {
-    $navbar || ($navbar = $('#navbar'));
-    window.addEventListener('scroll', scrollNav, false);
-  });
-  
-  $(document).on('focusin', '#searchForm', formFocusin);
-  $(document).on('focusout', '#searchForm', formFocusout);
-  $(document).on('click', '#sidebarSmToggle', toggleSidebarSm);
-  $(document).on('click', '#sidebarSm', offSidebarSm);
-  $(document).on('click', '#sidebarSmContent', stopBubbling);
   
   function formFocusin() {
     $('.-main .nav-item').each(function () {
@@ -64,5 +71,48 @@
   
   function stopBubbling(event) {
     event.stopPropagation();
+  }
+  
+  function liveSearch(event) {
+    clearTimeout(timeout);
+    
+    const $input = $(event.target);
+    const input = $input.val().trim();
+    const $cate = $($input.data('cate'));
+    const cate = $cate.val();
+    const $result = $($input.data('result-container'));
+    
+    if (cate) {
+      if (input) {
+        $cate.removeClass('is-invalid');
+        timeout = setTimeout(() => search(cate, input, $result), 1000);
+      } else {
+        $result.html('');
+      }
+    } else {
+      $cate.addClass('is-invalid');
+    }
+  }
+  
+  function search(cate, input, $result) {
+    axios
+      .get('/db/albums/search', { 
+        params: { 
+          cate: cate, 
+          q: input 
+        },
+        headers: { 'Accept': 'text/javascript, application/javascript' },
+      })
+      .then(_then)
+      .catch(_catch);
+      
+    function _then(response) {
+      $result.html(response.data);
+      loadAllImages();
+    }
+    
+    function _catch(error) {
+      console.log(error);
+    }
   }
 })();

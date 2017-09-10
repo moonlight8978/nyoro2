@@ -1,0 +1,14 @@
+<% content_for :breadcrumb do %>
+  <div class="container">
+    <ol class="breadcrumb">
+      <% link_array.each do |link| %>
+        <li class='breadcrumb-item'>
+          <%= link_to link[:name], link[:path] %>
+        </li>
+      <% end %>
+      <li class='breadcrumb-item active'>
+        <span><%= last %></span>
+      </li>
+    </ol>
+  </div>
+<% end %>

@@ -7,14 +7,9 @@ module ApplicationHelper
   # link_array: [{ path: , name: }]
   # last: name
   def breadcrumb(*link_array, last)
-    links = link_array.map do |link|
-      "<li class='breadcrumb-item'><a href='#{link[:path]}'>#{link[:name]}</a></li>"
-    end << "<li class='breadcrumb-item active'><span>#{last}</span></li>"
-    _breadcrumb = 
-      '<div class="container"><ol class="breadcrumb">' << 
-      links.join('') << 
-      '</ol></div>'
-    content_for(:breadcrumb, _breadcrumb.html_safe)
+    render partial: 'components/breadcrumb', locals: {
+      link_array: link_array, last: last
+    }
   end
   
   def comments_for(commentable, initial_comments, *params)

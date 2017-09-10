@@ -2,13 +2,15 @@
   data-original="/assets/index_parallax_1.jpg">
   <div class="content-inside top-content">
     <div class="animated-wrap animated fadeInUp">
-      <h1>
-        にょろにょろへようこそ
-      </h1>
+      <div class="welcome">
+        <span class="d-none d-sm-inline">にょろにょろへ</span>ようこそ
+      </div>
+        
       <p>
         このサイトはアダルトコンテンツがありますので<br>
         あなたは18歳以上であることを確認してください
       </p>
+      
       <div class="btn-c-group">
         <%= link_to 'ショップ', '#', class: 'btn-c btn-c-5' %>
         <%= link_to 'データベース', db_path, class: 'btn-c btn-c-5 btn-c-5-dark' %>
@@ -18,7 +20,6 @@
   <div class="arrow-wrap animated fadeIn">
     <div class="arrow bounce"></div>
   </div>
-
 </section>
 
 <div class="content-between-parallax container faq-section">
@@ -26,32 +27,49 @@
     よくある質問
   </h1>
   <div class="faq-wrap row">
-    <div class="faq-block col-lg-4 col-md-4 col-sm-4 wow rotateInDownLeft">
-      <i class="fa fa-question-circle-o"></i>
-      <h5>
-        ローレンイプサム？
-      </h5>
-      <p>
-        中めてフか民段ヱ善誰ヨ売性ヱヘ子感縦りスク向権コユキタ者康そむ間較け埼骨海ゆ刃間爆げ銘題ぞりゆ。
-      </p>
+    <div class="faq-block col-sm-4 wow fadeInUp">
+      <div class="faq-block-header">
+        <h5>
+          <i class="fa fa-question-circle-o"></i>
+          ローレンイプサム？
+        </h5>
+      </div>
+      
+      <div class="faq-block-body">
+        <p class="p">
+          中めてフか民段ヱ善誰ヨ売性ヱヘ子感縦りスク向権コユキタ者康そむ間較け埼骨海ゆ刃間爆げ銘題ぞりゆ。
+        </p>
+      </div>
     </div>
-    <div class="faq-block col-lg-4 col-md-4 col-sm-4 wow flipInX">
-      <i class="fa fa-clock-o"></i>
-      <h5>
-        ローレンイプサム？
-      </h5>
-      <p>
-        部おだざを中講だずンが更聞ヌシマ化幹造ワロ事役ゃのろド式拉ばひ探所アヒ転経37取他チヌモ持音ねうど登去ハ解調エヌコ日3被ナ著業ラと師接ト。
-      </p>
+    
+    <div class="faq-block col-sm-4 wow fadeInUp">
+      <div class="faq-block-header">
+        <h5>
+          <i class="fa fa-clock-o"></i>
+          ローレンイプサム？
+        </h5>
+      </div>
+      
+      <div class="faq-block-body">
+        <p>
+          部おだざを中講だずンが更聞ヌシマ化幹造ワロ事役ゃのろド式拉ばひ探所アヒ転経37取他チヌモ持音ねうど登去ハ解調エヌコ日3被ナ著業ラと師接ト。
+        </p>
+      </div>
     </div>
-    <div class="faq-block col-lg-4 col-md-4 col-sm-4 wow rotateInDownRight">
-      <i class="fa fa-check-circle-o"></i>
-      <h5>
-        ローレンイプサム？
-      </h5>
-      <p>
-        今イラ州該ど観思ツ効萬トラた優今ヱ手6転るか大10社1受れゆんド識済ぞよら以会ナタニモ月一梨転おらさひ信彫慰っざは。
-      </p>
+    
+    <div class="faq-block col-sm-4 wow fadeInUp">
+      <div class="faq-block-header">
+        <h5>
+          <i class="fa fa-check-circle-o"></i>
+          <span>ローレンイプサム？</span>
+        </h5>
+      </div>
+      
+      <div class="faq-block-body">
+        <p>
+          今イラ州該ど観思ツ効萬トラた優今ヱ手6転るか大10社1受れゆんド識済ぞよら以会ナタニモ月一梨転おらさひ信彫慰っざは。
+        </p>
+      </div>
     </div>
   </div>
 </div>
@@ -60,77 +78,85 @@
   data-original="/assets/index_parallax_2.jpg">
   <div class="content-inside database">
     <h1 class="wow fadeIn">合計は...</h1>
-    <div class="counting wow fadeInUp">
+    <div class="counting px-2 wow fadeInUp">
       <div class="count-wrap">
         <span class="count">1400</span>
-        <h6>ローレン</h6>
-        <a class="btn-c btn-c-5" ui-sref="index">行く</a>
+        <h6>アルバム</h6>
+        <a class="btn-c btn-c-5" ui-sref="index">
+          <i class="fa fa-angle-right"></i>
+        </a>
       </div>
       <div class="count-wrap">
         <span class="count">5000</span>
-        <h6>イプサム</h6>
-        <a class="btn-c btn-c-5 btn-c-5-dark" ui-sref="index">行く</a>
+        <h6>リリース</h6>
+        <a class="btn-c btn-c-5 btn-c-5-dark" ui-sref="index">
+          <i class="fa fa-angle-right"></i>
+        </a>
       </div>
       <div class="count-wrap">
         <span class="count">9000</span>
-        <h6>ローレン</h6>
-        <a class="btn-c btn-c-5" ui-sref="index">行く</a>
+        <h6>タグ</h6>
+        <a class="btn-c btn-c-5" ui-sref="index">
+          <i class="fa fa-angle-right"></i>
+        </a>
       </div>
       <div class="count-wrap">
         <span class="count">360</span>
-        <h6>イプサム</h6>
-        <a class="btn-c btn-c-5 btn-c-5-dark" ui-sref="index">行く</a>
+        <h6>ユーザー</h6>
+        <a class="btn-c btn-c-5 btn-c-5-dark" ui-sref="index">
+          <i class="fa fa-angle-right"></i>
+        </a>
       </div>
     </div>
   </div>
-  <!-- novels -->
 </section>
 
 <div class="content-between-parallax container feature-section">
-  <h1 class="wow rotateIn">
+  <h1 class="wow fadeInDown">
     フィーチャ
   </h1>
-  <p class="wow slideInRight">
-    中めてフか民段ヱ善誰ヨ売性ヱヘ子感縦りスク向権コユキタ者康そむ間較け埼骨海ゆ刃間爆げ銘題ぞりゆ。部おだざを中講だずンが更聞ヌシマ化幹造ワロ事役ゃのろド式拉ばひ探所アヒ転経37取他チヌモ持音ねうど登去ハ解調エヌコ日3被ナ著業ラと師接ト。今イラ州該ど観思ツ効萬トラた優今ヱ手6転るか大10社1受れゆんド識済ぞよら以会ナタニモ月一梨転おらさひ信彫慰っざは。
+  <p class="wow slideInRight d-none d-sm-block">
+    中めてフか民段ヱ善誰ヨ売性ヱヘ子感縦りスク向権コユキタ者康そむ間較け埼骨海ゆ刃間爆げ銘題ぞりゆ。
+    部おだざを中講だずンが更聞ヌシマ化幹造ワロ事役ゃのろド式拉ばひ探所アヒ転経37取他チヌモ持音ねうど登去ハ解調エヌコ日3被ナ著業ラと師接ト。今イラ州該ど観思ツ効萬トラた優今ヱ手6転るか大10社1受れゆんド識済ぞよら以会ナタニモ月一梨転おらさひ信彫慰っざは。
   </p>
-  <div class="features-container wow fadeInUp row">
-      <div class="feature-wrap">
-        <div class="feature">
-          <i class="fa fa-code"></i>
-          <h3>ローレン</h3>
-        </div>
+  <div class="features-container row">
+    <div class="feature-wrap wow fadeInUp">
+      <div class="feature">
+        <i class="fa fa-code"></i>
+        <h5>ローレン</h5>
       </div>
-      <div class="feature-wrap">
-        <div class="feature">
-          <i class="fa fa-code"></i>
-          <h3>イプサム</h3>
-        </div>
+    </div>
+    <div class="feature-wrap wow fadeInUp">
+      <div class="feature">
+        <i class="fa fa-code"></i>
+        <h5>イプサム</h5>
       </div>
-      <div class="feature-wrap">
-        <div class="feature">
-          <i class="fa fa-code"></i>
-          <h3>ローレン</h3>
-        </div>
+    </div>
+    <div class="feature-wrap wow fadeInUp">
+      <div class="feature">
+        <i class="fa fa-code"></i>
+        <h5>ローレン</h5>
       </div>
-      <div class="feature-wrap">
-        <div class="feature">
-          <i class="fa fa-code"></i>
-          <h3>イプサム</h3>
-        </div>
+    </div>
+    <div class="feature-wrap wow fadeInUp">
+      <div class="feature">
+        <i class="fa fa-code"></i>
+        <h5>イプサム</h5>
       </div>
+    </div>
   </div>
 </div>
 
 <section class="lazy parallax-section" id="section-3"
   data-original="/assets/index_parallax_3.jpg">
   <div class="the-team content-inside">
-    <h1 class="wow bounceInDown">
+    <h1 class="wow fadeInDown">
       チーム
     </h1>
-    <h2 class="wow bounceIn">
-      信頼性の高いプロのチーム
-    </h2>
-    <div class="team wow bounceInUp">
+    <h4 class="wow fadeInDown">
+      プロフェッショナルチーム
+    </h4>
+    <div class="team wow fadeInUp">
       <div class="member-wrap">
         <div class="member">
           <div class="avatar">
@@ -178,8 +204,8 @@
   <h1 class="wow jello">
     サビース
   </h1>
-  <div class="quote-container">
-    <div class="quote-wrap wow slideInLeft">
+  <div class="row">
+    <div class="col-sm-6 quote-wrap wow slideInLeft mb-3 mb-sm-0">
       <div class="quote">
         <p>
           中めてフか民段ヱ善誰ヨ売性ヱヘ子感縦りスク向権コユキタ者康そむ間較け埼骨海ゆ刃間爆げ銘題ぞりゆ。部おだざを中講だずンが更聞ヌシマ化幹造ワロ事役ゃのろド式拉ばひ探所アヒ転経37取他チヌモ持音ねうど登去ハ解調エヌコ日3被ナ著業ラと師接ト。
@@ -189,7 +215,7 @@
         <a class="quote-link" ui-sref="index">&#x02192</a>
       </div>
     </div>
-    <div class="quote-wrap wow slideInRight">
+    <div class="col-sm-6 quote-wrap wow slideInRight">
       <div class="quote">
         <p>
           中めてフか民段ヱ善誰ヨ売性ヱヘ子感縦りスク向権コユキタ者康そむ間較け埼骨海ゆ刃間爆げ銘題ぞりゆ。部おだざを中講だずンが更聞ヌシマ化幹造ワロ事役ゃのろド式拉ばひ探所アヒ転経37取他チヌモ持音ねうど登去ハ解調エヌコ日3被ナ著業ラと師接ト。
