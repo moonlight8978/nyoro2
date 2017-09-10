@@ -1,16 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  before_action :configure_permitted_parameters, if: :devise_controller?
   
 protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(
-      :sign_up, 
-      keys: [:user_name, :first_name, :last_name, :name_pronounce, :avatar]
-    )
-  end
   
   def current_user
     @current_user ||= super && User.eager_load(:roles).find(@current_user.id)

@@ -37,10 +37,10 @@
         
       <div class="social-login col-md-6">
         <div>
-          <a href="#" class="google">
+          <%= link_to user_google_oauth2_omniauth_authorize_path, class: 'google' do %>
             <i></i>
             <span>Googleアカウントでログイン</span>
-          </a>
+          <% end %>
         </div>
         <div>
           <a href="#" class="twitter">
@@ -49,10 +49,10 @@
           </a>
         </div>
         <div>
-          <a href="#" class="facebook">
+          <%= link_to user_facebook_omniauth_authorize_path, class: 'facebook' do %>
             <i></i>
             <span>Facebookアカウントでログイン</span>
-          </a>
+          <% end %>
         </div>
       </div>
     </div>

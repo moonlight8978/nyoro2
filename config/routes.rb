@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
       
   root to: redirect('/warning')
@@ -22,8 +23,8 @@ Rails.application.routes.draw do
     end
   end
   
-  resource :user, only: :show
-  resources :users
+  get 'user', to: 'users#current', as: 'current_user_page'
+  resources :users, only: [:index, :show]
   
   namespace :utilities do
     post 'nsfw'
