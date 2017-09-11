@@ -1,0 +1,46 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' },
+  "#{@user.user_name || '無名'}さんのプロファイル"
+) %>
+
+<%= page_title(
+  "#{@user.user_name || '無名'}さんのプロファイル", 
+  "#{@user.user_name || '無名'}'s profile"
+) %>
+
+<%= content_for :utils_tabs do %>
+  <div class="page-utility">
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active utility-label" data-toggle="tab" data-target="#information" 
+          role="tab" aria-controls="home"
+        >
+          メイン
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link utility-label" data-toggle="tab" data-target="#security" 
+          role="tab" aria-controls="profile"
+        >
+          セキュリティ
+        </a>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<div class="b-box-group">
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="information" role="tabpanel">
+      <h6 class="b-box-title">メイン</h6>
+      <div class="b-box">
+      </div>
+    </div>
+    
+    <div class="tab-pane fade" id="security" role="tabpanel">
+      <h6 class="b-box-title">セキュリティ</h6>
+      <div class="b-box">
+      </div>
+    </div>
+  </div>
+</div>

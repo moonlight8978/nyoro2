@@ -34,6 +34,11 @@ $(document).ready(() => {
   $('[data-toggle="dropdown"]').dropdown();
 });
 
+$('[data-toggle="tab"]').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
 // Configs
 axios.defaults.headers.common['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr('content');
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

@@ -40,21 +40,21 @@ private
   def omniauth_callback(provider)
     auth = request.env["omniauth.auth"]
     @user = User.from_omniauth(auth)
-    unless @user
-      begin
-        ActiveRecord::Base.transaction do
-          @user = User.create(
-            provider: auth.provider, 
-            uid: auth.uid,
-            email: auth.info.email,
-            password: Devise.friendly_token[0, 20]
-          )
-          @user.set_default_role
-        end
-      rescue ActiveRecord::Rollback
-        p 'rescue' 
-      end
-    end
+    # unless @user
+    #   begin
+    #     ActiveRecord::Base.transaction do
+    #       @user = User.create(
+    #         provider: auth.provider, 
+    #         uid: auth.uid,
+    #         email: auth.info.email,
+    #         password: Devise.friendly_token[0, 20]
+    #       )
+    #       @user.set_default_role
+    #     end
+    #   rescue ActiveRecord::Rollback
+    #     p 'rescue' 
+    #   end
+    # end
     
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated

@@ -1,5 +1,5 @@
-<div class="b-box p-4">
-  <%= form_for(@album) do |f| %>
+<div class="b-box">
+  <%= form_for(@album, html: { class: 'b-form' }) do |f| %>
     <div class="form-group b-form-group">
       <%= f.text_field :title, class: class_string('form-control' => true, 'is-invalid' => @album.errors.messages[:title].present?) %>
       <%= f.label :title, 'タイトル*' %>

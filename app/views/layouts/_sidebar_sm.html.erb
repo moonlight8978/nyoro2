@@ -21,7 +21,9 @@
       <div class="mt-3">
         <% if user_signed_in? %>
           <div class="b-ellipsis font-weight-bold">
-            <a href="#"><%= current_user.user_name || '無名' %>さん</a>
+            <%= link_to (current_user.user_name || '無名') + 'さん', 
+              user_path(current_user)
+            %>
           </div>
         <% else %>
           
@@ -117,6 +119,13 @@
             <% end %>
           </ul>
         </div>
+        <!-- END -->
+        
+        <%= link_to edit_user_registration_path do %>
+          <li class="list-group-item b-list-group-item list-group-item-action top-level">
+            設定
+          </li>
+        <% end %>
         <!-- END -->
       </ul>
     </div>

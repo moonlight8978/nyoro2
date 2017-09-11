@@ -3,6 +3,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
+    @title = UtilService::PageTitle.set("ログイン")
     @full_page = true
     @no_footer = true
     super
