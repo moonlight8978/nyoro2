@@ -1,0 +1,39 @@
+.page-user-detail {
+  .user-avatar-info-container {
+    @include responsive(sm) {
+      margin-top: -1rem;
+      margin-bottom: -1rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      background-color: $content__background;
+    }
+  }
+  
+  .user-avatar {
+    padding-left: 15px;
+    width: 110px;
+    flex: 0 0 110px;
+    
+    @include responsive(sm) {
+      width: 100%;
+      flex: 0 0 100%;
+      padding-right: 15px;
+      margin-bottom: .5rem;
+    }
+    // @include responsive(md) {
+    //   width: 100%;
+    //   flex: 0 0 85%;
+    //   
+    // }
+  }
+  
+  .user-info {
+    padding: 0 15px;
+    flex: 1 0 auto;
+    
+    .user-name {
+      font-size: 1.15rem;
+      font-weight: bold;
+    }
+  }
+}

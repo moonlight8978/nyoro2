@@ -10,167 +10,134 @@
 
 <%= content_for :utils_tabs do %>
   <div class="page-utility">
-    <ul class="nav nav-tabs" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active utility-label" data-toggle="tab" data-target="#information" 
-          role="tab" aria-controls="home"
-        >
-          メイン
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link utility-label" data-toggle="tab" data-target="#security" 
-          role="tab" aria-controls="profile"
-        >
-          セキュリティ
-        </a>
-      </li>
-    </ul>
+    <span class="utility-label" data-toggle="collapse" data-target="#security" 
+      aria-expanded="false" aria-controls="security"
+    >
+      セキュリティ
+    </span>
   </div>
 <% end %>
 
 <div class="b-box-group">
-  <div class="tab-content">
-    <div class="tab-pane fade show active" id="information" role="tabpanel">
-      <h6 class="b-box-title">メイン</h6>
-      <div class="b-box">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), method: :put, html: { class: 'b-form' }) do |f| %>
-          <div class="row">
-            <div class="col-sm-7 col-md-8">
-              <div class="form-group b-form-group">
-                <%= f.text_field :user_name, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:user_name].present?) %>
-                <%= f.label :user_name, 'ユーザー名' %>
-                <div class="invalid-feedback">
-                  <% resource.errors.messages[:user_name].each do |message| %>
-                    <div><%= message %></div>
-                  <% end %>
-                </div>
-              </div>
-              
-              <div class="form-group b-form-group">
-                <%= f.text_field :first_name, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:first_name].present?) %>
-                <%= f.label :first_name, 'First name' %>
-                <div class="invalid-feedback">
-                  <% resource.errors.messages[:first_name].each do |message| %>
-                    <div><%= message %></div>
-                  <% end %>
-                </div>
-              </div>
-              
-              <div class="form-group b-form-group">
-                <%= f.text_field :last_name, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:last_name].present?) %>
-                <%= f.label :last_name, 'Last name' %>
-                <div class="invalid-feedback">
-                  <% resource.errors.messages[:last_name].each do |message| %>
-                    <div><%= message %></div>
-                  <% end %>
-                </div>
-              </div>
-              
-              <div class="form-group b-form-group">
-                <%= f.text_field :name_pronounce, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:name_pronounce].present?) %>
-                <%= f.label :name_pronounce, '本名（かな）*' %>
-                <div class="invalid-feedback">
-                  <% resource.errors.messages[:name_pronounce].each do |message| %>
-                    <div><%= message %></div>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-sm-5 col-md-4">
-              <div class="row">
-                <div class="col-6 col-sm-12">
-                  <div class="b-img-placeholder b-ratio-1_1">
-                    <div class="b-img-thumb" data-background-image="<%= resource.avatar_url %>">
-                  </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="form-group b-form-group mt-3">
-                <%= f.file_field :avatar, class: class_string('form-control-file' => true, 'is-invalid' => resource.errors.messages[:avatar].present?) %>
-                <%= f.label :avatar, '写真をアップロード' %>
-                <div class="invalid-feedback">
-                  <% resource.errors.messages[:avatar].each do |message| %>
-                    <div><%= message %></div>
-                  <% end %>
-                </div>
+  <h6 class="b-box-title">メイン</h6>
+  <div class="b-box">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), method: :put, html: { class: 'b-form' }) do |f| %>
+      <div class="collapse" id="security">
+        <div class="form-group b-form-group">
+          <%= f.text_field :email, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:email].present?) %>
+          <%= f.label :email, 'メール' %>
+          <div class="invalid-feedback">
+            <% resource.errors.messages[:email].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group b-form-group">
+              <%= f.text_field :password, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:password].present?) %>
+              <%= f.label :password, 'パスワード' %>
+              <div class="invalid-feedback">
+                <% resource.errors.messages[:password].each do |message| %>
+                  <div><%= message %></div>
+                <% end %>
               </div>
             </div>
           </div>
           
-          <div class="form-group b-form-group">
-            <%= f.text_field :current_password, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:current_password].present?) %>
-            <%= f.label :current_password, '現在のパスワード' %>
-            <div class="invalid-feedback">
-              <% resource.errors.messages[:current_password].each do |message| %>
-                <div><%= message %></div>
-              <% end %>
+          <div class="col-sm-6">
+            <div class="form-group b-form-group">
+              <%= f.text_field :password_confirmation, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:password_confirmation].present?) %>
+              <%= f.label :password_confirmation, 'パスワードの認証' %>
+              <div class="invalid-feedback">
+                <% resource.errors.messages[:password_confirmation].each do |message| %>
+                  <div><%= message %></div>
+                <% end %>
+              </div>
             </div>
           </div>
-          
-          <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
-          <div class="clearfix"></div>
-        <% end %>
+        </div>
       </div>
-    </div>
-    
-    <div class="tab-pane fade" id="security" role="tabpanel">
-      <h6 class="b-box-title">セキュリティ</h6>
-      <div class="b-box">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), method: :put, html: { class: 'b-form' }) do |f| %>
+      
+      <div class="row">
+        <div class="col-sm-7 col-md-8">
           <div class="form-group b-form-group">
-            <%= f.text_field :email, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:email].present?) %>
-            <%= f.label :email, 'メール' %>
+            <%= f.text_field :user_name, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:user_name].present?) %>
+            <%= f.label :user_name, 'ユーザー名' %>
             <div class="invalid-feedback">
-              <% resource.errors.messages[:email].each do |message| %>
+              <% resource.errors.messages[:user_name].each do |message| %>
                 <div><%= message %></div>
               <% end %>
             </div>
           </div>
           
+          <div class="form-group b-form-group">
+            <%= f.text_field :first_name, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:first_name].present?) %>
+            <%= f.label :first_name, 'First name' %>
+            <div class="invalid-feedback">
+              <% resource.errors.messages[:first_name].each do |message| %>
+                <div><%= message %></div>
+              <% end %>
+            </div>
+          </div>
+          
+          <div class="form-group b-form-group">
+            <%= f.text_field :last_name, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:last_name].present?) %>
+            <%= f.label :last_name, 'Last name' %>
+            <div class="invalid-feedback">
+              <% resource.errors.messages[:last_name].each do |message| %>
+                <div><%= message %></div>
+              <% end %>
+            </div>
+          </div>
+          
+          <div class="form-group b-form-group">
+            <%= f.text_field :name_pronounce, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:name_pronounce].present?) %>
+            <%= f.label :name_pronounce, '本名（かな）*' %>
+            <div class="invalid-feedback">
+              <% resource.errors.messages[:name_pronounce].each do |message| %>
+                <div><%= message %></div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-sm-5 col-md-4">
           <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group b-form-group">
-                <%= f.text_field :password, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:password].present?) %>
-                <%= f.label :password, 'パスワード' %>
-                <div class="invalid-feedback">
-                  <% resource.errors.messages[:password].each do |message| %>
-                    <div><%= message %></div>
-                  <% end %>
-                </div>
+            <div class="col-6 col-sm-12">
+              <div class="b-img-placeholder b-ratio-1_1">
+                <div class="b-img-thumb" data-background-image="<%= resource.avatar_url %>">
               </div>
-            </div>
-            
-            <div class="col-sm-6">
-              <div class="form-group b-form-group">
-                <%= f.text_field :password_confirmation, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:password_confirmation].present?) %>
-                <%= f.label :password_confirmation, 'パスワードの認証' %>
-                <div class="invalid-feedback">
-                  <% resource.errors.messages[:password_confirmation].each do |message| %>
-                    <div><%= message %></div>
-                  <% end %>
-                </div>
               </div>
             </div>
           </div>
           
-          <div class="form-group b-form-group">
-            <%= f.text_field :current_password, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:current_password].present?) %>
-            <%= f.label :current_password, '現在のパスワード' %>
+          <div class="form-group b-form-group mt-3">
+            <%= f.file_field :avatar, class: class_string('form-control-file' => true, 'is-invalid' => resource.errors.messages[:avatar].present?) %>
+            <%= f.label :avatar, '写真をアップロード' %>
             <div class="invalid-feedback">
-              <% resource.errors.messages[:current_password].each do |message| %>
+              <% resource.errors.messages[:avatar].each do |message| %>
                 <div><%= message %></div>
               <% end %>
             </div>
           </div>
-          
-          <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
-          <div class="clearfix"></div>
-        <% end %>
+        </div>
       </div>
-    </div>
+      
+      <div class="form-group b-form-group">
+        <%= f.text_field :current_password, class: class_string('form-control' => true, 'is-invalid' => resource.errors.messages[:current_password].present?) %>
+        <%= f.label :current_password, '現在のパスワード' %>
+        <div class="invalid-feedback">
+          <% resource.errors.messages[:current_password].each do |message| %>
+            <div><%= message %></div>
+          <% end %>
+        </div>
+      </div>
+      
+      <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
+      <div class="clearfix"></div>
+    <% end %>
   </div>
 </div>
 

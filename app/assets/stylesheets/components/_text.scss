@@ -9,6 +9,16 @@
   white-space: pre-line;
 }
 
+// <div class="b-ruby">
+//   <span class="b-rb b-ellipsis" title="<%= @album.title %>">
+//     <%= @album.title %>
+//   </span>
+//   <span class="b-rt b-ellipsis" title="<%= @album.title_pronounce %>">
+//     <%= @album.title_pronounce %>
+//   </span>
+//   <span></span>
+// </div>
+
 .b-ruby {
   position: relative;
   height: #{1.5 + 0.6 * 1.5}rem;
