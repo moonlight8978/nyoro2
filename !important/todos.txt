@@ -1,0 +1,33 @@
+1. Model's version management
+- Album --- 1 n --- Album version => album versions
+- Album --- 1 1 --- Album version => latest version
+- Song --- 1 n --- Song version => song versions
+- Song --- 1 1 --- Song version => latest version
+
+- Album version --- 1 n --- Song => each version contains many songs, can multiple delete / create
+- Album v1 has 3 songs, Album v2 has 5 songs (2 added), Album v3 has 2 songs (3 deleted)
+...
+
+2. Auto kanji => hiragana, romaji
+- When create/edit, only original title is required input by user
+- On input change, title_pronounce will by filled by Yahoo Jp API, title_pronounce will be used to transform to romaji.
+
+3. Each album has youtube frame & search results by Youtube, niconico...
+
+4. Each album has amazon price list.
+
+5. Can be favorited, rated, commented, reviewed by users (with visualization).
+
+6. User utils: 
+- notification
+- friend
+- chat
+- recent activities (with graph for summary: total edits, comments, average star...)
+- link with social networks (fb, twitter)
+
+7. DB model when create, post on Facebook fanpage, send notification to user.
+
+8. Admin routes for management.
+
+9. E-Commerce.
+- Each product has ability to add db model for related section.
