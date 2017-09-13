@@ -13,7 +13,6 @@ class Db::AlbumsController < ApplicationController
     
     unless @album.errors.any?
       log = @album.log_create(current_user, @album.title, params[:description])
-      ActionCable.server.broadcast('logs', render_logs)
       redirect_to @album
     else
       render 'new'
@@ -55,12 +54,11 @@ class Db::AlbumsController < ApplicationController
     @title = UtilService::PageTitle.set "#{@album.title}を直す"
     @album_title = @album.title
     @album.assign_attributes(album_params)
-    p params[:db_album][:image]
+    
     # (render plain: '何も変わらなかった。' and return) unless @album.changed?
     
     if @album.save
       log = @album.log_update(current_user, @album.title, params[:description])
-      ActionCable.server.broadcast('logs', render_logs)
       redirect_to @album
     else
       render 'edit'
@@ -72,7 +70,6 @@ class Db::AlbumsController < ApplicationController
     @title = UtilService::PageTitle.set "#{@album.title}を消す"
     log = @album.log_destroy(current_user, @album.title, params[:description])
     @album.destroy
-    ActionCable.server.broadcast('logs', render_logs)
     redirect_to db_albums_path
   end
   

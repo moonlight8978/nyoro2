@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  after_save :set_default_role
+  after_create_commit :set_default_role
   has_and_belongs_to_many :roles, join_table: :users_user_roles
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
@@ -41,7 +41,6 @@ class User < ApplicationRecord
   end
   
   def set_default_role
-    user_role = User::Role.find_by_name('user')
-    (self.roles << user_role) unless self.roles.include?(user_role)
+    self.roles << (User::Role.find_by_name('user'))
   end
 end
