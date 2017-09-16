@@ -17,7 +17,10 @@ module Nyoro2
     config.i18n.default_locale = :ja
     
     config.time_zone = 'Asia/Bangkok'
-    config.active_record.default_timezone = :local
+    Groupdate.time_zone = 'Asia/Bangkok'
+    config.active_record.default_timezone = :utc
+    
+    # config.active_record.default_timezone = :local
 
     config.autoload_paths << Rails.root.join('lib')
 

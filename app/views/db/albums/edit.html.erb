@@ -8,4 +8,6 @@
 
 <%= page_title("#{@album_title}を編集する", "Edit #{@album_title}") %>
 
-<%= render 'form' %>
+<%= render partial: 'form', locals: {
+  url: db_album_path(params[:id]), method: :put
+} %>

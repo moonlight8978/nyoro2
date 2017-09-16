@@ -2,16 +2,17 @@
   { path: home_path, name: 'ホーム' }, 
   { path: 'javascript:void(0)', name: 'データベース' },
   { path: db_albums_path, name: 'アルバムリスト' },
-  @album.title
+  @latest.title
 ) %>
 
-<%= page_title(@album.title, @album.title_en) %>
+<%= page_title(@latest.title, @latest.title_en) %>
 
 <% content_for :options do %>
   <%= render partial: 'components/utils/options', locals: {
     name: 'アルバム',
     edit_path: edit_db_album_path(@album),
-    destroy_path: db_album_path(@album)
+    destroy_path: db_album_path(@album),
+    history_path: db_album_versions_path(@album)
   } %>
 <% end %>
 
@@ -20,7 +21,7 @@
     <div class="col-6 col-sm-5 col-md-4 pr-0">
       <div class="b-img-placeholder b-ratio-1_1">
         <div class="b-img-thumb" 
-          data-background-image="<%= @album.image_url.to_s %>"
+          data-background-image="<%= @latest.image_url.to_s %>"
         >
         </div>
       </div>
@@ -33,11 +34,11 @@
             <th class="align-bottom">タイトル</th>
             <td>
               <div class="b-ruby">
-                <span class="b-rb b-ellipsis" title="<%= @album.title %>">
-                  <%= @album.title %>
+                <span class="b-rb b-ellipsis" title="<%= @latest.title %>">
+                  <%= @latest.title %>
                 </span>
-                <span class="b-rt b-ellipsis" title="<%= @album.title_pronounce %>">
-                  <%= @album.title_pronounce %>
+                <span class="b-rt b-ellipsis" title="<%= @latest.title_pronounce %>">
+                  <%= @latest.title_pronounce %>
                 </span>
                 <span></span>
               </div>
@@ -46,13 +47,13 @@
           <tr>
             <th>ローマ字</th>
             <td>
-              <%= @album.title_en %>
+              <%= @latest.title_en %>
             </td>
           </tr>
           <tr>
             <th>写真のURL</th>
             <td>
-              <%= @album.image_url %>
+              <%= @latest.image_url %>
             </td>
           </tr>
           <tr class="b-description">
@@ -74,7 +75,7 @@
 <% content_for :modals do %>
   <%= render partial: 'components/confirm_destroy', 
     locals: { 
-      modal_title: @album.title,
+      modal_title: @latest.title,
       destroy_path: db_album_path(@album)
     } 
   %>

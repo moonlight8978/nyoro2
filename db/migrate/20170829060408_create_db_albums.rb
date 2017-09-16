@@ -1,10 +1,10 @@
 class CreateDbAlbums < ActiveRecord::Migration[5.1]
   def change
     create_table :db_albums do |t|
-      t.string :title
-      t.string :title_en
-      t.string :title_pronounce, index: true
-      t.string :image
+      # latest version
+      t.references :latest_version, index: true
+      
+      t.boolean :marked, index: true, default: false
       
       t.timestamps
     end

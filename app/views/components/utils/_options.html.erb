@@ -1,4 +1,13 @@
 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="crud">
+  <% if defined?(history_path) %>
+    <%= link_to history_path, class: 'b-link b-link-no-decoration' do %>
+      <div class="dropdown-item">
+        <i class="fa fa-fw fa-history"></i>
+        <span>編集履歴を見る</span>
+      </div>
+    <% end %> 
+  <% end %>
+  
   <% if defined?(new_path) %>
     <%= link_to new_path, class: 'b-link b-link-no-decoration' do %>
       <div class="dropdown-item">

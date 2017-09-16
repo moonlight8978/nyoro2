@@ -1,27 +1,32 @@
 class Db::AlbumsController < ApplicationController
   before_action :db_sidebar, only: [:show, :index]
-  before_action :authenticate_user!, only: [:edit, :update, :new, :create, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :new, :create]
+  before_action :authenticate_user!, :require_admin, only: [:destroy]
   
   def new
     @title = UtilService::PageTitle.set '新しいアルバムを作る'
-    @album = Db::Album.new
+    @latest = Db::AlbumVersion.new
   end
   
   def create
     @title = UtilService::PageTitle.set '新しいアルバムを作る'
-    @album = Db::Album.create(album_params)
+    create_svc = DbService::Album::CreateAlbum
+      .new(album_params, current_user, description: params[:description])
+      .perform
+    @album = create_svc.album
     
-    unless @album.errors.any?
-      log = @album.log_create(current_user, @album.title, params[:description])
+    unless create_svc.errors?
       redirect_to @album
     else
+      @latest = create_svc.latest_version
       render 'new'
     end
   end
   
   def show
-    @album = Db::Album.find(params[:id])
-    @title = UtilService::PageTitle.set @album.title
+    @album = Db::Album.includes(:latest_version).find(params[:id])
+    @latest = @album.latest_version
+    @title = UtilService::PageTitle.set @latest.title
     @comment = Feature::Comment.new
     @comments = @album.comments.eager_load(:user).page(1).per(5)
   end
@@ -32,35 +37,31 @@ class Db::AlbumsController < ApplicationController
     _direction = params[:reverse_sort].present? ? :desc : :asc
     
     @albums = Db::Album.all
-      .order(_order => _direction)
+      .includes(:latest_version)
       .page(params[:page] || 1)
       .per(params[:per_page] || 10)
-      
-    respond_to do |format|
-      format.html
-      format.js 
-      format.json { render json: @albums, status: :ok }
-    end
+      # .order(_order => _direction)
   end
   
   def edit
-    @album = Db::Album.find(params[:id])
-    @title = UtilService::PageTitle.set "#{@album.title}を直す"
-    @album_title = @album.title
+    @album = Db::Album.includes(:latest_version).find(params[:id])
+    @latest = @album.latest_version
+    @title = UtilService::PageTitle.set "#{@latest.title}を編集する"
+    @album_title = @latest.title
   end
   
   def update
-    @album = Db::Album.find(params[:id])
-    @title = UtilService::PageTitle.set "#{@album.title}を直す"
-    @album_title = @album.title
-    @album.assign_attributes(album_params)
+    update_svc = DbService::Album::UpdateAlbum
+      .new(params[:id], album_params, current_user, description: params[:description])
+      .perform
+    @album = update_svc.album
     
-    # (render plain: '何も変わらなかった。' and return) unless @album.changed?
-    
-    if @album.save
-      log = @album.log_update(current_user, @album.title, params[:description])
+    unless update_svc.errors?
       redirect_to @album
     else
+      @title = UtilService::PageTitle.set "#{update_svc.old_title}を編集する"
+      @album_title = update_svc.old_title
+      @latest = update_svc.latest_version
       render 'edit'
     end
   end
@@ -96,8 +97,8 @@ class Db::AlbumsController < ApplicationController
 private
 
   def album_params
-    params.require(:db_album).permit(
-      :title, :title_en, :title_pronounce, :image
+    params.require(:db_album_version).permit(
+      :title, :title_en, :title_pronounce, :image, :note
     )
   end
   

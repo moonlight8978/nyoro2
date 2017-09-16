@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       collection do
         get 'search'
       end
-      
+      resources :versions, controller: 'album_versions'
       resources :comments, controller: 'albums/comments'
     end
   end

@@ -1,0 +1,33 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' }, 
+  { path: 'javascript:void(0)', name: 'データベース' },
+  { path: db_albums_path, name: 'アルバムリスト' },
+  { path: db_album_path(@album), name: @album.latest_version.title },
+  '編集履歴'
+) %>
+
+<%= page_title("#{@album.latest_version.title}の編集履歴", "#{@album.latest_version.title_en}'s history") %>
+
+<div class="" style="margin-bottom: -1rem;">
+  <% @versions.reverse_each do |date, versions| %>
+    <div class="b-box mb-3">
+      <div class="b-box-another">
+        <%= date %>
+      </div>
+      
+      <div class="">
+        <% versions.each do |version| %>
+          <div class="b-box-row">
+            <%= link_to "バーションコード#{version.id}", db_album_version_path(@album, version) %>
+            <% if version.id == @album.latest_version_id %>
+              <span>current</span>
+            <% end %>
+            <span><%= version.previous_version_id %></span>
+            <span><i class="fa fa-history"></i></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+

@@ -1,11 +1,12 @@
 <div class="row">
   <% @albums.each do |album| %>
+    <% latest = album.latest_version %>
     <div class="col-md-6 mb-3">
       <div class="b-box b-box-p h-100 b-item">
         <div class="row">
           <div class="col-4 col-md-5 b-item-img">
             <div class="b-img-placeholder b-ratio-1_1">
-              <div class="b-img-thumb" data-background-image="<%= album.image_url.to_s %>">
+              <div class="b-img-thumb" data-background-image="<%= latest.image_url.to_s %>">
               </div>
             </div>
           </div>
@@ -13,8 +14,8 @@
           <div class="col-8 col-md-7 b-item-info">
             <div class="b-item-info-head">
               <div class="b-text-3l">
-                <%= link_to album.title, db_album_path(album), 
-                  title: album.title_pronounce
+                <%= link_to latest.title, db_album_path(album), 
+                  title: latest.title_pronounce
                 %>
               </div>
               <div class="mt-1">

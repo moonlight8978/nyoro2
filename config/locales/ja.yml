@@ -1,2 +1,6 @@
 ja:
   hello: こんにちは。
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 失敗
