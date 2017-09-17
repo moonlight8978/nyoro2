@@ -1,0 +1,11 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' }, 
+  { path: 'javascript:void(0)', name: 'データベース' },
+  { path: db_albums_path, name: 'アルバムリスト' },
+  { path: db_album_path(@disc.album_version.album_id), name: @disc.album_version.title },
+  '新しい歌を作る'
+) %>
+
+<%= page_title('新しい歌を作る', 'Create new song') %>
+
+<%= render partial: 'form', locals: { url: db_disc_songs_path(@disc), method: :post } %>

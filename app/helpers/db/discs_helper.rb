@@ -1,0 +1,2 @@
+module Db::DiscsHelper
+end

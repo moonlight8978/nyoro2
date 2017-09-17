@@ -1,0 +1,56 @@
+<div class="b-box">
+  <%= form_for(@latest, url: url, method: method, html: { class: 'b-form' }) do |f| %>
+  <div class="form-group b-form-group">
+    <%= f.text_field :number, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:number].present?) %>
+    <%= f.label :number, '番号*' %>
+    <div class="invalid-feedback">
+      <% @latest.errors.messages[:number].each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  </div>
+  
+    <div class="form-group b-form-group">
+      <%= f.text_field :title, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:title].present?) %>
+      <%= f.label :title, 'タイトル*' %>
+      <div class="invalid-feedback">
+        <% @latest.errors.messages[:title].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+  
+    <div class="form-group b-form-group">
+      <%= f.text_field :title_en, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:title_en].present?) %>
+      <%= f.label :title_en, 'タイトル（英語／ローマ字）*' %>
+      <div class="invalid-feedback">
+        <% @latest.errors.messages[:title_en].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="form-group b-form-group">
+      <%= f.text_field :title_pronounce, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:title_pronounce].present?) %>
+      <%= f.label :title_pronounce, 'タイトル（かな）*' %>
+      <div class="invalid-feedback">
+        <% @latest.errors.messages[:title_pronounce].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="form-group b-form-group">
+      <%= f.text_field :length, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:length].present?) %>
+      <%= f.label :length, '長さ' %>
+      <div class="invalid-feedback">
+        <% @latest.errors.messages[:length].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+    
+    <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
+    <div class="clearfix"></div>
+  <% end %>
+</div>

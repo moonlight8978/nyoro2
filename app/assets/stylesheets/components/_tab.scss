@@ -1,0 +1,29 @@
+.b-box {
+  .b-tabs {
+    border: 0;
+    // margin-left: -1rem;
+    // margin-right: -1rem;
+    
+    .nav-item {
+      margin: 0;
+      position: relative;
+      
+      &:not(:last-child):after {
+        content: '';
+        width: 1px;
+        background-color: #ccc;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+      }
+    }
+    
+    .nav-link {
+      padding: 0 1rem;
+      background-color: transparent;
+      border: 0;
+    }
+  }
+}

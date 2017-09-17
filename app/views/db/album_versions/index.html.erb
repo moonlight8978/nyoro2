@@ -8,22 +8,34 @@
 
 <%= page_title("#{@album.latest_version.title}の編集履歴", "#{@album.latest_version.title_en}'s history") %>
 
-<div class="" style="margin-bottom: -1rem;">
+<div class="page-version-list">
   <% @versions.reverse_each do |date, versions| %>
     <div class="b-box mb-3">
       <div class="b-box-another">
-        <%= date %>
+        <%= date %>に変更
       </div>
       
       <div class="">
         <% versions.each do |version| %>
           <div class="b-box-row">
-            <%= link_to "バーションコード#{version.id}", db_album_version_path(@album, version) %>
-            <% if version.id == @album.latest_version_id %>
-              <span>current</span>
-            <% end %>
-            <span><%= version.previous_version_id %></span>
-            <span><i class="fa fa-history"></i></span>
+            <div class="">
+              <%= link_to "バーション#{version.id}", db_album_version_path(@album, version) %>
+              <% if version.id == @album.latest_version_id %>
+                <span class="b-label ml-2">current</span>
+              <% end %>
+              <div class="version-utils">
+                <% if version.previous_version_id %>
+                  <%= link_to version.previous_version_id, 
+                    db_album_version_path(@album, version.previous_version_id), 
+                    title: "以前のバージョン" 
+                  %>
+                <% end %>
+                
+                <%= link_to db_album_version_path(@album, version), method: :put, title: "元に戻す" do %>
+                  <i class="fa fa-history"></i>
+                <% end %>
+              </div>
+            </div>
           </div>
         <% end %>
       </div>

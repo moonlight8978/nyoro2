@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916073137) do
+ActiveRecord::Schema.define(version: 20170917133325) do
 
   create_table "db_album_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "previous_version_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20170916073137) do
     t.datetime "updated_at", null: false
     t.index ["album_version_id"], name: "index_db_discs_on_album_version_id"
     t.index ["marked"], name: "index_db_discs_on_marked"
+    t.index ["number"], name: "index_db_discs_on_number"
   end
 
   create_table "db_song_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -61,7 +62,9 @@ ActiveRecord::Schema.define(version: 20170916073137) do
     t.string "length"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number"
     t.index ["marked"], name: "index_db_song_versions_on_marked"
+    t.index ["number"], name: "index_db_song_versions_on_number"
     t.index ["previous_version_id"], name: "index_db_song_versions_on_previous_version_id"
     t.index ["song_id"], name: "index_db_song_versions_on_song_id"
     t.index ["title_pronounce"], name: "index_db_song_versions_on_title_pronounce"
@@ -72,6 +75,10 @@ ActiveRecord::Schema.define(version: 20170916073137) do
     t.boolean "marked", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "disc_id"
+    t.bigint "latest_version_id"
+    t.index ["disc_id"], name: "index_db_songs_on_disc_id"
+    t.index ["latest_version_id"], name: "index_db_songs_on_latest_version_id"
     t.index ["marked"], name: "index_db_songs_on_marked"
     t.index ["song_version_id"], name: "index_db_songs_on_song_version_id"
   end

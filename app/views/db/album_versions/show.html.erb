@@ -1,0 +1,32 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' }, 
+  { path: 'javascript:void(0)', name: 'データベース' },
+  { path: db_albums_path, name: 'アルバムリスト' },
+  { path: db_album_path(@album), name: @album.latest_version.title },
+  "バージョン#{params[:id]}"
+) %>
+
+<%= page_title(@latest.title, @latest.title_en) %>
+
+<% content_for :options do %>
+  <%= render partial: 'components/utils/options', locals: {
+    name: 'アルバム',
+    edit_path: edit_db_album_path(@album),
+    destroy_path: db_album_path(@album),
+    history_path: db_album_versions_path(@album)
+  } %>
+<% end %>
+
+<% if params[:id].to_i != @album.latest_version_id%>
+  <div class="alert alert-warning" role="alert">
+    <span>これは最終バージョンではありません。</span>
+    <%= link_to 'すべてを見る', db_album_versions_path(@album) %>
+  </div>
+<% else %>
+  <div class="alert alert-success" role="alert">
+    <span>これは最終バージョンです。</span>
+    <%= link_to 'すべてを見る', db_album_versions_path(@album) %>
+  </div>
+<% end %>
+
+<%= render 'db/shared/album_info' %>

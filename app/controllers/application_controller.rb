@@ -22,7 +22,7 @@ protected
   
   def db_sidebar
     @sidebar = :db
-    @logs = Feature::Log.db_log.page(1).per(10)
+    @logs = Feature::Log.db_log.page(1).per(5)
   end
   
 private 

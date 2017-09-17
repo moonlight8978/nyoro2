@@ -1,0 +1,26 @@
+<div class="b-box">
+  <%= form_for(@disc, url: url, method: method, html: { class: 'b-form' }) do |f| %>
+    <div class="form-group b-form-group">
+      <%= f.number_field :number, class: class_string('form-control' => true, 'is-invalid' => @disc.errors.messages[:number].present?) %>
+      <%= f.label :number, 'ディスク番号*' %>
+      <div class="invalid-feedback">
+        <% @disc.errors.messages[:number].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+  
+    <div class="form-group b-form-group">
+      <%= f.text_field :title, class: class_string('form-control' => true, 'is-invalid' => @disc.errors.messages[:title].present?) %>
+      <%= f.label :title, 'タイトル' %>
+      <div class="invalid-feedback">
+        <% @disc.errors.messages[:title].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+    
+    <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
+    <div class="clearfix"></div>
+  <% end %>
+</div>

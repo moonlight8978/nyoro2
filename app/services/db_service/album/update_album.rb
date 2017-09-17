@@ -28,6 +28,7 @@ private
   
   def clone_latest_version_and_assign_new_values!
     @latest_version = @album.album_versions.create(@album.latest_version.dup.attributes)
+    @latest_version.assign_attributes(image: @album.latest_version.image)
     @latest_version.assign_attributes(@params)
     raise ActiveRecord::Rollback unless @latest_version.changed?
   end
@@ -42,6 +43,6 @@ private
   end
   
   def log_update_action
-    @album.log_update(@current_user, @params[:title], @optionals[:description])
+    @album.log_update(@current_user, @latest_version.title, @optionals[:description])
   end
 end

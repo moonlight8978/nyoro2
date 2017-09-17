@@ -1,7 +1,7 @@
 class Db::AlbumsController < ApplicationController
   before_action :db_sidebar, only: [:show, :index]
   before_action :authenticate_user!, only: [:edit, :update, :new, :create]
-  before_action :authenticate_user!, :require_admin, only: [:destroy]
+  before_action [:authenticate_user!, :require_admin], only: [:destroy]
   
   def new
     @title = UtilService::PageTitle.set '新しいアルバムを作る'

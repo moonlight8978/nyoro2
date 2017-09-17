@@ -17,6 +17,8 @@ class Db::AlbumVersion < ApplicationRecord
     .order(created_at: :desc)
   }
   
+  has_many :discs, class_name: 'Db::Disc'
+  
 private
   
   def set_default_values

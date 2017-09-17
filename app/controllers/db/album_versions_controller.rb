@@ -1,4 +1,7 @@
 class Db::AlbumVersionsController < ApplicationController
+  before_action :db_sidebar
+  before_action :authenticate_user!, only: [:update]
+  
   def index
     @album = Db::Album
       .includes(:latest_version)
@@ -10,9 +13,29 @@ class Db::AlbumVersionsController < ApplicationController
   end
   
   def show
-    @version = Db::AlbumVersion
-      .includes(:album)
+    @latest = Db::AlbumVersion
+      .includes(album: :latest_version)
       .find(params[:id])
-    @album = @version.album
+    @album = @latest.album
+    @title = UtilService::PageTitle
+      .set "#{@album.latest_version.title}・バージョン#{params[:id]}"
+  end
+  
+  # to revert / edit current latest_version of album
+  def update
+    @album = Db::Album.find(params[:album_id])
+    
+    if (@album.latest_version_id === params[:id].to_i)
+      redirect_to db_album_versions_path and return
+    end
+    
+    @version = Db::AlbumVersion.find(params[:id])
+    
+    if (@version.album_id === params[:album_id].to_i)
+      @album.update(latest_version_id: params[:id])
+      @album.log_update(current_user, @version.title, "バーション#{params[:id]}に戻す。")
+    end
+    
+    redirect_to db_album_versions_path
   end
 end

@@ -1,0 +1,114 @@
+<div class="b-box b-box-p">
+  <div class="row">
+    <div class="col-6 col-sm-5 col-md-4 pr-0">
+      <div class="b-img-placeholder b-ratio-1_1">
+        <div class="b-img-thumb" 
+          data-background-image="<%= @latest.image_url.to_s %>"
+        >
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-sm-7 col-md-8 pt-3 pt-sm-0">
+      <table class="b-table b-table-hidden-th">
+        <tbody>
+          <tr>
+            <th class="align-bottom">タイトル</th>
+            <td>
+              <div class="b-ruby">
+                <span class="b-rb b-ellipsis" title="<%= @latest.title %>">
+                  <%= @latest.title %>
+                </span>
+                <span class="b-rt b-ellipsis" title="<%= @latest.title_pronounce %>">
+                  <%= @latest.title_pronounce %>
+                </span>
+                <span></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>ローマ字</th>
+            <td>
+              <%= @latest.title_en %>
+            </td>
+          </tr>
+          <tr class="b-description">
+            <th colspan="2">デスクリプション</th>
+          </tr>
+          <tr class="b-description">
+            <td colspan="2">
+              <p class="b-description-text">これはデスクリプションです。</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="b-box mt-3">
+  <div class="b-box-another">
+    <ul class="nav nav-tabs b-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="discs-tab" data-toggle="tab" href="#discs" 
+          role="tab" aria-controls="home" aria-expanded="true" 
+        >
+          ディスク
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="staffs-tab" data-toggle="tab" href="#staffs" 
+          role="tab" aria-controls="staffs"
+        >
+          スタフ
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="discs" role="tabpanel" aria-labelledby="discs-tab">
+      <% if @latest.discs.any? %>
+        <% @latest.discs.each do |disc| %>
+          <div class="b-box-row">
+            <span>
+              ディスク
+              <%= disc.number %>
+              <%= "- #{disc.title}" if disc.title.present? %>
+            </span>
+            <%= link_to new_db_disc_song_path(disc) do %>
+              <i class="fa fa-plus"></i>
+            <% end %>
+            
+            <%= link_to edit_db_disc_path(disc) do %>
+              <i class="fa fa-pencil"></i>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="">
+          ディスクがありません。
+          <%= link_to '作りに行く', new_db_album_disc_path(@latest.album_id) %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="tab-pane fade" id="staffs" role="tabpanel" aria-labelledby="staffs-tab">
+      
+    </div>
+  </div>
+</div>
+
+<div class="b-box-group mt-3">
+  <div class="b-box-title">
+    ノート
+  </div>
+  
+  <div class="b-box b-box-p">
+    <% if @latest.note.present? %>
+      <%= @latest.note.html_safe %>
+    <% else %>
+      <span>何を書いて!</span>
+    <% end %>
+  </div>
+</div>

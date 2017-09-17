@@ -10,9 +10,8 @@ class DbService::Album::CreateAlbum
   def perform
     ActiveRecord::Base.transaction do
       create_new_album
-      build_new_album_latest_version
-      raise ActiveRecord::Rollback unless @latest_version.save
-      write_latest_version_to_album
+      create_new_version_as_album_latest_version!
+      assign_latest_version_to_album
       log_create_action
     end
   
@@ -29,12 +28,13 @@ private
     @album = Db::Album.create
   end
   
-  def build_new_album_latest_version
+  def create_new_version_as_album_latest_version
     @latest_version = @album.album_versions.build(@params)
     # @latest_version.previous_version = @album.latest_version
+    raise ActiveRecord::Rollback unless @latest_version.save
   end
   
-  def write_latest_version_to_album
+  def assign_latest_version_to_album
     @album.update(latest_version: @latest_version)
   end
   
