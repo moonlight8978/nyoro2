@@ -1,0 +1,45 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' }, 
+  { path: 'javascript:void(0)', name: 'データベース' },
+  { path: db_albums_path, name: 'アルバムリスト' },
+  { path: db_song_path(@song), name: @song.latest_version.title },
+  '編集履歴'
+) %>
+
+<%= page_title("#{@song.latest_version.title}の編集履歴", "#{@song.latest_version.title_en}'s history") %>
+
+<div class="page-version-list">
+  <% @versions.reverse_each do |date, versions| %>
+    <div class="b-box mb-3">
+      <div class="b-box-another">
+        <%= date %>に変更
+      </div>
+      
+      <div class="">
+        <% versions.each do |version| %>
+          <div class="b-box-row">
+            <div class="">
+              <%= link_to "バーション#{version.id}", db_song_version_path(@song, version) %>
+              <% if version.id == @song.latest_version_id %>
+                <span class="b-label ml-2">current</span>
+              <% end %>
+              <div class="version-utils">
+                <% if version.previous_version_id %>
+                  <%= link_to version.previous_version_id, 
+                    db_song_version_path(@song, version.previous_version_id), 
+                    title: "以前のバージョン" 
+                  %>
+                <% end %>
+                
+                <%= link_to db_song_version_path(@song, version), method: :put, title: "元に戻す" do %>
+                  <i class="fa fa-history"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+

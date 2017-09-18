@@ -24,13 +24,16 @@ Rails.application.routes.draw do
         get 'search'
       end
       resources :discs, except: [:index, :show], shallow: true do
-        resources :songs, shallow: true do
-          resources :versions, controller: 'song_versions'
-          resources :comments, controller: 'songs/comments'
-        end
+        resources :songs, shallow: true
       end
+      
       resources :versions, controller: 'album_versions'
       resources :comments, controller: 'albums/comments'
+    end
+    
+    resources :songs do
+      resources :versions, controller: 'song_versions'
+      resources :comments, controller: 'songs/comments'
     end
   end
   

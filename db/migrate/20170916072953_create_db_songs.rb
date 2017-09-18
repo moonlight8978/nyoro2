@@ -2,7 +2,7 @@ class CreateDbSongs < ActiveRecord::Migration[5.1]
   def change
     create_table :db_songs do |t|
       t.references :disc
-      t.references :song_version
+      t.references :latest_version
       
       t.boolean :marked, index: true, default: false
       

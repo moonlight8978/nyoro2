@@ -3,7 +3,7 @@ class DbService::Album::CreateSong
   
   def initialize(disc_id, params, current_user, **optionals)
     @disc = Db::Disc.find(disc_id)
-    @album = @disc.album_version.album
+    @album = @disc.album_versions.last.album
     @params = params
     @current_user = current_user
     @optionals = optionals

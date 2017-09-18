@@ -10,8 +10,8 @@ class DbService::Album::CreateDisc
   
   def perform
     ActiveRecord::Base.transaction do
-      clone_latest_version
       create_new_disc!
+      create_new_version_with_new_disk
       log_create_action
     end
   
@@ -23,20 +23,21 @@ class DbService::Album::CreateDisc
   end
   
 private
-
-  def clone_latest_version
+  
+  def create_new_disc!
+    @disc = Db::Disc.create(@params)
+    raise ActiveRecord::Rollback if @disc.errors.any?
+  end
+  
+  def create_new_version_with_new_disk
     @latest_version = @album.album_versions
       .build(@album.latest_version.dup.attributes)
     @latest_version.update(
       previous_version: @album.latest_version,
       image: @album.latest_version.image
     )
+    @latest_version << @disc
     @album.update(latest_version: @latest_version)
-  end
-  
-  def create_new_disc!
-    @disc = @latest_version.discs.build(@params)
-    raise ActiveRecord::Rollback unless @disc.save
   end
   
   def log_create_action

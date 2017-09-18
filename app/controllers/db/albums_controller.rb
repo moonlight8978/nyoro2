@@ -48,8 +48,7 @@ class Db::AlbumsController < ApplicationController
   def edit
     @album = Db::Album.includes(:latest_version).find(params[:id])
     @latest = @album.latest_version
-    @title = UtilService::PageTitle.set "#{@latest.title}を編集する"
-    @album_title = @latest.title
+    backup_ui_variables(@latest.title, @latest.title_en)
   end
   
   def update
@@ -61,8 +60,7 @@ class Db::AlbumsController < ApplicationController
     unless update_svc.errors?
       redirect_to @album
     else
-      @title = UtilService::PageTitle.set "#{update_svc.old_title}を編集する"
-      @album_title = update_svc.old_title
+      backup_ui_variables(update_svc.title, update_svc.title_en)
       @latest = update_svc.latest_version
       render 'edit'
     end
@@ -97,7 +95,13 @@ class Db::AlbumsController < ApplicationController
   end
 
 private
-
+  
+  def backup_ui_variables(ja, en)
+    @title = UtilService::PageTitle.set "#{ja}を編集する"
+    @page_title = ja
+    @page_title_en = en
+  end
+  
   def album_params
     params.require(:db_album_version).permit(
       :title, :title_en, :title_pronounce, :image, :note

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170917133325) do
+ActiveRecord::Schema.define(version: 20170918113659) do
 
   create_table "db_album_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "previous_version_id"
@@ -29,6 +29,12 @@ ActiveRecord::Schema.define(version: 20170917133325) do
     t.index ["title_pronounce"], name: "index_db_album_versions_on_title_pronounce"
   end
 
+  create_table "db_album_versions_discs", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "album_version_id", null: false
+    t.bigint "disc_id", null: false
+    t.index ["album_version_id", "disc_id"], name: "index_db_album_versions_discs_on_album_version_id_and_disc_id"
+  end
+
   create_table "db_albums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "latest_version_id"
     t.boolean "marked", default: false
@@ -41,13 +47,11 @@ ActiveRecord::Schema.define(version: 20170917133325) do
   end
 
   create_table "db_discs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "album_version_id"
     t.boolean "marked", default: false
     t.integer "number"
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["album_version_id"], name: "index_db_discs_on_album_version_id"
     t.index ["marked"], name: "index_db_discs_on_marked"
     t.index ["number"], name: "index_db_discs_on_number"
   end
@@ -60,9 +64,9 @@ ActiveRecord::Schema.define(version: 20170917133325) do
     t.string "title_en"
     t.string "title_pronounce"
     t.string "length"
+    t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "number"
     t.index ["marked"], name: "index_db_song_versions_on_marked"
     t.index ["number"], name: "index_db_song_versions_on_number"
     t.index ["previous_version_id"], name: "index_db_song_versions_on_previous_version_id"
@@ -71,16 +75,14 @@ ActiveRecord::Schema.define(version: 20170917133325) do
   end
 
   create_table "db_songs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "song_version_id"
+    t.bigint "disc_id"
+    t.bigint "latest_version_id"
     t.boolean "marked", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "disc_id"
-    t.bigint "latest_version_id"
     t.index ["disc_id"], name: "index_db_songs_on_disc_id"
     t.index ["latest_version_id"], name: "index_db_songs_on_latest_version_id"
     t.index ["marked"], name: "index_db_songs_on_marked"
-    t.index ["song_version_id"], name: "index_db_songs_on_song_version_id"
   end
 
   create_table "feature_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

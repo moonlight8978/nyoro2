@@ -27,6 +27,7 @@ class Db::SongsController < ApplicationController
   def show
     @song = Db::Song.find(params[:id])
     @latest = @song.latest_version
+    @album_first_version = @song.disc.album_versions.first
     @title = UtilService::PageTitle
       .set "#{@latest.title}・歌"
     @comment = Feature::Comment.new

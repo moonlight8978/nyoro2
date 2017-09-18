@@ -9,6 +9,7 @@ class CreateDbSongVersions < ActiveRecord::Migration[5.1]
       t.string :title_en
       t.string :title_pronounce, index: true
       t.string :length
+      t.integer :number, index: true
 
       t.timestamps
     end

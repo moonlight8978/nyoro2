@@ -6,14 +6,14 @@ class DbService::Album::UpdateSong
     @params = params
     @current_user = current_user
     @optionals = optionals
-    backup_data_for_ui
   end
   
   def perform
+    backup_data_for_ui
     ActiveRecord::Base.transaction do
-      clone_current_latest_version
-      save_with_new_params!
-      assign_new_latest_version_to_song
+      check_if_any_changes!
+      create_new_version!
+      make_new_version_as_latest
       log_update_action
     end
   
@@ -31,22 +31,26 @@ private
     @page_title_en = @song.latest_version.title_en
   end
   
-  def clone_current_latest_version
-    @latest_version = @song.song_versions.build(@song.latest_version.dup.attributes)
+  def check_if_any_changes!
+    @song.latest_version.assign_attributes(@params)
+    unless @song.latest_version.changed?
+      @latest_version = @song.latest_version
+      raise ActiveRecord::Rollback
+    end
   end
   
-  def save_with_new_params!
-    @latest_version.assign_attributes(@params)
+  def create_new_version!
+    @latest_version = @song.song_versions.build(@song.latest_version.dup.attributes)
     @latest_version.assign_attributes(previous_version: @song.latest_version)
     raise ActiveRecord::Rollback unless @latest_version.save
   end
   
-  def assign_new_latest_version_to_song
+  def make_new_version_as_latest
     @song.update(latest_version: @latest_version)
   end
   
   def log_update_action
-    @song.disc.album_version.album.log_update(
+    @song.disc.album_versions.last.album.log_update(
       @current_user,
       "歌・#{@latest_version.title}",
       @optionals[:description]

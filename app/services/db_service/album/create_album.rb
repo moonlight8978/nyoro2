@@ -28,7 +28,7 @@ private
     @album = Db::Album.create
   end
   
-  def create_new_version_as_album_latest_version
+  def create_new_version_as_album_latest_version!
     @latest_version = @album.album_versions.build(@params)
     # @latest_version.previous_version = @album.latest_version
     raise ActiveRecord::Rollback unless @latest_version.save

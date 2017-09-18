@@ -17,7 +17,7 @@ class Db::AlbumVersion < ApplicationRecord
     .order(created_at: :desc)
   }
   
-  has_many :discs, class_name: 'Db::Disc'
+  has_and_belongs_to_many :discs, join_table: :db_album_versions_discs
   
 private
   

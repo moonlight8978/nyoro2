@@ -2,11 +2,11 @@
   { path: home_path, name: 'ホーム' },
   { path: db_path, name: 'データベース' },
   { path: db_albums_path, name: 'アルバムリスト' },
-  { path: db_album_path(@album), name: @album_title },
+  { path: db_album_path(@album), name: @page_title },
   '編集'
 ) %>
 
-<%= page_title("#{@album_title}を編集する", "Edit #{@album_title}") %>
+<%= page_title("#{@page_title}を編集する", "edit #{@page_title_en}") %>
 
 <%= render partial: 'form', locals: {
   url: db_album_path(params[:id]), method: :put
