@@ -1,0 +1,45 @@
+<div class="b-box b-box-p">
+  <table class="b-table b-table-hidden-th">
+    <tbody>
+      <tr>
+        <th>番号</th>
+        <td>
+          <%= @latest.number %>/<%= @song.disc.songs.size %>
+        </td>
+      </tr>
+      <tr>
+        <th class="align-bottom">タイトル</th>
+        <td>
+          <div class="b-ruby">
+            <span class="b-rb b-ellipsis" title="<%= @latest.title %>">
+              <%= @latest.title %>
+            </span>
+            <span class="b-rt b-ellipsis" title="<%= @latest.title_pronounce %>">
+              <%= @latest.title_pronounce %>
+            </span>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>ローマ字</th>
+        <td>
+          <%= @latest.title_en %>
+        </td>
+      </tr>
+      <tr>
+        <th>長さ</th>
+        <td>
+          <%= @latest.length %>
+        </td>
+      </tr>
+      <tr>
+        <th>アルバム</th>
+        <td>
+          <%= link_to @song.disc.album_version.title, db_album_path(@song.disc.album_version.album_id) %>
+          (<%= link_to "バージョン#{@song.disc.album_version_id}", db_album_version_path(@song.disc.album_version.album_id, @song.disc.album_version_id) %>)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

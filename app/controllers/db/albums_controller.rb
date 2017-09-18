@@ -1,7 +1,7 @@
 class Db::AlbumsController < ApplicationController
   before_action :db_sidebar, only: [:show, :index]
-  before_action :authenticate_user!, only: [:edit, :update, :new, :create]
-  before_action [:authenticate_user!, :require_admin], only: [:destroy]
+  before_action :authenticate_user!, except: [:show, :index]
+  before_action :require_admin!, only: [:destroy]
   
   def new
     @title = UtilService::PageTitle.set '新しいアルバムを作る'
@@ -24,11 +24,13 @@ class Db::AlbumsController < ApplicationController
   end
   
   def show
-    @album = Db::Album.includes(:latest_version).find(params[:id])
+    @album = Db::Album
+      .includes(latest_version: { discs: { songs: :latest_version }})
+      .find(params[:id])
     @latest = @album.latest_version
     @title = UtilService::PageTitle.set @latest.title
     @comment = Feature::Comment.new
-    @comments = @album.comments.eager_load(:user).page(1).per(5)
+    @comments = @album.comments.includes(:user).page(1).per(5)
   end
   
   def index

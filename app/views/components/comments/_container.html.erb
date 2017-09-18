@@ -5,10 +5,10 @@
   
   <div class="b-box">
     <div class="b-box-another top">
-      <%= render 'components/comments/form' %>
+      <%= render partial: 'components/comments/form', locals: { commentable: commentable } %>
     </div>
     <div id="commentList">
-      <% if initial_comments.any? %>
+      <% if initial_comments.length > 0 %>
         <%= render partial: 'components/comments/list', 
           locals: { 
             commentable: commentable,

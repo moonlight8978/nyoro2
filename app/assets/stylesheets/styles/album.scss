@@ -1,0 +1,27 @@
+.album-track-list {
+  .b-label {
+    text-decoration: none;
+    padding: 5px 1rem;
+    font-size: .9rem;
+    margin-left: 5px;
+    color: $black;
+    background-color: transparent;
+    @include transition-std(all);
+    
+    &:hover {
+      color: $white;
+    }
+    
+    &.destroy:hover {
+      background-color: $red;
+    }
+    
+    &.update:hover {
+      background-color: $blue;
+    }
+    
+    &.create:hover {
+      background-color: $green;
+    }
+  }
+}

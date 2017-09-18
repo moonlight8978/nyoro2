@@ -1,0 +1,11 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' }, 
+  { path: 'javascript:void(0)', name: 'データベース' },
+  { path: db_albums_path, name: 'アルバムリスト' },
+  { path: db_song_path(@song), name: @page_title },
+  '編集'
+) %>
+
+<%= page_title("#{@page_title}を編集する", "Edit #{@page_title_en}") %>
+
+<%= render partial: 'form', locals: { url: db_song_path(@song), method: :put } %>

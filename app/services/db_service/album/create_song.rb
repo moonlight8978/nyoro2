@@ -11,11 +11,8 @@ class DbService::Album::CreateSong
   
   def perform
     ActiveRecord::Base.transaction do
-      @song = @disc.songs.create
-      @latest_version = @song.song_versions.create(@params)
-      raise ActiveRecord::Rollback if @latest_version.errors.any?
-      @song.update(latest_version: @latest_version)
-      @album.log_create(@current_user, "歌・#{@latest_version.title}", @optionals[:description])
+      create_new_song_with_latest_version!
+      log_create_action
     end
   
     self
@@ -26,5 +23,15 @@ class DbService::Album::CreateSong
   end
   
 private
-
+  
+  def create_new_song_with_latest_version!
+    @song = @disc.songs.create
+    @latest_version = @song.song_versions.create(@params)
+    raise ActiveRecord::Rollback if @latest_version.errors.any?
+    @song.update(latest_version: @latest_version)
+  end
+  
+  def log_create_action
+    @album.log_create(@current_user, "歌・#{@latest_version.title}", @optionals[:description])
+  end
 end

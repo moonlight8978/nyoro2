@@ -3,6 +3,6 @@ class Db::Disc < ApplicationRecord
     presence: { message: 'ディスクを空にするのができません。' },
     numericality: { only_integer: true, greater_than: 0, message: '入力したのは数ではありません' }
     
-  belongs_to :album_version
+  belongs_to :album_version, counter_cache: true
   has_many :songs
 end

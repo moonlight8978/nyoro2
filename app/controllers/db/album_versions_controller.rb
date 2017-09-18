@@ -14,7 +14,7 @@ class Db::AlbumVersionsController < ApplicationController
   
   def show
     @latest = Db::AlbumVersion
-      .includes(album: :latest_version)
+      .includes(:album, discs: { songs: [:latest_version] })
       .find(params[:id])
     @album = @latest.album
     @title = UtilService::PageTitle

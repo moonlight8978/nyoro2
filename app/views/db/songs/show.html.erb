@@ -1,0 +1,21 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' }, 
+  { path: 'javascript:void(0)', name: 'データベース' },
+  { path: db_albums_path, name: 'アルバムリスト' },
+  @latest.title
+) %>
+
+<%= page_title(@latest.title, @latest.title_en) %>
+
+<% content_for :options do %>
+  <%= render partial: 'components/utils/options', locals: {
+    name: '歌',
+    edit_path: edit_db_song_path(@song),
+    destroy_path: db_song_path(@song),
+    history_path: db_song_versions_path(@song)
+  } %>
+<% end %>
+
+<%= render 'db/shared/song_info' %>
+
+<%= comments_for(@song, @comments)  %>

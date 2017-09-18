@@ -42,3 +42,54 @@
     }
   }
 }
+
+.b-data-table {
+  width: 100%;
+  thead {
+    border-bottom: 1px solid $border-color;
+  }
+  
+  td, th {
+    padding: .5rem;
+    vertical-align: top;
+  }
+  
+  tbody tr:not(.b-row-collapse):hover {
+    background-color: #fafafa;
+  }
+  
+  .b-col-id {
+    width: 50px;
+    text-align: center;
+  }
+  
+  .b-col-wide {
+    @include responsive(sm) {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  
+  .b-col-small {
+    width: 50px;
+    
+    @include responsive(sm) {
+      width: 60px;
+    }
+  }
+  
+  .b-col-last {
+    text-align: center;
+  }
+  
+  // if row is toggleable
+  tr[aria-expanded="false"] .fa-angle-up { display: none }
+  tr[aria-expanded="true"] { 
+    background-color: #fafafa;
+    .fa-angle-down { display: none }
+  }
+  
+  .b-row-collapse {
+    
+  }
+}

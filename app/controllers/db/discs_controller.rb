@@ -1,5 +1,7 @@
 class Db::DiscsController < ApplicationController
   before_action :db_sidebar
+  before_action :authenticate_user!
+  before_action :require_admin!, only: [:destroy]
   
   def new
     @album = Db::Album.includes(:latest_version).find(params[:album_id])

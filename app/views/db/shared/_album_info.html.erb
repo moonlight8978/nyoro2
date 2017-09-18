@@ -60,7 +60,7 @@
         <a class="nav-link" id="staffs-tab" data-toggle="tab" href="#staffs" 
           role="tab" aria-controls="staffs"
         >
-          スタフ
+          スタッフ
         </a>
       </li>
     </ul>
@@ -68,21 +68,83 @@
   
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="discs" role="tabpanel" aria-labelledby="discs-tab">
-      <% if @latest.discs.any? %>
+      <% if @latest.discs.size > 0 %>
         <% @latest.discs.each do |disc| %>
           <div class="b-box-row">
-            <span>
-              ディスク
-              <%= disc.number %>
-              <%= "- #{disc.title}" if disc.title.present? %>
-            </span>
-            <%= link_to new_db_disc_song_path(disc) do %>
-              <i class="fa fa-plus"></i>
-            <% end %>
+            <div class="pb-2 d-flex justify-content-between">
+              <div class="">
+                <span>
+                  ディスク
+                  <%= disc.number %>
+                  <%= "- #{disc.title}" if disc.title.present? %>
+                </span>
+                <%= link_to edit_db_disc_path(disc) do %>
+                  <i class="fa fa-pencil"></i>
+                <% end %>
+              </div>
+              
+              <div class="">
+                <%= link_to db_disc_path(disc), method: :delete do %>
+                  <i class="fa fa-trash"></i>
+                <% end %>
+                <%= link_to new_db_disc_song_path(disc) do %>
+                  <i class="fa fa-plus"></i>
+                <% end %>
+              </div>
+            </div>
             
-            <%= link_to edit_db_disc_path(disc) do %>
-              <i class="fa fa-pencil"></i>
-            <% end %>
+            <table class="b-data-table album-track-list">
+              <thead>
+                <tr>
+                  <th class="b-col-id">番号</th>
+                  <th class="b-col-wide">曲名</th>
+                  <th class="b-col-small b-col-last">長さ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if disc.songs.size > 0 %>
+                  <% disc.songs.each do |_song| %>
+                    <% song = _song.latest_version %>
+                    <tr data-toggle="collapse" data-target="#songInfo<%= _song.id %>" 
+                      aria-expanded="false" aria-controls="songInfo<%= _song.id %>"
+                    >
+                      <td class="b-col-id">
+                        <%= song.number %>
+                        <i class="fa fa-angle-down"></i>
+                        <i class="fa fa-angle-up"></i>
+                      </td>
+                      <td class="b-col-wide">
+                        <%= link_to song.title, db_song_path(_song), class: 'no-propagation b-link-no-color' %>
+                        <%# song.title %>
+                      </td>
+                      <td class="b-col-small b-col-last"><%= song.length %></td>
+                    </tr>
+                    <tr class="collapse animated fadeIn b-row-collapse" id="songInfo<%= _song.id %>">
+                      <td colspan="3">
+                        <div class="d-flex justify-content-end">
+                          <%= link_to db_song_path(_song), class: 'b-label create' do %>
+                            <i class="fa fa-eye"></i>
+                          <% end %>
+                          
+                          <%= link_to db_song_path(_song), method: :delete, class: 'b-label destroy' do %>
+                            <i class="fa fa-trash"></i>
+                            消す
+                          <% end %>
+                          
+                          <%= link_to edit_db_song_path(_song), class: 'b-label update' do %>
+                            <i class="fa fa-pencil"></i>
+                            編集する
+                          <% end %>
+                        </div>
+                        <div class="">
+                          This is collapse
+                        </div>
+                      </td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
           </div>
         <% end %>
       <% else %>
