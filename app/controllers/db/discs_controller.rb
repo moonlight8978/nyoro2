@@ -2,9 +2,9 @@ class Db::DiscsController < ApplicationController
   before_action :db_sidebar
   before_action :authenticate_user!
   before_action :require_admin!, only: [:destroy]
+  before_action :new_title, only: [:new, :create]
   
   def new
-    @album = Db::Album.includes(:latest_version).find(params[:album_id])
     @disc = Db::Disc.new
   end
   
@@ -23,8 +23,7 @@ class Db::DiscsController < ApplicationController
   end
   
   def edit
-    @disc = Db::Disc.includes(:album_version).find(params[:id])
-    @latest = @disc.album_version
+    @disc = Db::Disc.find(params[:id])
   end
   
   def update
@@ -53,5 +52,9 @@ private
 
   def disc_params
     params.require(:db_disc).permit(:number, :title)
+  end
+  
+  def new_title
+    @title = "新しいディスクを作る"
   end
 end

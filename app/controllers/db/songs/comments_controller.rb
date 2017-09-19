@@ -1,10 +1,10 @@
-class Db::Albums::CommentsController < ApplicationController
+class Db::Songs::CommentsController < ApplicationController
   before_action :authenticate_user!, only: :create
   
   def index
-    @album = Db::Album.find(params[:album_id])
+    @song = Db::Song.find(params[:song_id])
     
-    @comments = @album.comments.includes(:user)
+    @comments = @song.comments.includes(:user)
       .page(params[:page] || 1)
       .per(params[:per_page] || 5)
     
@@ -13,7 +13,7 @@ class Db::Albums::CommentsController < ApplicationController
       format.js do
         if @comments.any?
           render partial: 'components/comments/list', 
-            locals: { commentable: @album, comments: @comments }
+            locals: { commentable: @song, comments: @comments }
         else 
           head :bad_request
         end
@@ -22,14 +22,14 @@ class Db::Albums::CommentsController < ApplicationController
   end
   
   def create
-    @album = Db::Album.find(params[:album_id])
+    @song = Db::Song.find(params[:song_id])
       
-    @comment = @album.comments.build(comment_params)
+    @comment = @song.comments.build(comment_params)
     @comment.user = current_user
     
     if @comment.save
-      @comment.log_comment(current_user, @album.latest_version.title, params[:description])
-      redirect_to @album
+      @comment.log_comment(current_user, @song.latest_version.title, params[:description])
+      redirect_to @song
     else
       
     end

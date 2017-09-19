@@ -2,10 +2,9 @@
   { path: home_path, name: 'ホーム' }, 
   { path: 'javascript:void(0)', name: 'データベース' },
   { path: db_albums_path, name: 'アルバムリスト' },
-  { path: db_album_path(@latest.title), name: @latest.title },
-  '新しいディスクを作る'
+  'ディスクを編集する'
 ) %>
 
-<%= page_title('新しいディスクを作る', 'Create new disc') %>
+<%= page_title('ディスクを編集する', 'Edit disc') %>
 
 <%= render partial: 'form', locals: { url: db_disc_path(@disc), method: :put } %>

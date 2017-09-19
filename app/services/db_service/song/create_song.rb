@@ -1,9 +1,8 @@
-class DbService::Album::CreateSong
+class DbService::Song::CreateSong
   attr_reader :song, :disc, :album, :latest_version
   
   def initialize(disc_id, params, current_user, **optionals)
     @disc = Db::Disc.find(disc_id)
-    @album = @disc.album_versions.last.album
     @params = params
     @current_user = current_user
     @optionals = optionals
@@ -32,6 +31,6 @@ private
   end
   
   def log_create_action
-    @album.log_create(@current_user, "歌・#{@latest_version.title}", @optionals[:description])
+    @song.log_create(@current_user, "#{@latest_version.title}", @optionals[:description])
   end
 end

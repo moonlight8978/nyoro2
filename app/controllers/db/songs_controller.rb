@@ -10,7 +10,7 @@ class Db::SongsController < ApplicationController
   end
   
   def create
-    create_svc = DbService::Album::CreateSong
+    create_svc = DbService::Song::CreateSong
       .new(params[:disc_id], song_params, current_user, description: params[:description])
       .perform
       
@@ -41,7 +41,7 @@ class Db::SongsController < ApplicationController
   end
   
   def update
-    update_svc = DbService::Album::UpdateSong
+    update_svc = DbService::Song::UpdateSong
       .new(params[:id], song_params, current_user, description: params[:description])
       .perform
     

@@ -1,0 +1,23 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' }, 
+  { path: 'javascript:void(0)', name: 'データベース' },
+  { path: db_albums_path, name: 'アルバムリスト' },
+  { path: db_song_path(@song), name: @song.latest_version.title },
+  @latest.title
+) %>
+
+<%= page_title(@latest.title, @latest.title_en) %>
+
+<% if params[:id].to_i != @song.latest_version_id%>
+  <div class="alert alert-warning" role="alert">
+    <span>これは最終バージョンではありません。</span>
+    <%= link_to 'すべてを見る', db_song_versions_path(@song) %>
+  </div>
+<% else %>
+  <div class="alert alert-success" role="alert">
+    <span>これは最終バージョンです。</span>
+    <%= link_to 'すべてを見る', db_song_versions_path(@song) %>
+  </div>
+<% end %>
+
+<%= render 'db/shared/song_info' %>

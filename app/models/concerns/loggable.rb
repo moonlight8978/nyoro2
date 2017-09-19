@@ -33,5 +33,15 @@ module Loggable
         title: title
       )
     end
+    
+    def log_comment(user, title, description)
+      self.logs.create(
+        user: user,
+        classification: :db, 
+        action: :comment, 
+        description: description,
+        title: title
+      )
+    end
   end
 end

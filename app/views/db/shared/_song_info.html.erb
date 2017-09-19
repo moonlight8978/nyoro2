@@ -36,8 +36,9 @@
       <tr>
         <th>アルバム</th>
         <td>
-          <%= link_to @album_first_version.title, db_album_path(@album_first_version.album_id) %>
-          (<%= link_to "バージョン#{@album_first_version.id}", db_album_version_path(@album_first_version.album_id, @album_first_version.id) %>)
+          <% first_version = @song.disc.album_versions.first %>
+          <%= link_to first_version.title, db_album_path(first_version.album_id) %>
+          (<%= link_to "バージョン#{first_version.id}", db_album_version_path(first_version.album_id, first_version.id) %>)
         </td>
       </tr>
     </tbody>

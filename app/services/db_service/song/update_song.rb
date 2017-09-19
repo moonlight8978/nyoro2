@@ -1,4 +1,4 @@
-class DbService::Album::UpdateSong
+class DbService::Song::UpdateSong
   attr_reader :song, :latest_version, :title, :page_title, :page_title_en
   
   def initialize(song_id, params, current_user, **optionals)
@@ -50,9 +50,9 @@ private
   end
   
   def log_update_action
-    @song.disc.album_versions.last.album.log_update(
+    @song.log_update(
       @current_user,
-      "歌・#{@latest_version.title}",
+      "#{@latest_version.title}",
       @optionals[:description]
     )
   end
