@@ -36,7 +36,7 @@ private
       previous_version: @album.latest_version,
       image: @album.latest_version.image
     )
-    @latest_version << @disc
+    @latest_version.discs << @disc
     @album.update(latest_version: @latest_version)
   end
   

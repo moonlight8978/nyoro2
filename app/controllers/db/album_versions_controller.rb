@@ -6,19 +6,18 @@ class Db::AlbumVersionsController < ApplicationController
     @album = Db::Album
       .includes(:latest_version)
       .find(params[:album_id])
-    @title = UtilService::PageTitle.set "#{@album.latest_version.title}の編集履歴"
+    set_title "#{@album.latest_version.title}の編集履歴"
     @versions = @album.versions
       .page(params[:page] || 1).per(params[:per] || 20)
       .group_by_day(&:created_at)
   end
   
   def show
-    @latest = Db::AlbumVersion
+    @album_version = Db::AlbumVersion
       .includes(:album, discs: { songs: [:latest_version] })
       .find(params[:id])
-    @album = @latest.album
-    @title = UtilService::PageTitle
-      .set "#{@album.latest_version.title}・バージョン#{params[:id]}"
+    @album = @album_version.album
+    set_title "#{@album.latest_version.title}・バージョン#{params[:id]}"
   end
   
   # to revert / edit current latest_version of album

@@ -4,12 +4,12 @@ class Db::AlbumsController < ApplicationController
   before_action :require_admin!, only: [:destroy]
   
   def new
-    @title = UtilService::PageTitle.set '新しいアルバムを作る'
+    set_title '新しいアルバムを作る'
     @latest = Db::AlbumVersion.new
   end
   
   def create
-    @title = UtilService::PageTitle.set '新しいアルバムを作る'
+    set_title '新しいアルバムを作る'
     create_svc = DbService::Album::CreateAlbum
       .new(album_params, current_user, description: params[:description])
       .perform
@@ -28,13 +28,12 @@ class Db::AlbumsController < ApplicationController
       .includes(latest_version: { discs: { songs: :latest_version }})
       .find(params[:id])
     @latest = @album.latest_version
-    @title = UtilService::PageTitle.set @latest.title
-    @comment = Feature::Comment.new
+    set_title @latest.title
     @comments = @album.comments.includes(:user).page(1).per(5)
   end
   
   def index
-    @title = UtilService::PageTitle.set 'アルバムリスト'
+    set_title 'アルバムリスト'
     _order = params[:sort].present? ? params[:sort] : :title_pronounce
     _direction = params[:reverse_sort].present? ? :desc : :asc
     
@@ -75,7 +74,7 @@ class Db::AlbumsController < ApplicationController
   end
   
   def search
-    @title = UtilService::PageTitle.set "Search results for #{params[:q]}"
+    set_title "Search results for #{params[:q]}"
     search = Db::Album.search do
       keywords params[:q], highlight: true
       order_by(:title_pronounce, :asc)
@@ -97,7 +96,7 @@ class Db::AlbumsController < ApplicationController
 private
   
   def backup_ui_variables(ja, en)
-    @title = UtilService::PageTitle.set "#{ja}を編集する"
+    set_title "#{ja}を編集する"
     @page_title = ja
     @page_title_en = en
   end

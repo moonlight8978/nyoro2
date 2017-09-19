@@ -29,10 +29,10 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group b-form-group">
-          <%= f.text_field :title_en, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:title_en].present?) %>
-          <%= f.label :title_en, 'タイトル（英語／ローマ字）*' %>
+          <%= f.text_field :title_pronounce, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:title_pronounce].present?) %>
+          <%= f.label :title_pronounce, 'タイトル（かな）*' %>
           <div class="invalid-feedback">
-            <% @latest.errors.messages[:title_en].each do |message| %>
+            <% @latest.errors.messages[:title_pronounce].each do |message| %>
               <div><%= message %></div>
             <% end %>
           </div>
@@ -41,10 +41,10 @@
       
       <div class="col-sm-6">
         <div class="form-group b-form-group">
-          <%= f.text_field :title_pronounce, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:title_pronounce].present?) %>
-          <%= f.label :title_pronounce, 'タイトル（かな）*' %>
+          <%= f.text_field :title_en, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:title_en].present?) %>
+          <%= f.label :title_en, 'タイトル（英語／ローマ字）*' %>
           <div class="invalid-feedback">
-            <% @latest.errors.messages[:title_pronounce].each do |message| %>
+            <% @latest.errors.messages[:title_en].each do |message| %>
               <div><%= message %></div>
             <% end %>
           </div>

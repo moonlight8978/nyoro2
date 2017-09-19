@@ -6,22 +6,18 @@ class Db::SongVersionsController < ApplicationController
     @song = Db::Song
       .includes(:latest_version)
       .find(params[:song_id])
-    @title = UtilService::PageTitle.set "#{@song.latest_version.title}の編集履歴"
+    set_title "#{@song.latest_version.title}の編集履歴"
     @versions = @song.versions
       .page(params[:page] || 1).per(params[:per] || 20)
       .group_by_day(&:created_at)
   end
   
   def show
-    # This is not global latest version. 
-    # Just because it shares template with song's page
-    # Will fix soon
-    @latest = Db::SongVersion
+    @song_version = Db::SongVersion
       .includes(:song)
       .find(params[:id])
-    @song = @latest.song
-    @title = UtilService::PageTitle
-      .set "#{@song.latest_version.title}・バージョン#{params[:id]}"
+    @song = @song_version.song
+    set_title "#{@song.latest_version.title}・バージョン#{params[:id]}"
   end
   
   def update

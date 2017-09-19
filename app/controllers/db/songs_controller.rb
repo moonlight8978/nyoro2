@@ -1,15 +1,16 @@
 class Db::SongsController < ApplicationController
   before_action :db_sidebar
-  before_action :new_title, only: [:new, :create]
   before_action :authenticate_user!, except: :show
   before_action :require_admin!, only: :destroy
   
   def new
+    set_title "新しい歌を作る"
     @disc = Db::Disc.find(params[:disc_id])
     @latest = Db::SongVersion.new
   end
   
   def create
+    set_title "新しい歌を作る"
     create_svc = DbService::Song::CreateSong
       .new(params[:disc_id], song_params, current_user, description: params[:description])
       .perform
@@ -27,10 +28,7 @@ class Db::SongsController < ApplicationController
   def show
     @song = Db::Song.find(params[:id])
     @latest = @song.latest_version
-    @album_first_version = @song.disc.album_versions.first
-    @title = UtilService::PageTitle
-      .set "#{@latest.title}・歌"
-    @comment = Feature::Comment.new
+    set_title "#{@latest.title}"
     @comments = @song.comments.includes(:user).page(1).per(5)
   end
   
@@ -63,13 +61,8 @@ private
     )
   end
   
-  def new_title
-    @title = UtilService::PageTitle.set "新しい歌を作る"
-  end
-  
   def set_ui_variables(ja, en)
-    @title = UtilService::PageTitle
-      .set "#{ja}・歌"
+    set_title "#{ja}・歌"
     @page_title = ja
     @page_title_en = en
   end

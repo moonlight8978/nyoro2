@@ -4,18 +4,18 @@
       <tr>
         <th>番号</th>
         <td>
-          <%= @latest.number %>/<%= @song.disc.songs.size %>
+          <%= current_version.number %>/<%= @song.disc.songs.size %>
         </td>
       </tr>
       <tr>
         <th class="align-bottom">タイトル</th>
         <td>
           <div class="b-ruby">
-            <span class="b-rb b-ellipsis" title="<%= @latest.title %>">
-              <%= @latest.title %>
+            <span class="b-rb b-ellipsis" title="<%= current_version.title %>">
+              <%= current_version.title %>
             </span>
-            <span class="b-rt b-ellipsis" title="<%= @latest.title_pronounce %>">
-              <%= @latest.title_pronounce %>
+            <span class="b-rt b-ellipsis" title="<%= current_version.title_pronounce %>">
+              <%= current_version.title_pronounce %>
             </span>
             <span></span>
           </div>
@@ -24,13 +24,13 @@
       <tr>
         <th>ローマ字</th>
         <td>
-          <%= @latest.title_en %>
+          <%= current_version.title_en %>
         </td>
       </tr>
       <tr>
         <th>長さ</th>
         <td>
-          <%= @latest.length %>
+          <%= current_version.length %>
         </td>
       </tr>
       <tr>
@@ -38,7 +38,9 @@
         <td>
           <% first_version = @song.disc.album_versions.first %>
           <%= link_to first_version.title, db_album_path(first_version.album_id) %>
-          (<%= link_to "バージョン#{first_version.id}", db_album_version_path(first_version.album_id, first_version.id) %>)
+          (<%= link_to "バージョン#{first_version.id}", 
+            db_album_version_path(first_version.album_id, first_version.id) 
+          %>)
         </td>
       </tr>
     </tbody>

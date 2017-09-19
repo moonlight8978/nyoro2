@@ -16,6 +16,6 @@
   } %>
 <% end %>
 
-<%= render 'db/shared/song_info' %>
+<%= render partial: 'db/shared/song_info', locals: { current_version: @latest } %>
 
 <%= comments_for(@song, @comments)  %>

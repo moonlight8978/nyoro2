@@ -1,0 +1,52 @@
+.b-icon-inline {
+  display: inline;
+  padding-left: 8px;
+  margin-left: 5px;
+  border-left: 1px solid #ddd;
+  
+  // i, span, a {
+  //   color: $black;
+  //   
+  //   &:hover {
+  //     color: $blue;
+  //   }
+  // }
+}
+
+.b-icon-group {
+  margin: 0 -3px;
+  display: flex;
+  
+  > * { margin: 0 3px; }
+  
+  i, a, span { text-decoration: none !important; }
+  
+  &.b-text-black > * { color: $black; }
+  
+  .b-icon {
+    padding: 5px 1rem;
+    font-size: .9rem;
+    text-align: center !important; 
+    background-color: transparent;
+    @include transition-std(all);
+    
+    &:hover {
+      color: $white;
+      background-color: $purple;
+    }
+    
+    &.destroy:hover {
+      background-color: $red;
+    }
+    
+    &.update:hover {
+      background-color: $blue;
+    }
+    
+    &.create:hover {
+      background-color: $green;
+    }
+  }
+  
+  &.b-size-small .b-icon { padding: 3px .5rem; }
+}

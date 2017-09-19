@@ -25,6 +25,10 @@ protected
     @logs = Feature::Log.db_log.page(1).per(5)
   end
   
+  def set_title(title)
+    @title = UtilService::PageTitle.set(title)
+  end
+  
 private 
 
   def not_found

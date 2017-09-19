@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <%= form_for(@comment, url: polymorphic_path([commentable, :comments]), html: { class: 'comment-form' }) do |f| %>
+  <%= form_for(:feature_comment, url: polymorphic_path([commentable, :comments]), html: { class: 'comment-form' }) do |f| %>
     <div class="comment-user-avatar">
       <div class="b-img-placeholder b-img-placeholder-avatar b-ratio-1_1">
         <div class="b-img-thumb" data-background-image="<%= current_user.avatar_url %>">

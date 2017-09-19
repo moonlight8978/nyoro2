@@ -3,10 +3,10 @@
   { path: 'javascript:void(0)', name: 'データベース' },
   { path: db_albums_path, name: 'アルバムリスト' },
   { path: db_song_path(@song), name: @song.latest_version.title },
-  @latest.title
+  @song_version.title
 ) %>
 
-<%= page_title(@latest.title, @latest.title_en) %>
+<%= page_title(@song_version.title, @song_version.title_en) %>
 
 <% if params[:id].to_i != @song.latest_version_id%>
   <div class="alert alert-warning" role="alert">
@@ -20,4 +20,4 @@
   </div>
 <% end %>
 
-<%= render 'db/shared/song_info' %>
+<%= render partial: 'db/shared/song_info', locals: { current_version: @song_version } %>

@@ -2,13 +2,14 @@ class Db::DiscsController < ApplicationController
   before_action :db_sidebar
   before_action :authenticate_user!
   before_action :require_admin!, only: [:destroy]
-  before_action :new_title, only: [:new, :create]
-  
+
   def new
+    set_title "新しいディスクを作る"
     @disc = Db::Disc.new
   end
   
   def create
+    set_title "新しいディスクを作る"
     create_svc = DbService::Album::CreateDisc
       .new(params[:album_id], disc_params, current_user, description: params[:description])
       .perform
@@ -23,10 +24,12 @@ class Db::DiscsController < ApplicationController
   end
   
   def edit
+    set_title "ディスクを編集する"
     @disc = Db::Disc.find(params[:id])
   end
   
   def update
+    set_title "ディスクを編集する"
     @disc = Db::Disc.includes(album_version: :album).find(params[:id])
     @latest = @disc.album_version
     @album = @latest.album
@@ -52,9 +55,5 @@ private
 
   def disc_params
     params.require(:db_disc).permit(:number, :title)
-  end
-  
-  def new_title
-    @title = "新しいディスクを作る"
   end
 end

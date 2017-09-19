@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   root to: redirect('/warning')
-  
   mount ActionCable.server => '/cable'
-  
-  get 'home', to: 'home#index'
-  get '/warning', to: 'warning#index'
   
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -17,7 +13,7 @@ Rails.application.routes.draw do
   
   
   namespace :db do
-    get '', action: :index
+    root action: 'index', as: ''
     
     resources :albums do
       collection do
@@ -39,5 +35,10 @@ Rails.application.routes.draw do
   
   namespace :utilities do
     post 'nsfw'
+  end
+  
+  scope module: :static_pages do
+    get 'home'
+    get 'warning'
   end
 end
