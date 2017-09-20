@@ -31,6 +31,10 @@ Rails.application.routes.draw do
       resources :versions, controller: 'song_versions'
       resources :comments, controller: 'songs/comments'
     end
+    
+    resources :people do
+      
+    end
   end
   
   namespace :utilities do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918113659) do
+ActiveRecord::Schema.define(version: 20170920123635) do
 
   create_table "db_album_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "previous_version_id"
@@ -54,6 +54,34 @@ ActiveRecord::Schema.define(version: 20170918113659) do
     t.datetime "updated_at", null: false
     t.index ["marked"], name: "index_db_discs_on_marked"
     t.index ["number"], name: "index_db_discs_on_number"
+  end
+
+  create_table "db_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "latest_version_id"
+    t.boolean "marked"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["latest_version_id"], name: "index_db_people_on_latest_version_id"
+    t.index ["marked"], name: "index_db_people_on_marked"
+  end
+
+  create_table "db_person_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "person_id"
+    t.bigint "previous_version_id"
+    t.boolean "marked", default: false
+    t.string "name"
+    t.string "name_en"
+    t.string "name_pronounce"
+    t.date "birthday"
+    t.string "website"
+    t.string "twitter"
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marked"], name: "index_db_person_versions_on_marked"
+    t.index ["name_pronounce"], name: "index_db_person_versions_on_name_pronounce"
+    t.index ["person_id"], name: "index_db_person_versions_on_person_id"
+    t.index ["previous_version_id"], name: "index_db_person_versions_on_previous_version_id"
   end
 
   create_table "db_song_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

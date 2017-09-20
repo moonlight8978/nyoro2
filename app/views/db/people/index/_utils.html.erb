@@ -1,0 +1,90 @@
+<% content_for :utils_dropdowns do %>
+  <%= form_tag db_albums_path, method: :get, enforce_utf8: false do %>
+    <div class="page-utility dropdown">
+      <span class="utility-label" id="sortBy"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+      >
+        sort by
+        <span>&#9660;</span>
+      </span>
+      <div class="dropdown-menu dropdown-off-autoclose" aria-labelledby="sortBy">
+        <div>
+          <%= label_tag :sort_, nil, class: 'd-block m-0' do %>
+            <div class="dropdown-item">
+              <%= radio_button_tag :sort, '', params[:sort].blank?, 
+                class: 'form-check-input ml-0' 
+              %>
+              キャンセル
+            </div>
+          <% end %>
+          
+          <%= label_tag :sort_title_pronounce, nil, class: 'd-block m-0' do %>
+            <div class="dropdown-item">
+              <%= radio_button_tag :sort, 'title_pronounce', 
+                params[:sort] == 'title_pronounce', 
+                class: 'form-check-input ml-0' 
+              %>
+              タイトル
+            </div>
+          <% end %>
+          
+          <%= label_tag :sort_length, nil, class: 'd-block m-0' do %>
+            <div class="dropdown-item">
+              <%= radio_button_tag :sort, 'length', 
+                params[:sort] == 'length', 
+                class: 'form-check-input ml-0' 
+              %>
+              長さ
+            </div>
+          <% end %>
+          
+          <%= label_tag :sort_released, nil, class: 'd-block m-0' do %>
+            <div class="dropdown-item">
+              <%= radio_button_tag :sort, 'released', 
+                params[:sort] == 'released', 
+                class: 'form-check-input ml-0' 
+              %>
+              発売日
+            </div>
+          <% end %>
+          
+          <%= label_tag :sort_rating, nil, class: 'd-block m-0' do %>
+            <div class="dropdown-item">
+              <%= radio_button_tag :sort, 'rating', 
+                params[:sort] == 'rating', 
+                class: 'form-check-input ml-0' 
+              %>
+              レーティング
+            </div>
+          <% end %>
+        </div>
+        
+        <%= label_tag :reverse_sort, nil, class: 'd-block m-0' do %>
+          <div class="dropdown-item">
+            <%= check_box_tag :reverse_sort, 'true', 
+              params[:reverse_sort].present?,
+              class: 'form-check-input ml-0' 
+            %>
+            Reverse sort
+          </div>
+        <% end %>
+        
+        <div class="dropdown-item">
+          <%= submit_tag 'ソート', name: nil, 
+            class: 'pull-right btn-c btn-c-5 btn-c-5-sakura px-3 py-1',
+            'data-disable-with' => '読み中...'
+          %>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% content_for :options do %>
+  <%= render partial: 'components/utils/options', locals: { 
+    name: 'スタッフ',
+    new_path: new_db_person_path
+  } %>
+<% end %>
+

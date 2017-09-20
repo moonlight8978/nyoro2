@@ -18,6 +18,7 @@
 //= require jquery-lazyload/jquery.lazyload
 //= require wowjs
 //= require nprogress/nprogress
+//= require jquery-ui/ui/widgets/datepicker
 
 //= require rails-ujs
 //= require turbolinks
@@ -37,7 +38,17 @@ $(document).ready(() => {
 $('[data-toggle="tab"]').click(function (e) {
   e.preventDefault()
   $(this).tab('show')
-})
+});
+
+$(document).on('turbolinks:load', () => {
+  $(".datepicker").datepicker({
+    dateFormat: "yy-mm-dd",
+    altFormat: "yy-mm-dd",
+    dayNames: [ "日", "月", "火", "水", "木", "金", "土" ],
+    dayNamesMin: [ "日", "月", "火", "水", "木", "金", "土" ],
+    firstDay: 1,
+  });
+});
 
 // Configs
 axios.defaults.headers.common['X-CSRF-Token'] = $('meta[name="csrf-token"]').attr('content');

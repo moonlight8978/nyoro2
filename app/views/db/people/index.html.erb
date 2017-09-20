@@ -1,0 +1,10 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' },
+  { path: db_path, name: 'データベース' },
+  'スタッフ'
+) %>
+
+<%= page_title('スタッフリスト', 'Staff list') %>
+
+<!-- Modal trigger is inside this component -->
+<%= render 'db/people/index/utils' %>

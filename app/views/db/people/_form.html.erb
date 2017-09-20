@@ -1,0 +1,78 @@
+<div class="b-box">
+  <%= form_for(@latest, url: url, method: method, html: { class: 'b-form' }) do |f| %>
+    <div class="form-group b-form-group">
+      <%= f.text_field :name, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:name].present?) %>
+      <%= f.label :name, '名前*' %>
+      <div class="invalid-feedback">
+        <% @latest.errors.messages[:name].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :name_pronounce, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:name_pronounce].present?) %>
+          <%= f.label :name_pronounce, '名前（発音）*' %>
+          <div class="invalid-feedback">
+            <% @latest.errors.messages[:name_pronounce].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :name_en, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:name_en].present?) %>
+          <%= f.label :name_en, '名前（英語／ローマ字）*' %>
+          <div class="invalid-feedback">
+            <% @latest.errors.messages[:name_en].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group b-form-group">
+      <%= f.text_field :birthday, class: class_string('form-control': true, 'is-invalid': @latest.errors.messages[:birthday].present?, datepicker: true) %>
+      <%= f.label :birthday, '誕生日' %>
+      <div class="invalid-feedback">
+        <% @latest.errors.messages[:birthday].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :website, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:website].present?) %>
+          <%= f.label :website, 'ツイーター' %>
+          <div class="invalid-feedback">
+            <% @latest.errors.messages[:website].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :twitter, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:twitter].present?) %>
+          <%= f.label :twitter, '個人のウェブサイト' %>
+          <div class="invalid-feedback">
+            <% @latest.errors.messages[:twitter].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
+    <div class="clearfix"></div>
+  <% end %>
+</div>

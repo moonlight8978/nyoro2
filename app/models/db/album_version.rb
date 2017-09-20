@@ -1,23 +1,22 @@
 class Db::AlbumVersion < ApplicationRecord
   after_initialize :set_default_values
   
-  validates :title, 
-    presence: { message: 'タイトルを空にすることはできません。' }
-  validates :title_en,
-    presence: { message: 'タイトル（英語／ローマ字）を空にすることはできません。' }
-  validates :title_pronounce,
-    presence: { message: 'タイトル（発音）を空にすることはできません。' }
-  mount_uploader :image, ImageUploader
+  include Validators::Title
+  include ImageUploadable
   
-  belongs_to :album, class_name: 'Db::Album'
-  belongs_to :previous_version, class_name: 'Db::AlbumVersion', optional: true
+  belongs_to :album, 
+    class_name: 'Db::Album'
+  belongs_to :previous_version, 
+    class_name: 'Db::AlbumVersion', optional: true
   
-  scope :version_list, -> { 
-    select(:id, :previous_version_id, :album_id, :created_at)
-    .order(created_at: :desc)
-  }
+  scope :version_list, 
+    -> { 
+      select(:id, :previous_version_id, :album_id, :created_at)
+      .order(created_at: :desc)
+    }
   
-  has_and_belongs_to_many :discs, join_table: :db_album_versions_discs
+  has_and_belongs_to_many :discs, 
+    join_table: :db_album_versions_discs
   
 private
   

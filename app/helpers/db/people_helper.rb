@@ -1,0 +1,2 @@
+module Db::PeopleHelper
+end
