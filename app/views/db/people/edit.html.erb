@@ -1,0 +1,12 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム'},
+  { path: db_path, name: 'データベース'},
+  { path: db_people_path, name: 'スタッフ'},
+  "#{@page_title}を編集する"
+) %>
+
+<%= page_title("#{@page_title}を編集する", "edit #{@page_title_en}") %>
+
+<%= render partial: 'form', locals: {
+  url: db_person_path(@person), method: :put
+} %>

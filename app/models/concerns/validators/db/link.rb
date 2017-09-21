@@ -1,4 +1,4 @@
-module Validators::Link
+module Validators::Db::Link
   extend ActiveSupport::Concern
   
   included do

@@ -1,0 +1,32 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' }, 
+  { path: 'javascript:void(0)', name: 'データベース' },
+  { path: db_people_path, name: 'スタッフ' },
+  { path: db_person_path(@person), name: @person.latest_version.name },
+  "バージョン#{params[:id]}"
+) %>
+
+<%= page_title(@current_version.name, @current_version.name_en) %>
+
+<% content_for :options do %>
+  <%= render partial: 'components/utils/options', locals: {
+    name: 'アルバム',
+    edit_path: edit_db_person_path(@person),
+    destroy_path: db_person_path(@person),
+    history_path: db_person_versions_path(@person)
+  } %>
+<% end %>
+
+<% if params[:id].to_i != @person.latest_version_id%>
+  <div class="alert alert-warning" role="alert">
+    <span>これは最終バージョンではありません。</span>
+    <%= link_to 'すべてを見る', db_person_versions_path(@person) %>
+  </div>
+<% else %>
+  <div class="alert alert-success" role="alert">
+    <span>これは最終バージョンです。</span>
+    <%= link_to 'すべてを見る', db_person_versions_path(@person) %>
+  </div>
+<% end %>
+
+<%= render partial: 'db/shared/person_info', locals: { current_version: @current_version } %>

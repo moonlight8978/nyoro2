@@ -6,5 +6,31 @@
 
 <%= page_title('スタッフリスト', 'Staff list') %>
 
-<!-- Modal trigger is inside this component -->
+<div class="b-box-group">
+  <div class="b-box-title">
+    
+  </div>
+  <div class="b-box-container">
+    <div class="row">
+      <% @people.each do |person| %>
+        <div class="col-md-6 mb-3">
+          <% latest = person.latest_version %>
+          <div class="b-box b-box-p">
+            <div class="">
+              <span class="flag-icon flag-icon-jp"></span>
+              <% if latest.gender == 'female' %>
+                <i class="fa fa-venus"></i>
+              <% elsif latest.gender == 'male' %>
+                <i class="fa fa-mars"></i>
+              <% end %>
+              <%= link_to latest.name, db_person_path(person) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+  </div>
+</div>
+
 <%= render 'db/people/index/utils' %>

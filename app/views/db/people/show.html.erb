@@ -1,0 +1,30 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' }, 
+  { path: 'javascript:void(0)', name: 'データベース' },
+  { path: db_people_path, name: 'スタッフ' },
+  @latest.name
+) %>
+
+<%= page_title(@latest.name, @latest.name_en) %>
+
+<% content_for :options do %>
+  <%= render partial: 'components/utils/options', locals: {
+    name: 'アルバム',
+    edit_path: edit_db_person_path(@person),
+    destroy_path: db_person_path(@person),
+    history_path: db_person_versions_path(@person)
+  } %>
+<% end %>
+
+<%= render partial: 'db/shared/person_info', locals: { current_version: @latest } %>
+
+<%= comments_for(@person, @comments) %>
+
+<% content_for :modals do %>
+  <%= render partial: 'components/confirm_destroy', 
+    locals: { 
+      modal_title: @latest.name,
+      destroy_path: db_person_path(@person)
+    } 
+  %>
+<% end %>

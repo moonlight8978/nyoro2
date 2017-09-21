@@ -1,4 +1,4 @@
-module Validators::Name
+module Validators::Db::Name
   extend ActiveSupport::Concern
   
   included do

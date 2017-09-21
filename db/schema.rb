@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920123635) do
+ActiveRecord::Schema.define(version: 20170921122853) do
 
   create_table "db_album_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "previous_version_id"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 20170920123635) do
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "gender"
+    t.string "blood_type"
     t.index ["marked"], name: "index_db_person_versions_on_marked"
     t.index ["name_pronounce"], name: "index_db_person_versions_on_name_pronounce"
     t.index ["person_id"], name: "index_db_person_versions_on_person_id"

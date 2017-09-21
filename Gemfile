@@ -5,30 +5,30 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.3'
-gem 'mysql2', '>= 0.3.18', '< 0.5'
-gem 'puma', '~> 3.7'
-gem 'sass-rails', '~> 5.0'
-gem 'autoprefixer-rails', '~> 7.1', '>= 7.1.4'
-gem 'uglifier', '>= 1.3.0'
-gem 'turbolinks', '~> 5'
-gem 'bcrypt', '~> 3.1.7'
+gem 'rails'
+gem 'mysql2'
+gem 'puma'
+gem 'sass-rails'
+gem 'autoprefixer-rails'
+gem 'uglifier'
+gem 'turbolinks'
+gem 'bcrypt'
 
-gem 'groupdate', '~> 3.2'
-gem 'sidekiq', '~> 5.0'
-gem 'sunspot_rails', '~> 2.2', '>= 2.2.7'
-gem 'figaro', '~> 1.1', '>= 1.1.1'
-gem 'kaminari', '~> 1.0', '>= 1.0.1'
-gem 'devise', '~> 4.3'
-gem 'active_model_serializers', '~> 0.10.6'
+gem 'groupdate'
+gem 'sidekiq'
+gem 'sunspot_rails'
+gem 'figaro'
+gem 'kaminari'
+gem 'devise'
+gem 'active_model_serializers'
 # gem 'redis', '~> 3.0'
-gem 'omniauth', '~> 1.6', '>= 1.6.1'
-gem 'omniauth-google-oauth2', '~> 0.5.2'
-gem 'omniauth-facebook', '~> 4.0'
-gem 'omniauth-twitter', '~> 1.4'
-gem 'faraday', '~> 0.9.2'
-gem 'i18n', '~> 0.8.6'
-gem 'carrierwave', '~> 1.1'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'faraday'
+gem 'i18n'
+gem 'carrierwave'
 # gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
@@ -36,17 +36,17 @@ gem 'carrierwave', '~> 1.1'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13'
+  gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'sunspot_solr', '~> 2.2', '>= 2.2.7'
+  gem 'sunspot_solr'
 end
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console'
+  gem 'listen'
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'bullet', '~> 5.6', '>= 5.6.1'
+  gem 'spring-watcher-listen'
+  gem 'bullet'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

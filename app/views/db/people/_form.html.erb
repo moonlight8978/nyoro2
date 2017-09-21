@@ -36,13 +36,41 @@
       </div>
     </div>
     
-    <div class="form-group b-form-group">
-      <%= f.text_field :birthday, class: class_string('form-control': true, 'is-invalid': @latest.errors.messages[:birthday].present?, datepicker: true) %>
-      <%= f.label :birthday, '誕生日' %>
-      <div class="invalid-feedback">
-        <% @latest.errors.messages[:birthday].each do |message| %>
-          <div><%= message %></div>
-        <% end %>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :birthday, class: class_string('form-control': true, 'is-invalid': @latest.errors.messages[:birthday].present?, datepicker: true) %>
+          <%= f.label :birthday, '誕生日' %>
+          <div class="invalid-feedback">
+            <% @latest.errors.messages[:birthday].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-6 col-sm-3">
+        <div class="form-group b-form-group">
+          <%= f.select :blood_type, %w(A B AB O), { include_blank: true }, { class: class_string('form-control': true, 'is-invalid': @latest.errors.messages[:blood_type].present?) } %>
+          <%= f.label :blood_type, 'Blood type' %>
+          <div class="invalid-feedback">
+            <% @latest.errors.messages[:blood_type].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-6 col-sm-3">
+        <div class="form-group b-form-group">
+          <%= f.select :gender, [%w(女性 female), %w(男性 male)], { include_blank: true }, { class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:gender].present?) } %>
+          <%= f.label :gender, 'Gender' %>
+          <div class="invalid-feedback">
+            <% @latest.errors.messages[:gender].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
     

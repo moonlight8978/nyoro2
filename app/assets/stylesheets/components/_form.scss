@@ -30,6 +30,10 @@
     }
   }
   
+  select.form-control:not([size]):not([multiple]) {
+    height: calc(2.75rem + 2px);
+  }
+  
   .form-control-file {
     border-color: rgba(0, 0, 0, 0.15);
     border-style: solid;

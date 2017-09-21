@@ -1,0 +1,37 @@
+<div class="b-box b-box-p">
+  <table class="b-table b-table-hidden-th">
+    <tbody>
+      <tr>
+        <th class="align-bottom">本名</th>
+        <td>
+          <div class="b-ruby">
+            <span class="b-rb b-ellipsis" title="<%= current_version.name %>">
+              <%= current_version.name %>
+            </span>
+            <span class="b-rt b-ellipsis" title="<%= current_version.name_pronounce %>">
+              <%= current_version.name_pronounce %>
+            </span>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>ローマ字</th>
+        <td>
+          <%= current_version.name_en %>
+        </td>
+      </tr>
+      <tr>
+        <th>誕生日</th>
+        <td>
+          <%= current_version.birthday %>
+        </td>
+      </tr>
+      <tr>
+        <th>ウェブサイト</th>
+        <td>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

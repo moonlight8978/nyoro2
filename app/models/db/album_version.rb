@@ -1,7 +1,7 @@
 class Db::AlbumVersion < ApplicationRecord
   after_initialize :set_default_values
   
-  include Validators::Title
+  include Validators::Db::Title
   include ImageUploadable
   
   belongs_to :album, 

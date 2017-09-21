@@ -33,7 +33,8 @@ Rails.application.routes.draw do
     end
     
     resources :people do
-      
+      resources :versions, controller: 'person_versions'
+      resources :comments, controller: 'people/comments'
     end
   end
   
