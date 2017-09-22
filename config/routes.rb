@@ -30,6 +30,15 @@ Rails.application.routes.draw do
     resources :songs do
       resources :versions, controller: 'song_versions'
       resources :comments, controller: 'songs/comments'
+      resources :staffs, controller: 'staffs', shallow: true
+    end
+    
+    resources :song_versions do
+      resources :staffs, controller: 'song_versions/staffs'
+    end
+    
+    resources :staffs, only: [] do
+      resources :versions, controller: 'staff_versions'
     end
     
     resources :people do

@@ -33,4 +33,8 @@ class Db::PersonVersionsController < ApplicationController
     
     redirect_to db_person_versions_path
   end
+  
+  def destroy
+    #code
+  end
 end

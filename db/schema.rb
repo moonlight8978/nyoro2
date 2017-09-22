@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921122853) do
+ActiveRecord::Schema.define(version: 20170922043113) do
 
   create_table "db_album_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "previous_version_id"
@@ -104,6 +104,12 @@ ActiveRecord::Schema.define(version: 20170921122853) do
     t.index ["title_pronounce"], name: "index_db_song_versions_on_title_pronounce"
   end
 
+  create_table "db_song_versions_staffs", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "song_version_id", null: false
+    t.bigint "staff_id", null: false
+    t.index ["song_version_id", "staff_id"], name: "index_db_song_versions_staffs_on_song_version_id_and_staff_id"
+  end
+
   create_table "db_songs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "disc_id"
     t.bigint "latest_version_id"
@@ -113,6 +119,34 @@ ActiveRecord::Schema.define(version: 20170921122853) do
     t.index ["disc_id"], name: "index_db_songs_on_disc_id"
     t.index ["latest_version_id"], name: "index_db_songs_on_latest_version_id"
     t.index ["marked"], name: "index_db_songs_on_marked"
+  end
+
+  create_table "db_staff_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "staff_id"
+    t.bigint "previous_version_id"
+    t.boolean "marked", default: false
+    t.bigint "person_id"
+    t.string "position"
+    t.string "alias"
+    t.string "alias_en"
+    t.string "alias_pronounce"
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["alias_pronounce"], name: "index_db_staff_versions_on_alias_pronounce"
+    t.index ["marked"], name: "index_db_staff_versions_on_marked"
+    t.index ["person_id"], name: "index_db_staff_versions_on_person_id"
+    t.index ["previous_version_id"], name: "index_db_staff_versions_on_previous_version_id"
+    t.index ["staff_id"], name: "index_db_staff_versions_on_staff_id"
+  end
+
+  create_table "db_staffs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "latest_version_id"
+    t.boolean "marked", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["latest_version_id"], name: "index_db_staffs_on_latest_version_id"
+    t.index ["marked"], name: "index_db_staffs_on_marked"
   end
 
   create_table "feature_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

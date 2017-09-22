@@ -78,6 +78,14 @@
     }
   }
   
+  .b-col-medium {
+    width: 75px;
+    
+    @include responsive(sm) {
+      width: 100px;
+    }
+  }
+  
   .b-col-last {
     text-align: center;
   }

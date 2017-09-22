@@ -1,0 +1,2 @@
+module Db::StaffsHelper
+end

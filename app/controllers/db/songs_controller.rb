@@ -26,8 +26,11 @@ class Db::SongsController < ApplicationController
   end
   
   def show
-    @song = Db::Song.find(params[:id])
+    @song = Db::Song
+      .includes(latest_version: { staffs: { latest_version: { person: :latest_version } } })
+      .find(params[:id])
     @latest = @song.latest_version
+    @staffs = @latest.staffs_group_by_position
     set_title "#{@latest.title}"
     @comments = @song.comments.includes(:user).page(1).per(5)
   end
@@ -51,6 +54,10 @@ class Db::SongsController < ApplicationController
       @latest = update_svc.latest_version
       render action: :edit
     end
+  end
+  
+  def destroy
+    #code
   end
   
 private

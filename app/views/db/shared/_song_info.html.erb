@@ -46,3 +46,61 @@
     </tbody>
   </table>
 </div>
+
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">
+    スタッフ
+    <div class="b-icon-inline">
+      <%= link_to new_db_song_staff_path(@song) do %>
+        <i class="fa fa-plus"></i>
+      <% end %>
+    </div>
+  </h6>
+  
+  <div class="b-box b-box-p">
+    <% if current_version.staffs.size > 0 %>
+      <table class="b-data-table">
+        <thead>
+          <tr>
+            <th>スタッフ名</th>
+            <th class="b-col-medium">役割</th>
+            <th class="b-col-medium b-col-last d-none d-sm-table-cell">行動</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_version.staffs.each do |staff| %>
+            <tr>
+              <td>
+                <%= link_to staff.latest_version.alias.present? ? staff.latest_version.alias :  staff.latest_version.person.latest_version.name, db_person_path(staff.latest_version.person), class: 'b-link-no-color' %>
+              </td>
+              <td class="b-col-medium">
+                <span class="b-label py-1 px-2"><%= staff.latest_version.position %></span>
+              </td>
+              <td class="b-col-medium b-col-last d-none d-sm-table-cell">
+                <div class="b-icon-group b-size-small justify-content-center">
+                  <%= link_to db_staff_versions_path(staff) do %>
+                    <div class="b-icon update">
+                      <i class="fa fa-history"></i>
+                    </div>
+                  <% end %>
+                  <%= link_to db_song_version_staff_path(current_version, staff), method: :delete do %>
+                    <div class="b-icon destroy">
+                      <i class="fa fa-trash"></i>
+                    </div>
+                  <% end %>
+                  <%= link_to edit_db_staff_path(staff) do %>
+                    <div class="b-icon create">
+                      <i class="fa fa-pencil"></i>
+                    </div>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      スタッフがいません。 
+    <% end %>
+  </div>
+</div>

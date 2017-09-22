@@ -1,0 +1,2 @@
+module Db::StaffVersionsHelper
+end

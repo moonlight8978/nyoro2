@@ -14,7 +14,12 @@ class Db::AlbumVersionsController < ApplicationController
   
   def show
     @album_version = Db::AlbumVersion
-      .includes(:album, discs: { songs: [:latest_version] })
+      .includes(
+        :album, 
+        discs: { songs: { latest_version: { staffs: { latest_version: { 
+          person: :latest_version } } } } 
+        }
+      )
       .find(params[:id])
     @album = @album_version.album
     set_title "#{@album.latest_version.title}・バージョン#{params[:id]}"
@@ -36,5 +41,9 @@ class Db::AlbumVersionsController < ApplicationController
     end
     
     redirect_to db_album_versions_path
+  end
+  
+  def destroy
+    #code
   end
 end

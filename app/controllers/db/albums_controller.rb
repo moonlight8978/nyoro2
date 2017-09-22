@@ -25,7 +25,7 @@ class Db::AlbumsController < ApplicationController
   
   def show
     @album = Db::Album
-      .includes(latest_version: { discs: { songs: :latest_version }})
+      .includes(latest_version: { discs: { songs: { latest_version: { staffs: { latest_version: { person: :latest_version } } } } } })
       .find(params[:id])
     @latest = @album.latest_version
     set_title @latest.title
@@ -66,11 +66,7 @@ class Db::AlbumsController < ApplicationController
   end
   
   def destroy
-    @album = Db::Album.find(params[:id])
-    @title = UtilService::PageTitle.set "#{@album.title}を消す"
-    log = @album.log_destroy(current_user, @album.title, params[:description])
-    @album.destroy
-    redirect_to db_albums_path
+    #codes
   end
   
   def search

@@ -36,4 +36,8 @@ class Db::SongVersionsController < ApplicationController
     
     redirect_to db_song_versions_path(@song)
   end
+  
+  def destroy
+    #code
+  end
 end

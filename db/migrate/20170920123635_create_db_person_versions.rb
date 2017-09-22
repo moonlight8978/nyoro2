@@ -9,8 +9,8 @@ class CreateDbPersonVersions < ActiveRecord::Migration[5.1]
       t.string :name_en
       t.string :name_pronounce, index: true
       t.date :birthday
-	  t.integer :gender
-	  t.string :blood_type
+	    t.boolean :gender
+	    t.string :blood_type
       t.string :website
       t.string :twitter
       t.text :note

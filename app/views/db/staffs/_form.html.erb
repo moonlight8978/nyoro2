@@ -1,0 +1,68 @@
+<div class="b-box">
+  <%= form_for(@latest, url: url, method: method, html: { class: 'b-form' }) do |f| %>
+    <div class="row">
+      <div class="col-8">
+        <div class="form-group b-form-group">
+          <%= f.select :person_id, Db::Person.all.includes(:latest_version).collect { |p| [p.latest_version.name, p.id] }, { include_blank: false }, { class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:person_id].present?) } %>
+          <%= f.label :person_id, 'スタッフ*' %>
+          <div class="invalid-feedback">
+            <% @latest.errors.messages[:person_id].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-4">
+        <div class="form-group b-form-group">
+          <%= f.select :position, %w(Lyrics Compose Arrange Vocal), {}, { class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:position].present?) } %>
+          <%= f.label :position, 'Position*' %>
+          <div class="invalid-feedback">
+            <% @latest.errors.messages[:position].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group b-form-group">
+      <%= f.text_field :alias, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:alias].present?) %>
+      <%= f.label :alias, 'Alias*' %>
+      <div class="invalid-feedback">
+        <% @latest.errors.messages[:alias].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :alias_pronounce, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:alias_pronounce].present?) %>
+          <%= f.label :alias_pronounce, 'Alias*' %>
+          <div class="invalid-feedback">
+            <% @latest.errors.messages[:alias_pronounce].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :alias_en, class: class_string('form-control' => true, 'is-invalid' => @latest.errors.messages[:alias_en].present?) %>
+          <%= f.label :alias_en, 'Alias*' %>
+          <div class="invalid-feedback">
+            <% @latest.errors.messages[:alias_en].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
+    <div class="clearfix"></div>
+  <% end %>
+</div>
