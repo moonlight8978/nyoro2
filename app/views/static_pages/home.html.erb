@@ -78,30 +78,30 @@
   data-original="/assets/index_parallax_2.jpg">
   <div class="content-inside database">
     <h1 class="wow fadeIn">合計は...</h1>
-    <div class="counting px-2 wow fadeInUp">
+    <div class="counting px-2 wow fadeInUp" id="counterContainer">
       <div class="count-wrap">
-        <span class="count">1400</span>
+        <span class="count counter" data-min="0" data-max="<%= @album_count %>"></span>
         <h6>アルバム</h6>
         <a class="btn-c btn-c-5" ui-sref="index">
           <i class="fa fa-angle-right"></i>
         </a>
       </div>
       <div class="count-wrap">
-        <span class="count">5000</span>
-        <h6>リリース</h6>
+        <span class="count counter" data-min="0" data-max="<%= @person_count %>"></span>
+        <h6>スタッフ</h6>
         <a class="btn-c btn-c-5 btn-c-5-dark" ui-sref="index">
           <i class="fa fa-angle-right"></i>
         </a>
       </div>
       <div class="count-wrap">
-        <span class="count">9000</span>
+        <span class="count counter" data-min="0" data-max="500"></span>
         <h6>タグ</h6>
         <a class="btn-c btn-c-5" ui-sref="index">
           <i class="fa fa-angle-right"></i>
         </a>
       </div>
       <div class="count-wrap">
-        <span class="count">360</span>
+        <span class="count counter" data-min="0" data-max="<%= @user_count %>"></span>
         <h6>ユーザー</h6>
         <a class="btn-c btn-c-5 btn-c-5-dark" ui-sref="index">
           <i class="fa fa-angle-right"></i>

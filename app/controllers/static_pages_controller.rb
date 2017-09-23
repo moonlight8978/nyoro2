@@ -1,6 +1,9 @@
 class StaticPagesController < ApplicationController
   def home
     set_title :'ホーム'
+    @album_count = Db::Album.all.count
+    @person_count = Db::Person.all.count
+    @user_count = User.all.count
     @full_page = true
   end
   

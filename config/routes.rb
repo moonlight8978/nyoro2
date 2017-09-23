@@ -33,8 +33,12 @@ Rails.application.routes.draw do
       resources :staffs, controller: 'staffs', shallow: true
     end
     
-    resources :song_versions do
+    resources :song_versions, only: [] do
       resources :staffs, controller: 'song_versions/staffs'
+    end
+    
+    resources :album_versions, only: [] do
+      resources :discs, only: :destroy, controller: 'album_versions/discs'
     end
     
     resources :staffs, only: [] do

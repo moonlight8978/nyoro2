@@ -1,0 +1,17 @@
+<% staffs_grouped = song_latest.staffs_group_by_position %>
+<% if staffs_grouped.present? %>
+  <div class="">
+    <% staffs_grouped.each do |position, staffs| %>
+      <div class="">
+        <strong><%= position %>: </strong>
+        <span class="">
+          <%= staffs.map { |staff| staff.latest_version.person.latest_version.name }.join(', ') %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="">
+    スタッフがいません。
+  </div>
+<% end %>

@@ -8,9 +8,10 @@ class Db::StaffVersionsController < ApplicationController
   end
   
   def update
-    song_id = params[:song_id].to_i
+    staff_id = params[:staff_id].to_i
     version_id = params[:id].to_i
-    @staff = Db::Staff.find(song_id)
+    @staff = Db::Staff.find(staff_id)
+    @song = @staff.song_versions.last.song
     
     if (@staff.latest_version_id === version_id)
       redirect_to db_song_versions_path(@staff) and return
@@ -18,12 +19,12 @@ class Db::StaffVersionsController < ApplicationController
     
     @version = Db::StaffVersion.find(version_id)
     
-    if (@version.song_id === song_id)
+    if (@version.staff_id === staff_id)
       @staff.update(latest_version_id: version_id)
-      @staff.log_update(current_user, @version.title, "バーション#{params[:id]}に戻す。")
+      @song.log_update(current_user, @version.title, "バーション#{params[:id]}に戻す。")
     end
     
-    redirect_to db_song_versions_path(@staff)
+    redirect_to db_song_versions_path(@song)
   end
   
   def show

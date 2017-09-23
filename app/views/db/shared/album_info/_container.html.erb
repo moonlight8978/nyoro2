@@ -1,0 +1,46 @@
+<%= render partial: 'db/shared/album_info/main', locals: { current_version: current_version } %>
+
+<div class="b-box mt-3">
+  <div class="b-box-another">
+    <ul class="nav nav-tabs b-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="discs-tab" data-toggle="tab" href="#discs" 
+          role="tab" aria-controls="home" aria-expanded="true" 
+        >
+          ディスク
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="staffs-tab" data-toggle="tab" href="#staffs" 
+          role="tab" aria-controls="staffs"
+        >
+          スタッフ
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="discs" role="tabpanel" aria-labelledby="discs-tab">
+      <%= render partial: 'db/shared/album_info/disk', locals: { current_version: current_version } %>
+    </div>
+    
+    <div class="tab-pane fade" id="staffs" role="tabpanel" aria-labelledby="staffs-tab">
+      <%= render partial: 'db/shared/album_info/staff', locals: { current_version: current_version } %>
+    </div>
+  </div>
+</div>
+
+<div class="b-box-group mt-3">
+  <div class="b-box-title">
+    ノート
+  </div>
+  
+  <div class="b-box b-box-p">
+    <% if current_version.note.present? %>
+      <%= current_version.note.html_safe %>
+    <% else %>
+      <span>何を書いて!</span>
+    <% end %>
+  </div>
+</div>

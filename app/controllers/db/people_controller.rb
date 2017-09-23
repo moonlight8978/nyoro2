@@ -1,5 +1,5 @@
 class Db::PeopleController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :db_sidebar
   
   def new
