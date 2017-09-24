@@ -1,0 +1,52 @@
+<div class="b-box">
+  <%= form_for(@tag, html: { class: 'b-form' }) do |f| %>
+    <div class="form-group b-form-group">
+      <%= f.text_field :name, class: class_string('form-control' => true, 'is-invalid' => @tag.errors.messages[:name].present?) %>
+      <%= f.label :name, 'タグ名*' %>
+      <div class="invalid-feedback">
+        <% @tag.errors.messages[:name].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :name_pronounce, class: class_string('form-control' => true, 'is-invalid' => @tag.errors.messages[:name_pronounce].present?) %>
+          <%= f.label :name_pronounce, 'タグ名（かな）*' %>
+          <div class="invalid-feedback">
+            <% @tag.errors.messages[:name_pronounce].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :name_en, class: class_string('form-control' => true, 'is-invalid' => @tag.errors.messages[:name_en].present?) %>
+          <%= f.label :name_en, 'タグ名（ローマ字／英語）*' %>
+          <div class="invalid-feedback">
+            <% @tag.errors.messages[:name_en].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group b-form-group">
+      <%= f.text_area :description, class: class_string('form-control' => true, 'is-invalid' => @tag.errors.messages[:description].present?), rows: 1 %>
+      <%= f.label :description, 'ディスクリプション' %>
+      <div class="invalid-feedback">
+        <% @tag.errors.messages[:description].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+    
+    <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
+    <div class="clearfix"></div>
+  <% end %>
+</div>

@@ -1,0 +1,2 @@
+module Db::TagsHelper
+end

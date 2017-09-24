@@ -1,47 +1,51 @@
-<div class="b-box b-box-p">
-  <div class="row">
-    <div class="col-6 col-sm-5 col-md-4 pr-0">
-      <div class="b-img-placeholder b-ratio-1_1">
-        <div class="b-img-thumb" 
-          data-background-image="<%= current_version.image_url.to_s %>"
-        >
+<div class="b-box">
+  <div class="p-3">
+    <div class="row">
+      <div class="col-6 col-sm-5 col-md-4 pr-0">
+        <div class="b-img-placeholder b-ratio-1_1">
+          <div class="b-img-thumb" 
+            data-background-image="<%= current_version.image_url.to_s %>"
+          >
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="col-sm-7 col-md-8 pt-3 pt-sm-0">
-      <table class="b-table b-table-hidden-th">
-        <tbody>
-          <tr>
-            <th class="align-bottom">タイトル</th>
-            <td>
-              <div class="b-ruby">
-                <span class="b-rb b-ellipsis" title="<%= current_version.title %>">
-                  <%= current_version.title %>
-                </span>
-                <span class="b-rt b-ellipsis" title="<%= current_version.title_pronounce %>">
-                  <%= current_version.title_pronounce %>
-                </span>
-                <span></span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th>ローマ字</th>
-            <td>
-              <%= current_version.title_en %>
-            </td>
-          </tr>
-          <tr class="b-description">
-            <th colspan="2">デスクリプション</th>
-          </tr>
-          <tr class="b-description">
-            <td colspan="2">
-              <p class="b-description-text">これはデスクリプションです。</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      
+      <div class="col-sm-7 col-md-8 pt-3 pt-sm-0">
+        <table class="b-table b-table-hidden-th">
+          <tbody>
+            <tr>
+              <th class="align-bottom">タイトル</th>
+              <td>
+                <div class="b-ruby">
+                  <span class="b-rb b-ellipsis" title="<%= current_version.title %>">
+                    <%= current_version.title %>
+                  </span>
+                  <span class="b-rt b-ellipsis" title="<%= current_version.title_pronounce %>">
+                    <%= current_version.title_pronounce %>
+                  </span>
+                  <span></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>ローマ字</th>
+              <td>
+                <%= current_version.title_en %>
+              </td>
+            </tr>
+            <tr class="b-description">
+              <th colspan="2">デスクリプション</th>
+            </tr>
+            <tr class="b-description">
+              <td colspan="2">
+                <p class="b-description-text">これはデスクリプションです。</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+  
+  <%= yield %>
 </div>

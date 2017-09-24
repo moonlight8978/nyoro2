@@ -9,6 +9,8 @@ class Db::Album < ApplicationRecord
     class_name: 'Db::AlbumVersion'
   has_many :versions, 
     -> { version_list }, class_name: 'Db::AlbumVersion'
+  has_and_belongs_to_many :tags,
+    join_table: :db_albums_tags
   
   searchable do
   end

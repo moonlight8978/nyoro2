@@ -1,0 +1,62 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' },
+  { path: db_path, name: 'データベース' },
+  { path: db_tags_path, name: 'タグ' },
+  @tag.name
+) %>
+
+<%= page_title(@tag.name, @tag.name_en) %>
+
+<% content_for :options do %>
+  <%= render partial: 'components/utils/options', locals: {
+    name: 'タグ',
+    edit_path: edit_db_tag_path(@tag),
+    destroy_path: db_tag_path(@tag)
+  } %>
+<% end %>
+
+<div class="b-box b-box-p">
+  <table class="b-table b-table-hidden-th">
+    <tbody>
+      <tr>
+        <th class="align-bottom">タグ名</th>
+        <td>
+          <div class="b-ruby">
+            <span class="b-rb b-ellipsis" title="<%= @tag.name %>">
+              <%= @tag.name %>
+            </span>
+            <span class="b-rt b-ellipsis" title="<%= @tag.name_pronounce %>">
+              <%= @tag.name_pronounce %>
+            </span>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>ローマ字</th>
+        <td>
+          <%= @tag.name_en %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-3 b-box-group">
+  <h6 class="b-box-title">
+    ディスクリプション
+  </h6>
+  
+  <div class="b-box b-box-p">
+    <p class="b-description-text m-0"><%= @tag.description %></p>
+  </div>
+</div>
+
+<div class="mt-3 b-box-group">
+  <h6 class="b-box-title">
+    関係があるアルバム
+  </h6>
+  
+  <div class="b-box b-box-p">
+  </div>
+</div>

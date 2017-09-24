@@ -1,0 +1,11 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' },
+  { path: db_path, name: 'データベース' },
+  { path: db_tags_path, name: 'タグ' },
+  { path: db_tag_path(@tag), name: @tag.name },
+  '編集'
+) %>
+
+<%= page_title("#{@page_title}を編集する", "edit #{@page_title_en}") %>
+
+<%= render 'form' %>

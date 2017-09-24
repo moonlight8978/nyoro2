@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922043113) do
+ActiveRecord::Schema.define(version: 20170924034611) do
 
   create_table "db_album_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "previous_version_id"
@@ -44,6 +44,12 @@ ActiveRecord::Schema.define(version: 20170922043113) do
     t.index ["latest_version_id"], name: "index_db_albums_on_latest_version_id"
     t.index ["marked"], name: "index_db_albums_on_marked"
     t.index ["updated_at"], name: "index_db_albums_on_updated_at"
+  end
+
+  create_table "db_albums_tags", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "album_id", null: false
+    t.bigint "tag_id", null: false
+    t.index ["album_id", "tag_id"], name: "index_db_albums_tags_on_album_id_and_tag_id"
   end
 
   create_table "db_discs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -147,6 +153,16 @@ ActiveRecord::Schema.define(version: 20170922043113) do
     t.datetime "updated_at", null: false
     t.index ["latest_version_id"], name: "index_db_staffs_on_latest_version_id"
     t.index ["marked"], name: "index_db_staffs_on_marked"
+  end
+
+  create_table "db_tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "name_en"
+    t.string "name_pronounce"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name_pronounce"], name: "index_db_tags_on_name_pronounce"
   end
 
   create_table "feature_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

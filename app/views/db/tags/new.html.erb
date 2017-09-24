@@ -1,0 +1,17 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' },
+  { path: db_path, name: 'データベース' },
+  { path: db_tags_path, name: 'タグ' },
+  '新しいタグを作る'
+) %>
+
+<%= page_title('新しいタグを作る', 'Create new tag') %>
+
+<%= render 'form' %>
+
+<%# content_for :options do %>
+  <%# render partial: 'components/utils/options', locals: {
+    name: 'タグ',
+    new_path: new_db_tag_path
+  } %>
+<%# end %>

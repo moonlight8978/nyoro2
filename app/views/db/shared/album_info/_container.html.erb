@@ -1,4 +1,6 @@
-<%= render partial: 'db/shared/album_info/main', locals: { current_version: current_version } %>
+<%= render layout: 'db/shared/album_info/main', locals: { current_version: current_version } do %>
+  <%= yield %>
+<% end%>
 
 <div class="b-box mt-3">
   <div class="b-box-another">

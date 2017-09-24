@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+  
   resources :users, only: [:show, :index]
   get 'user', to: 'users#current', as: 'current_user_page'
   put 'user', to: 'users#update'
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
       collection do
         get 'search'
       end
+      resources :tags, only: [:create, :destroy], controller: 'albums/tags'
       resources :discs, except: [:index, :show], shallow: true do
         resources :songs, shallow: true
       end
@@ -48,6 +50,12 @@ Rails.application.routes.draw do
     resources :people do
       resources :versions, controller: 'person_versions'
       resources :comments, controller: 'people/comments'
+    end
+    
+    resources :tags do
+      collection do
+        get 'search'
+      end
     end
   end
   
