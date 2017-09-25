@@ -1,0 +1,36 @@
+// <div class="b-tag-container">
+//   <span class="b-tag">My Tag</span>
+//   <span class="b-tag">My Tag</span>
+// </div>
+
+.b-tag-container {
+  display: flex;
+  margin: 0 -3px;
+  flex-wrap: wrap;
+}
+
+.b-tag {
+  padding: 5px;
+  color: $black;
+  font-size: 0.9rem;
+  background-color: $content__background;
+  margin-left: 3px;
+  margin-right: 3px;
+  cursor: pointer;
+  
+  @include transition-std(all);
+  
+  &:hover {
+    color: $white;
+    background-color: $gray-dark;
+  }
+}
+
+.b-tag-blue {
+  color: $white;
+  background-color: $blue--light;
+  
+  &:hover {
+    background-color: $blue;
+  }
+}

@@ -19,12 +19,16 @@
 <%= render layout: 'db/shared/album_info/container', locals: { current_version: @latest } do %>
   <div class="b-box-another bottom text-center">
     <% if @album.tags.size > 0 %>
-      <div class="b-tag-list-container">
-        <%= @album.tags.each do |tag| %>
+      <div class="b-tag-container justify-content-center">
+        <% @album.tags.each do |tag| %>
           <div class="b-tag">
             <%= tag.name %>
           </div>
         <% end%>
+        
+        <div class="b-tag" data-toggle="modal" data-target="#addTagModal">
+          <i class="fa fa-plus"></i>
+        </div>
       </div>
     <% else %>
       <a href="#" id="addTagButton" class="b-link-no-decoration"
@@ -56,11 +60,18 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="" id="tagListWillBeSave">
-          
+      <div class="modal-body p-4">
+        <div class="b-tag-container" id="tagListWillBeSave">
+          <div class="b-tag-container">
+            <% @album.tags.each do |tag| %>
+              <div class="b-tag b-tag-blue mb-2">
+                <%= tag.name %>
+              </div>
+            <% end%>
+          </div>
         </div>
-        <%= form_tag(search_db_tags_path, method: :get, remote: true, class: 'b-form p-3') do %>
+        
+        <%= form_tag(search_db_tags_path, method: :get, remote: true, class: 'b-form px-0 pt-0') do %>
           <div class="row">
             <div class="col-8 col-sm-9 col-md-10">
               <div class="form-group b-form-group m-0">
@@ -75,7 +86,7 @@
           </div>
         <% end %>
         
-        <div class="" id="tagSearchResults">
+        <div class="b-tag-container" id="tagSearchResults">
           
         </div>
       </div>
@@ -84,6 +95,9 @@
         
         <%= form_tag(db_album_tags_path(@album), method: :post) do %>
           <div class="" id="tagIdsWillBeSave">
+            <% @album.tag_ids.each do |tag| %>
+              <%= hidden_field_tag :'tag_ids[]', tag, multiple: true %>
+            <% end %>
           </div>
           <%= submit_tag '提出', class: 'btn btn-primary' %>
         <% end %>

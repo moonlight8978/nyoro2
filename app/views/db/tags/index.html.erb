@@ -12,3 +12,18 @@
     new_path: new_db_tag_path
   } %>
 <% end %>
+
+<div class="b-box">
+  <% @tags.each do |tag| %>
+    <div class="b-box-row">
+      <div class="b-ruby">
+        <div class="b-rb">
+          <%= link_to tag.name, db_tag_path(tag) %>
+        </div>
+        <div class="b-rt">
+          <%= tag.name_pronounce %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

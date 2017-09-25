@@ -1,6 +1,10 @@
 class Db::Albums::TagsController < ApplicationController
   def create
-    p tag_params
+    @album = Db::Album.find(params[:album_id])
+    ids = params[:tag_ids].uniq
+    @album.tag_ids = ids
+    
+    redirect_to @album
   end
   
   def destroy

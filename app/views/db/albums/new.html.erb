@@ -6,7 +6,5 @@
 ) %>
 
 <%= page_title('新しいアルバムを作る', 'New album') %>
-
-<%= render partial: 'form', locals: {
-  url: db_albums_path, method: :post
-} %>
+  
+<%= render 'form', url: db_albums_path, method: :post %>
