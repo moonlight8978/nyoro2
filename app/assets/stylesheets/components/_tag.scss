@@ -1,6 +1,10 @@
 // <div class="b-tag-container">
-//   <span class="b-tag">My Tag</span>
-//   <span class="b-tag">My Tag</span>
+//   <div class="b-tag-item">
+//     <span class="b-tag">My Tag</span>
+//   </div>
+//   <div class="b-tag-item">
+//     <span class="b-tag">My Tag</span>
+//   </div>
 // </div>
 
 .b-tag-container {
@@ -9,15 +13,16 @@
   flex-wrap: wrap;
 }
 
+.b-tag-item {
+  padding: 0 3px;
+}
+
 .b-tag {
-  padding: 5px;
   color: $black;
-  font-size: 0.9rem;
   background-color: $content__background;
-  margin-left: 3px;
-  margin-right: 3px;
+  padding: 5px;
   cursor: pointer;
-  
+  font-size: 0.9rem;
   @include transition-std(all);
   
   &:hover {

@@ -21,13 +21,13 @@
     <% if @album.tags.size > 0 %>
       <div class="b-tag-container justify-content-center">
         <% @album.tags.each do |tag| %>
-          <div class="b-tag">
-            <%= tag.name %>
+          <div class="b-tag-item">
+            <div class="b-tag"><%= tag.name %></div> 
           </div>
         <% end%>
         
-        <div class="b-tag" data-toggle="modal" data-target="#addTagModal">
-          <i class="fa fa-plus"></i>
+        <div class="b-tag-item" data-toggle="modal" data-target="#addTagModal">
+          <div class="b-tag"><i class="fa fa-plus"></i></div>
         </div>
       </div>
     <% else %>
@@ -62,13 +62,11 @@
       </div>
       <div class="modal-body p-4">
         <div class="b-tag-container" id="tagListWillBeSave">
-          <div class="b-tag-container">
-            <% @album.tags.each do |tag| %>
-              <div class="b-tag b-tag-blue mb-2">
-                <%= tag.name %>
-              </div>
-            <% end%>
-          </div>
+          <% @album.tags.each do |tag| %>
+            <div class="b-tag-item mb-2">
+              <div class="b-tag b-tag-blue"><%= tag.name %></div> 
+            </div>
+          <% end%>
         </div>
         
         <%= form_tag(search_db_tags_path, method: :get, remote: true, class: 'b-form px-0 pt-0') do %>

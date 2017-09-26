@@ -1,5 +1,5 @@
 <% @tags.each do |tag| %>
-  <span class="b-tag animated fadeIn tag-result" data-id="<%= tag.id %>">
-    <%= tag.name %>
-  </span>
+  <div class="b-tag-item animated fadeIn tag-result" data-id="<%= tag.id %>" data-name="<%= tag.name %>">
+    <div class="b-tag"><%= tag.name %></div> 
+  </div>
 <% end%>
