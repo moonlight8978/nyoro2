@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= @title %></title>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="turbolinks-cache-control" content="no-cache">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/earlyaccess/mplus1p.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <!-- <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %> -->
+    <%= render 'layouts/navbar' unless @no_navbar %>
+    
+    <div class="animated fadeIn" style="padding-top: 64px;">
+      
+      <%= render 'layouts/sidebar_admin' %>
+      <%= yield %>
+      
+    </div>
+    
+    <%= yield :modals %>
+  </body>
+</html>

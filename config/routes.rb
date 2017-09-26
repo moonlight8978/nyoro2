@@ -67,4 +67,13 @@ Rails.application.routes.draw do
     get 'home'
     get 'warning'
   end
+  
+  namespace :admin do
+    root to: 'dashboard#statistics'
+    
+    namespace :dashboard do
+      root action: 'statistics'
+      get 'statistics'
+    end
+  end
 end

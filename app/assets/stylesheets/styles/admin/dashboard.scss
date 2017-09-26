@@ -1,0 +1,5 @@
+.admin-dashboard {
+  @include responsive(lg) {
+    margin-left: #{$admin-sidebar-width}px;
+  }
+}

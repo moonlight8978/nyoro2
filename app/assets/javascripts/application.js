@@ -19,6 +19,7 @@
 //= require wowjs
 //= require nprogress/nprogress
 //= require jquery-ui/ui/widgets/datepicker
+//= require chart.js/dist/Chart.bundle.min
 
 //= require rails-ujs
 //= require turbolinks
