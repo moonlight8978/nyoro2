@@ -8,8 +8,8 @@
           </div>
           
           <canvas id="editChart" width="4" height="1.6" 
-            data-data="<%= @log_count %>" 
-            data-labels='<%= raw @log_labels %>'
+            data-data="<%= @statistics[:edit_day][:data] %>" 
+            data-labels='<%= raw @statistics[:edit_day][:labels] %>'
           >
           </canvas>
         </div>
@@ -24,8 +24,8 @@
             
             <div class="col-9">
               <canvas id="editChartMonth" width="9" height="3"
-                data-data="<%= @count %>"
-                data-labels='<%= raw @labels %>'
+                data-data="<%= @statistics[:edit_month][:data] %>"
+                data-labels='<%= raw @statistics[:edit_month][:labels] %>'
               >
             </div>
           </div>
@@ -50,8 +50,8 @@
               <h5>Comment</h5>
             </div>
             <canvas id="commentChart" width="7" height="3"
-              data-data="<%= @comment_count %>"
-              data-labels='<%= raw @comment_labels %>'
+              data-data="<%= @statistics[:comment_day][:data] %>"
+              data-labels='<%= raw @statistics[:comment_day][:labels] %>'
             >
             </canvas>
           </div>
