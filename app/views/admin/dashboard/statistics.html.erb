@@ -1,11 +1,11 @@
 <div class="admin-dashboard p-3">
   <div class="row">
     <div class="col-md-8">
-      <div class="b-box h-100">
-        <div class="admin-panel" style="background-color: #00ACC2;">
-          <h3>
-            編集
-          </h3>
+      <div class="b-box">
+        <div class="admin-panel admin-panel-reverse" style="background-color: #00ACC2;">
+          <div class="admin-panel-title">
+            <h3>編集</h3>
+          </div>
           
           <canvas id="editChart" width="4" height="1.6" 
             data-data="<%= @log_count %>" 
@@ -16,8 +16,10 @@
         <div class="admin-panel" style="background-color: #fff;">
           <div class="row">
             <div class="col-3">
-              <h3>編集総数</h3>
-              <span>35</span>
+              <div class="admin-panel-title">
+                <h3 class="text-center">総数</h3>
+              </div>
+              <div class="text-center">35編集</div>
             </div>
             
             <div class="col-9">
@@ -33,16 +35,26 @@
       
     </div>
     
-    <div class="col-md-4">
-      <div class="b-box h-100">
-        <div class="admin-panel" style="background-color: #009788;">
-          <h3>Browser stats</h3>
-          <canvas id="browserChart" width="7" height="3"></canvas>
-        </div>
-        
-        <div class="admin-panel" style="background-color: #00796A;">
-          <h3>Comment</h3>
-          <canvas id="commentChart" width="5" height="3"></canvas>
+    <div class="col-md-4 mt-sm-4 mt-md-0">
+      <div class="b-box">
+        <div class="admin-panel-inline-group">
+          <div class="admin-panel admin-panel-reverse" style="background-color: #009788;">
+            <div class="admin-panel-title">
+              <h5>Browser stats</h5>
+            </div>
+            <canvas id="browserChart" width="7" height="3"></canvas>
+          </div>
+          
+          <div class="admin-panel admin-panel-reverse" style="background-color: #00796A;">
+            <div class="admin-panel-title">
+              <h5>Comment</h5>
+            </div>
+            <canvas id="commentChart" width="7" height="3"
+              data-data="<%= @comment_count %>"
+              data-labels='<%= raw @comment_labels %>'
+            >
+            </canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -51,25 +63,70 @@
   <div class="row mt-4">
     <div class="col-sm-6 col-lg-3 mb-3">
       <div class="b-box">
-        new album, total album
+        <div class="admin-block admin-block-reverse" style="background-color: #4CB050;">
+          <div class="">
+            <i class="fa fa-music"></i>
+            <span class="admin-block-title">新アルバム</span>
+          </div>
+          <strong>
+            <%= @new_albums %>
+          </strong>
+          
+        </div>
+        <div class="admin-block admin-block-reverse" style="background-color: #398E3B;">
+          total product
+        </div>
       </div>
       
     </div>
     <div class="col-sm-6 col-lg-3 mb-3">
       <div class="b-box">
-        new product, total product
+        <div class="admin-block admin-block-reverse" style="background-color: #EC407A;">
+          <div class="">
+            <i class="fa fa-file-o"></i>
+            <span class="admin-block-title">新背品</span>
+          </div>
+          <strong>
+            0
+          </strong>
+        </div>
+        <div class="admin-block admin-block-reverse" style="background-color: #C2175B;">
+          total product
+        </div>
       </div>
       
     </div>
     <div class="col-sm-6 col-lg-3 mb-3">
       <div class="b-box">
-        new user, total user
+        <div class="admin-block admin-block-reverse" style="background-color: #607D8B;">
+          <div class="">
+            <i class="fa fa-user-plus"></i>
+            <span class="admin-block-title">新ユーザー</span>
+          </div>
+          <strong>
+            <%= @new_users %>
+          </strong>
+        </div>
+        <div class="admin-block admin-block-reverse" style="background-color: #465A65;">
+          total user
+        </div>
       </div>
       
     </div>
     <div class="col-sm-6 col-lg-3 mb-3">
       <div class="b-box">
-        何を書いていい
+        <div class="admin-block admin-block-reverse" style="background-color: #9C28B1;">
+          <div class="">
+            <i class="fa fa-pencil"></i>
+            <span class="admin-block-title">何書いて</span>
+          </div>
+          <strong>
+            0
+          </strong>
+        </div>
+        <div class="admin-block admin-block-reverse" style="background-color: #7D1DA2;">
+          何書いて
+        </div>
       </div>
     </div>
   </div>

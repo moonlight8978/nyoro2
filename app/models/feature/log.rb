@@ -6,7 +6,16 @@ class Feature::Log < ApplicationRecord
   scope :db_log, 
     -> { includes(:loggable, :user).where('classification = :class AND action != :action', 
                 class: :db, action: :comment).order(created_at: :desc) }
-                  
+  
+  scope :db_edit, 
+    -> { where('classification = :class AND action = :action', class: :db, action: :update) }
+  
+  scope :db_create,
+    -> { where('classification = :class AND action = :action', class: :db, action: :create) } 
+    
+  scope :db_comment,
+    -> { where('classification = :class AND action = :action', class: :db, action: :comment) }
+    
 private
   
   def stream_logs

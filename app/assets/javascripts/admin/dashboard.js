@@ -27,7 +27,7 @@ $(document).on('turbolinks:load', function (event) {
         },
         layout: {
           padding: {
-            top: 15,
+            top: 0,
             right: 40,
             bottom: 15,
             left: 15
@@ -51,8 +51,7 @@ $(document).on('turbolinks:load', function (event) {
             },
             ticks: { 
               fontColor: '#fff',
-              padding: 10,
-              maxTicksLimit: 4
+              padding: 10
             }
           }]
         }
@@ -164,8 +163,72 @@ $(document).on('turbolinks:load', function (event) {
           },
           pointLabels: {
             fontColor: 'white',
-            fontSize: 11
+            fontSize: 12,
+            fontWeight: 400
           }
+        }
+      }
+    });
+  }
+  
+  var $dbCommentDayCanvas = $("#commentChart");
+  var dbCommentDayChart;
+  
+  if ($dbCommentDayCanvas.length) {
+    let data = $dbCommentDayCanvas.data('data');
+    let labels = $dbCommentDayCanvas.data('labels');
+    
+    dbCommentDayChart = new Chart($dbCommentDayCanvas, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Total of comment',
+          borderColor: '#fff',
+          backgroundColor: '#006A59',
+          fill: false,
+          data: data
+        }]
+      },
+      options: {
+        legend: {
+          display: false,
+        },
+        layout: {
+          padding: {
+            top: 0,
+            right: 40,
+            bottom: 15,
+            left: 15
+          }
+        },
+        scales: {
+          xAxes: [{
+            gridLines: { 
+              drawOnChartArea: false,
+              color: '#006A59',
+              tickMarkLength: 11,
+              zeroLineColor: '#006A59'
+            },
+            ticks: { 
+              fontColor: '#fff',
+              padding: 5
+            }
+          }],
+          yAxes: [{
+            gridLines: { 
+              drawOnChartArea: false,
+              color: '#006A59',
+              tickMarkLength: 11,
+              zeroLineColor: '#006A59'
+            },
+            ticks: { 
+              fontColor: '#fff',
+              padding: 5,
+              min: 0,
+              maxTicksLimit: 6
+            }
+          }]
         }
       }
     });

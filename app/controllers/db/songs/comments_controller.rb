@@ -28,7 +28,7 @@ class Db::Songs::CommentsController < ApplicationController
     @comment.user = current_user
     
     if @comment.save
-      @comment.log_comment(current_user, @song.latest_version.title, params[:description])
+      @song.log_comment(current_user, @song.latest_version.title, params[:description])
       redirect_to @song
     else
       

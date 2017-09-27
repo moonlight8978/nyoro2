@@ -1,4 +1,6 @@
 class Db::Tag < ApplicationRecord
+  include Loggable
+  include Commentable
   include Validators::Db::Name
   
   has_and_belongs_to_many :albums,

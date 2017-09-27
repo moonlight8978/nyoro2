@@ -16,6 +16,7 @@ class Db::TagsController < ApplicationController
     if @tag.errors.any?
       render action: :new
     else
+      @tag.log_create(current_user, @tag.name, params[:description])
       redirect_to @tag
     end
   end
@@ -31,6 +32,7 @@ class Db::TagsController < ApplicationController
   end
   
   def update
+    
     #code
   end
   
