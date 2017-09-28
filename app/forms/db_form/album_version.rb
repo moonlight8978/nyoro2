@@ -7,7 +7,7 @@ class DbForm::AlbumVersion
   
   delegate :title, :title_en, :title_pronounce, :note, :image_url, to: :album_version
   
-  include Validators::Db::Title
+  include Db::Validators::Title
   
   def initialize(album_version = nil)
     @album_version = album_version || Db::AlbumVersion.new

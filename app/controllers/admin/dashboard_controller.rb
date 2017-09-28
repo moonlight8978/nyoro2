@@ -8,7 +8,6 @@ class Admin::DashboardController < ApplicationController
     ]
     @statistics = StatisticService::DbLog.perform(series)
     
-    @new_albums = Db::Album.where("created_at >= ?", Date.today.at_beginning_of_week.at_beginning_of_day).size
-    @new_users = User.where("created_at >= ?", Date.today.at_beginning_of_week.at_beginning_of_day).size
+    @new_last_week = StatisticService::LastWeek.perform(:user, :album)
   end
 end

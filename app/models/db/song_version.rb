@@ -1,6 +1,6 @@
 class Db::SongVersion < ApplicationRecord
-  include Validators::Db::Number
-  include Validators::Db::Title
+  include Db::Validators::Number
+  include Db::Validators::Title
     
   belongs_to :song
   belongs_to :previous_version, 

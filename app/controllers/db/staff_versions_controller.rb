@@ -1,4 +1,7 @@
 class Db::StaffVersionsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :db_sidebar
+  
   def index
     @staff = Db::Staff.find(params[:staff_id])
     set_title "スタッフの編集履歴"
@@ -14,17 +17,17 @@ class Db::StaffVersionsController < ApplicationController
     @song = @staff.song_versions.last.song
     
     if (@staff.latest_version_id === version_id)
-      redirect_to db_song_versions_path(@staff) and return
+      redirect_to @song and return
     end
     
     @version = Db::StaffVersion.find(version_id)
     
     if (@version.staff_id === staff_id)
       @staff.update(latest_version_id: version_id)
-      @song.log_update(current_user, @version.title, "バーション#{params[:id]}に戻す。")
+      @song.log_update(current_user, 'スタッフ', "バーション#{params[:id]}に戻す。")
     end
     
-    redirect_to db_song_versions_path(@song)
+    redirect_to @song
   end
   
   def show

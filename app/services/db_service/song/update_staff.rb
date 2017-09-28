@@ -1,5 +1,5 @@
 class DbService::Song::UpdateStaff
-  attr_reader :song, :latest_version
+  attr_reader :song, :latest_version, :staff, :title, :title_en
   
   def initialize(staff_id, params, current_user, **optionals)
     @staff = Db::Staff.find(staff_id)
@@ -11,6 +11,7 @@ class DbService::Song::UpdateStaff
   end
   
   def perform
+    backup_ui_variables
     ActiveRecord::Base.transaction do
       check_if_user_made_any_changes!
       create_new_staff_version!
@@ -26,6 +27,10 @@ class DbService::Song::UpdateStaff
   end
   
 private
+  def backup_ui_variables
+    @title = @song.latest_version.title
+    @title_en = @song.latest_version.title_en
+  end
   
   def check_if_user_made_any_changes!
     @latest_version.assign_attributes(@params)

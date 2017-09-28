@@ -1,6 +1,6 @@
 class Db::Album < ApplicationRecord
   include Commentable
-  include Loggable
+  include Db::Loggable
   
   # This association is not optional
   belongs_to :latest_version, 

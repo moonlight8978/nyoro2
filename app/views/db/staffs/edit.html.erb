@@ -6,7 +6,7 @@
   'スタッフを編集する'
 ) %>
 
-<%= page_title('スタッフを編集する', 'edit staff') %>
+<%= page_title("#{@page_title}のスタッフを編集する", "edit #{@page_title}'s staff'") %>
 
 <%= render partial: 'db/staffs/form', locals: {
   url: db_staff_path(@staff), method: :put

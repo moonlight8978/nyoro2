@@ -1,6 +1,6 @@
 class Db::Song < ApplicationRecord
   include Commentable
-  include Loggable
+  include Db::Loggable
   
   belongs_to :latest_version, 
     class_name: 'Db::SongVersion', optional: true

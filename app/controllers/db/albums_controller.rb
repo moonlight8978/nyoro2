@@ -1,7 +1,7 @@
 class Db::AlbumsController < ApplicationController
-  before_action :db_sidebar, only: [:show, :index]
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!, except: [:show, :index, :search]
   before_action :require_admin!, only: [:destroy]
+  before_action :db_sidebar
   
   def new
     set_title '新しいアルバムを作る'

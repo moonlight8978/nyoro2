@@ -4,3 +4,8 @@ ja:
     errors:
       messages:
         record_invalid: 失敗
+        models:
+          db/staff_version:
+            attributes:
+              person:
+                required: このスタッフがデータベースにいません。

@@ -1,16 +1,19 @@
 class Db::TagsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :db_sidebar
   
   def index
+    set_title 'タグ'
     @tags = Db::Tag.all
   end
   
   def new
+    set_title '新しいタグを作る'
     @tag = Db::Tag.new
   end
   
   def create
+    set_title '新しいタグを作る'
     @tag = Db::Tag.create(tag_params)
     
     if @tag.errors.any?
@@ -22,18 +25,23 @@ class Db::TagsController < ApplicationController
   end
   
   def show
+    set_title "#{@tag}・タグ"
     @tag = Db::Tag.find(params[:id])
   end
   
   def edit
     @tag = Db::Tag.find(params[:id])
-    @page_title = @tag.name
-    @page_title_en = @tag.name_en
+    backup_ui_variables(@tag.name, @tag.name_en)
   end
   
   def update
-    
-    #code
+    @tag = Db::Tag.find(params[:id])
+    backup_ui_variables(@tag.name, @tag.name_en)
+    @tag.assign_attributes(tag_params)
+    if @tag.changed? && !@tag.save
+      render action: :edit and return
+    end
+    redirect_to @tag
   end
   
   def search
@@ -51,6 +59,12 @@ class Db::TagsController < ApplicationController
   end
   
 private
+
+  def backup_ui_variables(ja, en)
+    set_title "#{ja}を編集する"
+    @page_title = ja
+    @page_title_en = en
+  end
   
   def tag_params
     params.require(:db_tag).permit(

@@ -1,6 +1,6 @@
 class Db::AlbumVersionsController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :show]
   before_action :db_sidebar
-  before_action :authenticate_user!, only: [:update]
   
   def index
     @album = Db::Album

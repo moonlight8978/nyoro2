@@ -1,5 +1,5 @@
 class Db::Person < ApplicationRecord
-  include Loggable
+  include Db::Loggable
   include Commentable
   
   belongs_to :latest_version, 

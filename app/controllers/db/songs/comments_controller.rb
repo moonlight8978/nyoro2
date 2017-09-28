@@ -35,6 +35,14 @@ class Db::Songs::CommentsController < ApplicationController
     end
   end
   
+  def destroy
+    #code
+  end
+  
+  def update
+    #code
+  end
+  
 private
   
   def comment_params

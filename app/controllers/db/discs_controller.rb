@@ -1,7 +1,7 @@
 class Db::DiscsController < ApplicationController
-  before_action :db_sidebar
   before_action :authenticate_user!
   before_action :require_admin!, only: [:destroy]
+  before_action :db_sidebar
 
   def new
     set_title "新しいディスクを作る"

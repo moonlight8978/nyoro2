@@ -8,10 +8,10 @@ class Feature::Log < ApplicationRecord
                 class: :db, action: :comment).order(created_at: :desc) }
   
   scope :db_edit, 
-    -> { where('classification = :class AND action = :action', class: :db, action: :update) }
+    -> { where('classification = :class AND action != :action', class: :db, action: :comment) }
   
   scope :db_create,
-    -> { where('classification = :class AND action = :action', class: :db, action: :create) } 
+    -> { where('classification = :class AND action != :action', class: :db, action: :create) } 
     
   scope :db_comment,
     -> { where('classification = :class AND action = :action', class: :db, action: :comment) }

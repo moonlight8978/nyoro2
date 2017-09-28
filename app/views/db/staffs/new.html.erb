@@ -6,7 +6,7 @@
   '新しいスタッフを作る'
 ) %>
 
-<%= page_title('新しいスタッフを作る', 'Create new staff') %>
+<%= page_title("#{@song.latest_version.title}の新しいスタッフをつくる", "new staff for #{@song.latest_version.title_en}") %>
 
 <%= render partial: 'db/staffs/form', locals: {
   url: db_song_staffs_path(@song), method: :post

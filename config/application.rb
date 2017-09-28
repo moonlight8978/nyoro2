@@ -15,6 +15,7 @@ module Nyoro2
     
     I18n.available_locales = [:en, :ja]
     config.i18n.default_locale = :ja
+    config.i18n.fallbacks = true
     
     config.time_zone = 'Asia/Bangkok'
     Groupdate.time_zone = 'Asia/Bangkok'

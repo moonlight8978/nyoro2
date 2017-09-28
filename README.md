@@ -1,12 +1,24 @@
 # **Nyoro2 Project**
 #### Album database and E-Commerce
 
+### Todos:
+* DB
+** all: destroy
+** staff_version_c: show
+** comment: update, destroy, need refactoring later
+** discs/songs: destroy
+** user's profile statistics
+** user ratings
+** views's authorization
+
+* E-Commerce: had not been implemented yet
+
 ### About Project 
 * **Just for learning purpose**
 * Technologies: Ruby on Rails 5.x full stack
 * Features: 
   * Authentication (+ Social login) / Authorization (gem devise)
-  * Chart (D3.js)
+  * Chart (D3.js => moved to Chart.js)
   * Search (gem sunspot)
   * Version management (Page is editable by both users and admins)
 
@@ -26,7 +38,7 @@
 * sidekiq - redis: `$ sudo apt-get install redis-server`
 * Node.js
 * Yarn
-* ngrok: `$ ./ngrok http 3000`
+* ngrok: `$ ./ngrok http 3000` => moved to local network by disabling firewall
 
 ##### Database - MySQL
 * Username: `root`

@@ -1,4 +1,5 @@
 class Db::Staff < ApplicationRecord
+  # Associations
   belongs_to :latest_version, 
     class_name: 'Db::StaffVersion'
   has_many :staff_versions
