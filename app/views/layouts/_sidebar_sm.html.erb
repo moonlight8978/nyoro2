@@ -22,7 +22,7 @@
         <% if user_signed_in? %>
           <div class="b-ellipsis font-weight-bold">
             <%= link_to (current_user.user_name || '無名') + 'さん', 
-              user_path(current_user)
+              profile_path(current_user.id)
             %>
           </div>
         <% else %>
@@ -119,13 +119,6 @@
             <% end %>
           </ul>
         </div>
-        <!-- END -->
-        
-        <%= link_to edit_user_registration_path do %>
-          <li class="list-group-item b-list-group-item list-group-item-action top-level">
-            設定
-          </li>
-        <% end %>
         <!-- END -->
       </ul>
     </div>

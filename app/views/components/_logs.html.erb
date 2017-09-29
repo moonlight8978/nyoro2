@@ -6,7 +6,7 @@
     
     <div class="ellipsis">
       <%= link_to (log.user.user_name || '無名') + 'さん', 
-        user_path(log.user),
+        profile_path(log.user.id),
         class: 'b-link b-author'
       %>
     </div>

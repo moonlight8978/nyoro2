@@ -1,4 +1,4 @@
-module StatisticService::LastWeek
+module StatisticsService::LastWeek
   def self.perform(*series)
     @results = {}
     

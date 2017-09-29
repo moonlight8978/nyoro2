@@ -2,19 +2,32 @@
 <div class="pt-4"></div>
 <div class="pt-3"></div>
 
+
 <div class="container pb-3 px-4">
-  <h3 class="mt-4 text-center mb-5 d-none d-md-block">ログイン</h3>
-  <div class="login-container">
+  <div class="b-authenticate-container b-box">
+    <div class="b-authenticate-title">
+      <h3>ログイン</h3>
+      <span class="d-none d-sm-inline-block">ノート</span>
+    </div>
+    
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-lg-6">
+        <% unless flash.empty? %>
+        <div class="alert alert-danger" role="alert">
+          <% flash.each do |key, value| %>
+          <div><%= value %></div>
+          <% end %>
+        </div>
+        <% end %>
+        
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group b-form-group">
-            <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+            <%= f.email_field :email, autofocus: true, class: class_string('form-control': true, 'is-invalid': !flash.empty?) %>
             <%= f.label :email, 'メール' %>
           </div>
         
           <div class="form-group b-form-group">
-            <%= f.password_field :password, autocomplete: 'off', class: 'form-control' %>
+            <%= f.password_field :password, autocomplete: 'off', class: class_string('form-control': true, 'is-invalid': !flash.empty?) %>
             <%= f.label :password, 'パスワード' %>
           </div>
         
@@ -26,7 +39,7 @@
           <% end -%>
         
           <div class="form-group text-center">
-            <%= f.submit "ログイン", class: 'btn-c btn-c-5 btn-c-5-sakura submit-btn' %>
+            <%= f.submit "ログイン", class: 'btn-c btn-c-5 btn-c-5-sakura w-100' %>
           </div>
           
           <div class="b-form-link">
@@ -35,24 +48,28 @@
         <% end %>
       </div>
         
-      <div class="social-login col-md-6">
-        <div>
-          <%= link_to user_google_oauth2_omniauth_authorize_path, class: 'google' do %>
-            <i></i>
-            <span>Googleアカウントでログイン</span>
-          <% end %>
-        </div>
-        <div>
-          <a href="#" class="twitter">
-            <i></i>
-            <span>Twitterアカウントでログイン</span>
-          </a>
-        </div>
-        <div>
-          <%= link_to user_facebook_omniauth_authorize_path, class: 'facebook' do %>
-            <i></i>
-            <span>Facebookアカウントでログイン</span>
-          <% end %>
+      <div class="col-lg-6 mt-4 mt-lg-0">
+        <div class="b-authenticate-social">
+          <div class="b-authenticate-social-title">
+            他のサービスIDで登録
+          </div>
+          
+          <div class="b-authenticate-social-link-group">
+            <%= link_to user_google_oauth2_omniauth_authorize_path, class: 'b-authenticate-social-link google' do %>
+              <i></i>
+              <span>Googleアカウントで登録</span>
+            <% end %>
+            
+            <a href="#" class="b-authenticate-social-link twitter">
+              <i></i>
+              <span>Twitterアカウントで登録</span>
+            </a>
+            
+            <%= link_to user_facebook_omniauth_authorize_path, class: 'b-authenticate-social-link facebook' do %>
+              <i></i>
+              <span>Facebookアカウントで登録</span>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

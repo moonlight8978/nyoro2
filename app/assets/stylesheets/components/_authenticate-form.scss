@@ -1,0 +1,88 @@
+.b-authenticate-container {
+  padding: 2rem;
+  
+  .b-authenticate-title {
+    margin-bottom: 1.5rem;
+    
+    h1, h2, h3, h4, h5, h6 { font-weight: 900; }
+    
+    > * { 
+      display: inline-block;
+      margin: 0;
+    }
+  }
+  
+  .b-authenticate-social {
+    // height: 100%;
+    border-top: 1px solid $border-color;
+    padding-top: 1rem;
+    
+    @include responsive(sm) {
+      padding: 1rem 2rem;
+      background-color: $content__background;
+      border: 1px solid $border-color;
+    }
+    
+    .b-authenticate-social-title {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .b-authenticate-social-link-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .b-authenticate-social-link {
+      height: 50px;
+      line-height: 50px;
+      background-color: $white;
+      color: $black;
+      position: relative;
+      padding-left: 53px;
+      @include transition-std(all);
+      
+      &:after {
+        content: '\0203A';
+        position: absolute;
+        height: 50px;
+        line-height: 50px;
+        right: 1rem;
+        top: 0;
+      }
+      
+      &:not(:last-child) {
+        margin-bottom: 3px;
+      }
+      
+      &:hover { 
+        color: $white; 
+        text-decoration: none;
+      }
+      
+      &.facebook {
+        i { background: transparent url('sprite_login_parts_151221.png') no-repeat 0 -50px; }
+        &:hover { background-color: $facebook; }
+      }
+      
+      &.google {
+        i { background: transparent url('sprite_login_parts_151221.png') no-repeat 0 -100px; }
+        &:hover { background-color: $google; }
+      }
+      
+      &.twitter {
+        i { background: transparent url('sprite_login_parts_151221.png') no-repeat 0 0; }
+        &:hover { background-color: $twitter; }
+      }
+      
+      i {
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        top: 0;
+        left: 0;
+        display: block;
+      }
+    }
+  }
+}

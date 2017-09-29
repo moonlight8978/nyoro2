@@ -11,7 +11,7 @@
       <div class="pl-3" style="flex: 1 0 calc(100% - 40px);">
         <div>
           <%= link_to (comment.user.user_name || '無名') + 'さん', 
-            user_path(comment.user), 
+            profile_path(comment.user.id), 
             class: 'b-author b-link' 
           %>
           <span>・</span>

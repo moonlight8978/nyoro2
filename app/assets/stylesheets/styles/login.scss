@@ -76,17 +76,17 @@
       }
 
       &.google {
-        i { background: transparent url(https://www.dmm.com/images/my/login/sprite_login_parts_151221.png) no-repeat 0 -100px; }
+        i { background: transparent url('sprite_login_parts_151221.png') no-repeat 0 -100px; }
         &:hover { background-color: $google; }
       }
 
       &.twitter {
-        i { background: transparent url(https://www.dmm.com/images/my/login/sprite_login_parts_151221.png) no-repeat 0 0; }
+        i { background: transparent url('sprite_login_parts_151221.png') no-repeat 0 0; }
         &:hover { background-color: $twitter; }
       }
 
       &.facebook {
-        i { background: transparent url(https://www.dmm.com/images/my/login/sprite_login_parts_151221.png) no-repeat 0 -50px; }
+        i { background: transparent url('sprite_login_parts_151221.png') no-repeat 0 -50px; }
         &:hover { background-color: $facebook; }
       }
     }

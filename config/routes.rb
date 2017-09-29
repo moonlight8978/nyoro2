@@ -2,15 +2,26 @@ Rails.application.routes.draw do
   root to: redirect('/warning')
   mount ActionCable.server => '/cable'
   
-  devise_for :users, controllers: {
+  # Devise routing
+  devise_for :users, skip: [:registrations], controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations',
+    # registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
   
-  resources :users, only: [:show, :index]
-  get 'user', to: 'users#current', as: 'current_user_page'
-  put 'user', to: 'users#update'
+  devise_scope :user do
+    get 'users/cancel', to: 'users/registrations#cancel', as: :cancel_user_registration
+    get 'users/sign_up', to: 'users/registrations#new', as: :new_user_registration
+    put 'users', to: 'users/registrations#update', as: :user_registration
+    patch 'users', to: 'users/registrations#update'
+    post 'users', to: 'users/registrations#create'
+    delete 'users', to: 'users/registrations#destroy'
+  end
+  
+  # User profile
+  scope module: :users do
+    resources :profiles, only: [:show, :index, :update]
+  end
   
   
   namespace :db do

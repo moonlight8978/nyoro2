@@ -89,11 +89,7 @@
                   class: 'dropdown-item' if current_user.is_admin?
                 %>
                 <%= link_to (current_user.user_name || '無名') + 'さん', 
-                  user_path(current_user), 
-                  class: 'dropdown-item' 
-                %>
-                <%= link_to '設定', 
-                  edit_user_registration_path, 
+                  profile_path(current_user.id), 
                   class: 'dropdown-item' 
                 %>
                 <%= link_to 'ログアウト', destroy_user_session_path, 

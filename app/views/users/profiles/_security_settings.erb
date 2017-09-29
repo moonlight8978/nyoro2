@@ -1,0 +1,57 @@
+<div class="tab-pane active" id="security" role="tabpanel">
+  <div class="b-box-group">
+    <h6 class="b-box-title">セキュリティ</h6>
+    <div class="b-box">
+      <%= form_for(@user, url: user_registration_path, method: :put, html: { class: 'b-form' }) do |f| %>
+        <div class="form-group b-form-group">
+          <%= f.email_field :email, class: class_string('form-control' => true, 'is-invalid' => @user.errors.messages[:email].present?) %>
+          <%= f.label :email, 'メール' %>
+          <div class="invalid-feedback">
+            <% @user.errors.messages[:email].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group b-form-group">
+              <%= f.password_field :password, class: class_string('form-control' => true, 'is-invalid' => @user.errors.messages[:password].present?) %>
+              <%= f.label :password, 'パスワード' %>
+              <div class="invalid-feedback">
+                <% @user.errors.messages[:password].each do |message| %>
+                  <div><%= message %></div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-6">
+            <div class="form-group b-form-group">
+              <%= f.password_field :password_confirmation, class: class_string('form-control' => true, 'is-invalid' => @user.errors.messages[:password_confirmation].present?) %>
+              <%= f.label :password_confirmation, 'パスワードの認証' %>
+              <div class="invalid-feedback">
+                <% @user.errors.messages[:password_confirmation].each do |message| %>
+                  <div><%= message %></div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group b-form-group">
+          <%= f.password_field :current_password, class: class_string('form-control' => true, 'is-invalid' => @user.errors.messages[:current_password].present?) %>
+          <%= f.label :current_password, '現在のパスワード' %>
+          <div class="invalid-feedback">
+            <% @user.errors.messages[:current_password].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+        
+        <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
+        <div class="clearfix"></div>
+      <% end %>
+    </div>
+  </div>
+</div>

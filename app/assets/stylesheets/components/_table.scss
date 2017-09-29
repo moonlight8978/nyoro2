@@ -91,10 +91,10 @@
   }
   
   // if row is toggleable
-  tr[aria-expanded="false"] .fa-angle-up { display: none }
+  tr[aria-expanded="false"] .fa-angle-down { display: none }
   tr[aria-expanded="true"] { 
     background-color: #fafafa;
-    .fa-angle-down { display: none }
+    .fa-angle-right { display: none }
   }
   
   .b-row-collapse {

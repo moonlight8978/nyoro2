@@ -1,0 +1,78 @@
+<div class="tab-pane active" id="identity" role="tabpanel">
+  <div class="b-box-group">
+    <h6 class="b-box-title">セキュリティ</h6>
+    <div class="b-box">
+      <%= form_for(@user, url: profile_path(@user.id), 
+        method: :put, html: { class: 'b-form' }) do |f| 
+      %>
+        <div class="row">
+          <div class="col-sm-7 col-md-8">
+            <div class="form-group b-form-group">
+              <%= f.text_field :user_name, class: class_string('form-control' => true, 'is-invalid' => @user.errors.messages[:user_name].present?) %>
+              <%= f.label :user_name, 'ユーザー名' %>
+              <div class="invalid-feedback">
+                <% @user.errors.messages[:user_name].each do |message| %>
+                  <div><%= message %></div>
+                <% end %>
+              </div>
+            </div>
+            
+            <div class="form-group b-form-group">
+              <%= f.text_field :first_name, class: class_string('form-control' => true, 'is-invalid' => @user.errors.messages[:first_name].present?) %>
+              <%= f.label :first_name, 'First name' %>
+              <div class="invalid-feedback">
+                <% @user.errors.messages[:first_name].each do |message| %>
+                  <div><%= message %></div>
+                <% end %>
+              </div>
+            </div>
+            
+            <div class="form-group b-form-group">
+              <%= f.text_field :last_name, class: class_string('form-control' => true, 'is-invalid' => @user.errors.messages[:last_name].present?) %>
+              <%= f.label :last_name, 'Last name' %>
+              <div class="invalid-feedback">
+                <% @user.errors.messages[:last_name].each do |message| %>
+                  <div><%= message %></div>
+                <% end %>
+              </div>
+            </div>
+            
+            <div class="form-group b-form-group">
+              <%= f.text_field :name_pronounce, class: class_string('form-control' => true, 'is-invalid' => @user.errors.messages[:name_pronounce].present?) %>
+              <%= f.label :name_pronounce, '本名（かな）*' %>
+              <div class="invalid-feedback">
+                <% @user.errors.messages[:name_pronounce].each do |message| %>
+                  <div><%= message %></div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-5 col-md-4">
+            <div class="row">
+              <div class="col-6 col-sm-10">
+                <div class="b-img-placeholder b-ratio-1_1">
+                  <div class="b-img-thumb" data-background-image="<%= @user.avatar_url %>">
+                </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group b-form-group mt-3">
+              <%= f.file_field :avatar, class: class_string('form-control-file' => true, 'is-invalid' => @user.errors.messages[:avatar].present?) %>
+              <%= f.label :avatar, '写真をアップロード' %>
+              <div class="invalid-feedback">
+                <% @user.errors.messages[:avatar].each do |message| %>
+                  <div><%= message %></div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
+        <div class="clearfix"></div>
+      <% end %>
+    </div>
+  </div>
+</div>

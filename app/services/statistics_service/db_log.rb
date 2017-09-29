@@ -1,4 +1,4 @@
-module StatisticService::DbLog
+module StatisticsService::DbLog
   attr_reader :results
   
   def self.perform(series)
