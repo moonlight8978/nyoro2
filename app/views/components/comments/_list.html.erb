@@ -15,13 +15,13 @@
             class: 'b-author b-link' 
           %>
           <span>・</span>
-          <span class="b-font-85"><%= j_full_date(comment.created_at) %></span>
+          <span class="b-font-85"><%= time_in_words(comment.created_at) %></span>
         </div>
         <p class="b-description-text m-0"><%= comment.body || '無名' %></p>
       </div>
     </div>
     
-    <% if comment.user.is_current_user?(current_user) %>
+    <% if can_edit_comment(comment) %>
       <%= render 'components/comments/options', locals: { comment: comment } %>
     <% end %>
   </div>

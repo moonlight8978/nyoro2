@@ -28,7 +28,7 @@ class Db::Albums::CommentsController < ApplicationController
     @comment.user = current_user
     
     if @comment.save
-      @album.log_comment(current_user, @album.latest_version.title, params[:description])
+      @comment.log_comment(current_user, @album.latest_version.title, params[:description])
       redirect_to @album
     else
       

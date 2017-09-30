@@ -38,4 +38,8 @@ module ApplicationHelper
       img_thumb('/assets/unknown-user.png', '1_1', true)
     end
   end
+  
+  def can_edit_comment(comment)
+    user_signed_in? && comment.can_be_edited_by(current_user)
+  end
 end

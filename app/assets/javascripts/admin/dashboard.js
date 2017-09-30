@@ -51,7 +51,8 @@ $(document).on('turbolinks:load', function (event) {
             },
             ticks: { 
               fontColor: '#fff',
-              padding: 10
+              padding: 10,
+              maxTicksLimit: 6
             }
           }]
         }

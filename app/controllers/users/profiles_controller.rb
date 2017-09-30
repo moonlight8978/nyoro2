@@ -4,16 +4,20 @@ class Users::ProfilesController < ApplicationController
   
   def show
     @active_tab = params[:tab] || 'info'
-    
-    if current_user && current_user.id === params[:id].to_i
-      @own = true
-      @user = current_user
-    else
-      @own = false
-      @user = User.find(params[:id])
-    end
-    
+    set_authorities(params[:id])
     set_title "#{@user.user_name || '無名'}さんのプロファイル"
+    case @active_tab
+    when 'info'
+      perform_info
+    when 'statistics'
+      perform_statistics
+    when 'recent_activities'
+      perform_recent_activities
+    when 'identity_settings'
+      perform_identity_settings
+    when 'security_settings'
+      perform_security_settings
+    end
   end
   
   def update
@@ -41,5 +45,37 @@ private
       :user_name, :first_name, :last_name, :name_pronounce, :avatar
       # birthday
     )
+  end
+  
+  def set_authorities(user_id)
+    @user = User.find(user_id)
+    @own = user_signed_in? && @user == current_user
+  end
+  
+  def perform_info
+    #code
+  end
+  
+  def perform_statistics
+    series = [
+      { name: :comment, start_day: 6.days.ago },
+      { name: :edit, start_day: 6.days.ago }
+    ]
+    @statistics = StatisticsService::DbLog.perform(series)
+    p @statistics
+  end
+  
+  def perform_recent_activities
+    log_query = LogQuery.new(per_page: 10)
+    @log_comments = log_query.comment(@user)
+    @log_edit = log_query.db_edit(@user)
+  end
+  
+  def perform_identity_settings
+    #code
+  end
+  
+  def perform_security_settings
+    #code
   end
 end

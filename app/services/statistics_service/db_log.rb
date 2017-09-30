@@ -1,8 +1,11 @@
 module StatisticsService::DbLog
   attr_reader :results
   
-  def self.perform(series)
+  # will receive series = [{ name:, start_day*:, start_month*: }]
+  # return results { seri: { labels: label_for_chart, data: data_for_chart } }
+  def self.perform(series, user = nil)
     @results = {}
+    @user = user
     
     series.each do |seri|
       if seri[:start_day].present?
@@ -31,40 +34,35 @@ private
   end
   
   def self.chart_data_by_day(seri, start_time)
-    seri_name = "#{seri}_day".to_sym
     grouped = group_log(seri)
-    
-    grouped = grouped
       .where("created_at >= ?", start_time.at_beginning_of_day)
       .group_by_day(&:created_at)
-    
+    grouped = @user.present? ? grouped.where(user: user) : grouped
+      
+    seri_name = "#{seri}_day".to_sym
     @results[seri_name] = {}
-    
     @results[seri_name][:data] = (start_time.to_date..Date.today).map do |date|
       log = grouped.detect { |group_date, logs| group_date == date }
       log && log[1].size || 0
     end
-    
     @results[seri_name][:labels] = (start_time.to_date..Date.today).map do |date|
       date.strftime('%-m月%d日')
     end
   end
   
   def self.chart_data_by_month(seri, start_time)
-    seri_name = "#{seri}_month".to_sym
-    months = (start_time.to_date..Date.today).map { |date| date.strftime("%Y月%-m日") }.uniq
-    
     grouped = group_log(seri)
       .where("created_at >= ?", start_time.at_beginning_of_month)
       .group_by_month(&:created_at)
+    grouped = @user.present? ? grouped.where(user: user) : grouped
     
+    seri_name = "#{seri}_month".to_sym
+    months = (start_time.to_date..Date.today).map { |date| date.strftime("%Y月%-m日") }.uniq
     @results[seri_name] = {}
-    
     @results[seri_name][:data] = months.map do |month|
       log = grouped.detect { |group_date, logs| group_date.strftime("%Y月%-m日") == month }
       log && log[1].size || 0
     end
-    
     @results[seri_name][:labels] = months
   end
 end

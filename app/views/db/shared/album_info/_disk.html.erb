@@ -57,7 +57,7 @@
                 <td class="b-col-small b-col-last"><%= song_latest.length %></td>
                 <td class="b-col-small b-col-last d-none d-sm-table-cell">
                   <div class="b-icon-group b-size-small justify-content-center">
-                    <%= link_to db_song_path(song), method: :delete do %>
+                    <%= link_to db_song_path(song), method: :delete, class: 'no-propagation' do %>
                       <div class="b-icon destroy">
                         <i class="fa fa-trash"></i>
                       </div>
