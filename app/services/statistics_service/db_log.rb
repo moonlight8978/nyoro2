@@ -36,9 +36,9 @@ private
   def self.chart_data_by_day(seri, start_time)
     grouped = group_log(seri)
       .where("created_at >= ?", start_time.at_beginning_of_day)
-      .group_by_day(&:created_at)
-    grouped = @user.present? ? grouped.where(user: user) : grouped
-      
+    grouped = @user.present? ? grouped.where(user: @user) : grouped
+    grouped = grouped.group_by_day(&:created_at)
+    
     seri_name = "#{seri}_day".to_sym
     @results[seri_name] = {}
     @results[seri_name][:data] = (start_time.to_date..Date.today).map do |date|
@@ -47,6 +47,9 @@ private
     end
     @results[seri_name][:labels] = (start_time.to_date..Date.today).map do |date|
       date.strftime('%-m月%d日')
+    end
+    @results[seri_name][:total] = @results[seri_name][:data].inject(0) do |sum, count|
+      sum + count
     end
   end
   
@@ -64,5 +67,8 @@ private
       log && log[1].size || 0
     end
     @results[seri_name][:labels] = months
+    @results[seri_name][:total] = @results[seri_name][:data].inject(0) do |sum, count|
+      sum + count
+    end
   end
 end

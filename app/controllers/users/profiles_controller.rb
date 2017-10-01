@@ -9,8 +9,6 @@ class Users::ProfilesController < ApplicationController
     case @active_tab
     when 'info'
       perform_info
-    when 'statistics'
-      perform_statistics
     when 'recent_activities'
       perform_recent_activities
     when 'identity_settings'
@@ -56,19 +54,16 @@ private
     #code
   end
   
-  def perform_statistics
+  def perform_recent_activities
+    log_query = LogQuery.new(per_page: 5)
+    @log_comments = log_query.comment(@user)
+    @log_edit = log_query.db_edit(@user)
     series = [
       { name: :comment, start_day: 6.days.ago },
       { name: :edit, start_day: 6.days.ago }
     ]
-    @statistics = StatisticsService::DbLog.perform(series)
+    @statistics = StatisticsService::DbLog.perform(series, @user)
     p @statistics
-  end
-  
-  def perform_recent_activities
-    log_query = LogQuery.new(per_page: 10)
-    @log_comments = log_query.comment(@user)
-    @log_edit = log_query.db_edit(@user)
   end
   
   def perform_identity_settings

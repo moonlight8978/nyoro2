@@ -19,13 +19,6 @@
         %>
       </li>
       <li class="nav-item">
-        <%= link_to '統計', profile_path(@user.id, tab: 'statistics'), 
-          class: class_string(
-            'nav-link': true, 'utility-label': true, 'active': @active_tab == 'statistics'
-          ) 
-        %>
-      </li>
-      <li class="nav-item">
         <%= link_to '最近の活動', profile_path(@user.id, tab: 'recent_activities'), 
           class: class_string(
             'nav-link': true, 'utility-label': true, 'active': @active_tab == 'recent_activities'
@@ -63,7 +56,6 @@
 <div class="b-box-group page-user-detail">
   <div class="tab-content">
     <%= render 'users/profiles/info' if @active_tab == 'info' %>
-    <%= render 'users/profiles/statistics' if @active_tab == 'statistics' %>
     <%= render 'users/profiles/recent_activities' if @active_tab == 'recent_activities' %>
     <% if @own %>
       <%= render 'users/profiles/identity_settings' if @active_tab == 'identity_settings' %>

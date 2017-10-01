@@ -6,9 +6,54 @@
 <%= page_title('データベース', 'Database') %>
 
 <div class="b-box-group">
-  <h6 class="b-box-title">
-    <%= link_to 'アルバム', db_albums_path %>
-  </h6>
+  <div class="">
+    <h6 class="b-box-title">
+      アルバム
+    </h6>
+    <%= link_to 'もっと見る', db_albums_path, class: "pull-right" %>
+  </div>
+  
+  <div class="b-box">
+    <div class="slick b-horizontal-list">
+      <% @albums.each do |album| %>
+        <div class="">
+          <div class="b-horizontal-list-item">
+            <% latest = album.latest_version %>
+            <div class="">
+              <div class="b-img-placeholder b-ratio-1_1">
+                <div class="b-img-thumb" 
+                  data-background-image="<%= latest.image_url.to_s %>"
+                >
+                </div>
+              </div>
+            </div>
+            <div class="b-horizontal-list-item-title">
+              <%= link_to latest.title, db_album_path(album), class: 'b-link-no-color' %>
+            </div>
+            <div class="b-horizontal-list-item-other">
+              <div class="">
+                <span>9.5</span>
+                <i class="fa fa-star"></i>
+              </div>
+              <div class="">
+                <i class="fa fa-comments-o"></i>
+                <span>22</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="b-box-group mt-3">
+  <div class="">
+    <h6 class="b-box-title">
+      スタッフ
+    </h6>
+    <%= link_to 'もっと見る', db_people_path, class: "pull-right" %>
+  </div>
   
   <div class="b-box b-box-p">
     
@@ -16,19 +61,12 @@
 </div>
 
 <div class="b-box-group mt-3">
-  <h6 class="b-box-title">
-    <%= link_to 'スタッフ', db_people_path %>
-  </h6>
-  
-  <div class="b-box b-box-p">
-    
+  <div class="">
+    <h6 class="b-box-title">
+      タグ
+    </h6>
+    <%= link_to 'もっと見る', db_tags_path, class: "pull-right" %>
   </div>
-</div>
-
-<div class="b-box-group mt-3">
-  <h6 class="b-box-title">
-    <%= link_to 'タグ', db_tags_path %>
-  </h6>
   
   <div class="b-box b-box-p">
     

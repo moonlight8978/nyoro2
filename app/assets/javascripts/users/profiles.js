@@ -14,9 +14,12 @@ $(document).on('turbolinks:load', function (event) {
         labels: labels,
         datasets: [{
           label: 'Total of edit',
-          borderColor: '#fff',
-          backgroundColor: '#06BCD2',
-          fill: false,
+          borderColor: '#43A1F0',
+          borderWidth: 3,
+          backgroundColor: '#BFDCFA',
+          pointBorderWidth: 3,
+          pointBackgroundColor: '#fff',
+          fill: true,
           data: data
         }]
       },
@@ -26,8 +29,8 @@ $(document).on('turbolinks:load', function (event) {
         },
         layout: {
           padding: {
-            top: 0,
-            right: 40,
+            top: 15,
+            right: 15,
             bottom: 15,
             left: 15
           }
@@ -35,23 +38,26 @@ $(document).on('turbolinks:load', function (event) {
         scales: {
           xAxes: [{
             gridLines: { 
-              display: false
+              color: '#B6D9F8',
+              drawTicks: false,
+              tickMarkLength: 5,
+              drawOnChartArea: false,
+              zeroLineColor: '#B6D9F8'
             },
             ticks: { 
-              fontColor: '#fff'
+              display: false
             }
           }],
           yAxes: [{
             gridLines: { 
-              color: '#46D9E9',
+              color: '#B6D9F8',
               drawTicks: false,
-              tickMarkLength: 11,
-              zeroLineColor: '#46D9E9'
+              tickMarkLength: 5,
+              drawOnChartArea: false,
+              zeroLineColor: '#B6D9F8'
             },
             ticks: { 
-              fontColor: '#fff',
-              padding: 10,
-              maxTicksLimit: 6
+              display: false
             }
           }]
         }
@@ -71,10 +77,13 @@ $(document).on('turbolinks:load', function (event) {
       data: {
         labels: labels,
         datasets: [{
-          label: 'Total of edit',
-          borderColor: '#fff',
-          backgroundColor: '#06BCD2',
-          fill: false,
+          label: '編集',
+          borderColor: '#43A1F0',
+          borderWidth: 3,
+          backgroundColor: '#BFDCFA',
+          pointBorderWidth: 3,
+          pointBackgroundColor: '#fff',
+          fill: true,
           data: data
         }]
       },
@@ -84,8 +93,8 @@ $(document).on('turbolinks:load', function (event) {
         },
         layout: {
           padding: {
-            top: 0,
-            right: 40,
+            top: 15,
+            right: 15,
             bottom: 15,
             left: 15
           }
@@ -93,23 +102,26 @@ $(document).on('turbolinks:load', function (event) {
         scales: {
           xAxes: [{
             gridLines: { 
-              display: false
+              color: '#B6D9F8',
+              drawTicks: false,
+              tickMarkLength: 5,
+              drawOnChartArea: false,
+              zeroLineColor: '#B6D9F8'
             },
             ticks: { 
-              fontColor: '#fff'
+              display: false
             }
           }],
           yAxes: [{
             gridLines: { 
-              color: '#46D9E9',
+              color: '#B6D9F8',
               drawTicks: false,
-              tickMarkLength: 11,
-              zeroLineColor: '#46D9E9'
+              tickMarkLength: 5,
+              drawOnChartArea: false,
+              zeroLineColor: '#B6D9F8'
             },
             ticks: { 
-              fontColor: '#fff',
-              padding: 10,
-              maxTicksLimit: 6
+              display: false
             }
           }]
         }

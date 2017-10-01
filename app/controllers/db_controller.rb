@@ -3,5 +3,6 @@ class DbController < ApplicationController
   
   def index
     @title = UtilService::PageTitle.set('データベース')
+    @albums = Db::Album.includes(:latest_version).all
   end
 end

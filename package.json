@@ -13,6 +13,7 @@
     "jquery-ui": "^1.12.1",
     "nprogress": "^0.2.0",
     "popper.js": "^1.12.5",
+    "slick-carousel": "^1.7.1",
     "tether": "^1.4.0",
     "wowjs": "^1.1.3"
   },

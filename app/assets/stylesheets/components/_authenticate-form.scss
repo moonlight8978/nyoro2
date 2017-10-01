@@ -1,5 +1,8 @@
 .b-authenticate-container {
-  padding: 2rem;
+  padding: 2rem 1rem;
+  @include responsive(sm) {
+    padding: 2rem;
+  }
   
   .b-authenticate-title {
     margin-bottom: 1.5rem;

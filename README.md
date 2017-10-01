@@ -3,13 +3,11 @@
 
 ### Todos:
 * DB
+  * user ratings, favorite for db model
   * all: destroy
   * staff_version_c: show
   * comment: update, destroy, need refactoring later
   * discs/songs: destroy
-  * user's profile statistics
-  * user ratings
-  * views's authorization
 
 * E-Commerce: had not been implemented yet
 

@@ -1,0 +1,52 @@
+// use with slick.js
+
+.b-horizontal-list {
+  padding: 1rem 0.5rem;
+  
+  .slick-list,
+  .slick-track {
+    height: 100%;
+  }
+  
+  .slick-slide:focus { outline: 0; }
+
+  .slick-track {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .slick-arrow {
+    &.slick-prev {
+      
+    }
+    
+    &.slick-next {
+      
+    }
+  }
+  
+  .b-horizontal-list-item {
+    padding: 1rem;
+    background-color: $white;
+    @include transition-std(background-color);
+    
+    &:hover {
+      background-color: $content__background;
+    }
+  }
+  
+  .b-horizontal-list-item-title {
+    margin-top: .5rem;
+    height: 2.7rem;
+    overflow: hidden;
+    padding-right: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .b-horizontal-list-item-other {
+    margin-top: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+}
