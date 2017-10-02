@@ -1,0 +1,22 @@
+<% if search.results.size > 0 %>
+  <% search.each_hit_with_result do |hit, album| %>
+    <% latest = album.latest_version %>
+    <div class="b-box-row">
+      <div class="">
+        <%= highlight_result(hit, :title) || album.latest_version.title %>
+      </div>
+      <div class="">
+        アリアス: 
+        <%= highlight_result(hit, :title_pronounce) || album.latest_version.title_pronounce %>, 
+        <%= highlight_result(hit, :title_en) || album.latest_version.title_en %>
+      </div>
+      <div class="">
+        <%= album.latest_version.title %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="b-box-row">
+    結果がありません。
+  </div>
+<% end %>

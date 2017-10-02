@@ -1,0 +1,42 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' }, 
+  { path: 'javascript:void(0)', name: 'データベース' },
+  '検索'
+) %>
+
+<%= page_title("検索", "Search") %>
+
+<div class="b-box">
+  <div class="b-box-another top">
+    <%= form_tag db_search_result_path, method: :get, id: 'fullSearchForm' do %>
+      <div class="b-search-form-container">
+        <div class="b-search-category">
+          <%= select_tag :category, 
+            options_for_select([%w(アルバム album), %w(タグ tag), %w(スタッフ staff)]), 
+            { class: 'form-control' } 
+          %>
+        </div>
+        <div class="b-search-input">
+          <%= text_field_tag :q, '', class: 'form-control' %>
+        </div>
+        <div class="b-search-submit">
+          <%= button_tag nil, class: 'btn-c btn-c-5 btn-c-5-sakura' do %>
+            <i class="fa fa-angle-right"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="b-search-loading" id="searchLoading">
+    <div class="b-box-row">
+      <div class="b-loading"></div>
+    </div>
+  </div>
+  
+  <div class="" id="searchResults">
+    <div class="b-box-row">
+      検索結果...
+    </div>
+  </div>
+</div>

@@ -21,8 +21,14 @@
   z-index: 1;
   color: $text-color__nav !important;
   height: 100%;
+  align-items: center;
+  display: flex;
+  
   @include no-outline;
   @extend .brand-hover;
+  
+  &.left { left: 0; }
+  &.right { right: 0; }
 }
 
 .navbar-brand {

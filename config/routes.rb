@@ -23,7 +23,6 @@ Rails.application.routes.draw do
     resources :profiles, only: [:show, :index, :update]
   end
   
-  
   namespace :db do
     root action: 'index', as: ''
     
@@ -67,6 +66,11 @@ Rails.application.routes.draw do
       collection do
         get 'search'
       end
+    end
+    
+    namespace :search do
+      get '', action: :index
+      get 'result', action: :result
     end
   end
   

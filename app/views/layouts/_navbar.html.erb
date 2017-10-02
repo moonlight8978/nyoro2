@@ -1,8 +1,12 @@
 <nav class="navbar fixed-top navbar-inverse navbar-expand-md 
   animated fadeInDown" id="navbar">
-  <button class="navbar-toggler" type="button" data-target="#sidebarSm" id="sidebarSmToggle">
+  <button class="navbar-toggler left" type="button" data-target="#sidebarSm" id="sidebarSmToggle">
     <i class="fa fa-fw fa-bars"></i>
   </button>
+  
+  <%= link_to db_search_path, class: 'navbar-toggler right' do %>
+    <i class="fa fa-fw fa-search"></i>
+  <% end %>
   
   <div class="container">
     <%= link_to 'にょろにょろ', home_path, class: 'd-md-none navbar-brand' %>

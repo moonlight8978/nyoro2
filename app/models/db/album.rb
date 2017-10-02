@@ -13,5 +13,14 @@ class Db::Album < ApplicationRecord
     join_table: :db_albums_tags
   
   searchable do
+    text :title, boost: 2, :stored => true do
+      latest_version.title
+    end
+    text :title_en, boost: 2, :stored => true do
+      latest_version.title_en
+    end
+    text :title_pronounce, :stored => true do
+      latest_version.title_pronounce
+    end
   end
 end

@@ -1,0 +1,25 @@
+.b-search-loading {
+  display: none;
+  border-bottom: 1px solid $border-color;
+  
+  .b-loading { display: block; }
+}
+
+.b-search-form-container {
+  display: flex;
+  
+  .b-search-category {
+    flex: 0 0 auto;
+  }
+  
+  .b-search-input {
+    padding: 0 1rem 0 .5rem;
+    flex: 1 0 auto;
+  }
+  
+  .b-search-submit {
+    flex: 0 0 auto;
+    
+    .btn-c { padding: .33rem 1rem; }
+  }
+}
