@@ -3,32 +3,37 @@
     .on('submit', '#fullSearchForm', async function (event) {
       event.preventDefault();
       
-      let $loading = $('#searchLoading');
-      let $results = $('#searchResults');
-      $results.html('');
-      $loading.show();
+      let category = $('#fullSearchForm select[name="category"]').val();
+      let q = $('#fullSearchForm input[name="q"]').val().trim();
       
-      let $category = $('#fullSearchForm select[name="category"]');
-      let $input = $('#fullSearchForm input[name="q"]');
-      
-      let category = $category.val();
-      let q = $input.val().trim();
-      
-      search(category, q);
-      console.log(category);
-      console.log(q);
+      pushState(`${$(this).attr('action')}?${$(this).serialize()}`);
+      search('/db/search', { category: category, q: q });
     });
     
-  function search(category, q) {
-    let $results = $('#searchResults');
+  $(document)
+    .on('click', '#searchResults .pagination a', async function (event) {
+      event.preventDefault();
+      pushState(this.href);
+      search(this.href);
+    });
+  
+  // need to fix soon if multiple ajax are used
+  $(window).on('popstate', function (event) {
+    console.log(event);
+    search(window.location.href);
+  });
+    
+  function search(url, params = {}) {
     let $loading = $('#searchLoading');
-    let errorMsg = `<div class="b-box-row">エラーが起こりました。</div>`
+    let $results = $('#searchResults');
+    let errorMsg = `<div class="b-box-row">エラーが起こりました。</div>`;
+    
+    $results.html('');
+    $loading.show();
+    
     axios
-      .get('/db/search/result', { 
-        params: { 
-          category: category, 
-          q: q 
-        },
+      .get(url, { 
+        params: params,
         headers: { 'Accept': 'text/javascript, application/javascript' },
       })
       .then(_then)
@@ -49,6 +54,10 @@
         console.log(error);
       }, 3000);
     }
+  }
+  
+  function pushState(href) {
+    window.history.pushState(null, '', href);
   }
 })();
 

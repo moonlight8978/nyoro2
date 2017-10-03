@@ -70,7 +70,6 @@ Rails.application.routes.draw do
     
     namespace :search do
       get '', action: :index
-      get 'result', action: :result
     end
   end
   

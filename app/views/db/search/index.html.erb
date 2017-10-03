@@ -1,6 +1,6 @@
 <%= breadcrumb(
   { path: home_path, name: 'ホーム' }, 
-  { path: 'javascript:void(0)', name: 'データベース' },
+  { path: db_path, name: 'データベース' },
   '検索'
 ) %>
 
@@ -8,20 +8,20 @@
 
 <div class="b-box">
   <div class="b-box-another top">
-    <%= form_tag db_search_result_path, method: :get, id: 'fullSearchForm' do %>
+    <%= form_tag db_search_path, method: :get, id: 'fullSearchForm', enforce_utf8: false do %>
       <div class="b-search-form-container">
         <div class="b-search-category">
           <%= select_tag :category, 
-            options_for_select([%w(アルバム album), %w(タグ tag), %w(スタッフ staff)]), 
+            options_for_select([%w(アルバム album), %w(タグ tag), %w(スタッフ staff)], selected: params[:category]), 
             { class: 'form-control' } 
           %>
         </div>
         <div class="b-search-input">
-          <%= text_field_tag :q, '', class: 'form-control' %>
+          <%= text_field_tag :q, params[:q], class: 'form-control' %>
         </div>
         <div class="b-search-submit">
-          <%= button_tag nil, class: 'btn-c btn-c-5 btn-c-5-sakura' do %>
-            <i class="fa fa-angle-right"></i>
+          <%= button_tag nil, class: '', name: nil do %>
+            <i class="fa fa-search"></i>
           <% end %>
         </div>
       </div>
@@ -35,8 +35,12 @@
   </div>
   
   <div class="" id="searchResults">
-    <div class="b-box-row">
-      検索結果...
-    </div>
+    <% if @results %>
+      <%= raw @results %>
+    <% else %>
+      <div class="b-box-row">
+        検索しましょう...
+      </div>
+    <% end %>
   </div>
 </div>

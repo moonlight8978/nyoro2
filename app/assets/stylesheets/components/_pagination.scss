@@ -1,0 +1,30 @@
+.b-pagination {
+  .page-link {
+    padding: 4px 12px;
+    color: #737373;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+    background-color: transparent !important;
+    border: 0;
+  }
+
+  .page.current .page-link {
+    font-weight: bold;
+    color: #31773a;
+  }
+  
+  .page-item {
+    border-bottom: solid 2px #737373;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-bottom: solid 4px #009aab;
+
+      .page-link { color: #009aab; }
+    }
+    
+    &.disabled {
+      border-bottom: solid 4px #31773a;
+    }
+  }
+}
