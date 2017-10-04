@@ -1,0 +1,32 @@
+<% if search.results.size > 0 %>
+  <div class="<%= class_string('mb-5': search.results.total_pages > 1) %>">
+    <% search.each_hit_with_result do |hit, person| %>
+      <% latest = person.latest_version %>
+      <div class="b-box-row">
+        <div class="b-result-title b-ellipsis">
+          <%= link_to highlight_result(hit, :name) || latest.name, 
+            db_person_path(person)
+          %>
+        </div>
+        <div class="b-result-link">
+          <%= link_to latest.link, latest.link %>
+        </div>
+        <div class="b-result-related">
+          <%= highlight_result(hit, :name_pronounce) || latest.name_pronounce %>, 
+          <%= highlight_result(hit, :name_en) || latest.name_en %>
+        </div>
+        <div class="b-result-content">
+          <%= latest.note %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="b-result-pagination">
+    <%= paginate search.results %>
+  </div>
+<% else %>
+  <div class="b-box-row">
+    結果がありません。
+  </div>
+<% end %>

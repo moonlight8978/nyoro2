@@ -5,22 +5,31 @@
       
       let category = $('#fullSearchForm select[name="category"]').val();
       let q = $('#fullSearchForm input[name="q"]').val().trim();
+      let title_ja = `「${q} (${category})」の検索結果`;
+      let title_en = `Search results for '${q} (${category})'`;
+      let formUrl = `${$(this).attr('action')}?${$(this).serialize()}`;
       
-      pushState(`${$(this).attr('action')}?${$(this).serialize()}`);
+      pushState(formUrl, title_ja, title_en);
       search('/db/search', { category: category, q: q });
     });
     
   $(document)
     .on('click', '#searchResults .pagination a', async function (event) {
       event.preventDefault();
-      pushState(this.href);
+      
+      let category = $('#fullSearchForm select[name="category"]').val();
+      let q = $('#fullSearchForm input[name="q"]').val().trim();
+      let title_ja = `「${q} (${category})」の検索結果・ページ ${$(this).data('page')}`;
+      let title_en = `Search results for '${q} (${category})' - Page ${$(this).data('page')}`;
+      
+      pushState(this.href, title_ja, title_en);
       search(this.href);
     });
   
-  // need to fix soon if multiple ajax are used
-  $(window).on('popstate', function (event) {
-    console.log(event);
-    search(window.location.href);
+  window.addEventListener('popstate', function (event) {
+    if (event.state === null) {
+      window.location = window.location.href;
+    }
   });
     
   function search(url, params = {}) {
@@ -56,8 +65,11 @@
     }
   }
   
-  function pushState(href) {
-    window.history.pushState(null, '', href);
+  function pushState(href, title_ja = '', title_en = '') {
+    document.title = titleize(title_ja);
+    $('.b-big-title').html(title_ja);
+    $('.b-small-title').html(title_en);
+    window.history.pushState(null, titleize(title_ja), href);
   }
 })();
 

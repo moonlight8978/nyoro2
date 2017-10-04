@@ -68,6 +68,12 @@
   .b-box-row {
     .b-result-title a { font-size: 1.125rem; }
     
+    .b-result-link a {
+      font-size: 0.95rem;
+      text-decoration: none;
+      color: #006621;
+    }
+    
     .b-result-related {
       font-size: 0.9rem;
       // color: #006621;
@@ -83,5 +89,6 @@
   
   .highlight {
     background-color: yellow;
+    font-style: normal;
   }
 }

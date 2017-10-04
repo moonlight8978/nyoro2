@@ -87,3 +87,6 @@ var $loading;
       });
   });
 })();
+function titleize(title) {
+  return `${title} / にょろにょろ！`
+}

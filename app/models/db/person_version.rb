@@ -12,4 +12,8 @@ class Db::PersonVersion < ApplicationRecord
       select(:id, :previous_version_id, :person_id, :created_at)
       .order(created_at: :desc)
     }
+    
+  def link
+    twitter || website || nil
+  end
 end

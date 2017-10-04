@@ -1,0 +1,28 @@
+<% if search.results.size > 0 %>
+  <div class="<%= class_string('mb-5': search.results.total_pages > 1) %>">
+    <% search.each_hit_with_result do |hit, tag| %>
+      <div class="b-box-row">
+        <div class="b-result-title b-ellipsis">
+          <%= link_to highlight_result(hit, :name) || tag.name, 
+            db_tag_path(tag)
+          %>
+        </div>
+        <div class="b-result-related">
+          <%= highlight_result(hit, :name_pronounce) || tag.name_pronounce %>, 
+          <%= highlight_result(hit, :name_en) || tag.name_en %>
+        </div>
+        <div class="b-result-content">
+          <%= tag.description %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="b-result-pagination">
+    <%= paginate search.results %>
+  </div>
+<% else %>
+  <div class="b-box-row">
+    結果がありません。
+  </div>
+<% end %>

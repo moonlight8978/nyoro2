@@ -7,8 +7,8 @@ class Db::Tag < ApplicationRecord
     join_table: :db_albums_tags
     
   searchable do
-    text :name, boost: 3
-    text :name_en
-    text :name_pronounce
+    text :name, boost: 2, :stored => true
+    text :name_en, boost: 2, :stored => true
+    text :name_pronounce, :stored => true
   end
 end
