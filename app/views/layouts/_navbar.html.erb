@@ -36,43 +36,40 @@
           </li>
         </ul>
         <!-- END navbar left -->
-        <form class="form-inline search-form" id="searchForm"
-          name="navSearchForm">
+        
+        <%= form_tag db_search_path, method: :get, enforce_utf8: false, 
+          class: "form-inline search-form", id: 'searchForm' do 
+        %>
           <div class="input-group search-cate-wrap">
-            <select class="form-control search-cate" name="category" 
-              id="searchCate" required
-            >
-              <option value="">カテゴリ</option>
-              <option value="novel">ビジュアルノベル</option>
-              <option value="novelRelease">ノベルの発売</option>
-              <option value="album">アルバム</option>
-              <option value="albumRelease">アルバムの発売</option>
-              <option value="novelProduct">美少女ゲーム(製品)</option>
-              <option value="albumProduct">アルバム(製品)</option>
-              <option value="character">キュラクター</option>
-              <option value="tag">タグ</option>
-            </select>
+            <%= select_tag :category, 
+              options_for_select(
+                [%w(アルバム album), %w(スタッフ staff), %w(タグ tag)],
+                selected: 'album'
+              ),
+              { class: 'form-control search-cate', id: 'searchCate', required: true }
+            %>
           </div>
-
+          
           <div class="input-group search-query-wrap">
-            <input class="form-control search-query" id="searchInput"
-              name="query" type="text" placeholder="検索..." data-cate="#searchCate"
-              data-result-container="#searchContainer" autocomplete="off" required
-            >
+            <%= text_field_tag :q, '', class: 'form-control search-query',
+              id: 'searchInput', 'data-cate': '#searchCate', 
+              'data-result-container': '#searchContainer', autocomplete: :off,
+              required: true, placeholder: "検索..."
+            %>
             <div class="btn-group">
-              <button type="button" class="btn btn-clear" id="searchClear">
+              <%= button_tag nil, type: :button, class: 'btn btn-clear', id: 'searchClear' do %>
                 <i class="fa fa-times"></i>
-              </button>
-              <button id="searchSubmit" class="btn btn-submit">
+              <% end %>
+              <%= button_tag nil, class: 'btn btn-submit', id: 'searchSubmit', name: nil do %>
                 <i class="fa fa-search"></i>
-              </button>
+              <% end %>
             </div>
 
             <div class="live-search-results" id="searchContainer">
             </div>
+            <div class="clearfix"></div>
           </div>
-          <div class="clearfix"></div>
-        </form>
+        <% end %>
       </div>
       <!-- main section -->
       <div class="-user">

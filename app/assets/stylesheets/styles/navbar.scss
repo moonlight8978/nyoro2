@@ -210,6 +210,10 @@ nav .-user {
   .search-query-wrap {
     width: 80%;
   }
+  
+  input.form-control {
+    padding-left: 1rem;
+  }
 }
 
 .navbar select option {
@@ -223,8 +227,9 @@ nav .-user {
   .live-search-results {
     display: none;
     position: absolute;
-    top: 100%;
-    width: 100%;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
   }
 
   .clear-search-input {
@@ -237,6 +242,24 @@ nav .-user {
       display: block;
       z-index: 3000;
     }
+  }
+}
+
+.live-search-results {
+  a {
+    color: $black; 
+    text-decoration: none;
+  }
+  
+  .result-row {
+    padding: 0 1rem;
+    text-align: left;
+    
+    &:hover { background-color: #f0f0f0; }
+  }
+  
+  .result-warning {
+    padding: .5rem 0;
   }
 }
 

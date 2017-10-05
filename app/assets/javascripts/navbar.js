@@ -96,9 +96,9 @@
   
   function search(cate, input, $result) {
     axios
-      .get('/db/albums/search', { 
+      .get('/search/live', { 
         params: { 
-          cate: cate, 
+          category: cate, 
           q: input 
         },
         headers: { 'Accept': 'text/javascript, application/javascript' },
@@ -108,6 +108,7 @@
       
     function _then(response) {
       $result.html(response.data);
+      console.log(response.data);
       loadAllImages();
     }
     

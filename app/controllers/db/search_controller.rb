@@ -42,29 +42,17 @@ private
 
   def search(category, query)
     query = query.strip.gsub(/\s+/, ' ')
-    case category
-    when 'album'
-      search = Db::Album.search(include: :latest_version) do
-        fulltext query, 
-          fields: [:title, :title_en, :title_pronounce], 
-          highlight: true
-        paginate page: params[:page] || 1, per_page: 1
+    search = 
+      case category
+      when 'album'
+        DbQuery::Album
+      when 'tag'
+        DbQuery::Tag
+      when 'staff'
+        DbQuery::Album
       end
-    when 'tag'
-      search = Db::Tag.search do
-        fulltext query, 
-          fields: [:name, :name_en, :name_pronounce], 
-          highlight: true
-        paginate page: params[:page] || 1, per_page: 1
-      end
-    when 'staff'
-      search = Db::Person.search(include: :latest_version) do
-        fulltext query, 
-          fields: [:name, :name_en, :name_pronounce, :website, :twitter], 
-          highlight: true
-        paginate page: params[:page] || 1, per_page: 1
-      end
-    end 
+      .search(query: query, page: pagination_page)
+      
     render_to_string(partial: "db/search/result_#{category}", locals: { search: search })     
   end
   

@@ -1,0 +1,19 @@
+<div class="b-box pt-1">
+  <% if search.results.size > 0 %>
+    <% search.results.each do |album| %>
+      <% latest = album.latest_version %>
+      <%= link_to db_album_path(album) do %>
+        <div class="result-row b-ellipsis">
+          <%= latest.title %>
+        </div>
+      <% end %>
+    <% end %>
+    <div class="result-warning">
+      結果は最大5枚です。
+    </div>
+  <% else %>
+    <div class="pt-1 pb-3 b-ellipsis">
+      <span>結果がありません。</span>
+    </div>
+  <% end %>
+</div>

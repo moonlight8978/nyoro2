@@ -73,6 +73,11 @@ Rails.application.routes.draw do
     end
   end
   
+  namespace :search do
+    get '', action: :index
+    get 'live'
+  end
+  
   namespace :utilities do
     post 'nsfw'
   end

@@ -1,11 +1,11 @@
-class DbQuery::Album
-  MODEL = Db::Album
+class DbQuery::Person
+  MODEL = Db::Person
   PER_PAGE = 1
   
   def self.search(**params)
     MODEL.search(include: :latest_version) do
       fulltext params[:query], 
-        fields: [:title, :title_en, :title_pronounce], 
+        fields: [:name, :name_en, :name_pronounce, :website, :twitter], 
         highlight: true
       paginate page: params[:page], per_page: PER_PAGE
     end
@@ -14,7 +14,7 @@ class DbQuery::Album
   def self.live_search(query)
     MODEL.search(include: :latest_version) do
       fulltext query, 
-        fields: [:title, :title_en, :title_pronounce], 
+        fields: [:name, :name_en, :name_pronounce, :website, :twitter], 
         highlight: true
       paginate page: 1, per_page: 5
     end
