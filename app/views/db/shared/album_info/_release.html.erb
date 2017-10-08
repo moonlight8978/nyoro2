@@ -1,0 +1,41 @@
+<% if current_version.releases.size > 0 %>
+  <div class="">
+    <div class="b-icon-group b-size-small">
+      <%= link_to new_db_album_release_path(@album) do %>
+        <div class="b-icon create">
+          <i class="fa fa-plus"></i>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <% current_version.releases.each do |release| %>
+    <div class="b-box-row">
+      <% latest = release.latest_version %>
+      <table class="b-table">
+        <tbody>
+          <tr>
+            <td>製品番号</td>
+            <td><%= latest.catalog_number || 'N/A' %></td>
+          </tr>
+          <tr>
+            <td>発売日</td>
+            <td><%= latest.released_at %></td>
+          </tr>
+          <tr>
+            <td>タイプ</td>
+            <td><%= latest.format %></td>
+          </tr>
+          <tr>
+            <td>価格</td>
+            <td><%= latest.cost %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% else %>
+  <div class="p-3">
+    発売情報がありません。<%= link_to '作るに行く', new_db_album_release_path(@album) %>
+  </div>
+<% end %>

@@ -1,0 +1,70 @@
+<div class="b-box">
+  <%= form_for(@form, url: url, method: method, html: { class: 'b-form' }) do |f| %>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group b-form-group">
+          <%= f.text_field :catalog_number, class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:catalog_number].present?) %>
+          <%= f.label :catalog_number, '製品番号' %>
+          <div class="invalid-feedback">
+            <% @form.errors.messages[:catalog_number].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-5">
+        <div class="form-group b-form-group">
+          <%= f.number_field :price, class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:price].present?), step: 0.01 %>
+          <%= f.label :price, '価格' %>
+          <div class="invalid-feedback">
+            <% @form.errors.messages[:price].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-3">
+        <div class="form-group b-form-group">
+          <%= f.text_field :currency, class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:currency].present?) %>
+          <%= f.label :currency, '通貨' %>
+          <div class="invalid-feedback">
+            <% @form.errors.messages[:currency].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group b-form-group">
+          <%= f.text_field :format, class: class_string('form-control': true, 'is-invalid': @form.errors.messages[:format].present?) %>
+          <%= f.label :format, 'タイプ' %>
+          <div class="invalid-feedback">
+            <% @form.errors.messages[:format].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-8">
+        <div class="form-group b-form-group">
+          <%= f.text_field :released_at, class: class_string('form-control': true, 'is-invalid': @form.errors.messages[:released_at].present?, datepicker: true) %>
+          <%= f.label :released_at, '発売日' %>
+          <div class="invalid-feedback">
+            <% @form.errors.messages[:released_at].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
+    <div class="clearfix"></div>
+  <% end %>
+</div>

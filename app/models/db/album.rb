@@ -11,6 +11,8 @@ class Db::Album < ApplicationRecord
     -> { version_list }, class_name: 'Db::AlbumVersion'
   has_and_belongs_to_many :tags,
     join_table: :db_albums_tags
+  has_and_belongs_to_many :releases,
+    join_table: :db_albums_releases
   
   searchable do
     text :title, boost: 2, :stored => true do
