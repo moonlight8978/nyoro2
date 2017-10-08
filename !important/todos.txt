@@ -8,6 +8,21 @@
 - Album v1 has 3 songs, Album v2 has 5 songs (2 added), Album v3 has 2 songs (3 deleted)
 ...
 
+- Album version --- n n --- Release => release_version
+1> => What if user want to list all album in a specific release
+???
+=> where album.latest_verison.contain(release)??????
+
+2> => album --- n n --- release
+album version remove release => remove release from collection
+album version add more release => add
+
+=> 2 associations
+
+- Release --- 1 n --- Release version => release latest_version
+=> Each album contains many release, and each release can be in many album's release list
+
+
 2. Auto kanji => hiragana, romaji
 - When create/edit, only original title is required input by user
 - On input change, title_pronounce will by filled by Yahoo Jp API, title_pronounce will be used to transform to romaji.
