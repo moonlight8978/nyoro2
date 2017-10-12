@@ -1,39 +1,37 @@
-<% if current_version.releases.size > 0 %>
+<% if current_version.release %>
+  <% release = current_version.release %>
   <div class="">
     <div class="b-icon-group b-size-small">
-      <%= link_to new_db_album_release_path(@album) do %>
-        <div class="b-icon create">
-          <i class="fa fa-plus"></i>
+      <%= link_to edit_db_album_release_path(@album) do %>
+        <div class="b-icon update">
+          <i class="fa fa-pencil"></i>
         </div>
       <% end %>
     </div>
   </div>
   
-  <% current_version.releases.each do |release| %>
-    <div class="b-box-row">
-      <% latest = release.latest_version %>
-      <table class="b-table">
-        <tbody>
-          <tr>
-            <td>製品番号</td>
-            <td><%= latest.catalog_number || 'N/A' %></td>
-          </tr>
-          <tr>
-            <td>発売日</td>
-            <td><%= latest.released_at %></td>
-          </tr>
-          <tr>
-            <td>タイプ</td>
-            <td><%= latest.format %></td>
-          </tr>
-          <tr>
-            <td>価格</td>
-            <td><%= latest.cost %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
+  <div class="b-box-row">
+    <table class="b-table">
+      <tbody>
+        <tr>
+          <td>製品番号</td>
+          <td><%= release.catalog_number || 'N/A' %></td>
+        </tr>
+        <tr>
+          <td>発売日</td>
+          <td><%= release.released_at %></td>
+        </tr>
+        <tr>
+          <td>タイプ</td>
+          <td><%= release.format %></td>
+        </tr>
+        <tr>
+          <td>価格</td>
+          <td><%= release.cost %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 <% else %>
   <div class="p-3">
     発売情報がありません。<%= link_to '作るに行く', new_db_album_release_path(@album) %>

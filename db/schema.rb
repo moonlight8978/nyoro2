@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008051234) do
+ActiveRecord::Schema.define(version: 20171012093915) do
 
   create_table "db_album_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "previous_version_id"
@@ -104,30 +104,19 @@ ActiveRecord::Schema.define(version: 20171008051234) do
     t.index ["previous_version_id"], name: "index_db_person_versions_on_previous_version_id"
   end
 
-  create_table "db_release_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "release_id"
-    t.bigint "previous_version_id"
+  create_table "db_releases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "album_version_id"
     t.float "price", limit: 24
+    t.string "currency"
     t.string "format"
     t.date "released_at"
     t.string "catalog_number"
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "currency"
-    t.index ["catalog_number"], name: "index_db_release_versions_on_catalog_number"
-    t.index ["previous_version_id"], name: "index_db_release_versions_on_previous_version_id"
-    t.index ["release_id"], name: "index_db_release_versions_on_release_id"
-    t.index ["released_at"], name: "index_db_release_versions_on_released_at"
-  end
-
-  create_table "db_releases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "latest_version_id"
-    t.boolean "marked", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["latest_version_id"], name: "index_db_releases_on_latest_version_id"
-    t.index ["marked"], name: "index_db_releases_on_marked"
+    t.index ["album_version_id"], name: "index_db_releases_on_album_version_id"
+    t.index ["catalog_number"], name: "index_db_releases_on_catalog_number"
+    t.index ["released_at"], name: "index_db_releases_on_released_at"
   end
 
   create_table "db_song_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

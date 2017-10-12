@@ -1,0 +1,11 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム'},
+  { path: db_path, name: 'データベース'},
+  { path: db_albums_path, name: 'アルバム'},
+  { path: db_album_path(@album), name: @album.latest_version.title },
+  '発売情報を編集する'
+) %>
+
+<%= page_title('発売情報を編集する', 'Edit release') %>
+
+<%= render 'form', url: db_album_release_path(@album), method: :put %>

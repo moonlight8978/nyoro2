@@ -3,25 +3,41 @@ class DbForm::ReleaseVersion
   include ActiveModel::Dirty
   include ActiveModel::Model
   
-  attr_accessor :release_id, :previous_version_id, :price, :currency, :format, 
-    :released_at, :catalog_number, :note, :album
-  attr_reader :release, :latest
-  
+  # associations
+  delegate :price, :currency, :format, :released_at, :catalog_number, :note, 
+    to: :release
+  attr_accessor :album, :release
+  # class methods
+  # validates
   validates :format, presence: true
+  # callbacks
+  # instance methods
+  def release
+    @release ||= Db::Release.new
+  end
   
-  def create_release
+  def create(params, current_user)
+    assign_latest(params)
     if valid?
       ActiveRecord::Base.transaction do
-        create_release_version
-        create_album_release_with_latest_verison
         create_new_latest_album_version
         assign_associations
+        assign_release_to_album_version
+        log_action(:create, current_user)
       end
     end
   end
   
-  def update_release
-    #code
+  def update(params, current_user)
+    assign_latest(params)
+    if valid?
+      ActiveRecord::Base.transaction do
+        create_new_latest_album_version
+        assign_associations
+        assign_new_release
+        log_action(:update, current_user)
+      end
+    end
   end
   
   def persisted?
@@ -30,16 +46,8 @@ class DbForm::ReleaseVersion
   
 private
 
-  def create_release_version
-    @latest = Db::ReleaseVersion.create(
-      price: price, currency: currency, format: format, released_at: released_at,
-      catalog_number: catalog_number, note: note
-    )
-  end
-  
-  def create_album_release_with_latest_verison
-    @release = Db::Release.create(latest_version: @latest)
-    @latest.update(release: @release)
+  def assign_latest(params)
+    release.assign_attributes(params)
   end
   
   def create_new_latest_album_version
@@ -51,10 +59,23 @@ private
   end
   
   def assign_associations
-    @album_latest.releases << @release
-    album.releases << @release
-    
     @album_latest.disc_ids = album.latest_version.disc_ids
     album.update(latest_version: @album_latest)
+  end
+  
+  def assign_release_to_album_version
+    @album_latest.release = release
+  end
+  
+  def log_action(action, current_user)
+    method = "log_#{action}".to_sym
+    album.send method, 
+      current_user, 
+      "発売情報・#{album.latest_version.title}", 
+      "#{album.latest_version.title}の新しい発売情報が作られました。"
+  end
+  
+  def assign_new_release
+    @album_latest.release = Db::Release.new(release.dup.attributes)
   end
 end

@@ -17,8 +17,7 @@ class Db::AlbumVersion < ApplicationRecord
   
   has_and_belongs_to_many :discs, 
     join_table: :db_album_versions_discs
-  has_and_belongs_to_many :releases,
-    join_table: :db_album_versions_releases
+  has_one :release
   
 private
   

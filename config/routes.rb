@@ -34,8 +34,7 @@ Rails.application.routes.draw do
       resources :discs, except: [:index, :show], shallow: true do
         resources :songs, shallow: true
       end
-      resources :releases, shallow: true
-      
+      resource :release
       resources :versions, controller: 'album_versions'
       resources :comments, controller: 'albums/comments'
     end
@@ -61,10 +60,6 @@ Rails.application.routes.draw do
     resources :people do
       resources :versions, controller: 'person_versions'
       resources :comments, controller: 'people/comments'
-    end
-    
-    resources :releases do
-      resources :versions, controller: 'release_versions'
     end
     
     resources :tags do

@@ -1,10 +1,7 @@
 class Db::Release < ApplicationRecord
-  has_and_belongs_to_many :album,
-    join_table: :db_albums_releases
-  has_and_belongs_to_many :album_versions,
-    join_table: :db_album_versions_releases
+  belongs_to :album_version, optional: true
   
-  has_many :release_versions
-  belongs_to :latest_version, 
-    class_name: 'Db::ReleaseVersion', optional: true
+  def cost
+    @cost ||= CostValue.new(price, currency)
+  end
 end
