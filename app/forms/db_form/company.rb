@@ -36,4 +36,13 @@ private
     latest.update(company: @company)
     @company.update(latest_version: latest)
   end
+  
+  def update_company
+    p latest.dup
+    latest = @company.company_versions.build(@latest.dup.attributes)
+    latest.update_attributes(
+      previous_version: latest
+    )
+    @company.update(latest_version: latest)
+  end
 end

@@ -35,6 +35,10 @@
           <td>価格</td>
           <td><%= release.cost %></td>
         </tr>
+        <tr>
+          <td>発売者</td>
+          <td><%= release.publisher.latest_version.name || '不明' %></td>
+        </tr>
       </tbody>
     </table>
   </div>

@@ -64,6 +64,19 @@
       </div>
     </div>
     
+    <div class="form-group b-form-group">
+      <%= f.select :publisher_id, Db::Company.includes(:latest_version).all.map { |c| [c.latest_version.name, c.id] }, { include_blank: true }, { class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:publisher_id].present? || @form.errors.messages[:publisher].present?) } %>
+      <%= f.label :publisher_id, '発売者' %>
+      <div class="invalid-feedback">
+        <% @form.errors.messages[:publisher_id].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+        <% @form.errors.messages[:publisher].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+    
     <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
     <div class="clearfix"></div>
   <% end %>

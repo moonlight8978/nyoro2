@@ -1,0 +1,33 @@
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">アルバム</h6>
+  <div class="b-box b-box-p">
+    <% if company.albums.size > 0 %>
+      <table class="b-data-table">
+        <thead>
+          <tr>
+            <th class="b-col-medium b-col-last">製品番号</th>
+            <th class="b-col-wide">アルバムタイトル</th>
+            <th class="b-col-medium b-col-last">発売日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% company.albums.each do |album| %>
+            <tr>
+              <td class="b-col-medium b-col-last">
+                <%= album.latest_version.release.catalog_number || 'N/A' %>
+              </td>
+              <td class="b-col-wide">
+                <%= link_to album.latest_version.title, db_album_path(album) %>
+              </td>
+              <td class="b-col-medium b-col-last">
+                <%= album.latest_version.release.released_at %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <span>アルバムがありません。</span>
+    <% end %>
+  </div>
+</div>

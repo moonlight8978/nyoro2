@@ -1,0 +1,33 @@
+<div class="b-box b-box-p">
+  <table class="b-table b-table-hidden-th">
+    <tbody>
+      <tr>
+        <th class="align-bottom">本名</th>
+        <td>
+          <div class="b-ruby">
+            <span class="b-rb b-ellipsis" title="<%= current_version.name %>">
+              <%= current_version.name %>（<%= current_version.name_en %>）
+            </span>
+            <span class="b-rt b-ellipsis" title="<%= current_version.name_pronounce %>">
+              <%= current_version.name_pronounce %>
+            </span>
+            <span></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>会社名</th>
+        <td>
+          <%= country_for(current_version) %>
+          <%= current_version.country.name %>
+        </td>
+      </tr>
+      <% if current_version.established_at %>
+        <tr>
+          <th>設立</th>
+          <td><%= current_version.established_at %>から</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

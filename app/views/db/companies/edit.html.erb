@@ -1,0 +1,11 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム'},
+  { path: db_path, name: 'データベース'},
+  { path: db_companies_path, name: '会社リスト'},
+  { path: db_companies_path, name: @company.latest_version.name },
+  '編集'
+) %>
+
+<%= page_title("#{@company.latest_version.name}を編集する", "edit #{@company.latest_version.name_en}") %>
+  
+<%= render 'form', url: db_company_path(@company), method: :put %>

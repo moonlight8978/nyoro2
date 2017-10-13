@@ -12,3 +12,24 @@
     new_path: new_db_company_path
   } %>
 <% end %>
+
+<div class="b-box-group">
+  <div class="b-box-title">
+    
+  </div>
+  <div class="b-box-container">
+    <div class="row">
+      <% @companies.each do |company| %>
+        <div class="col-md-6 mb-3">
+          <% latest = company.latest_version %>
+          <div class="b-box b-box-p">
+            <div class="">
+              <span class="flag-icon flag-icon-jp"></span>
+              <%= link_to latest.name, db_company_path(company) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

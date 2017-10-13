@@ -5,6 +5,7 @@ class DbForm::Release
   
   # associations
   delegate :price, :currency, :format, :released_at, :catalog_number, :note, 
+    :publisher_id, :publisher,
     to: :release
   attr_accessor :album, :release
   # class methods
@@ -61,6 +62,7 @@ private
   def assign_associations
     @album_latest.disc_ids = album.latest_version.disc_ids
     album.update(latest_version: @album_latest)
+    album.publisher_ids = [release.publisher_id]
   end
   
   def assign_release_to_album_version

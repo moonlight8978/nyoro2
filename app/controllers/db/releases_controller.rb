@@ -47,7 +47,8 @@ private
   def release_params
     params.require(:db_form_release).permit(
       :price, :currency, :format, 
-      :released_at, :catalog_number, :note
+      :released_at, :catalog_number, :note,
+      :publisher_id
     )
   end
 end

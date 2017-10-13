@@ -1,0 +1,17 @@
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">
+    ノート
+    <div class="b-icon-inline">
+      <%= link_to '#' do %>
+        <i class="fa fa-pencil"></i>
+      <% end %>
+    </div>
+  </h6>
+  <div class="b-box b-box-p">
+    <% if current_version.note.present? %>
+      <%= current_version.note.html_safe %>
+    <% else %>
+      <span>何を書いて!</span>
+    <% end %>
+  </div>
+</div>

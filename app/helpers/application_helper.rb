@@ -42,4 +42,18 @@ module ApplicationHelper
   def can_edit_comment(comment)
     user_signed_in? && comment.can_be_edited_by(current_user)
   end
+  
+  def country_for(member)
+    if member.country
+      country_template(member.country.code, member.country.name).html_safe
+    else
+      country_template(:unknown, '不明').html_safe
+    end
+  end
+  
+private
+  
+  def country_template(code, name)
+    "<span class='flag-icon flag-icon-#{code}' data-toggle='tooltip' data-placement='bottom' title='#{name}'></span>"
+  end
 end
