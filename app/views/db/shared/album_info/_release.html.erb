@@ -1,11 +1,14 @@
 <% if current_version.release %>
   <% release = current_version.release %>
-  <div class="">
-    <div class="b-icon-group b-size-small">
-      <%= link_to edit_db_album_release_path(@album) do %>
-        <div class="b-icon update">
-          <i class="fa fa-pencil"></i>
-        </div>
+  <div class="dropdown show b-header-utils">
+    <a class="b-dropdown-toggle-icon" href="#" id="tabReleaseDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-ellipsis-v"></i>
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="tabReleaseDropDown">
+      <%= link_to edit_db_album_release_path(@album), class: 'dropdown-item' do %>
+        <i class="fa fa-pencil"></i>
+        <span>発売情報を編集する</span>
       <% end %>
     </div>
   </div>
@@ -13,6 +16,9 @@
   <div class="b-box-row">
     <table class="b-table">
       <tbody>
+        <tr class="d-none">
+          <td></td>
+        </tr>
         <tr>
           <td>製品番号</td>
           <td><%= release.catalog_number || 'N/A' %></td>

@@ -1,0 +1,10 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム'},
+  { path: db_path, name: 'データベース'},
+  { path: db_companies_path, name: '会社リスト'},
+  '会社を作る'
+) %>
+
+<%= page_title('会社を作る', 'New company') %>
+  
+<%= render 'form', url: db_companies_path, method: :post %>

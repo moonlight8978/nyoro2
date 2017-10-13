@@ -1,4 +1,4 @@
-class DbForm::ReleaseVersion
+class DbForm::Release
   # extend ActiveModel::Naming
   include ActiveModel::Dirty
   include ActiveModel::Model

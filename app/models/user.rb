@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include MemberOfCountry
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # settings and associations

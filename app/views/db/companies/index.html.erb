@@ -1,0 +1,14 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' },
+  { path: db_path, name: 'データベース' },
+  '会社'
+) %>
+
+<%= page_title('会社リスト', 'Company list') %>
+
+<% content_for :options do %>
+  <%= render partial: 'components/utils/options', locals: {
+    name: '会社',
+    new_path: new_db_company_path
+  } %>
+<% end %>

@@ -11,6 +11,8 @@ class Db::Album < ApplicationRecord
     -> { version_list }, class_name: 'Db::AlbumVersion'
   has_and_belongs_to_many :tags,
     join_table: :db_albums_tags
+  has_and_belongs_to_many :publisher,
+    join_table: :db_albums_companies, class_name: 'Db::Company', limit: 1
   
   searchable do
     text :title, boost: 2, :stored => true do
@@ -22,5 +24,10 @@ class Db::Album < ApplicationRecord
     text :title_pronounce, :stored => true do
       latest_version.title_pronounce
     end
+  end
+  
+  # instance methods
+  def method
+    #code
   end
 end

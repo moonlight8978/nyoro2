@@ -5,10 +5,14 @@
 }
 
 .b-dropdown-toggle-icon {
-  padding: 2px 9px;
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 50% !important;
+  display: block;
   
   &:hover {
     background-color: #f0f0f0;
-    border-radius: 50% !important;
   }
 }

@@ -4,14 +4,14 @@ class Db::ReleasesController < ApplicationController
   
   def new
     set_title '発売情報を作る'
-    @form = DbForm::ReleaseVersion.new
+    @form = DbForm::Release.new
     @album = Db::Album.find(params[:album_id])
   end
   
   def create
     set_title '発売情報を作る'
     @album = Db::Album.find(params[:album_id])
-    @form = DbForm::ReleaseVersion.new(album: @album)
+    @form = DbForm::Release.new(album: @album)
     if @form.create(release_params, current_user)
       redirect_to @album
     else
@@ -19,23 +19,19 @@ class Db::ReleasesController < ApplicationController
     end
   end
   
-  def show
-    @album = Db::Album.find(params[:album_id])
-    @release = Db::Release.find(params[:id])
-  end
-  
   def edit
     set_title '発売情報を編集する'
     @album = Db::Album.find(params[:album_id])
-    @form = DbForm::ReleaseVersion.new(
+    @form = DbForm::Release.new(
       album: @album, 
       release: @album.latest_version.release
     )
   end
   
   def update
+    set_title '発売情報を編集する'
     @album = Db::Album.find(params[:album_id])
-    @form = DbForm::ReleaseVersion.new(
+    @form = DbForm::Release.new(
       album: @album, 
       release: @album.latest_version.release
     )
@@ -49,7 +45,7 @@ class Db::ReleasesController < ApplicationController
 private
 
   def release_params
-    params.require(:db_form_release_version).permit(
+    params.require(:db_form_release).permit(
       :price, :currency, :format, 
       :released_at, :catalog_number, :note
     )

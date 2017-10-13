@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012093915) do
+ActiveRecord::Schema.define(version: 20171013030106) do
+
+  create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "name_en"
+    t.string "name_pronounce"
+    t.string "code"
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_countries_on_code"
+    t.index ["name_pronounce"], name: "index_countries_on_name_pronounce"
+  end
 
   create_table "db_album_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "previous_version_id"
@@ -35,12 +47,6 @@ ActiveRecord::Schema.define(version: 20171012093915) do
     t.index ["album_version_id", "disc_id"], name: "index_db_album_versions_discs_on_album_version_id_and_disc_id"
   end
 
-  create_table "db_album_versions_releases", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "album_version_id", null: false
-    t.bigint "release_id", null: false
-    t.index ["album_version_id", "release_id"], name: "index_db_album_versions_releases"
-  end
-
   create_table "db_albums", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "latest_version_id"
     t.boolean "marked", default: false
@@ -52,16 +58,45 @@ ActiveRecord::Schema.define(version: 20171012093915) do
     t.index ["updated_at"], name: "index_db_albums_on_updated_at"
   end
 
-  create_table "db_albums_releases", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "db_albums_companies", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "album_id", null: false
-    t.bigint "release_id", null: false
-    t.index ["album_id", "release_id"], name: "index_db_albums_releases"
+    t.bigint "company_id", null: false
+    t.index ["album_id", "company_id"], name: "index_db_albums_companies_on_album_id_and_company_id"
   end
 
   create_table "db_albums_tags", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "album_id", null: false
     t.bigint "tag_id", null: false
     t.index ["album_id", "tag_id"], name: "index_db_albums_tags_on_album_id_and_tag_id"
+  end
+
+  create_table "db_companies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "latest_version_id"
+    t.boolean "marked", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["latest_version_id"], name: "index_db_companies_on_latest_version_id"
+    t.index ["marked"], name: "index_db_companies_on_marked"
+  end
+
+  create_table "db_company_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "company_id"
+    t.bigint "previous_version_id"
+    t.bigint "country_id"
+    t.boolean "marked", default: false
+    t.string "name"
+    t.string "name_en"
+    t.string "name_pronounce"
+    t.date "established_at"
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_db_company_versions_on_company_id"
+    t.index ["country_id"], name: "index_db_company_versions_on_country_id"
+    t.index ["established_at"], name: "index_db_company_versions_on_established_at"
+    t.index ["marked"], name: "index_db_company_versions_on_marked"
+    t.index ["name_pronounce"], name: "index_db_company_versions_on_name_pronounce"
+    t.index ["previous_version_id"], name: "index_db_company_versions_on_previous_version_id"
   end
 
   create_table "db_discs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -98,6 +133,8 @@ ActiveRecord::Schema.define(version: 20171012093915) do
     t.datetime "updated_at", null: false
     t.integer "gender"
     t.string "blood_type"
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_db_person_versions_on_country_id"
     t.index ["marked"], name: "index_db_person_versions_on_marked"
     t.index ["name_pronounce"], name: "index_db_person_versions_on_name_pronounce"
     t.index ["person_id"], name: "index_db_person_versions_on_person_id"
@@ -114,8 +151,10 @@ ActiveRecord::Schema.define(version: 20171012093915) do
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "publisher_id"
     t.index ["album_version_id"], name: "index_db_releases_on_album_version_id"
     t.index ["catalog_number"], name: "index_db_releases_on_catalog_number"
+    t.index ["publisher_id"], name: "index_db_releases_on_publisher_id"
     t.index ["released_at"], name: "index_db_releases_on_released_at"
   end
 
@@ -253,7 +292,9 @@ ActiveRecord::Schema.define(version: 20171012093915) do
     t.string "uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "country_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

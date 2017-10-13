@@ -1,9 +1,0 @@
-<%= breadcrumb(
-  { path: home_path, name: 'ホーム'},
-  { path: db_path, name: 'データベース'},
-  { path: db_albums_path, name: 'アルバム'},
-  { path: db_album_path(@album), name: @album.latest_version.title },
-  '発売情報を作る'
-) %>
-
-<%= page_title("", 'Create new release') %>

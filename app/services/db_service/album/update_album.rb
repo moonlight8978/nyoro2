@@ -49,6 +49,7 @@ private
   
   def assign_old_associations
     @latest_version.disc_ids = @latest_version.previous_version.disc_ids
+    @latest_version.release = Db::Release.new(@latest_version.previous_version.release.dup.attributes)
   end
   
   def make_new_version_as_latest

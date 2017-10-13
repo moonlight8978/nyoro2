@@ -68,6 +68,10 @@ Rails.application.routes.draw do
       end
     end
     
+    resources :companies do
+      resources :versions, controller: 'company_versions'
+    end
+    
     namespace :search do
       get '', action: :index
     end

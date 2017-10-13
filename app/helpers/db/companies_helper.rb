@@ -1,0 +1,2 @@
+module Db::CompaniesHelper
+end

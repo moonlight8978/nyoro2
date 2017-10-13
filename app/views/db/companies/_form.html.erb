@@ -1,0 +1,84 @@
+<div class="b-box">
+  <%= form_for(@form, url: url, method: method, html: { class: 'b-form' }) do |f| %>
+    <div class="form-group b-form-group">
+      <%= f.text_field :name, class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:name].present?) %>
+      <%= f.label :name, '会社名*' %>
+      <div class="invalid-feedback">
+        <% @form.errors.messages[:name].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :name_pronounce, class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:name_pronounce].present?) %>
+          <%= f.label :name_pronounce, '会社名（かな）*' %>
+          <div class="invalid-feedback">
+            <% @form.errors.messages[:name_pronounce].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :name_en, class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:name_en].present?) %>
+          <%= f.label :name_en, '会社名（英語／ローマ字）*' %>
+          <div class="invalid-feedback">
+            <% @form.errors.messages[:name_en].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group b-form-group">
+          <%= f.select :country_id, Country.all.map { |c| [c.name, c.id] }, { include_blank: true }, { class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:country].present? || @form.errors.messages[:country_id].present?) } %>
+          <%= f.label :country_id, '国家' %>
+          <div class="invalid-feedback">
+            <% @form.errors.messages[:country_id].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+            <% @form.errors.messages[:country].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-6">
+        <div class="form-group b-form-group">
+          <%= f.text_field :established_at, class: class_string('form-control': true, 'is-invalid': @form.errors.messages[:established_at].present?, datepicker: true) %>
+          <%= f.label :established_at, '設立の日' %>
+          <div class="invalid-feedback">
+            <% @form.errors.messages[:established_at].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group b-form-group">
+      <%= f.text_area :note, class: class_string('form-control': true, 'is-invalid': @form.errors.messages[:note].present?) %>
+      <%= f.label :note, 'ノート' %>
+      <small class="form-text text-muted">
+        コードのHTMLが許可されています。
+      </small>
+      <div class="invalid-feedback">
+        <% @form.errors.messages[:note].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+    
+    <%= f.submit '提出', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right' %>
+    <div class="clearfix"></div>
+  <% end %>
+</div>

@@ -1,5 +1,6 @@
 class Db::PersonVersion < ApplicationRecord
   include Db::Validators::Name
+  include MemberOfCountry
   
   enum gender: %w(female male)
   
