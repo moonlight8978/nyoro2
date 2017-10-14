@@ -29,7 +29,11 @@
 
 <% unless comments.last_page? %>
   <div class="px-3 py-2" id="wrapper<%= comments.current_page %>">
-    <%= link_to polymorphic_path([commentable, :comments], page: comments.next_page), 
+    <%= link_to feature_comments_path(
+        commentable_type: commentable.class.name, 
+        commentable_id: commentable.id, 
+        page: comments.next_page
+      ), 
       class: 'b-more-comments', 
       'data-target' => '#commentList', 
       'data-loading' => '#commentLoading' + comments.current_page.to_s,

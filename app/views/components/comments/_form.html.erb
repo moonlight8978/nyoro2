@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <%= form_for(:feature_comment, url: polymorphic_path([commentable, :comments]), html: { class: 'comment-form' }) do |f| %>
+  <%= form_for(:feature_comment, url: feature_comments_path, html: { class: 'comment-form' }) do |f| %>
     <div class="comment-user-avatar">
       <div class="b-img-placeholder b-img-placeholder-avatar b-ratio-1_1">
         <div class="b-img-thumb" data-background-image="<%= current_user.avatar_url %>">
@@ -9,6 +9,8 @@
     <div class="comment-input">
       <%= f.text_area :body, rows: 1, class: 'form-control' %>
     </div>
+    <%= hidden_field_tag :commentable_type, commentable.class.name %>
+    <%= hidden_field_tag :commentable_id, commentable.id %>
     <div class="comment-submit">
       <%= f.button nil, class: 'btn-c btn-c-5 btn-c-5-sakura', 'data-disable-with' => '...' do %>
         <i class="fa fa-angle-right"></i>

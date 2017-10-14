@@ -5,9 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails'
-gem 'mysql2'
-gem 'puma'
+gem 'rails', '~> 5.1', '>= 5.1.4'
+gem 'mysql2', '~> 0.4.9'
+gem 'puma', '~> 3.10'
 gem 'sass-rails'
 gem 'autoprefixer-rails'
 gem 'uglifier'
@@ -21,7 +21,7 @@ gem 'figaro'
 gem 'kaminari'
 gem 'devise'
 gem 'active_model_serializers'
-# gem 'redis', '~> 3.0'
+gem 'redis', '~> 3.3.5'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'

@@ -99,4 +99,8 @@ Rails.application.routes.draw do
       get 'statistics'
     end
   end
+  
+  namespace :feature do
+    resources :comments
+  end
 end
