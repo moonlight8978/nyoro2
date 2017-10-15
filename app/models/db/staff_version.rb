@@ -4,7 +4,6 @@ class Db::StaffVersion < ApplicationRecord
   belongs_to :previous_version, 
     class_name: 'Db::StaffVersion', optional: true
   belongs_to :person, optional: true
-  
   # scopes
   scope :version_list, 
     -> { 
@@ -32,4 +31,7 @@ class Db::StaffVersion < ApplicationRecord
   # callbacks
   
   # instance methods
+  def title
+    self.alias.present? ? self.alias : person.title
+  end
 end

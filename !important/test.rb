@@ -1,6 +1,16 @@
-def asd(x)
+class X
   
+protected
+  
+  def hello
+    p :hello
+  end
 end
 
-p asd(1)
-p asd(2)
+class Y < X
+  def hallo
+    self.hello
+  end
+end
+
+Y.new.hallo

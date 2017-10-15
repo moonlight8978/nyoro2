@@ -27,6 +27,7 @@ class Db::TagsController < ApplicationController
   def show
     set_title "#{@tag}・タグ"
     @tag = Db::Tag.find(params[:id])
+    @comments = @tag.comments.includes(:user).page(1).per(5)
   end
   
   def edit

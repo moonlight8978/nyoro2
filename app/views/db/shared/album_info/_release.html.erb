@@ -37,7 +37,13 @@
         </tr>
         <tr>
           <td>発売者</td>
-          <td><%= release.publisher.latest_version.name || '不明' %></td>
+          <td>
+            <% if release.publisher %>
+              <%= link_to(release.publisher.latest_version.name, release.publisher) %>
+            <% else %>
+              不明
+            <% end %>
+          </td>
         </tr>
       </tbody>
     </table>

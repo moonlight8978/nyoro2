@@ -1,17 +1,19 @@
 class Db::CompaniesController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :db_sidebar
+  
   def index
-    set_title ""
+    set_title "発売者"
     @companies = Db::Company.includes(:latest_version).all
   end
   
   def new
-    set_title ""
+    set_title "新しい発売者を作る"
     @form = DbForm::Company.new
   end
   
   def create
-    set_title ""
+    set_title "新しい発売者を作る"
     @form = DbForm::Company.new
     if @form.save(:create, company_params, current_user)
       redirect_to @form.company
@@ -21,18 +23,19 @@ class Db::CompaniesController < ApplicationController
   end
   
   def show
-    set_title ""
-    @company = Db::Company.find(params[:id])
+    @company = Db::Company
+      .includes(albums: { latest_version: :release })
+      .find(params[:id])
+    set_title @company.latest_version.name
+    @comments = @company.comments.includes(:user).page(1).per(5)
   end
   
   def edit
-    set_title ""
     @company = Db::Company.find(params[:id])
     @form = DbForm::Company.new(company: @company, latest: @company.latest_version)
   end
   
   def update
-    set_title ""
     @company = Db::Company.find(params[:id])
     @form = DbForm::Company.new(company: @company, latest: @company.latest_version)
     if @form.save(:update, company_params, current_user)

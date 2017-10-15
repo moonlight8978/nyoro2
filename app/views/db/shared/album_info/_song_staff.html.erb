@@ -5,7 +5,10 @@
       <div class="">
         <strong><%= position %>: </strong>
         <span class="">
-          <%= staffs.map { |staff| staff.latest_version.person.latest_version.name }.join(', ') %>
+          <%= staffs.map do |staff| 
+            link_to staff.latest_version.person.latest_version.name, db_person_path(staff.latest_version.person)
+          end.join(', ').html_safe
+          %>
         </span>
       </div>
     <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013030106) do
+ActiveRecord::Schema.define(version: 20171015043152) do
 
   create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -256,6 +256,17 @@ ActiveRecord::Schema.define(version: 20171013030106) do
     t.index ["classification"], name: "index_feature_logs_on_classification"
     t.index ["loggable_type", "loggable_id"], name: "index_feature_logs_on_loggable_type_and_loggable_id"
     t.index ["user_id"], name: "index_feature_logs_on_user_id"
+  end
+
+  create_table "feature_ratings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.string "rateable_type"
+    t.bigint "rateable_id"
+    t.integer "star"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rateable_type", "rateable_id"], name: "index_feature_ratings_on_rateable_type_and_rateable_id"
+    t.index ["user_id"], name: "index_feature_ratings_on_user_id"
   end
 
   create_table "user_roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -1,5 +1,7 @@
 class Db::Company < ApplicationRecord
   include Db::Loggable
+  include Commentable
+  
   delegate :title, to: :latest_version
   has_many :company_versions
   belongs_to :latest_version,

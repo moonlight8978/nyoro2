@@ -18,3 +18,5 @@
 <%= render 'db/shared/company_info/container', current_version: @company.latest_version %>
 
 <%= render 'db/companies/releases', company: @company %>
+
+<%= comments_for(@company, @comments) %>

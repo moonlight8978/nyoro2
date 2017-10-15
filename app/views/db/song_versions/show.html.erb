@@ -1,6 +1,6 @@
 <%= breadcrumb(
   { path: home_path, name: 'ホーム' }, 
-  { path: 'javascript:void(0)', name: 'データベース' },
+  { path: db_path, name: 'データベース' },
   { path: db_albums_path, name: 'アルバムリスト' },
   { path: db_song_path(@song), name: @song.latest_version.title },
   @song_version.title
