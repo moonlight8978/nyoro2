@@ -1,0 +1,12 @@
+<div class="page-utility dropdown">
+  <span class="utility-label" id="rateForm"
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+  >
+    Rating: ? / 8.5
+    <span>&#9660;</span>
+  </span>
+  
+  <div class="dropdown-menu dropdown-off-autoclose" aria-labelledby="rateForm">
+    <%= render 'components/ratings/form', rateable: rateable %>
+  </div>
+</div>

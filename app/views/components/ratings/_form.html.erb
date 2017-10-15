@@ -1,0 +1,18 @@
+<%= form_for(:feature_rate, url: feature_ratings_path, method: :post) do |f| %>
+  <%= f.label :star, class: 'd-block m-0' do %>
+    <div class="dropdown-item">
+      <%= f.radio_button :star, nil, class: 'form-check-input ml-0' %>
+      Select
+    </div>
+  <% end %>
+  <% (1..10).reverse_each do |star| %>
+    <%= f.label :"star_#{star}", class: 'd-block m-0' do %>
+      <div class="dropdown-item">
+        <%= f.radio_button :star, star, class: 'form-check-input ml-0' %>
+        (<%= star %>) sadasd
+      </div>
+    <% end %>
+  <% end %>
+  <%= hidden_field_tag :rateable_type, rateable.class.name %>
+  <%= hidden_field_tag :rateable_id, rateable.id %>
+<% end %>

@@ -102,5 +102,6 @@ Rails.application.routes.draw do
   
   namespace :feature do
     resources :comments
+    resources :ratings
   end
 end

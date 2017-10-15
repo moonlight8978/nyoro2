@@ -1,6 +1,8 @@
 class Db::Album < ApplicationRecord
   include Commentable
+  include Rateable
   include Db::Loggable
+  
   delegate :title, to: :latest_version
   # This association is not optional
   belongs_to :latest_version, 

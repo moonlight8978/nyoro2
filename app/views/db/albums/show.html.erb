@@ -7,6 +7,10 @@
 
 <%= page_title(@latest.title, @latest.title_en) %>
 
+<% content_for :utils_left do %>
+  <%= ratings_for(@album) %>
+<% end %>
+
 <% content_for :options do %>
   <%= render partial: 'components/utils/options', locals: {
     name: 'アルバム',
@@ -40,6 +44,8 @@
     <% end %>
   </div>
 <% end %>
+
+<%= ratings_graph_for(@album) %>
 
 <%= comments_for(@album, @comments) %>
 

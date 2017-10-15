@@ -10,7 +10,10 @@ class User < ApplicationRecord
          :confirmable, :lockable, :omniauthable
   devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2, :twitter]
   mount_uploader :avatar, AvatarUploader
-  
+  has_many :ratings, 
+    foreign_key: :user_id, class_name: 'Feature::Rating'
+  has_many :rated_albums, 
+    through: :ratings, source_type: 'Db::Album', source: :rateable
   #scopes
   
   # class methods
