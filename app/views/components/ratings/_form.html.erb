@@ -1,15 +1,16 @@
-<%= form_for(:feature_rate, url: feature_ratings_path, method: :post) do |f| %>
-  <%= f.label :star, class: 'd-block m-0' do %>
+<%= form_for(rated, url: feature_ratings_path, method: :post) do |f| %>
+  <div class="b-loading"></div>
+  <%= f.label :star_0, class: 'd-block m-0 b-feature-rate' do %>
     <div class="dropdown-item">
-      <%= f.radio_button :star, nil, class: 'form-check-input ml-0' %>
-      Select
+      <%= f.radio_button :star, 0, class: 'form-check-input ml-0', checked: rated.star.nil? %>
+      -/ No score
     </div>
   <% end %>
   <% (1..10).reverse_each do |star| %>
-    <%= f.label :"star_#{star}", class: 'd-block m-0' do %>
+    <%= f.label :"star_#{star}", class: 'd-block m-0 b-feature-rate' do %>
       <div class="dropdown-item">
         <%= f.radio_button :star, star, class: 'form-check-input ml-0' %>
-        (<%= star %>) sadasd
+        <%= star %>/ sadasd
       </div>
     <% end %>
   <% end %>
