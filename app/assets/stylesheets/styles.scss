@@ -1,5 +1,3 @@
-@import 'styles/admin/dashboard';
-@import 'styles/admin/sidebar';
 @import 'styles/album';
 @import 'styles/comment';
 @import 'styles/footer';
@@ -10,4 +8,11 @@
 @import 'styles/user';
 @import 'styles/version';
 @import 'styles/warning';
+
+@import 'styles/admin/dashboard';
+@import 'styles/admin/sidebar';
+
 @import 'styles/db/search';
+
+@import 'styles/feature/comment';
+@import 'styles/feature/rating';

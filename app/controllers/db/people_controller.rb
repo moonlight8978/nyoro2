@@ -26,7 +26,6 @@ class Db::PeopleController < ApplicationController
     @person = Db::Person.find(params[:id])
     @latest = @person.latest_version
     set_title @latest.name
-    @comments = @person.comments.includes(:user).page(1).per(5)
   end
   
   def edit

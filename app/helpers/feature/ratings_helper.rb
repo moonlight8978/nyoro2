@@ -1,13 +1,18 @@
 module Feature::RatingsHelper
   def ratings_for(rateable)
-    if user_signed_in?
-      rated = rateable.ratings.find_by(user_id: current_user.id) || Feature::Rating.new
-      rated_star = rated.star || '-'
+    rated = rateable.ratings.given_by(current_user)
+    available_ratings = (1..10).map do |star|
+      RatingValue.new(Feature::Rating.new(star: star))
     end
-    render 'components/ratings/container', rateable: rateable, rated_star: rated_star, rated: rated
+    render 'components/ratings/container', 
+      rateable: rateable, 
+      rated: rated, 
+      available_ratings: available_ratings
   end
   
   def ratings_graph_for(rateable)
-    render 'components/ratings/statistics', rateable: rateable
+    statistics = StatisticsService::Rating.new(rateable).perform
+    p statistics
+    render 'components/ratings/statistics', rateable: rateable, statistics: statistics
   end
 end

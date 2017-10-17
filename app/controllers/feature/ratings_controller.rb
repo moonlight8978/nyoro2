@@ -2,15 +2,17 @@ class Feature::RatingsController < ApplicationController
   before_action :authenticate_user!, :find_rateable
   
   def create
-    rate_svc = FeatureService::Rate.new(
-      rateable: @rateable, 
-      current_user: current_user,
-      star: rating_params[:star]
-    )
-  end
-  
-  def update
-    #code
+    rate_svc = FeatureService::Rate
+      .new(
+        rateable: @rateable, 
+        user: current_user,
+        star: rating_params[:star]
+      )
+      .perform
+      
+    respond_to do |format|
+      format.js { render json: rate_svc.response }
+    end
   end
   
 private

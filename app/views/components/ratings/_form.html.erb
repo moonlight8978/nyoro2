@@ -1,19 +1,27 @@
-<%= form_for(rated, url: feature_ratings_path, method: :post) do |f| %>
-  <div class="b-loading"></div>
-  <%= f.label :star_0, class: 'd-block m-0 b-feature-rate' do %>
-    <div class="dropdown-item">
-      <%= f.radio_button :star, 0, class: 'form-check-input ml-0', checked: rated.star.nil? %>
-      -/ No score
-    </div>
-  <% end %>
-  <% (1..10).reverse_each do |star| %>
-    <%= f.label :"star_#{star}", class: 'd-block m-0 b-feature-rate' do %>
+<%= form_for(rated.model, url: feature_ratings_path, method: :post, 
+  html: { class: 'b-feature-rate-form'}) do |f| 
+%>
+  <div class="b-loading-wrap">
+    <div class="b-loading"></div>
+  </div>
+  
+  <div class="inputs-wrap">
+    <%= f.label :star_0, class: 'd-block m-0 b-feature-rate' do %>
       <div class="dropdown-item">
-        <%= f.radio_button :star, star, class: 'form-check-input ml-0' %>
-        <%= star %>/ sadasd
+        <%= f.radio_button :star, 0, class: 'form-check-input ml-0', checked: rated.model.star.nil? %>
+        -/ No score
       </div>
     <% end %>
-  <% end %>
+    <% available_ratings.reverse_each do |rating| %>
+      <%= f.label :"star_#{rating.star}", class: 'd-block m-0 b-feature-rate' do %>
+        <div class="dropdown-item">
+          <%= f.radio_button :star, rating.star, class: 'form-check-input ml-0' %>
+          <%= rating.to_s %>/ <%= rating.descr %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  
   <%= hidden_field_tag :rateable_type, rateable.class.name %>
   <%= hidden_field_tag :rateable_id, rateable.id %>
 <% end %>

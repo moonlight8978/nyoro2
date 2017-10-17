@@ -1,0 +1,25 @@
+.b-feature-rate-form {
+  position: relative;
+  .b-loading-wrap { display: none; }
+  .b-loading { display: block; }
+  
+  input { display: none; }
+}
+
+.b-feature-rate-form.active {
+  .b-loading-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+  }
+  
+  .inputs-wrap {
+    opacity: 0.5;
+  }
+}

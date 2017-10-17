@@ -3,10 +3,23 @@
   <div class="b-box b-box-p">
     <div class="row">
       <div class="col-6">
-        graph
+        <canvas id="rateChart" width="4" height="1.6" 
+          data-data="<%= statistics[:data] %>" 
+          data-labels='<%= raw statistics[:labels] %>'
+        >
+        </canvas>
       </div>
       <div class="col-6">
-        list of rated users
+        <div class="">
+          <%= rateable.average_stars %>
+        </div>
+        <% rateable.ratings.each do |rating| %>
+          <div class="">
+            <%= rating.rated_user.user_name %>
+            <%= rating.star %>
+            <%= time_in_words(rating.updated_at, { time: false, date: true }) %>
+          </div>
+        <% end%>
       </div>
     </div>
   </div>

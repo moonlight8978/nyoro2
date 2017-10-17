@@ -27,7 +27,6 @@ class Db::CompaniesController < ApplicationController
       .includes(albums: { latest_version: :release })
       .find(params[:id])
     set_title @company.latest_version.name
-    @comments = @company.comments.includes(:user).page(1).per(5)
   end
   
   def edit

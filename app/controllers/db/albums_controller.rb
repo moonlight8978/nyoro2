@@ -25,11 +25,20 @@ class Db::AlbumsController < ApplicationController
   
   def show
     @album = Db::Album
-      .includes(latest_version: { discs: { songs: { latest_version: { staffs: { latest_version: { person: :latest_version } } } } } })
+      .includes(
+        latest_version: { 
+          discs: { 
+            songs: { 
+              latest_version: { staffs: { latest_version: { person: :latest_version } } } 
+            } 
+          },
+          release: :publisher
+        },
+        ratings: :rated_user
+      )
       .find(params[:id])
     @latest = @album.latest_version
     set_title @latest.title
-    @comments = @album.comments.includes(:user).page(1).per(5)
   end
   
   def index
