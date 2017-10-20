@@ -8,12 +8,14 @@
     <span id="avgRatedStar"><%= rateable.average_stars %></span>
     <span>&#9660;</span>
   </span>
-  
+
   <div class="dropdown-menu" aria-labelledby="rateForm">
     <% if user_signed_in? %>
       <%= render 'components/ratings/form', rateable: rateable, rated: rated, available_ratings: available_ratings %>
     <% else %>
-      ログインのが必要です
+      <div class="text-center">
+        ログインのが必要です
+      </div>
     <% end %>
   </div>
 </div>

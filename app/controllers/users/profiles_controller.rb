@@ -1,7 +1,8 @@
 class Users::ProfilesController < ApplicationController
+  # TODO user's recent votes
   before_action :authenticate_user!
   before_action :require_moderator!, only: :index
-  
+
   def show
     @active_tab = params[:tab] || 'info'
     set_authorities(params[:id])
@@ -17,10 +18,10 @@ class Users::ProfilesController < ApplicationController
       perform_security_settings
     end
   end
-  
+
   def update
     @user = current_user
-    
+
     @user.assign_attributes(profile_params)
     if @user.changed? && !@user.save
       p 'changed and saving...'
@@ -29,13 +30,13 @@ class Users::ProfilesController < ApplicationController
       render action: :show
     else
       redirect_to profile_path(@user.id, tab: :identity_settings)
-    end  
+    end
   end
-  
+
   def index
     #code
   end
-  
+
 private
 
   def profile_params
@@ -44,16 +45,16 @@ private
       # birthday
     )
   end
-  
+
   def set_authorities(user_id)
     @user = User.find(user_id)
     @own = user_signed_in? && @user == current_user
   end
-  
+
   def perform_info
     #code
   end
-  
+
   def perform_recent_activities
     log_query = LogQuery.new(per_page: 5)
     @log_comments = log_query.comment(@user)
@@ -65,11 +66,11 @@ private
     @statistics = StatisticsService::DbLog.perform(series, @user)
     p @statistics
   end
-  
+
   def perform_identity_settings
     #code
   end
-  
+
   def perform_security_settings
     #code
   end

@@ -1,26 +1,43 @@
 <div class="b-box-group mt-3">
-  <h6 class="b-box-title">Rating</h6>
+  <h6 class="b-box-title">評価</h6>
   <div class="b-box b-box-p">
-    <div class="row">
-      <div class="col-6">
-        <canvas id="rateChart" width="4" height="1.6" 
-          data-data="<%= statistics[:data] %>" 
-          data-labels='<%= raw statistics[:labels] %>'
-        >
-        </canvas>
-      </div>
-      <div class="col-6">
-        <div class="">
-          <%= rateable.average_stars %>
-        </div>
-        <% rateable.ratings.each do |rating| %>
-          <div class="">
-            <%= rating.rated_user.user_name %>
-            <%= rating.star %>
-            <%= time_in_words(rating.updated_at, { time: false, date: true }) %>
+    <% if rateable.ratings.size > 0 %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="chart-container" style="position: relative; height: 200px; width: 100%;">
+            <canvas id="rateChart"
+              data-data="<%= statistics[:data] %>"
+              data-labels='<%= raw statistics[:labels] %>'
+            >
+            </canvas>
           </div>
-        <% end%>
+        </div>
+        <div class="col-md-6">
+          <div class="b-rating-inside-star">
+            <i class="fa fa-star">
+              <span><%= rateable.average_stars %></span>
+            </i>
+
+            <div class="b-rating-description">
+              全部は<%= rateable.ratings.size %>票（<%= rateable.average_stars %>平均）
+            </div>
+          </div>
+          <table class="b-table">
+            <% rateable.ratings.each_with_index do |rating, index| %>
+              <% break if index > 4 %>
+              <tr>
+                <td class="text-left"><%= rating.rated_user.user_name %></td>
+                <td class="text-center"><%= rating.star %></td>
+                <td class="text-right"><%= time_in_words(rating.updated_at, { time: false, date: true }) %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <div class="">
+        不明
+      </div>
+    <% end %>
   </div>
 </div>

@@ -2,12 +2,12 @@
 //   <h6 class="b-box-title">
 //     情報
 //   </h6>
-//   
+//
 //   <div class="b-box">
 //     <div class="b-box-another top">
 //       紹介
 //     </div>
-// 
+//
 //     <div id="p-3">
 //       こんにちは
 //     </div>
@@ -35,7 +35,7 @@
 .b-box-another {
   padding: 1rem;
   background: #f6f7f9;
-  
+
   &.top { border-bottom: 1px solid #ddd; }
   &.bottom { border-top: 1px solid #ddd; }
 }
@@ -43,15 +43,15 @@
 .b-box .b-box-row {
   position: relative;
   padding: 1rem;
-  
-  &:not(:last-child):after {
+
+  &:not(:first-child):before {
     content: "";
     display: block;
     height: 1px;
     position: absolute;
     right: 10px;
     left: 10px;
-    bottom: 0;
+    top: 0;
     background-color: $border-color;
   }
 }

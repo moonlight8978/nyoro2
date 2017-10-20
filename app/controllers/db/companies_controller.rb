@@ -1,17 +1,18 @@
 class Db::CompaniesController < ApplicationController
+  # TODO destroy
   before_action :authenticate_user!, except: [:show, :index]
   before_action :db_sidebar
-  
+
   def index
     set_title "発売者"
     @companies = Db::Company.includes(:latest_version).all
   end
-  
+
   def new
     set_title "新しい発売者を作る"
     @form = DbForm::Company.new
   end
-  
+
   def create
     set_title "新しい発売者を作る"
     @form = DbForm::Company.new
@@ -21,19 +22,19 @@ class Db::CompaniesController < ApplicationController
       render :new
     end
   end
-  
+
   def show
     @company = Db::Company
       .includes(albums: { latest_version: :release })
       .find(params[:id])
     set_title @company.latest_version.name
   end
-  
+
   def edit
     @company = Db::Company.find(params[:id])
     @form = DbForm::Company.new(company: @company, latest: @company.latest_version)
   end
-  
+
   def update
     @company = Db::Company.find(params[:id])
     @form = DbForm::Company.new(company: @company, latest: @company.latest_version)
@@ -43,11 +44,11 @@ class Db::CompaniesController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     #code
   end
-  
+
 private
 
   def company_params

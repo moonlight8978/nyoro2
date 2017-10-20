@@ -10,11 +10,11 @@
               </div>
             </div>
           </div>
-          
+
           <div class="col-8 col-md-7 b-item-info">
             <div class="b-item-info-head">
               <div class="b-text-3l">
-                <%= link_to latest.title, db_album_path(album), 
+                <%= link_to latest.title, db_album_path(album),
                   title: latest.title_pronounce
                 %>
               </div>
@@ -26,25 +26,25 @@
                   </div>
                   <div class="col-6 pl-2 text-left">
                     <i class="fa fa-star" title="ユーザーレーティング"></i>
-                    10
+                    <%= album.average_stars %>
                   </div>
                 </div>
               </div>
               <div class="line w-100 mt-2"></div>
             </div>
-            
+
             <div class="b-item-info-body">
               <div class="">
                 <div class="b-font-80">
                   発売日
                 </div>
                 <div class="">
-                  2017-08-29
+                  <%= latest.released_at.to_s %>
                 </div>
               </div>
             </div>
           </div>
-        </div>    
+        </div>
       </div>
     </div>
   <% end %>

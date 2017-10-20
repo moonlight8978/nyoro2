@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20171015043152) do
 
   create_table "db_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "latest_version_id"
-    t.boolean "marked"
+    t.boolean "marked", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["latest_version_id"], name: "index_db_people_on_latest_version_id"
@@ -126,13 +126,13 @@ ActiveRecord::Schema.define(version: 20171015043152) do
     t.string "name_en"
     t.string "name_pronounce"
     t.date "birthday"
+    t.boolean "gender"
+    t.string "blood_type"
     t.string "website"
     t.string "twitter"
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "gender"
-    t.string "blood_type"
     t.bigint "country_id"
     t.index ["country_id"], name: "index_db_person_versions_on_country_id"
     t.index ["marked"], name: "index_db_person_versions_on_marked"

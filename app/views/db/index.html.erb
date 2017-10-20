@@ -12,7 +12,7 @@
     </h6>
     <%= link_to 'もっと見る', db_albums_path, class: "pull-right" %>
   </div>
-  
+
   <div class="b-box">
     <div class="slick b-horizontal-list">
       <% @albums.each do |album| %>
@@ -21,7 +21,7 @@
             <% latest = album.latest_version %>
             <div class="">
               <div class="b-img-placeholder b-ratio-1_1">
-                <div class="b-img-thumb" 
+                <div class="b-img-thumb"
                   data-background-image="<%= latest.image_url.to_s %>"
                 >
                 </div>
@@ -32,12 +32,12 @@
             </div>
             <div class="b-horizontal-list-item-other">
               <div class="">
-                <span>9.5</span>
+                <span><%= album.average_stars %></span>
                 <i class="fa fa-star"></i>
               </div>
               <div class="">
                 <i class="fa fa-comments-o"></i>
-                <span>22</span>
+                <span><%= album.comments.size %></span>
               </div>
             </div>
           </div>
@@ -54,9 +54,9 @@
     </h6>
     <%= link_to 'もっと見る', db_people_path, class: "pull-right" %>
   </div>
-  
+
   <div class="b-box b-box-p">
-    
+
   </div>
 </div>
 
@@ -67,8 +67,8 @@
     </h6>
     <%= link_to 'もっと見る', db_tags_path, class: "pull-right" %>
   </div>
-  
+
   <div class="b-box b-box-p">
-    
+
   </div>
 </div>

@@ -2,7 +2,7 @@
   position: relative;
   .b-loading-wrap { display: none; }
   .b-loading { display: block; }
-  
+
   input { display: none; }
 }
 
@@ -18,8 +18,36 @@
     justify-content: center;
     z-index: 1;
   }
-  
+
   .inputs-wrap {
     opacity: 0.5;
+  }
+}
+
+.b-rating-inside-star {
+  display: flex;
+
+  i {
+    color: #00b0f0;
+    position: relative;
+    font-size: 5rem;
+  }
+
+  span {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-family: Roboto, sans-serif;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  .b-rating-description {
+    display: flex;
+    padding: 0 1rem;
+    justify-content: center;
+    flex-direction: column;
   }
 }
