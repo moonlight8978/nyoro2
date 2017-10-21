@@ -1,16 +1,16 @@
-<nav class="navbar fixed-top navbar-inverse navbar-expand-md 
+<nav class="navbar fixed-top navbar-inverse navbar-expand-md
   animated fadeInDown" id="navbar">
   <button class="navbar-toggler left" type="button" data-target="#sidebarSm" id="sidebarSmToggle">
     <i class="fa fa-fw fa-bars"></i>
   </button>
-  
+
   <%= link_to db_search_path, class: 'navbar-toggler right' do %>
     <i class="fa fa-fw fa-search"></i>
   <% end %>
-  
+
   <div class="container">
     <%= link_to 'にょろにょろ', home_path, class: 'd-md-none navbar-brand' %>
-    
+
     <div class="collapse navbar-collapse w-100">
       <div class="-main">
         <ul class="navbar-nav">
@@ -36,12 +36,12 @@
           </li>
         </ul>
         <!-- END navbar left -->
-        
-        <%= form_tag db_search_path, method: :get, enforce_utf8: false, 
-          class: "form-inline search-form", id: 'searchForm' do 
+
+        <%= form_tag db_search_path, method: :get, enforce_utf8: false,
+          class: "form-inline search-form", id: 'searchForm' do
         %>
           <div class="input-group search-cate-wrap">
-            <%= select_tag :category, 
+            <%= select_tag :category,
               options_for_select(
                 [%w(アルバム album), %w(スタッフ staff), %w(タグ tag)],
                 selected: 'album'
@@ -49,10 +49,10 @@
               { class: 'form-control search-cate', id: 'searchCate', required: true }
             %>
           </div>
-          
+
           <div class="input-group search-query-wrap">
             <%= text_field_tag :q, '', class: 'form-control search-query',
-              id: 'searchInput', 'data-cate': '#searchCate', 
+              id: 'searchInput', 'data-cate': '#searchCate',
               'data-result-container': '#searchContainer', autocomplete: :off,
               required: true, placeholder: "検索..."
             %>
@@ -86,14 +86,16 @@
                 <i class="fa fa-cog"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <%= link_to 'ダッシュボード', admin_dashboard_statistics_path, 
+                <%= link_to 'ダッシュボード', admin_dashboard_statistics_path,
                   class: 'dropdown-item' if current_user.is_admin?
                 %>
-                <%= link_to (current_user.user_name || '無名') + 'さん', 
-                  profile_path(current_user.id), 
-                  class: 'dropdown-item' 
+                <%= link_to 'My List', profile_my_list_path(current_user),
+                  class: 'dropdown-item'
                 %>
-                <%= link_to 'ログアウト', destroy_user_session_path, 
+                <%= link_to 'プロファイル', profile_path(current_user.id),
+                  class: 'dropdown-item'
+                %>
+                <%= link_to 'ログアウト', destroy_user_session_path,
                   method: :delete, class: 'dropdown-item'
                 %>
               </div>

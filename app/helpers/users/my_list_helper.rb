@@ -1,0 +1,2 @@
+module Users::MyListHelper
+end

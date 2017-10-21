@@ -24,7 +24,7 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %> -->
     <%= render 'layouts/navbar' unless @no_navbar  %>
-    
+
     <div class="animated fadeIn">
       <% if @full_page %>
         <%= yield %>
@@ -32,11 +32,11 @@
         <div class="pt-5"></div>
         <div class="pt-4"></div>
         <div class="pt-3"></div>
-        
+
         <%= yield :breadcrumb %>
-      
+
         <%= yield :title %>
-        
+
         <div class="container py-4">
           <div class="row">
             <div class="col-lg-9">
@@ -44,21 +44,21 @@
               <%= yield %>
             </div>
             <div class="col-lg-3">
-              <%= yield :sidebar %>
-              
               <% if @sidebar == :db %>
                 <%= render 'components/sidebar_db' %>
               <% elsif @sidebar == :shop %>
                 <%= render 'components/sidebar_shop' %>
+              <% else %>
+                <%= yield :sidebar %>
               <% end %>
             </div>
           </div>
         </div>
       <% end %>
     </div>
-    
+
     <%= yield :modals %>
-    
+
     <%= render 'layouts/footer' unless @no_footer %>
   </body>
 </html>

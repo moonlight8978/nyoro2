@@ -1,6 +1,6 @@
 class DbService::Song::UpdateStaff
   attr_reader :song, :latest_version, :staff, :title, :title_en
-  
+
   def initialize(staff_id, params, current_user, **optionals)
     @staff = Db::Staff.find(staff_id)
     @song = @staff.song_versions.last.song
@@ -9,7 +9,7 @@ class DbService::Song::UpdateStaff
     @current_user = current_user
     @optionals = optionals
   end
-  
+
   def perform
     backup_ui_variables
     ActiveRecord::Base.transaction do
@@ -18,35 +18,36 @@ class DbService::Song::UpdateStaff
       make_new_version_as_default
       log_update_action
     end
-    
+
     self
   end
-  
+
   def errors?
     @latest_version.errors.any?
   end
-  
+
 private
   def backup_ui_variables
     @title = @song.latest_version.title
     @title_en = @song.latest_version.title_en
   end
-  
+
   def check_if_user_made_any_changes!
     @latest_version.assign_attributes(@params)
     raise ActiveRecord::Rollback unless @latest_version.changed?
   end
-  
+
   def create_new_staff_version!
     @latest_version = Db::StaffVersion.new(@latest_version.dup.attributes)
     @latest_version.assign_attributes(previous_version: @staff.latest_version)
+    @latest_version.editor = @current_user
     raise ActiveRecord::Rollback unless @latest_version.save
   end
-  
+
   def make_new_version_as_default
     @staff.update(latest_version: @latest_version)
   end
-  
+
   def log_update_action
     @song.log_update(@current_user, "スタッフ", @optionals[:description])
   end

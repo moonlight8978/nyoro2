@@ -3,11 +3,16 @@ class Db::AlbumVersion < ApplicationRecord
 
   include Db::Validators::Title
   include ImageUploadable
+  include Db::TrackEditor
 
   belongs_to :album,
-    class_name: 'Db::Album'
+    class_name: 'Db::Album', optional: true
   belongs_to :previous_version,
     class_name: 'Db::AlbumVersion', optional: true
+  belongs_to :release,
+    optional: true
+  has_and_belongs_to_many :discs,
+    join_table: :db_album_versions_discs
 
   scope :version_list,
     -> {
@@ -15,9 +20,7 @@ class Db::AlbumVersion < ApplicationRecord
       .order(created_at: :desc)
     }
 
-  has_and_belongs_to_many :discs,
-    join_table: :db_album_versions_discs
-  has_one :release
+
 
   def released_at
     DateValue.new(release && release.released_at)

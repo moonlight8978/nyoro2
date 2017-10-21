@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015043152) do
+ActiveRecord::Schema.define(version: 20171021072317) do
 
   create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -35,9 +35,13 @@ ActiveRecord::Schema.define(version: 20171015043152) do
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "editor_id"
+    t.bigint "release_id"
     t.index ["album_id"], name: "index_db_album_versions_on_album_id"
+    t.index ["editor_id"], name: "index_db_album_versions_on_editor_id"
     t.index ["marked"], name: "index_db_album_versions_on_marked"
     t.index ["previous_version_id"], name: "index_db_album_versions_on_previous_version_id"
+    t.index ["release_id"], name: "index_db_album_versions_on_release_id"
     t.index ["title_pronounce"], name: "index_db_album_versions_on_title_pronounce"
   end
 
@@ -91,8 +95,10 @@ ActiveRecord::Schema.define(version: 20171015043152) do
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "editor_id"
     t.index ["company_id"], name: "index_db_company_versions_on_company_id"
     t.index ["country_id"], name: "index_db_company_versions_on_country_id"
+    t.index ["editor_id"], name: "index_db_company_versions_on_editor_id"
     t.index ["established_at"], name: "index_db_company_versions_on_established_at"
     t.index ["marked"], name: "index_db_company_versions_on_marked"
     t.index ["name_pronounce"], name: "index_db_company_versions_on_name_pronounce"
@@ -111,7 +117,7 @@ ActiveRecord::Schema.define(version: 20171015043152) do
 
   create_table "db_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "latest_version_id"
-    t.boolean "marked", default: false
+    t.boolean "marked"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["latest_version_id"], name: "index_db_people_on_latest_version_id"
@@ -126,15 +132,17 @@ ActiveRecord::Schema.define(version: 20171015043152) do
     t.string "name_en"
     t.string "name_pronounce"
     t.date "birthday"
-    t.boolean "gender"
-    t.string "blood_type"
     t.string "website"
     t.string "twitter"
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "gender"
+    t.string "blood_type"
     t.bigint "country_id"
+    t.bigint "editor_id"
     t.index ["country_id"], name: "index_db_person_versions_on_country_id"
+    t.index ["editor_id"], name: "index_db_person_versions_on_editor_id"
     t.index ["marked"], name: "index_db_person_versions_on_marked"
     t.index ["name_pronounce"], name: "index_db_person_versions_on_name_pronounce"
     t.index ["person_id"], name: "index_db_person_versions_on_person_id"
@@ -142,7 +150,6 @@ ActiveRecord::Schema.define(version: 20171015043152) do
   end
 
   create_table "db_releases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "album_version_id"
     t.float "price", limit: 24
     t.string "currency"
     t.string "format"
@@ -152,7 +159,6 @@ ActiveRecord::Schema.define(version: 20171015043152) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "publisher_id"
-    t.index ["album_version_id"], name: "index_db_releases_on_album_version_id"
     t.index ["catalog_number"], name: "index_db_releases_on_catalog_number"
     t.index ["publisher_id"], name: "index_db_releases_on_publisher_id"
     t.index ["released_at"], name: "index_db_releases_on_released_at"
@@ -169,6 +175,8 @@ ActiveRecord::Schema.define(version: 20171015043152) do
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "editor_id"
+    t.index ["editor_id"], name: "index_db_song_versions_on_editor_id"
     t.index ["marked"], name: "index_db_song_versions_on_marked"
     t.index ["number"], name: "index_db_song_versions_on_number"
     t.index ["previous_version_id"], name: "index_db_song_versions_on_previous_version_id"
@@ -205,7 +213,9 @@ ActiveRecord::Schema.define(version: 20171015043152) do
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "editor_id"
     t.index ["alias_pronounce"], name: "index_db_staff_versions_on_alias_pronounce"
+    t.index ["editor_id"], name: "index_db_staff_versions_on_editor_id"
     t.index ["marked"], name: "index_db_staff_versions_on_marked"
     t.index ["person_id"], name: "index_db_staff_versions_on_person_id"
     t.index ["previous_version_id"], name: "index_db_staff_versions_on_previous_version_id"

@@ -1,6 +1,7 @@
 class Feature::CommentsController < ApplicationController
-  # TODO destroy, update comment
-  before_action :authenticate_user!, :find_commentable
+  before_action :authenticate_user!
+  before_action :find_commentable, only: [:index, :create]
+  before_action :comment_must_belongs_to_user
 
   def index
     @comments = @commentable.comments.includes(:user)
@@ -27,6 +28,16 @@ class Feature::CommentsController < ApplicationController
     redirect_to @commentable
   end
 
+  def update
+    @comment.update(body: params[:body])
+    head :ok
+  end
+
+  def destroy
+    @comment.destroy
+    head :ok
+  end
+
 private
 
   def comment_params
@@ -35,5 +46,9 @@ private
 
   def find_commentable
     @commentable = params[:commentable_type].constantize.find(params[:commentable_id])
+  end
+
+  def comment_must_belongs_to_user
+    @comment = current_user.comments.find(params[:id])
   end
 end

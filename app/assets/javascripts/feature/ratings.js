@@ -42,8 +42,8 @@ $(document).on('turbolinks:load', function () {
         labels: labels,
         datasets: [{
           label: 'Votes',
-          borderColor: '#47BFBD',
-          backgroundColor: '#47BFBD',
+          borderColor: '#00b0f0',
+          backgroundColor: '#00b0f0',
           fill: false,
           data: data
         }]

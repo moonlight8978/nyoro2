@@ -11,7 +11,7 @@ module Feature::RatingsHelper
   end
 
   def ratings_graph_for(rateable)
-    (rateable.ratings.size > 0) && statistics = StatisticsService::Rating.new(rateable).perform
+    (rateable.ratings.size > 0) && statistics = StatisticsService::Rating.new(rateable.ratings).perform
     render 'components/ratings/statistics',
       rateable: rateable,
       statistics: statistics

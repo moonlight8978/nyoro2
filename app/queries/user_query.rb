@@ -1,0 +1,3 @@
+class UserQuery
+  #code
+end

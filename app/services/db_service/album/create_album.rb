@@ -1,5 +1,4 @@
 class DbService::Album::CreateAlbum
-  # OPTIMIZE create service for reusealbe method
   attr_reader :latest_version, :album
 
   def initialize(params, current_user, **optionals)
@@ -10,33 +9,28 @@ class DbService::Album::CreateAlbum
 
   def perform
     ActiveRecord::Base.transaction do
-      create_new_album
       create_new_version_as_album_latest_version!
-      assign_latest_version_to_album
+      create_new_album_represent_latest
       log_create_action
     end
-
+    p @latest_version.errors
     self
   end
 
   def errors?
-    @album.errors.any? || @latest_version.errors.any?
+    @latest_version.errors.any?
   end
 
 private
-
-  def create_new_album
-    @album = Db::Album.create
-  end
-
   def create_new_version_as_album_latest_version!
-    @latest_version = @album.album_versions.build(@params)
-    # @latest_version.previous_version = @album.latest_version
+    @latest_version = Db::AlbumVersion.new(@params)
+    @latest_version.editor = @current_user
     raise ActiveRecord::Rollback unless @latest_version.save
   end
 
-  def assign_latest_version_to_album
-    @album.update(latest_version: @latest_version)
+  def create_new_album_represent_latest
+    @album = Db::Album.create(latest_version: @latest_version)
+    @latest_version.update(album: @album)
   end
 
   def log_create_action
