@@ -56,7 +56,35 @@
   </div>
 
   <div class="b-box b-box-p">
+    <div class="slick b-horizontal-list">
+      <% @people.each do |person| %>
+        <div class="">
+          <div class="b-horizontal-list-item">
+            <% latest = person.latest_version %>
+            <div class="">
+              <div class="b-img-placeholder b-ratio-1_1">
+                <div class="b-img-thumb"
+                  data-background-image="http://loz.com/log.png"
+                >
+                </div>
+              </div>
+            </div>
+            <div class="b-horizontal-list-item-title">
+              <%= link_to latest.name, db_person_path(person), class: 'b-link-no-color' %>
+            </div>
+            <div class="b-horizontal-list-item-other">
+              <div class="">
 
+              </div>
+              <div class="">
+                <i class="fa fa-comments-o"></i>
+                <span><%= person.comments.size %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
@@ -69,6 +97,74 @@
   </div>
 
   <div class="b-box b-box-p">
+    <div class="slick b-horizontal-list">
+      <% @tags.each do |tag| %>
+        <div class="">
+          <div class="b-horizontal-list-item">
+            <div class="">
+              <div class="b-img-placeholder b-ratio-1_1">
+                <div class="b-img-thumb"
+                  data-background-image="http://loz.com/log.png"
+                >
+                </div>
+              </div>
+            </div>
+            <div class="b-horizontal-list-item-title">
+              <%= link_to tag.name, db_tag_path(tag), class: 'b-link-no-color' %>
+            </div>
+            <div class="b-horizontal-list-item-other">
+              <div class="">
 
+              </div>
+              <div class="">
+                <i class="fa fa-comments-o"></i>
+                <span><%= tag.comments.size %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="b-box-group mt-3">
+  <div class="">
+    <h6 class="b-box-title">
+      発売者
+    </h6>
+    <%= link_to 'もっと見る', db_companies_path, class: "pull-right" %>
+  </div>
+
+  <div class="b-box b-box-p">
+    <div class="slick b-horizontal-list">
+      <% @companies.each do |company| %>
+        <div class="">
+          <div class="b-horizontal-list-item">
+            <% latest = company.latest_version %>
+            <div class="">
+              <div class="b-img-placeholder b-ratio-1_1">
+                <div class="b-img-thumb"
+                  data-background-image="http://loz.com/log.png"
+                >
+                </div>
+              </div>
+            </div>
+            <div class="b-horizontal-list-item-title">
+              <%= link_to latest.name, db_company_path(company), class: 'b-link-no-color' %>
+            </div>
+            <div class="b-horizontal-list-item-other">
+              <div class="">
+
+              </div>
+              <div class="">
+                <i class="fa fa-comments-o"></i>
+                <span><%= company.comments.size %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

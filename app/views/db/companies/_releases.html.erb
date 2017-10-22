@@ -14,13 +14,13 @@
           <% company.albums.each do |album| %>
             <tr>
               <td class="b-col-medium b-col-last">
-                <%= album.latest_version.release.catalog_number || 'N/A' %>
+                <%= (album.latest_version.release && album.latest_version.release.catalog_number) || 'N/A' %>
               </td>
               <td class="b-col-wide">
                 <%= link_to album.latest_version.title, db_album_path(album) %>
               </td>
               <td class="b-col-medium b-col-last">
-                <%= album.latest_version.release.released_at %>
+                <%= album.latest_version.release && album.latest_version.release.released_at %>
               </td>
             </tr>
           <% end %>

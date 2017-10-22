@@ -3,7 +3,7 @@ class DbService::Album::UpdateAlbum
 
   def initialize(album_id, params, current_user, **optionals)
     @album = Db::Album.includes(:latest_version).find(album_id)
-    @latest_version = @album.latest_version
+    @latest_version = Db::AlbumVersion.new(@album.latest_version.dup.attributes)
     @params = params
     @current_user = current_user
     @optionals = optionals

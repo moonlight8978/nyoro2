@@ -1,20 +1,10 @@
 # **Nyoro2 Project**
 #### Album database and E-Commerce
 
-### Todos:
-* DB
-  * user ratings, favorite for db model
-  * all: destroy
-  * staff_version_c: show
-  * comment: update, destroy, need refactoring later
-  * discs/songs: destroy
-
-* E-Commerce: had not been implemented yet
-
-### About Project 
+### About Project
 * **Just for learning purpose**
 * Technologies: Ruby on Rails 5.x full stack
-* Features: 
+* Features:
   * Authentication (+ Social login) / Authorization (gem devise)
   * Chart (D3.js => moved to Chart.js)
   * Search (gem sunspot)
@@ -27,16 +17,20 @@
 * `$ rails s`
 
 ### Environment
-##### Ruby Version: 
-* Ruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-linux]
-* Rails 5.1.3
+##### Ruby Version:
+* ruby 2.4.2p198 (2017-09-14 revision 59899) [x86_64-linux]
+* Rails 5.1.4
 
 ##### System dependencies
-* sunspot - JAVA: `$ sudo apt-get install default-jre`
-* sidekiq - redis: `$ sudo apt-get install redis-server`
+* sunspot require java and unzip
+  * `$ sudo apt-get install default-jre`
+  * `$ sudo apt-get install unzip`
+* sidekiq require redis
+  * `$ sudo apt-get install redis-server`
 * Node.js
 * Yarn
-* ngrok: `$ ./ngrok http 3000` => moved to local network by disabling firewall
+* ngrok => moved to local network by disabling firewall
+  * `$ ./ngrok http 3000`
 
 ##### Database - MySQL
 * Username: `root`
@@ -52,8 +46,15 @@
 * ...
 
 ### Learning Materials
+
+###### Overview
 * [Official RoR beginner guide](http://guides.rubyonrails.org/getting_started.html)
 * [Official RoR API](http://api.rubyonrails.org/)
+* [Some other resources](https://github.com/TranBaVinhSon/awesome-programming-tutorials#ruby-on-rails)
+
+###### In-depth:
+
 * [Ajax in RoR](http://guides.rubyonrails.org/working_with_javascript_in_rails.html)
 * [Simple Divise setup](https://launchschool.com/blog/how-to-use-devise-in-rails-for-authentication)
 * [Search with Sunspot](https://github.com/sunspot/sunspot/wiki)
+* [Counter Cache](http://railscasts.com/episodes/23-counter-cache-column)

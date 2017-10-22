@@ -10,7 +10,7 @@
 ) %>
 
 <div class="b-box p-3">
-  <table class="b-data-table">
+  <table class="b-data-table b-table-loading" id="myList">
     <thead>
       <tr>
         <th class="b-col-small b-col-id">番号</th>
@@ -18,17 +18,14 @@
         <th class="b-col-small b-col-last">点</th>
       </tr>
     </thead>
-
-    <tbody>
-      <% @ratings.each_with_index do |rating, index| %>
-        <% break if index > 20 %>
-        <tr>
-          <td class="b-col-small b-col-id"><%= index + 1 %></td>
-          <td class="b-col-wide"><%= rating.album.title %></td>
-          <td class="b-col-small b-col-last"><%= rating.star %></td>
-        </tr>
-      <% end %>
+    <tbody class="b-tbody-loading">
+      <tr>
+        <td colspan="3"><div class="b-loading"></div></td>
+      </tr>
     </tbody>
+    <%= render 'users/my_list/album_list',
+      ratings: @ratings.includes(album: :latest_version).page(1).per(50)
+    %>
   </table>
 </div>
 

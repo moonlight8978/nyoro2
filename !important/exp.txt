@@ -1,3 +1,4 @@
+Ruby on Rails
 joins(:association).order("table_name.attribute direction")
   != joins(:association).order("table_name.attribute": :direction)
 
@@ -6,3 +7,13 @@ cannot call content_for in application layout
 has_many_and_belongs_to: destroy does not destroy the objects.
 
 polymorphic: association must be clearly defined, cannot eagerload :~able
+
+counter_cache, owner will have a new field (~_count) in table
+
+SQL
+select(avg, count) require group(~)
+group with condition => having
+
+CSS
+flex inside table => will overflow because table auto layout 
+  => table-layout: fixed => hard to control, width is based on first row of table

@@ -1,35 +1,36 @@
 class DbService::Person::CreatePersonLatest
-  # OPTIMIZE create service for reusealbe method
-  def initialize(params, current_user, **optionals)
-    @params = params
-    @current_user = current_user
-    @optionals = optionals
+  attr_reader :person, :latest
+  # allow :user, :params
+  def initialize(**args)
+    @user, @params, @person = args[:user], args[:params], args[:person]
   end
 
   def perform
-    ActiveRecord::Base.transaction do
-      create_db_person_version!
-      create_person_with_recent_created_version_as_latest
-      log_create_action
-    end
+    build_latest
+    @person || build_person_with_latest
+    assign_associations
 
     self
   end
 
 private
 
-  def create_db_person_version!
-    @latest_version = Db::PersonVersion.new(@params)
-    @latest_version.editor = @current_user
-    raise ActiveRecord::Rollback unless @latest_version.save
+  def build_latest
+    params = @params || @person.latest_version.dup.attributes
+    @latest = Db::PersonVersion.new(params)
+    @latest.editor = @user
+    @latest.save
   end
 
-  def create_person_with_recent_created_version_as_latest
-    @person = Db::Person.create(latest_version: @latest_version)
-    @latest_version.update(person: @person)
+  def build_person_with_latest
+    @person = Db::Person.create(latest_version: @latest)
   end
 
-  def log_create_action
-    @person.log_create(@current_user, "#{@latest_version.name}", @optionals[:description])
+  def assign_associations
+    @person.update(latest_version: @latest)
+    @latest.update(
+      previous_version: @person.latest_version,
+      person: @person
+    )
   end
 end

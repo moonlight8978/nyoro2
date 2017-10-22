@@ -1,7 +1,7 @@
 class Feature::CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_commentable, only: [:index, :create]
-  before_action :comment_must_belongs_to_user
+  before_action :comment_must_belongs_to_user, only: [:update, :destroy]
 
   def index
     @comments = @commentable.comments.includes(:user)

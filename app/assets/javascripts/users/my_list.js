@@ -66,3 +66,11 @@ $(document).on('turbolinks:load', function () {
     });
   }
 });
+
+$(document)
+  .on('turbolinks:load', function (event) {
+    let $table = $('.b-table-loading');
+    $table.length > 0 && setTimeout(function () {
+      $table.removeClass('b-table-loading');
+    }, 3000);
+  });

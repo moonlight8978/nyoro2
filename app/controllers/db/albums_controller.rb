@@ -1,5 +1,4 @@
 class Db::AlbumsController < ApplicationController
-  # TODO classify sortable field
   # TODO destroy
   before_action :authenticate_user!, except: [:show, :index, :search]
   before_action :require_admin!, only: [:destroy]
@@ -45,12 +44,12 @@ class Db::AlbumsController < ApplicationController
 
   def index
     set_title 'アルバムリスト'
+
     _order = params[:sort].present? ? params[:sort] : :title_pronounce
     _direction = params[:reverse_sort].present? ? :desc : :asc
-
-    @albums = Db::Album
-      .includes(:latest_version)
-      .order("db_album_versions.#{_order} #{_direction}")
+    @albums = DbQuery::Album
+      .new
+      .sort(_order, _direction)
       .page(params[:page] || 1)
       .per(params[:per_page] || 10)
   end

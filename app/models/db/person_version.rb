@@ -6,7 +6,8 @@ class Db::PersonVersion < ApplicationRecord
 
   enum gender: %w(female male)
 
-  belongs_to :person, optional: true
+  belongs_to :person,
+    optional: true
   belongs_to :previous_version,
     class_name: 'Db::PersonVersion', optional: true
 

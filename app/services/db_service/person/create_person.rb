@@ -1,4 +1,5 @@
 class DbService::Person::CreatePerson
+  # FIXME form object is more suitable
   attr_reader :person, :latest_version
 
   def initialize(params, current_user, **optionals)
@@ -8,9 +9,10 @@ class DbService::Person::CreatePerson
   end
 
   def perform
+    return self unless valid?
+
     ActiveRecord::Base.transaction do
-      create_db_person_version!
-      create_person_with_recent_created_version_as_latest
+      create_new_person
       log_create_action
     end
 
@@ -23,15 +25,18 @@ class DbService::Person::CreatePerson
 
 private
 
-  def create_db_person_version!
+  def valid?
     @latest_version = Db::PersonVersion.new(@params)
     @latest_version.editor = @current_user
-    raise ActiveRecord::Rollback unless @latest_version.save
+    @latest_version.valid?
   end
 
-  def create_person_with_recent_created_version_as_latest
-    @person = Db::Person.create(latest_version: @latest_version)
-    @latest_version.update(person: @person)
+  def create_new_person
+    svc = DbService::Person::CreatePersonLatest
+      .new(user: @current_user, params: @params)
+      .perform
+    @latest_version = svc.latest
+    @person = svc.person
   end
 
   def log_create_action

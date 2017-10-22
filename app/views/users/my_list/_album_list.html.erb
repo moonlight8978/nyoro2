@@ -1,0 +1,24 @@
+<tbody class="b-tbody-data animated fadeIn">
+  <% ratings.each_with_index do |rating, index| %>
+    <tr>
+      <td class="b-col-small b-col-id"><%= index + 1 %></td>
+      <td class="b-col-wide"><%= rating.album.title %></td>
+      <td class="b-col-small b-col-last"><%= rating.star %></td>
+    </tr>
+  <% end %>
+</tbody>
+
+<% unless ratings.last_page? %>
+  <tbody class="b-tbody-paginate b-more-items-wrapper animated fadeIn">
+    <tr>
+      <td class="text-center" colspan="3">
+        <%= link_to 'もっと見る',
+          profile_my_list_path(@user, page: ratings.next_page),
+          class: 'b-more-items',
+          data: { 'append-to': '#myList' }
+        %>
+        <div class="b-loading b-loading-inline"></div>
+      </td>
+    </tr>
+  </tbody>
+<% end %>

@@ -28,16 +28,14 @@
 <% end %>
 
 <% unless comments.last_page? %>
-  <div class="px-3 py-2" id="wrapper<%= comments.current_page %>">
+  <div class="px-3 py-2 b-more-items-wrapper">
     <%= link_to feature_comments_path(
         commentable_type: commentable.class.name,
         commentable_id: commentable.id,
         page: comments.next_page
       ),
-      class: 'b-more-comments',
-      'data-target' => '#commentList',
-      'data-loading' => '#commentLoading' + comments.current_page.to_s,
-      'data-wrapper' => '#wrapper' + comments.current_page.to_s do
+      class: 'b-more-items b-more-comments',
+      'data-append-to' => '#commentList' do
     %>
       <i class="fa fa-fw fa-caret-down"></i>
       <span>他のコメントを見る</span>
