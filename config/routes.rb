@@ -100,6 +100,10 @@ Rails.application.routes.draw do
       root action: 'statistics'
       get 'statistics'
     end
+
+    scope module: :db_list do
+      get 'albums_list'
+    end
   end
 
   namespace :feature do

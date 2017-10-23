@@ -23,15 +23,14 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %> -->
-    <%= render 'layouts/navbar' unless @no_navbar %>
-    
-    <div class="animated fadeIn" style="padding-top: 64px;">
-      
-      <%= render 'layouts/sidebar_admin' %>
+
+    <%= render 'layouts/sidebar_admin' %>
+
+    <div class="admin-dashboard">
+      <%= yield :title %>
       <%= yield %>
-      
     </div>
-    
+
     <%= yield :modals %>
   </body>
 </html>

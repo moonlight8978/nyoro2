@@ -1,7 +1,5 @@
-module Admin
-  module DashboardHelper
-    def method
-      #code
-    end
+module Admin::DashboardHelper
+  def method
+    #code
   end
 end

@@ -18,11 +18,20 @@
         <th class="b-col-small b-col-last">点</th>
       </tr>
     </thead>
+
+    <!-- To fix tr hover make border disappear -->
+    <tbody>
+      <tr>
+        <td class="p-0 m-0"></td>
+      </tr>
+    </tbody>
+
     <tbody class="b-tbody-loading">
       <tr>
         <td colspan="3"><div class="b-loading"></div></td>
       </tr>
     </tbody>
+
     <%= render 'users/my_list/album_list',
       ratings: @ratings.includes(album: :latest_version).page(1).per(50)
     %>

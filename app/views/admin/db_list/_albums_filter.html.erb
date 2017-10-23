@@ -1,0 +1,41 @@
+<%= form_tag admin_albums_list_path, method: :get, class: 'b-form', enforce_utf8: false do %>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group b-form-group m-0">
+        <%= text_field_tag :q, params[:q], class: class_string('form-control': true, 'is-invalid': false) %>
+        <%= label_tag :q, 'タイトル' %>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="form-group b-form-group m-0">
+        <%= text_field_tag :editor, params[:editor], class: class_string('form-control': true, 'is-invalid': false) %>
+        <%= label_tag :editor, 'タイトル' %>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <!-- <div class="form-check">
+        <%#= label_tag :marked, nil, class: 'form-check-label' do %>
+          <%#= check_box_tag :marked, 'yes', params[:marked] || false, class: 'form-check-input' %>
+          Marked
+        <%# end %>
+      </div> -->
+      <div class="form-group b-form-group m-0">
+        <%= select_tag :marked, options_for_select([%w(Marked yes)], params[:marked]), include_blank: 'Active', class: class_string('form-control': true, 'is-invalid': false) %>
+        <%= label_tag :marked, 'Status' %>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <%= submit_tag 'Filter', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right py-2 px-3', name: nil %>
+    <div class="clearfix"></div>
+  </div>
+<% end %>

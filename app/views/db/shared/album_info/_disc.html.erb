@@ -1,0 +1,84 @@
+<% if current_version.discs.size > 0 %>
+  <% current_version.discs.each do |disc| %>
+    <div class="b-box-row">
+      <div class="pb-2 d-flex justify-content-between">
+        <div class="">
+          <span>
+            ディスク
+            <%= disc.number %>
+            <%= "- #{disc.title}" if disc.title.present? %>
+          </span>
+          <div class="b-icon-inline">
+            <%= link_to edit_db_disc_path(disc) do %>
+              <i class="fa fa-pencil"></i>
+            <% end %>
+          </div>
+        </div>
+        
+        <div class="b-icon-group b-size-small">
+          <%= link_to db_album_version_disc_path(current_version, disc), method: :delete do %>
+            <div class="b-icon destroy">
+              <i class="fa fa-trash"></i>
+            </div>
+          <% end %>
+          <%= link_to new_db_disc_song_path(disc) do %>
+            <div class="b-icon create">
+              <i class="fa fa-plus"></i>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+      <table class="b-data-table album-track-list">
+        <thead>
+          <tr>
+            <th class="b-col-id">番号</th>
+            <th class="b-col-wide">曲名</th>
+            <th class="b-col-small b-col-last">長さ</th>
+            <th class="b-col-small b-col-last d-none d-sm-table-cell"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if disc.songs.size > 0 %>
+            <% disc.songs.each do |song| %>
+              <% song_latest = song.latest_version %>
+              <tr data-toggle="collapse" data-target="#songInfo<%= song.id %>" 
+                aria-expanded="false" aria-controls="songInfo<%= song.id %>"
+              >
+                <td class="b-col-id">
+                  <%= song_latest.number %>
+                  <i class="fa fa-angle-right"></i>
+                  <i class="fa fa-angle-down"></i>
+                </td>
+                <td class="b-col-wide">
+                  <%= link_to song_latest.title, db_song_path(song), class: 'no-propagation b-link-no-color' %>
+                  <%# song.title %>
+                </td>
+                <td class="b-col-small b-col-last"><%= song_latest.length %></td>
+                <td class="b-col-small b-col-last d-none d-sm-table-cell">
+                  <div class="b-icon-group b-size-small justify-content-center">
+                    <%= link_to db_song_path(song), method: :delete, class: 'no-propagation' do %>
+                      <div class="b-icon destroy">
+                        <i class="fa fa-trash"></i>
+                      </div>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+              <tr class="collapse animated fadeIn b-row-collapse" id="songInfo<%= song.id %>">
+                <td colspan="3">
+                  <%= render partial: 'db/shared/album_info/song_staff', locals: { song_latest: song_latest } %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% else %>
+  <div class="p-3">
+    ディスクがありません。
+    <%= link_to '作りに行く', new_db_album_disc_path(current_version.album_id) %>
+  </div>
+<% end %>

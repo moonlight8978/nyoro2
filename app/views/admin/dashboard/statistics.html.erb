@@ -1,4 +1,6 @@
-<div class="admin-dashboard p-3">
+<%= page_title("ダッシュボード", "Dashboard") %>
+
+<div class="p-3">
   <div class="row">
     <div class="col-md-8">
       <div class="b-box">
@@ -6,9 +8,9 @@
           <div class="admin-panel-title">
             <h3>編集</h3>
           </div>
-          
-          <canvas id="editChart" width="4" height="1.6" 
-            data-data="<%= @statistics[:edit_day][:data] %>" 
+
+          <canvas id="editChart" width="4" height="1.6"
+            data-data="<%= @statistics[:edit_day][:data] %>"
             data-labels='<%= raw @statistics[:edit_day][:labels] %>'
           >
           </canvas>
@@ -21,7 +23,7 @@
               </div>
               <div class="text-center">35編集</div>
             </div>
-            
+
             <div class="col-9">
               <canvas id="editChartMonth" width="9" height="3"
                 data-data="<%= @statistics[:edit_month][:data] %>"
@@ -32,9 +34,9 @@
           </canvas>
         </div>
       </div>
-      
+
     </div>
-    
+
     <div class="col-md-4 mt-sm-4 mt-md-0">
       <div class="b-box">
         <div class="admin-panel-inline-group">
@@ -44,7 +46,7 @@
             </div>
             <canvas id="browserChart" width="7" height="3"></canvas>
           </div>
-          
+
           <div class="admin-panel admin-panel-reverse" style="background-color: #00796A;">
             <div class="admin-panel-title">
               <h5>Comment</h5>
@@ -59,7 +61,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="row mt-4">
     <div class="col-sm-6 col-lg-3 mb-3">
       <div class="b-box">
@@ -71,13 +73,13 @@
           <strong>
             <%= @new_last_week[:album] %>
           </strong>
-          
+
         </div>
         <div class="admin-block admin-block-reverse" style="background-color: #398E3B;">
           total product
         </div>
       </div>
-      
+
     </div>
     <div class="col-sm-6 col-lg-3 mb-3">
       <div class="b-box">
@@ -94,7 +96,7 @@
           total product
         </div>
       </div>
-      
+
     </div>
     <div class="col-sm-6 col-lg-3 mb-3">
       <div class="b-box">
@@ -111,7 +113,7 @@
           total user
         </div>
       </div>
-      
+
     </div>
     <div class="col-sm-6 col-lg-3 mb-3">
       <div class="b-box">
