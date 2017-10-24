@@ -1,0 +1,24 @@
+.admin-content {
+  @include responsive(lg) {
+    margin-left: #{$admin-sidebar-width}px;
+  }
+
+  .b-page-title {
+    box-shadow: none;
+    border-bottom: 1px solid $border-color;
+    padding: 1rem;
+  }
+}
+
+.admin-sidebar {
+  width: #{$admin-sidebar-width}px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+
+  @include responsive(lg) {
+    display: block;
+  }
+}

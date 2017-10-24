@@ -101,8 +101,11 @@ Rails.application.routes.draw do
       get 'statistics'
     end
 
-    scope module: :db_list do
-      get 'albums_list'
+    scope module: :db do
+      get 'albums_list', to: 'albums#index'
+      get 'publishers_list', to: 'companies#index'
+      get 'staffs_list', to: 'people#index'
+      get 'tags_list', to: 'tags#index'
     end
   end
 

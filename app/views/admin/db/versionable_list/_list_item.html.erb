@@ -1,0 +1,57 @@
+<% latest = resource.latest_version %>
+
+<tr data-toggle="collapse" data-target="#resourceId<%= resource.id %>"
+  aria-expanded="false" aria-controls="resourceId<%= resource.id %>"
+>
+  <td class="b-col-wide">
+    <i class="fa fa-angle-right"></i>
+    <i class="fa fa-angle-down"></i>
+    <span class="px-1"><%= resource.id %>.</span>
+    <%= link_to latest.title, show_path_for(resource), class: 'no-propagation b-link-no-color' %>
+  </td>
+  <td class="b-col-semi-wide">
+    <%= link_to latest.editor.user_name, profile_path(latest.editor), class: 'no-propagation  b-link-no-color' %>
+  </td>
+  <td class="b-col-medium">
+    <span class="b-label <%= resource.status.css_class %>"><%= resource.status.to_s %></span>
+  </td>
+  <td class="b-col-small b-col-last">
+    <div class="b-icon-group b-size-small justify-content-center">
+      <%= link_to show_path_for(resource), method: :delete, class: 'no-propagation' do %>
+        <div class="b-icon destroy">
+          <i class="fa fa-trash"></i>
+        </div>
+      <% end %>
+      <%= link_to edit_path_for(resource), class: 'no-propagation' do %>
+        <div class="b-icon update">
+          <i class="fa fa-pencil"></i>
+        </div>
+      <% end %>
+    </div>
+  </td>
+</tr>
+
+<tr class="collapse b-row-collapse" id="resourceId<%= resource.id %>">
+  <td colspan="4" class="px-3 b-font-90">
+    <div class="row">
+      <div class="col-9 col-md-10 col-lg-9 col-xl-10">
+        <strong>詳しく見る: </strong>
+        <%= link_to 'こっち', show_path_for(resource) %><br>
+
+        <strong>すべてのバージョンを見る: </strong>
+        <%= link_to 'こっち', versions_path_for(resource) %>
+      </div>
+      <% if latest.has_attribute?(:image) %>
+        <div class="col-3 col-md-2 col-lg-3 col-xl-2">
+          <div class="b-img-placeholder b-ratio-1_1">
+            <div class="b-img-thumb"
+              data-background-image="<%= latest.image_url.to_s %>"
+            >
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </td>
+</tr>

@@ -1,17 +1,11 @@
-.admin-dashboard {
-  @include responsive(lg) {
-    margin-left: #{$admin-sidebar-width}px;
-  }
-}
-
 .admin-panel-inline-group {
   display: flex;
   flex-wrap: wrap;
-  
+
   .admin-panel {
     width: 100%;
     flex: 0 0 100%;
-    
+
     @include responsive(sm) {
       width: 50%;
       flex: 0 0 50%;
@@ -20,7 +14,7 @@
       width: 100%;
       flex: 0 0 100%;
     }
-    
+
   }
 }
 
@@ -42,18 +36,18 @@
 .admin-block {
   padding: 1rem;
   text-align: center;
-  
+
   .admin-block-title {
     font-size: 1.1rem;
     text-align: center;
     color: $black;
   }
-  
+
   strong {
     font-weight: 600;
     font-size: 1.5rem;
   }
-  
+
   &.admin-block-reverse {
     color: $white;
     * { color: $white; }

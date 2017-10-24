@@ -1,4 +1,4 @@
-# **Nyoro2 Project**
+# **Nyoro2 Project (2017年8月30日 - ?)**
 #### Album database and E-Commerce
 
 ### About Project

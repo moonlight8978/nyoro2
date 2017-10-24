@@ -23,10 +23,10 @@
   height: 100%;
   align-items: center;
   display: flex;
-  
+
   @include no-outline;
   @extend .brand-hover;
-  
+
   &.left { left: 0; }
   &.right { right: 0; }
 }
@@ -161,7 +161,7 @@ nav .-user {
 
         &:checked { color: red; }
       }
-      
+
       &.is-invalid { border-color: #dc3545; }
     }
   }
@@ -210,7 +210,7 @@ nav .-user {
   .search-query-wrap {
     width: 80%;
   }
-  
+
   input.form-control {
     padding-left: 1rem;
   }
@@ -247,17 +247,17 @@ nav .-user {
 
 .live-search-results {
   a {
-    color: $black; 
+    color: $black;
     text-decoration: none;
   }
-  
+
   .result-row {
     padding: 0 1rem;
     text-align: left;
-    
+
     &:hover { background-color: #f0f0f0; }
   }
-  
+
   .result-warning {
     padding: .5rem 0;
   }
@@ -324,25 +324,26 @@ nav .-user {
 
 .b-sidebar-sm-header {
   padding: 1rem;
-  background: linear-gradient(to top right, #000000, #434343);
-  
-  a, span, i { 
-    color: $white; 
+  // background: linear-gradient(to top right, #000000, #434343);
+  background-color: #2f4050;
+
+  a, span, i {
+    color: $white;
   }
-  
+
   .user-utilities {
     display: flex;
     i {
       transition: color .15s ease;
     }
-    
+
     a {
       padding: 0.5rem 0;
       width: 40px;
       text-align: center;
       border-radius: 50% !important;
       transition: background-color .15s ease;
-      
+
       &:hover {
         i { color: $black; }
         background-color: $white;
@@ -353,31 +354,31 @@ nav .-user {
 
 .b-sidebar-sm-body {
   padding: 0.25rem 1rem;
-  
+
   .b-list-group.top-level {
     margin-left: -1rem;
     margin-right: -1rem;
     width: auto;
   }
-  
+
   .b-list-group-item.top-level {
     font-weight: bold;
     border: 0;
   }
-  
+
   .b-list-group-item:not(.top-level) {
     margin-bottom: 0;
     padding: 0 0 0 2rem;
     border: 0;
-    
-    div { 
+
+    div {
       padding: 0.75rem 1.25rem 0.75rem 0;
       border-bottom: 1px solid $border-color;
     }
   }
-  
-  a, span { 
-    color: $black; 
+
+  a, span {
+    color: $black;
     text-decoration: none !important;
   }
 }

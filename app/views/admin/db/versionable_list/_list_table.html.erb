@@ -1,0 +1,9 @@
+<tbody class="b-tbody-data animated fadeIn">
+  <% resources.each do |resource| %>
+    <%= render 'admin/db/versionable_list/list_item', resource: resource %>
+  <% end %>
+</tbody>
+
+<% unless resources.last_page? %>
+  <%= render 'admin/db/versionable_list/list_paginate', next_page: resources.next_page %>
+<% end %>

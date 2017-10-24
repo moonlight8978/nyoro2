@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023072709) do
+ActiveRecord::Schema.define(version: 20171024092609) do
 
   create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 20171023072709) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "editor_id"
+    t.index ["editor_id"], name: "index_db_discs_on_editor_id"
     t.index ["marked"], name: "index_db_discs_on_marked"
     t.index ["number"], name: "index_db_discs_on_number"
   end
@@ -162,7 +164,10 @@ ActiveRecord::Schema.define(version: 20171023072709) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "publisher_id"
+    t.bigint "editor_id"
+    t.boolean "marked", default: false
     t.index ["catalog_number"], name: "index_db_releases_on_catalog_number"
+    t.index ["editor_id"], name: "index_db_releases_on_editor_id"
     t.index ["publisher_id"], name: "index_db_releases_on_publisher_id"
     t.index ["released_at"], name: "index_db_releases_on_released_at"
   end
@@ -243,6 +248,9 @@ ActiveRecord::Schema.define(version: 20171023072709) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comments_count", default: 0
+    t.bigint "editor_id"
+    t.boolean "marked", default: false
+    t.index ["editor_id"], name: "index_db_tags_on_editor_id"
     t.index ["name_pronounce"], name: "index_db_tags_on_name_pronounce"
   end
 

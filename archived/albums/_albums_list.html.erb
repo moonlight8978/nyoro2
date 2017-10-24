@@ -1,0 +1,9 @@
+<tbody class="b-tbody-data animated fadeIn">
+  <% albums.each do |album| %>
+    <%= render 'admin/db/albums/albums_item', album: album %>
+  <% end %>
+</tbody>
+
+<% unless albums.last_page? %>
+  <%= render 'admin/db/albums/albums_paginate' %>
+<% end %>

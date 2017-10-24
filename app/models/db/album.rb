@@ -27,6 +27,11 @@ class Db::Album < ApplicationRecord
     text :title_pronounce, :stored => true do
       latest_version.title_pronounce
     end
+
+    text :editor do
+      latest_version.editor.user_name || ''
+    end
+    boolean :marked
   end
 
   # instance methods
