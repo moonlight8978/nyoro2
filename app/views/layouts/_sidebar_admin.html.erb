@@ -21,38 +21,48 @@
             profile_path(current_user.id)
           %>
         </div>
+        <div class="">
+          <i class="fa fa-sign-out"></i>
+          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+        </div>
       </div>
     </div>
     <div class="b-sidebar-sm-body">
       <ul class="list-group b-list-group top-level list-group-item-action">
         <%= link_to admin_dashboard_statistics_path do %>
           <li class="list-group-item b-list-group-item list-group-item-action top-level">
-            <i class="fa fa-th-large"></i>
+            <i class="fa fa-line-chart pr-2"></i>
             ダッシュボード
+          </li>
+        <% end %>
+        <%= link_to db_path do %>
+          <li class="list-group-item b-list-group-item list-group-item-action top-level">
+            <i class="fa fa-th-large pr-2"></i>
+            データベース
           </li>
         <% end %>
         <%= link_to admin_albums_list_path do %>
           <li class="list-group-item b-list-group-item list-group-item-action top-level">
-            <i class="fa fa-th-large"></i>
-            Albums
+            <i class="fa fa-music pr-2"></i>
+            アルバム
           </li>
         <% end %>
         <%= link_to admin_publishers_list_path do %>
           <li class="list-group-item b-list-group-item list-group-item-action top-level">
-            <i class="fa fa-th-large"></i>
-            Publishers
+            <i class="fa fa-briefcase pr-2"></i>
+            発売者
           </li>
         <% end %>
         <%= link_to admin_staffs_list_path do %>
           <li class="list-group-item b-list-group-item list-group-item-action top-level">
-            <i class="fa fa-th-large"></i>
-            Staffs
+            <i class="fa fa-key pr-2"></i>
+            スタッフ
           </li>
         <% end %>
         <%= link_to admin_tags_list_path do %>
           <li class="list-group-item b-list-group-item list-group-item-action top-level">
-            <i class="fa fa-th-large"></i>
-            Tags
+            <i class="fa fa-tags pr-2"></i>
+            タグ
           </li>
         <% end %>
       </ul>

@@ -1,5 +1,6 @@
 class Db::TagsController < ApplicationController
-  # TODO destroy
+  include Db::Destroyable
+
   before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :db_sidebar
 
@@ -15,9 +16,10 @@ class Db::TagsController < ApplicationController
 
   def create
     set_title '新しいタグを作る'
-    @tag = Db::Tag.create(tag_params)
+    @tag = Db::Tag.new(tag_params)
+    @tag.editor = current_user
 
-    if @tag.errors.any?
+    unless @tag.save
       render action: :new
     else
       @tag.log_create(current_user, @tag.name, params[:description])
@@ -26,8 +28,8 @@ class Db::TagsController < ApplicationController
   end
 
   def show
-    set_title "#{@tag}・タグ"
     @tag = Db::Tag.find(params[:id])
+    set_title "#{@tag.name}・タグ"
   end
 
   def edit
@@ -42,6 +44,7 @@ class Db::TagsController < ApplicationController
     if @tag.changed? && !@tag.save
       render action: :edit and return
     end
+    @tag.update(editor: current_user)
     redirect_to @tag
   end
 

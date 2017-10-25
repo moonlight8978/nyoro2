@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
+  # TODO recent activities
+
 protected
 
   def current_user
@@ -23,7 +25,7 @@ protected
   end
 
   def set_title(title)
-    @title = UtilService::PageTitle.set(title)
+    @title = title
   end
 
 private

@@ -42,6 +42,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rails-erd', require: false
   gem 'web-console'
   gem 'listen'
   gem 'spring'

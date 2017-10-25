@@ -46,7 +46,7 @@
   <h6 class="b-box-title">
     ディスクリプション
   </h6>
-  
+
   <div class="b-box b-box-p">
     <p class="b-description-text m-0"><%= @tag.description %></p>
   </div>
@@ -56,9 +56,18 @@
   <h6 class="b-box-title">
     関係があるアルバム
   </h6>
-  
+
   <div class="b-box b-box-p">
   </div>
 </div>
 
 <%= comments_for(@tag, @comments) %>
+
+<% content_for :modals do %>
+  <%= render partial: 'components/confirm_destroy',
+    locals: {
+      modal_title: @tag.name,
+      destroy_path: db_tag_path(@tag)
+    }
+  %>
+<% end %>

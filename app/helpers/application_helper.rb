@@ -35,10 +35,6 @@ module ApplicationHelper
     end
   end
 
-  def can_edit_comment(comment)
-    user_signed_in? && comment.can_be_edited_by(current_user)
-  end
-
   def country_for(member)
     if member.country
       country_template(member.country.code, member.country.name).html_safe

@@ -49,6 +49,10 @@ private
   end
 
   def comment_must_belongs_to_user
-    @comment = current_user.comments.find(params[:id])
+    if current_user.is_moderator?
+      @comment = Feature::Comment.find(params[:id])
+    else
+      @comment = current_user.comments.find(params[:id])
+    end
   end
 end

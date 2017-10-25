@@ -5,7 +5,7 @@ class DbForm::Release
 
   # associations
   delegate :price, :currency, :format, :released_at, :catalog_number, :note,
-    :publisher_id, :publisher,
+    :publisher_id, :publisher, :editor_id, :editor,
     to: :release
   attr_accessor :album, :release
   # class methods
@@ -18,7 +18,7 @@ class DbForm::Release
   end
 
   def create(params, current_user)
-    assign_latest(params)
+    assign_latest(params, current_user)
     if valid?
       ActiveRecord::Base.transaction do
         clone_album_latest(current_user)
@@ -29,7 +29,7 @@ class DbForm::Release
   end
 
   def update(params, current_user)
-    assign_latest(params)
+    assign_latest(params, current_user)
     if valid?
       ActiveRecord::Base.transaction do
         clone_album_latest(current_user)
@@ -45,8 +45,9 @@ class DbForm::Release
 
 private
 
-  def assign_latest(params)
+  def assign_latest(params, current_user)
     release.assign_attributes(params)
+    release.editor = current_user
   end
 
   def clone_album_latest(current_user)

@@ -1,12 +1,14 @@
 .admin-sidebar {
   background-color: #fff;
+  color: $black;
   box-shadow: 3px 0px 3px -3px rgba(0,0,0,0.12), 2px 0px 2px -2px rgba(0,0,0,0.24);
 }
 
 .admin-sidebar {
-  .list-group-item {
+  .b-list-group-item.top-level {
     // background-color: #2f4050;
-    font-weight: normal;
+    font-weight: 600;
+    font-size: 0.95rem;
   }
 
   .b-list-group {

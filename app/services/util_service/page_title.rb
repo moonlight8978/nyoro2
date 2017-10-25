@@ -1,5 +1,5 @@
 class UtilService::PageTitle
   def self.set(title)
-    "#{title} / にょろにょろ！"
+    "#{title}"
   end
 end

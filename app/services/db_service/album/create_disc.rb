@@ -25,8 +25,9 @@ class DbService::Album::CreateDisc
 private
 
   def create_new_disc!
-    @disc = Db::Disc.create(@params)
-    raise ActiveRecord::Rollback if @disc.errors.any?
+    @disc = Db::Disc.new(@params)
+    @disc.editor = @current_user
+    raise ActiveRecord::Rollback unless @disc.save
   end
 
   def create_new_version_with_new_disk
