@@ -20,8 +20,6 @@ class Db::AlbumVersion < ApplicationRecord
       .order(created_at: :desc)
     }
 
-
-
   def released_at
     DateValue.new(release && release.released_at)
   end

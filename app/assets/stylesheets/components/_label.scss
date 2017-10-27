@@ -3,8 +3,11 @@
   padding: 0 5px 2px;
   color: white;
   background-color: $purple;
-  
+
   &.create { background-color: $green; }
   &.update { background-color: $blue; }
   &.destroy { background-color: $red; }
+  &.google { background-color: $google; }
+  &.twitter { background-color: $twitter; }
+  &.facebook { background-color: $facebook; }
 }

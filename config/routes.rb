@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   namespace :db do
     root action: 'index', as: ''
 
+    resources :recent_activities, only: :index
+
     resources :albums do
       collection do
         get 'search'
@@ -107,6 +109,8 @@ Rails.application.routes.draw do
       get 'staffs_list', to: 'people#index'
       get 'tags_list', to: 'tags#index'
     end
+
+    get 'users_list', to: 'users_management#index'
   end
 
   namespace :feature do

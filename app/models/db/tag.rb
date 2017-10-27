@@ -22,5 +22,8 @@ class Db::Tag < ApplicationRecord
     text :title_pronounce do
       name_pronounce
     end
+    string :marked do
+      marked ? 'pending' : 'active'
+    end
   end
 end

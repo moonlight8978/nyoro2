@@ -1,0 +1,41 @@
+<%= breadcrumb(
+  { path: home_path, name: 'ホーム' },
+  { path: db_path, name: 'データベース' },
+  '最近の活動'
+) %>
+
+<%= page_title '最近の活動', 'Recent activities' %>
+
+<div class="pl-2">
+  <%= activities.count_from %>
+  <span>-</span>
+  <%= activities.count_to %>
+</div>
+
+<div class="b-box-group mt-1">
+  <div class="b-box">
+    <% activities.each do |activity| %>
+      <div class="b-box-row">
+        <div class="">
+          <%= activity.action_icon %>
+          <%= link_to activity.title, activity.loggable %>
+        </div>
+
+        <div class="b-font-90">
+          <%= link_to activity.user.user_name_san, profile_path(activity.user), class: 'b-author b-link' %>
+          <span>・</span>
+          <%= activity.commented_at %>
+        </div>
+
+        <div class="b-font-90 mt-2">
+          <strong><i>Description:</i></strong>
+          <%= activity.description %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-3 d-flex justify-content-end">
+    <%= paginate @activities %>
+  </div>
+</div>

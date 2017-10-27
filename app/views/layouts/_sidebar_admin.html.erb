@@ -35,6 +35,12 @@
             ダッシュボード
           </li>
         <% end %>
+        <%= link_to admin_users_list_path do %>
+          <li class="list-group-item b-list-group-item list-group-item-action top-level">
+            <i class="fa fa-users pr-2"></i>
+            ユーザー
+          </li>
+        <% end %>
         <%= link_to db_path do %>
           <li class="list-group-item b-list-group-item list-group-item-action top-level">
             <i class="fa fa-th-large pr-2"></i>

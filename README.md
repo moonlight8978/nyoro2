@@ -9,6 +9,11 @@
   * Chart (D3.js => moved to Chart.js)
   * Search (gem sunspot)
   * Version management (Page is editable by both users and admins)
+  * Realtime sidebar (Websocket - Action Cable)
+* Techniques:
+  * Design Patterns: Query / Service / Value / Form Object, Decorators
+  * AJAX + Animation (axios)
+  * Modularization
 
 ### Initialization
 * `$ bundle install`

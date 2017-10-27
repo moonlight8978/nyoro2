@@ -29,6 +29,7 @@ gem 'omniauth-twitter'
 gem 'faraday'
 gem 'i18n'
 gem 'carrierwave'
+gem 'draper', '~> 3.0', '>= 3.0.1'
 # gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment

@@ -1,0 +1,2 @@
+module Db::RecentActivitiesHelper
+end

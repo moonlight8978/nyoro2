@@ -4,12 +4,12 @@ class Admin::Db::ListController < Admin::AdminController
   def index
     _q = params[:q]
     _editor = params[:editor]
-    _mark = params[:marked].present?
+    _marked = params[:marked]
 
     self.resources = resource_class.search(include: :editor) do
-      fulltext _q, fields: [:title, :title_en, :title_pronounce] if params[:q].present?
-      fulltext _editor, fields: [:editor] if params[:editor].present?
-      with(:marked, _mark) if false
+      fulltext _q, fields: [:title, :title_en, :title_pronounce] if _q.present?
+      fulltext _editor, fields: [:editor] if _editor.present?
+      with(:marked, _marked) if _marked.present?
       paginate page: params[:page] || 1, per_page: params[:per_page] || 20
     end.results
 

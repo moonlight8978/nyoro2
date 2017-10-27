@@ -27,6 +27,8 @@ class Db::Company < ApplicationRecord
     text :editor do
       latest_version.editor.user_name || ''
     end
-    boolean :marked
+    string :marked do
+      marked ? 'pending' : 'active'
+    end
   end
 end

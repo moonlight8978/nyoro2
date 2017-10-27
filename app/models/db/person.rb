@@ -3,7 +3,7 @@ class Db::Person < ApplicationRecord
   include Commentable
   include AliasTitle
   include Db::MarkDestroy
-  
+
   delegate :title, to: :latest_version
 
   belongs_to :latest_version,
@@ -28,6 +28,9 @@ class Db::Person < ApplicationRecord
     end
     text :website do
       latest_version.website
+    end
+    string :marked do
+      marked ? 'pending' : 'active'
     end
   end
 end

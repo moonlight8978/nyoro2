@@ -1,0 +1,9 @@
+<tbody class="b-tbody-data animated fadeIn">
+  <% users.each do |user| %>
+    <%= render 'admin/users_management/list_item', user: user %>
+  <% end %>
+</tbody>
+
+<% unless @users.last_page? %>
+  <%= render 'admin/users_management/list_paginate', next_page: @users.next_page %>
+<% end %>

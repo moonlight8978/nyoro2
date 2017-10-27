@@ -4,7 +4,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # settings and associations
   after_create_commit :set_default_role
-  has_and_belongs_to_many :roles, join_table: :users_user_roles
+  has_and_belongs_to_many :roles,
+    join_table: :users_user_roles, after_add: :reindex, after_remove: :reindex
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :omniauthable
@@ -30,6 +31,28 @@ class User < ApplicationRecord
     end
   end
 
+  searchable do
+    text :user_name, boost: 2
+    text :email, boost: 2
+    string :role do
+      if is_admin?
+        'admin'
+      elsif is_moderator?
+        'moderator'
+      elsif is_user?
+        'user'
+      else
+        'banned'
+      end
+    end
+    string :social_provider do
+      provider.present? ? provider.split('_').first : ''
+    end
+    string :activation do
+      confirmed_at && (confirmed_at > confirmation_sent_at) ? 'activated' : 'not_activated'
+    end
+  end
+
   # validates
 
   # callbacks
@@ -37,6 +60,9 @@ class User < ApplicationRecord
     self.roles << (User::Role.find_by_name('user'))
   end
 
+  def reindex(role)
+    Sunspot.index self
+  end
   # instance methods
   def is_admin?
     self.roles.pluck(:name).include?('admin')
