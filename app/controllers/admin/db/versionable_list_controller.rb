@@ -1,34 +1,23 @@
-class Admin::Db::VersionableListController < Admin::AdminController
-  helper_method :resources, :edit_path_for, :show_path_for, :versions_path_for
+class Admin::Db::VersionableListController < Admin::ManagementController
+  helper_method :edit_path_for, :show_path_for, :versions_path_for
 
   def index
-    _q = params[:q]
-    _editor = params[:editor]
-    _marked = params[:marked]
-
-    self.resources = resource_class.search(include: { latest_version: :editor }) do
-      fulltext _q, fields: [:title, :title_en, :title_pronounce] if _q.present?
-      fulltext _editor, fields: [:editor] if _editor.present?
-      with(:marked, _marked) if _marked.present?
-      paginate page: params[:page] || 1, per_page: params[:per_page] || 20
-    end.results
-
-    respond_to do |format|
-      format.html
-      format.js do
-        render partial: 'admin/db/versionable_list/list_table', locals: { resources: resources }
-      end
-    end
+    super
   end
 
 protected
 
-  def resources
-    instance_variable_get(:"@#{resources_name}")
+  def search_for_resources(**args)
+    resource_class.search(include: { latest_version: :editor }) do
+      fulltext params[:q], fields: [:title, :title_en, :title_pronounce] if params[:q].present?
+      fulltext params[:editor], fields: [:editor] if params[:editor].present?
+      with(:marked, params[:marked]) if params[:marked].present?
+      paginate page: args[:page], per_page: 20
+    end.results
   end
 
-  def resources=(resources)
-    instance_variable_set(:"@#{resources_name}", resources)
+  def template_for_resources
+    "admin/db/versionable_list/list_table"
   end
 
   def edit_path_for(resource)
@@ -42,8 +31,6 @@ protected
   def versions_path_for(resource)
     send("db_#{resources_name.singularize}_versions_path", resource)
   end
-
-private
 
   def resource_class
     "Db::#{resources_name.classify}".constantize

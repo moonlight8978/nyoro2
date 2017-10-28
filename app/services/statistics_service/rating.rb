@@ -10,7 +10,7 @@ class StatisticsService::Rating
       ratings = grouped.detect { |key, ratings| key.to_i == star }
       ratings && ratings[1].size || 0
     end
-    results[:average] = @ratings.average(:star)
+    results[:average] = @ratings.average(:star).round(1)
     results[:votes] = @ratings.size
     results
   end

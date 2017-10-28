@@ -1,28 +1,29 @@
-class Admin::UsersManagementController < Admin::AdminController
+class Admin::UsersManagementController < Admin::ManagementController
   decorates_assigned :users
 
   def index
-    respond_to do |format|
-      format.html do
-        @title = "ユーザー管理"
-        @users = search(params[:q], params[:role], params[:activation], params[:social_provider], 1)
-      end
-      format.js do
-        @users = search(params[:q], params[:role], params[:activation], params[:social_provider], params[:page])
-        render partial: 'admin/users_management/list_table'
-      end
-    end
+    @title = "ユーザー管理"
+    @title_en = "Users management"
+    super
   end
 
 private
 
-  def search(q, role, activation, social_provider, page)
+  def resources_name
+    "users"
+  end
+
+  def template_for_resources
+    "admin/users_management/list_table"
+  end
+
+  def search_for_resources(**args)
     User.search(include: [:country, :roles]) do
-      fulltext q, fields: [:user_name, :email] if q.present?
-      with(:role, role) if role.present?
-      with(:activation, activation) if activation.present?
-      with(:social_provider, social_provider) if social_provider.present?
-      paginate page: page, per_page: 25
+      fulltext params[:q], fields: [:user_name, :email] if params[:q].present?
+      with(:role, params[:role]) if params[:role].present?
+      with(:activation, params[:activation]) if params[:activation].present?
+      with(:social_provider, params[:social_provider]) if params[:social_provider].present?
+      paginate page: args[:page], per_page: 25
     end.results
   end
 end

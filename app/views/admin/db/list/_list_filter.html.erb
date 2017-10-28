@@ -1,4 +1,4 @@
-<%= form_tag admin_albums_list_path, method: :get, class: 'b-form', enforce_utf8: false do %>
+<%= form_tag request.path, method: :get, class: 'b-form', enforce_utf8: false do %>
   <div class="row">
     <div class="col-6">
       <div class="form-group b-form-group m-0">
@@ -12,7 +12,7 @@
     <div class="col-4">
       <div class="form-group b-form-group m-0">
         <%= text_field_tag :editor, params[:editor], class: class_string('form-control': true, 'is-invalid': false) %>
-        <%= label_tag :editor, 'タイトル' %>
+        <%= label_tag :editor, '編集者' %>
         <div class="invalid-feedback">
         </div>
       </div>
