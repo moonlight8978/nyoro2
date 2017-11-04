@@ -29,7 +29,7 @@ gem 'i18n', '~> 0.9.0'
 gem 'carrierwave', '~> 1.2', '>= 1.2.1'
 gem 'draper', '~> 3.0', '>= 3.0.1'
 gem 'mini_magick', '~> 4.8'
-# gem 'redis', '~> 4.0', '>= 4.0.1'
+gem 'redis', '~> 3.3', '>= 3.3.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

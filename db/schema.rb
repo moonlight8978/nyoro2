@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024092609) do
+ActiveRecord::Schema.define(version: 20171104072816) do
 
   create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -252,6 +252,66 @@ ActiveRecord::Schema.define(version: 20171024092609) do
     t.boolean "marked", default: false
     t.index ["editor_id"], name: "index_db_tags_on_editor_id"
     t.index ["name_pronounce"], name: "index_db_tags_on_name_pronounce"
+  end
+
+  create_table "ec_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "parent_id"
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_ec_categories_on_parent_id"
+  end
+
+  create_table "ec_product_colors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "product_id"
+    t.string "name"
+    t.string "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_ec_product_colors_on_product_id"
+  end
+
+  create_table "ec_product_discounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "product_id"
+    t.float "shop", limit: 24, default: 0.0
+    t.float "system", limit: 24, default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_ec_product_discounts_on_product_id"
+  end
+
+  create_table "ec_product_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "product_id"
+    t.string "image"
+    t.boolean "nsfw", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_ec_product_images_on_product_id"
+  end
+
+  create_table "ec_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "category_id"
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_ec_products_on_category_id"
+  end
+
+  create_table "ec_shops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.string "type"
+    t.string "name"
+    t.string "website"
+    t.string "phone"
+    t.string "email"
+    t.string "address"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_ec_shops_on_type"
+    t.index ["user_id"], name: "index_ec_shops_on_user_id"
   end
 
   create_table "feature_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

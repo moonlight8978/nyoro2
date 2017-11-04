@@ -17,6 +17,8 @@ class User < ApplicationRecord
     through: :ratings, source_type: 'Db::Album', source: :rateable
   has_many :comments,
     class_name: 'Feature::Comment'
+  has_one :shop,
+    class_name: 'Ec::Shop'
   #scopes
 
   # class methods

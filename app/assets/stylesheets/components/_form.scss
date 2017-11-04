@@ -6,7 +6,7 @@
   margin-bottom: 1.5rem;
   position: relative;
   padding-top: 24px;
-  
+
   label {
     position: absolute;
     top: 0;
@@ -14,44 +14,45 @@
     font-size: 0.85rem;
     font-weight: bold;
     margin-bottom: 0;
-    color: #616161;
+    color: $black--light;
     @include transition-std(color);
   }
-  
+
   .form-control, .form-control-file {
     box-shadow: none !important;
     border-width: 0 0 2px 0;
     padding: 0.75rem 0;
     color: $black;
     @include transition-std(all);
-    
+
     &:-webkit-autofill {
       box-shadow: 0 0 0px 1000px white inset !important;
     }
   }
-  
+
   select.form-control:not([size]):not([multiple]) {
     height: calc(2.75rem + 2px);
   }
-  
+
   .form-control-file {
     border-color: rgba(0, 0, 0, 0.15);
     border-style: solid;
     padding: 0.75rem 0;
     width: 100%;
     transition: border-color .15s ease;
-    
-    &.is-invalid { 
-      border-color: #dc3545; 
-      
+
+    &.is-invalid {
+      border-color: #dc3545;
+
       ~ .invalid-feedback {
         display: block;
       }
     }
   }
-  
+
   .form-control:focus + label {
     color: #2d90fb;
+    // color: #365899;
   }
 }
 
@@ -59,11 +60,24 @@
   a {
     font-size: 0.9rem;
     line-height: 1.75;
-    
+
     &:before {
       content: '\025B8';
       display: inline-block;
       width: 14px;
     }
   }
+}
+
+.b-form-submit {
+  display: flex;
+
+  &.b-form-submit-right {
+    justify-content: flex-end;
+  }
+}
+
+.b-form-control-range {
+  display: block;
+  width: 100%;
 }

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   scope module: :users do
     resources :profiles, only: [:show, :index, :update] do
       get 'my_list', to: 'my_list#index'
+      resource 'shop', controller: :shop
     end
   end
 
@@ -116,5 +117,14 @@ Rails.application.routes.draw do
   namespace :feature do
     resources :comments
     resources :ratings
+  end
+
+  namespace :ec do
+    resources :products do
+      resources :images
+      resource :discount
+      resources :colors
+    end
+    resources :categories
   end
 end
