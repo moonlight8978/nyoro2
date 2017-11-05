@@ -3,4 +3,18 @@ class Ec::Shop < ApplicationRecord
 
   belongs_to :user,
     class_name: :'User'
+  has_many :products,
+    class_name: :'Ec::Product'
+
+  def approved?
+    type == 'Ec::ApprovedShop'
+  end
+
+  searchable do
+    text :name, boost: 3
+    text :email
+    string :status do
+      approved? ? 'approved' : 'unapproved'
+    end
+  end
 end

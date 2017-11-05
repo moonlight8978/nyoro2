@@ -68,3 +68,32 @@
 .b-box-container {
   margin-bottom: -1rem;
 }
+
+.b-row-horizontal-group {
+  display: flex;
+}
+
+.b-row-horizontal {
+  flex: 0 0 auto;
+  position: relative;
+  padding: 0 1rem;
+
+  &:not(:last-child):after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    background-color: $border-color;
+    z-index: 1;
+  }
+}
+
+.b-row-horizontal-toggler {
+  flex: 0 0 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

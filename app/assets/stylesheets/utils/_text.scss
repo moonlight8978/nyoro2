@@ -4,6 +4,10 @@
   overflow: hidden;
 }
 
+.b-break {
+  word-break: break-all;
+}
+
 .b-has-html {
   white-space: pre-line;
 }

@@ -10,7 +10,7 @@ class Admin::UsersManagementController < Admin::ManagementController
 private
 
   def resources_name
-    "users"
+    :"users"
   end
 
   def template_for_resources

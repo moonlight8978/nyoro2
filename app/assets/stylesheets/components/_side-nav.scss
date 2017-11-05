@@ -4,6 +4,10 @@
     margin-bottom: 1rem;
   }
 
+  .list-group > a {
+    text-decoration: none;
+  }
+
   .b-list-group-header {
     color: $black--light;
     // padding: 4px .5rem;
@@ -26,7 +30,7 @@
   }
 
   .list-group-item-action {
-    &:focus, &:hover {
+    &:focus, &:hover, &.active {
       background-color: $white;
       border-color: $border-color;
     }

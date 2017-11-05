@@ -1,0 +1,41 @@
+<tr data-toggle="collapse" data-target="#shopId<%= shop.id %>"
+  aria-expanded="false" aria-controls="shopId<%= shop.id %>"
+>
+  <td class="b-col-wide">
+    <i class="fa fa-angle-right"></i>
+    <i class="fa fa-angle-down"></i>
+    <span class="px-1"><%= shop.id %>.</span>
+    <%= link_to shop.name, '#', class: 'no-propagation b-link-no-color' %>
+  </td>
+
+  <td class="b-col-semi-wide">
+    <%= shop.user.user_name %>
+  </td>
+
+  <td class="b-col-medium text-center">
+    <%= shop.status_tag %>
+  </td>
+
+  <td class="b-col-small b-col-last">
+    <div class="b-icon-group b-size-small justify-content-center">
+      <%= link_to '#', method: :delete, class: 'no-propagation' do %>
+        <div class="b-icon destroy">
+          <i class="fa fa-trash"></i>
+        </div>
+      <% end %>
+      <%= link_to '#', class: 'no-propagation' do %>
+        <div class="b-icon update">
+          <i class="fa fa-pencil"></i>
+        </div>
+      <% end %>
+    </div>
+  </td>
+</tr>
+
+<tr class="collapse b-row-collapse" id="shopId<%= shop.id %>">
+  <td colspan="4" class="px-3 b-font-90">
+    <div class="row">
+
+    </div>
+  </td>
+</tr>

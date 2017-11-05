@@ -1,0 +1,53 @@
+<div id="b-sideNav" class="b-side-nav">
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-action">user_name</li>
+  </ul>
+  <ul class="list-group">
+    <h6 class="b-list-group-header">List header</h6>
+
+    <li class="list-group-item list-group-item-action">
+      <i class="fa fa-music"></i>
+      Item
+    </li>
+    <li class="list-group-item list-group-item-action">
+      <i class="fa fa-music"></i>
+      Item longer
+    </li>
+    <li class="list-group-item list-group-item-action">
+      <i class="fa fa-music"></i>
+      Item longer longer
+    </li>
+    <li class="list-group-item list-group-item-action">
+      <i class="fa fa-music"></i>
+      Item longest longest
+    </li>
+    <li class="list-group-item list-group-item-action">
+      <i class="fa fa-music"></i>
+      Item
+    </li>
+  </ul>
+
+  <%= form_tag '#', method: :get, html: {} do %>
+    <ul class="list-group">
+      <h6 class="b-list-group-header">Type</h6>
+
+      <%= label_tag :type, class: 'd-block' do %>
+        <% (1..4).each do %>
+          <li class="list-group-item list-group-item-action">
+            <%= check_box_tag :type, 'type1', params[:type] == 'type1' %>
+            Type 1
+          </li>
+        <% end %>
+      <% end %>
+
+    </ul>
+
+    <ul class="list-group">
+      <h6 class="b-list-group-header">Price</h6>
+
+      <li class="list-group-item">
+        <%= range_field_tag :price, params[:price], min: 0, max: 100000, class: 'b-form-control-range' %>
+      </li>
+    </ul>
+  <% end %>
+</div>

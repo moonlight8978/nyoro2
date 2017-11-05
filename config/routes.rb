@@ -22,7 +22,13 @@ Rails.application.routes.draw do
   scope module: :users do
     resources :profiles, only: [:show, :index, :update] do
       get 'my_list', to: 'my_list#index'
-      resource 'shop', controller: :shop
+    end
+    resource :shop, controller: :'shop/shop' do
+      resources :products, controller: 'shop/products' do
+        collection do
+          delete 'destroy_multiple'
+        end
+      end
     end
   end
 
@@ -109,6 +115,10 @@ Rails.application.routes.draw do
       get 'publishers_list', to: 'companies#index'
       get 'staffs_list', to: 'people#index'
       get 'tags_list', to: 'tags#index'
+    end
+
+    scope module: :ec do
+      get 'shops_list', to: 'shops_management#index'
     end
 
     get 'users_list', to: 'users_management#index'

@@ -1,0 +1,12 @@
+<tbody class="b-tbody-paginate b-more-items-wrapper animated fadeIn">
+  <tr>
+    <td class="text-center" colspan="4">
+      <%= link_to 'もっと見る',
+        request.query_parameters.merge({ page: next_page }),
+        class: 'b-more-items',
+        data: { 'append-to': '#manageDbResources' }
+      %>
+      <div class="b-loading b-loading-inline"></div>
+    </td>
+  </tr>
+</tbody>

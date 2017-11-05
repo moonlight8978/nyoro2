@@ -1,0 +1,36 @@
+<%= form_tag request.path, method: :get, class: 'b-form', enforce_utf8: false do %>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group b-form-group m-0">
+        <%= text_field_tag :q, params[:q], class: 'form-control' %>
+        <%= label_tag :q, 'メール／ユーザー名' %>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="form-group b-form-group m-0">
+        <%= select_tag :role, options_for_select(%w(admin moderator user banned), params[:role]), include_blank: '全部', class: 'form-control' %>
+        <%= label_tag :role, 'Role' %>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="form-group b-form-group m-0">
+        <%= select_tag :activation, options_for_select(%w(activated not_activated), params[:activation]), include_blank: '全部', class: 'form-control' %>
+        <%= label_tag :activation, '活性化' %>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="form-group b-form-group m-0">
+        <%= select_tag :social_provider, options_for_select(%w(google twitter facebook), params[:social_provider]), include_blank: '全部', class: 'form-control' %>
+        <%= label_tag :social_provider, 'ソシアル' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <%= submit_tag 'Filter', class: 'btn-c btn-c-5 btn-c-5-sakura pull-right py-2 px-3', name: nil %>
+    <div class="clearfix"></div>
+  </div>
+<% end %>

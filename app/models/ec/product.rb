@@ -7,6 +7,8 @@ class Ec::Product < ApplicationRecord
     class_name: :'Ec::Product::Color'
   has_many :images,
     class_name: :'Ec::Product::Image'
+  belongs_to :category,
+    class_name: :'Ec::Category'
   # def self.table_name_prefix
   #   'ec_product_'
   # end

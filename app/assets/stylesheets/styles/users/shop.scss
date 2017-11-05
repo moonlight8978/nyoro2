@@ -1,0 +1,11 @@
+.ec-shop-info {
+  .b-row-horizontal {
+    flex: 0 0 calc(50% - 1rem - 10px);
+    max-width: calc(50% - 1rem - 10px);
+  }
+
+  .b-row-horizontal-toggler {
+    flex: 0 0 calc(2rem + 20px);
+    max-width: calc(2rem + 20px);
+  }
+}

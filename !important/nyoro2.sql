@@ -13,12 +13,10 @@
 
 
 -- Dumping database structure for nyoro2_development
-DROP DATABASE IF EXISTS `nyoro2_development`;
 CREATE DATABASE IF NOT EXISTS `nyoro2_development` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `nyoro2_development`;
 
 -- Dumping structure for table nyoro2_development.ar_internal_metadata
-DROP TABLE IF EXISTS `ar_internal_metadata`;
 CREATE TABLE IF NOT EXISTS `ar_internal_metadata` (
   `key` varchar(255) NOT NULL,
   `value` varchar(255) DEFAULT NULL,
@@ -27,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `ar_internal_metadata` (
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.ar_internal_metadata: ~0 rows (approximately)
+-- Dumping data for table nyoro2_development.ar_internal_metadata: ~1 rows (approximately)
 DELETE FROM `ar_internal_metadata`;
 /*!40000 ALTER TABLE `ar_internal_metadata` DISABLE KEYS */;
 INSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES
@@ -35,7 +33,6 @@ INSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) 
 /*!40000 ALTER TABLE `ar_internal_metadata` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.countries
-DROP TABLE IF EXISTS `countries`;
 CREATE TABLE IF NOT EXISTS `countries` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -50,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `countries` (
   KEY `index_countries_on_code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.countries: ~0 rows (approximately)
+-- Dumping data for table nyoro2_development.countries: ~1 rows (approximately)
 DELETE FROM `countries`;
 /*!40000 ALTER TABLE `countries` DISABLE KEYS */;
 INSERT INTO `countries` (`id`, `name`, `name_en`, `name_pronounce`, `code`, `note`, `created_at`, `updated_at`) VALUES
@@ -58,13 +55,13 @@ INSERT INTO `countries` (`id`, `name`, `name_en`, `name_pronounce`, `code`, `not
 /*!40000 ALTER TABLE `countries` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_albums
-DROP TABLE IF EXISTS `db_albums`;
 CREATE TABLE IF NOT EXISTS `db_albums` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `latest_version_id` bigint(20) DEFAULT NULL,
   `marked` tinyint(1) DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `comments_count` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `index_db_albums_on_latest_version_id` (`latest_version_id`),
   KEY `index_db_albums_on_marked` (`marked`),
@@ -72,25 +69,24 @@ CREATE TABLE IF NOT EXISTS `db_albums` (
   KEY `index_db_albums_on_updated_at` (`updated_at`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_albums: ~3 rows (approximately)
+-- Dumping data for table nyoro2_development.db_albums: ~4 rows (approximately)
 DELETE FROM `db_albums`;
 /*!40000 ALTER TABLE `db_albums` DISABLE KEYS */;
-INSERT INTO `db_albums` (`id`, `latest_version_id`, `marked`, `created_at`, `updated_at`) VALUES
-	(1, 22, 0, '2017-09-19 11:41:48', '2017-10-20 05:41:31'),
-	(2, 21, 0, '2017-09-19 13:26:11', '2017-10-19 04:14:44'),
-	(4, 9, 0, '2017-09-28 10:58:01', '2017-09-28 10:58:38'),
-	(6, 43, 0, '2017-10-21 07:51:14', '2017-10-21 08:45:47');
+INSERT INTO `db_albums` (`id`, `latest_version_id`, `marked`, `created_at`, `updated_at`, `comments_count`) VALUES
+	(1, 44, 0, '2017-09-19 11:41:48', '2017-10-22 08:51:06', 6),
+	(2, 21, 0, '2017-09-19 13:26:11', '2017-10-19 04:14:44', 1),
+	(4, 9, 0, '2017-09-28 10:58:01', '2017-09-28 10:58:38', 0),
+	(6, 45, 1, '2017-10-21 07:51:14', '2017-10-25 06:40:13', 0);
 /*!40000 ALTER TABLE `db_albums` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_albums_companies
-DROP TABLE IF EXISTS `db_albums_companies`;
 CREATE TABLE IF NOT EXISTS `db_albums_companies` (
   `album_id` bigint(20) NOT NULL,
   `company_id` bigint(20) NOT NULL,
   KEY `index_db_albums_companies_on_album_id_and_company_id` (`album_id`,`company_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_albums_companies: ~2 rows (approximately)
+-- Dumping data for table nyoro2_development.db_albums_companies: ~3 rows (approximately)
 DELETE FROM `db_albums_companies`;
 /*!40000 ALTER TABLE `db_albums_companies` DISABLE KEYS */;
 INSERT INTO `db_albums_companies` (`album_id`, `company_id`) VALUES
@@ -100,14 +96,13 @@ INSERT INTO `db_albums_companies` (`album_id`, `company_id`) VALUES
 /*!40000 ALTER TABLE `db_albums_companies` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_albums_tags
-DROP TABLE IF EXISTS `db_albums_tags`;
 CREATE TABLE IF NOT EXISTS `db_albums_tags` (
   `album_id` bigint(20) NOT NULL,
   `tag_id` bigint(20) NOT NULL,
   KEY `index_db_albums_tags_on_album_id_and_tag_id` (`album_id`,`tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_albums_tags: ~4 rows (approximately)
+-- Dumping data for table nyoro2_development.db_albums_tags: ~5 rows (approximately)
 DELETE FROM `db_albums_tags`;
 /*!40000 ALTER TABLE `db_albums_tags` DISABLE KEYS */;
 INSERT INTO `db_albums_tags` (`album_id`, `tag_id`) VALUES
@@ -119,7 +114,6 @@ INSERT INTO `db_albums_tags` (`album_id`, `tag_id`) VALUES
 /*!40000 ALTER TABLE `db_albums_tags` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_album_versions
-DROP TABLE IF EXISTS `db_album_versions`;
 CREATE TABLE IF NOT EXISTS `db_album_versions` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `previous_version_id` bigint(20) DEFAULT NULL,
@@ -141,58 +135,59 @@ CREATE TABLE IF NOT EXISTS `db_album_versions` (
   KEY `index_db_album_versions_on_title_pronounce` (`title_pronounce`),
   KEY `index_db_album_versions_on_editor_id` (`editor_id`),
   KEY `index_db_album_versions_on_release_id` (`release_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_album_versions: ~22 rows (approximately)
+-- Dumping data for table nyoro2_development.db_album_versions: ~37 rows (approximately)
 DELETE FROM `db_album_versions`;
 /*!40000 ALTER TABLE `db_album_versions` DISABLE KEYS */;
 INSERT INTO `db_album_versions` (`id`, `previous_version_id`, `album_id`, `marked`, `title`, `title_en`, `title_pronounce`, `image`, `note`, `created_at`, `updated_at`, `editor_id`, `release_id`) VALUES
-	(1, NULL, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', '', NULL, '2017-09-19 11:41:51', '2017-09-19 11:41:51', NULL, NULL),
-	(3, 1, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', '', NULL, '2017-09-19 11:44:16', '2017-09-19 11:44:16', NULL, NULL),
-	(4, NULL, 2, 0, 'TRIBAL LINK - L', 'TRIBAL LINK - L', 'TRIBAL LINK - L', '', NULL, '2017-09-19 13:26:17', '2017-09-19 13:26:17', NULL, NULL),
-	(5, 4, 2, 0, 'TRIBAL LINK - R', 'TRIBAL LINK - L', 'TRIBAL LINK - L', '', NULL, '2017-09-19 13:26:53', '2017-09-19 13:26:53', NULL, NULL),
-	(6, 3, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', '', NULL, '2017-09-23 07:29:00', '2017-09-23 07:29:00', NULL, NULL),
-	(7, 3, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', '', NULL, '2017-09-25 15:16:26', '2017-09-25 15:16:26', NULL, NULL),
-	(8, NULL, 4, 0, '恋と恋するユートピア　ボーカルCD', 'Koi To Koi Suru Utopia Vocal CD', 'こいとこいするうーとぴあぼーかるCD', '', NULL, '2017-09-28 10:58:01', '2017-09-28 10:58:01', NULL, NULL),
-	(9, 8, 4, 0, '恋と恋するユートピア　ボーカルCD', 'Koi To Koi Suru Utopia Vocal CD', 'こいとこいするうーとぴあぼーかるCD', '', NULL, '2017-09-28 10:58:38', '2017-09-28 10:58:38', NULL, NULL),
-	(12, 4, 2, 0, 'TRIBAL LINK - L', 'TRIBAL LINK - L', 'TRIBAL LINK - L', '', NULL, '2017-10-08 06:21:58', '2017-10-08 06:21:58', NULL, NULL),
-	(13, 3, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', '', NULL, '2017-10-08 06:30:13', '2017-10-08 06:30:13', NULL, NULL),
-	(15, 13, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', '', NULL, '2017-10-12 08:44:40', '2017-10-12 08:44:40', NULL, NULL),
-	(16, 15, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', '', NULL, '2017-10-12 10:15:25', '2017-10-12 10:15:25', NULL, NULL),
-	(17, 12, 2, 0, 'TRIBAL LINK - L', 'TRIBAL LINK - L', 'TRIBAL LINK - L', '', NULL, '2017-10-12 10:18:54', '2017-10-12 10:18:54', NULL, NULL),
-	(18, 17, 2, 0, 'TRIBAL LINK - L', 'TRIBAL LINK - L', 'TRIBAL LINK - L', '', NULL, '2017-10-12 10:48:48', '2017-10-12 10:48:48', NULL, NULL),
-	(21, 18, 2, 0, 'TRIBAL LINK - L', 'TRIBAL LINK - L', 'TRIBAL LINK - L', '', NULL, '2017-10-12 11:06:37', '2017-10-12 11:06:37', NULL, NULL),
-	(22, 16, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', '', NULL, '2017-10-13 02:51:58', '2017-10-13 02:51:58', NULL, NULL),
-	(23, 22, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', '', NULL, '2017-10-13 02:54:29', '2017-10-13 02:54:29', NULL, NULL),
-	(24, 22, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-13 09:57:12', '2017-10-13 09:57:12', NULL, NULL),
-	(25, 24, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-13 09:58:44', '2017-10-13 09:58:44', NULL, NULL),
-	(26, 22, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-19 04:02:35', '2017-10-19 04:02:35', NULL, NULL),
-	(27, 22, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-19 04:02:36', '2017-10-19 04:02:36', NULL, NULL),
-	(28, 22, 1, 0, 'loz', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-19 04:03:30', '2017-10-19 04:03:30', NULL, NULL),
-	(29, NULL, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', 'koisuru_shoujo_85b6173a-4e47-4e57-8ccb-f0178445050a.jpg', NULL, '2017-10-21 07:51:14', '2017-10-21 07:51:22', 1, NULL),
-	(30, 29, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', 'koisuru_shoujo_85b6173a-4e47-4e57-8ccb-f0178445050a_b3a4de92-2f9c-4610-b73c-841f8c4a229b.jpg', NULL, '2017-10-21 07:57:53', '2017-10-21 07:57:53', 1, NULL),
-	(31, 30, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', 'koisuru_shoujo_85b6173a-4e47-4e57-8ccb-f0178445050a_b3a4de92-2f9c-4610-b73c-841f8c4a229b_f5c30dc3-50e5-41db-ae7d-bc4b3b020ba1.jpg', NULL, '2017-10-21 07:59:13', '2017-10-21 07:59:14', 1, 9),
-	(33, 31, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', 'koisuru_shoujo_85b6173a-4e47-4e57-8ccb-f0178445050a_b3a4de92-2f9c-4610-b73c-841f8c4a229b_f5c30dc3-50e5-41db-ae7d-bc4b3b020ba1_1a328f57-21f9-4445-9d75-07c0ee826eb9.jpg', NULL, '2017-10-21 08:00:47', '2017-10-21 08:00:47', 1, 9),
-	(34, 33, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', 'koisuru_shoujo_85b6173a-4e47-4e57-8ccb-f0178445050a_b3a4de92-2f9c-4610-b73c-841f8c4a229b_f5c30dc3-50e5-41db-ae7d-bc4b3b020ba1_1a328f57-21f9-4445-9d75-07c0ee826eb9_21383e8a-a929-40c1-82ce-2c42dbe3e11c.jpg', NULL, '2017-10-21 08:05:53', '2017-10-21 08:05:53', 1, 9),
-	(36, 33, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', 'koisuru_shoujo_85b6173a-4e47-4e57-8ccb-f0178445050a_b3a4de92-2f9c-4610-b73c-841f8c4a229b_f5c30dc3-50e5-41db-ae7d-bc4b3b020ba1_1a328f57-21f9-4445-9d75-07c0ee826eb9_50f34f99-0c2e-41d6-900b-2e6c86675b7c.jpg', NULL, '2017-10-21 08:09:41', '2017-10-21 08:09:41', 1, 9),
-	(37, 36, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', 'koisuru_shoujo_85b6173a-4e47-4e57-8ccb-f0178445050a_b3a4de92-2f9c-4610-b73c-841f8c4a229b_f5c30dc3-50e5-41db-ae7d-bc4b3b020ba1_1a328f57-21f9-4445-9d75-07c0ee826eb9_50f34f99-0c2e-41d6-900b-2e6c86675b7c_2962b1f0-9fba-4d3b-9290-faa030b272f2.jpg', NULL, '2017-10-21 08:11:30', '2017-10-21 08:11:30', 1, 10),
-	(38, 37, 6, 0, 'AAAAAAAAAAAAAAA', 'asdasdasd', 'asdasdasdasdasd', 'koisuru_shoujo_85b6173a-4e47-4e57-8ccb-f0178445050a_b3a4de92-2f9c-4610-b73c-841f8c4a229b_f5c30dc3-50e5-41db-ae7d-bc4b3b020ba1_1a328f57-21f9-4445-9d75-07c0ee826eb9_50f34f99-0c2e-41d6-900b-2e6c86675b7c_2962b1f0-9fba-4d3b-9290-faa030b272f2_.jpg', NULL, '2017-10-21 08:36:15', '2017-10-21 08:36:15', 1, 10),
-	(39, 38, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', 'koisuru_shoujo_85b6173a-4e47-4e57-8ccb-f0178445050a_b3a4de92-2f9c-4610-b73c-841f8c4a229b_f5c30dc3-50e5-41db-ae7d-bc4b3b020ba1_1a328f57-21f9-4445-9d75-07c0ee826eb9_50f34f99-0c2e-41d6-900b-2e6c86675b7c_2962b1f0-9fba-4d3b-9290-faa030b272f2__.jpg', NULL, '2017-10-21 08:37:53', '2017-10-21 08:37:53', 1, 10),
-	(40, 39, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', 'koisuru_shoujo_.jpg', NULL, '2017-10-21 08:40:20', '2017-10-21 08:40:21', 1, 10),
-	(41, 40, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', '43039f38-6fab-4d5c-ac9f-3f090cb55705.jpg', NULL, '2017-10-21 08:42:17', '2017-10-21 08:42:18', 1, 10),
-	(42, 41, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', '8024f105-4e7a-49ad-a03b-985ed08ae9f5.jpg', NULL, '2017-10-21 08:43:02', '2017-10-21 08:43:02', 1, 11),
-	(43, 42, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', 'e63d80ba-6624-4fc5-920f-833eade4d7dd.jpg', NULL, '2017-10-21 08:45:47', '2017-10-21 08:45:47', 1, 12);
+	(1, NULL, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-09-19 11:41:51', '2017-09-19 11:41:51', 1, NULL),
+	(3, 1, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-09-19 11:44:16', '2017-09-19 11:44:16', 1, NULL),
+	(4, NULL, 2, 0, 'TRIBAL LINK - L', 'TRIBAL LINK - L', 'TRIBAL LINK - L', NULL, NULL, '2017-09-19 13:26:17', '2017-09-19 13:26:17', 1, NULL),
+	(5, 4, 2, 0, 'TRIBAL LINK - R', 'TRIBAL LINK - L', 'TRIBAL LINK - L', NULL, NULL, '2017-09-19 13:26:53', '2017-09-19 13:26:53', 1, NULL),
+	(6, 3, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-09-23 07:29:00', '2017-09-23 07:29:00', 1, NULL),
+	(7, 3, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-09-25 15:16:26', '2017-09-25 15:16:26', 1, NULL),
+	(8, NULL, 4, 0, '恋と恋するユートピア　ボーカルCD', 'Koi To Koi Suru Utopia Vocal CD', 'こいとこいするうーとぴあぼーかるCD', NULL, NULL, '2017-09-28 10:58:01', '2017-09-28 10:58:01', 1, NULL),
+	(9, 8, 4, 0, '恋と恋するユートピア　ボーカルCD', 'Koi To Koi Suru Utopia Vocal CD', 'こいとこいするうーとぴあぼーかるCD', NULL, NULL, '2017-09-28 10:58:38', '2017-09-28 10:58:38', 1, NULL),
+	(12, 4, 2, 0, 'TRIBAL LINK - L', 'TRIBAL LINK - L', 'TRIBAL LINK - L', NULL, NULL, '2017-10-08 06:21:58', '2017-10-08 06:21:58', 1, NULL),
+	(13, 3, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-08 06:30:13', '2017-10-08 06:30:13', 1, NULL),
+	(15, 13, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-12 08:44:40', '2017-10-12 08:44:40', 1, NULL),
+	(16, 15, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-12 10:15:25', '2017-10-12 10:15:25', 1, NULL),
+	(17, 12, 2, 0, 'TRIBAL LINK - L', 'TRIBAL LINK - L', 'TRIBAL LINK - L', NULL, NULL, '2017-10-12 10:18:54', '2017-10-12 10:18:54', 1, NULL),
+	(18, 17, 2, 0, 'TRIBAL LINK - L', 'TRIBAL LINK - L', 'TRIBAL LINK - L', NULL, NULL, '2017-10-12 10:48:48', '2017-10-12 10:48:48', 1, NULL),
+	(21, 18, 2, 0, 'TRIBAL LINK - L', 'TRIBAL LINK - L', 'TRIBAL LINK - L', NULL, NULL, '2017-10-12 11:06:37', '2017-10-12 11:06:37', 1, NULL),
+	(22, 16, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-13 02:51:58', '2017-10-13 02:51:58', 1, NULL),
+	(23, 22, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-13 02:54:29', '2017-10-13 02:54:29', 1, NULL),
+	(24, 22, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-13 09:57:12', '2017-10-13 09:57:12', 1, NULL),
+	(25, 24, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-13 09:58:44', '2017-10-13 09:58:44', 1, NULL),
+	(26, 22, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-19 04:02:35', '2017-10-19 04:02:35', 1, NULL),
+	(27, 22, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-19 04:02:36', '2017-10-19 04:02:36', 1, NULL),
+	(28, 22, 1, 0, 'loz', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-19 04:03:30', '2017-10-19 04:03:30', 1, NULL),
+	(29, NULL, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', NULL, NULL, '2017-10-21 07:51:14', '2017-10-21 07:51:22', 1, NULL),
+	(30, 29, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', NULL, NULL, '2017-10-21 07:57:53', '2017-10-21 07:57:53', 1, NULL),
+	(31, 30, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', NULL, NULL, '2017-10-21 07:59:13', '2017-10-21 07:59:14', 1, 9),
+	(33, 31, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', NULL, NULL, '2017-10-21 08:00:47', '2017-10-21 08:00:47', 1, 9),
+	(34, 33, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', NULL, NULL, '2017-10-21 08:05:53', '2017-10-21 08:05:53', 1, 9),
+	(36, 33, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', NULL, NULL, '2017-10-21 08:09:41', '2017-10-21 08:09:41', 1, 9),
+	(37, 36, 6, 0, 'asdasdas', 'asdasdasd', 'asdasdasd', NULL, NULL, '2017-10-21 08:11:30', '2017-10-21 08:11:30', 1, 10),
+	(38, 37, 6, 0, 'AAAAAAAAAAAAAAA', 'asdasdasd', 'asdasdasdasdasd', NULL, NULL, '2017-10-21 08:36:15', '2017-10-21 08:36:15', 1, 10),
+	(39, 38, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', NULL, NULL, '2017-10-21 08:37:53', '2017-10-21 08:37:53', 1, 10),
+	(40, 39, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', NULL, NULL, '2017-10-21 08:40:20', '2017-10-21 08:40:21', 1, 10),
+	(41, 40, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', NULL, NULL, '2017-10-21 08:42:17', '2017-10-21 08:42:18', 1, 10),
+	(42, 41, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', NULL, NULL, '2017-10-21 08:43:02', '2017-10-21 08:43:02', 1, 11),
+	(43, 42, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', NULL, NULL, '2017-10-21 08:45:47', '2017-10-21 08:45:47', 1, 12),
+	(44, 22, 1, 0, '恋する少女と想いのキセキ Original Sound Track', 'Koi Suru Shoujo to Omoi no Kiseki Original Sound Track', 'こいするしょうじょとおもいのきせきOriginal Sound Track', NULL, NULL, '2017-10-22 07:49:09', '2017-10-22 07:49:14', 1, 13),
+	(45, 43, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', NULL, NULL, '2017-10-25 06:40:13', '2017-10-25 06:40:15', 1, 14);
 /*!40000 ALTER TABLE `db_album_versions` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_album_versions_discs
-DROP TABLE IF EXISTS `db_album_versions_discs`;
 CREATE TABLE IF NOT EXISTS `db_album_versions_discs` (
   `album_version_id` bigint(20) NOT NULL,
   `disc_id` bigint(20) NOT NULL,
   KEY `index_db_album_versions_discs_on_album_version_id_and_disc_id` (`album_version_id`,`disc_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_album_versions_discs: ~10 rows (approximately)
+-- Dumping data for table nyoro2_development.db_album_versions_discs: ~21 rows (approximately)
 DELETE FROM `db_album_versions_discs`;
 /*!40000 ALTER TABLE `db_album_versions_discs` DISABLE KEYS */;
 INSERT INTO `db_album_versions_discs` (`album_version_id`, `disc_id`) VALUES
@@ -214,17 +209,19 @@ INSERT INTO `db_album_versions_discs` (`album_version_id`, `disc_id`) VALUES
 	(40, 5),
 	(41, 5),
 	(42, 5),
-	(43, 5);
+	(43, 5),
+	(44, 2),
+	(45, 5);
 /*!40000 ALTER TABLE `db_album_versions_discs` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_companies
-DROP TABLE IF EXISTS `db_companies`;
 CREATE TABLE IF NOT EXISTS `db_companies` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `latest_version_id` bigint(20) DEFAULT NULL,
   `marked` tinyint(1) DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `comments_count` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `index_db_companies_on_latest_version_id` (`latest_version_id`),
   KEY `index_db_companies_on_marked` (`marked`)
@@ -233,13 +230,12 @@ CREATE TABLE IF NOT EXISTS `db_companies` (
 -- Dumping data for table nyoro2_development.db_companies: ~2 rows (approximately)
 DELETE FROM `db_companies`;
 /*!40000 ALTER TABLE `db_companies` DISABLE KEYS */;
-INSERT INTO `db_companies` (`id`, `latest_version_id`, `marked`, `created_at`, `updated_at`) VALUES
-	(1, 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-	(5, 6, 0, '2017-10-13 04:10:19', '2017-10-15 04:10:05');
+INSERT INTO `db_companies` (`id`, `latest_version_id`, `marked`, `created_at`, `updated_at`, `comments_count`) VALUES
+	(1, 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
+	(5, 6, 0, '2017-10-13 04:10:19', '2017-10-25 07:24:18', 1);
 /*!40000 ALTER TABLE `db_companies` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_company_versions
-DROP TABLE IF EXISTS `db_company_versions`;
 CREATE TABLE IF NOT EXISTS `db_company_versions` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `company_id` bigint(20) DEFAULT NULL,
@@ -262,19 +258,19 @@ CREATE TABLE IF NOT EXISTS `db_company_versions` (
   KEY `index_db_company_versions_on_name_pronounce` (`name_pronounce`),
   KEY `index_db_company_versions_on_established_at` (`established_at`),
   KEY `index_db_company_versions_on_editor_id` (`editor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_company_versions: ~3 rows (approximately)
+-- Dumping data for table nyoro2_development.db_company_versions: ~4 rows (approximately)
 DELETE FROM `db_company_versions`;
 /*!40000 ALTER TABLE `db_company_versions` DISABLE KEYS */;
 INSERT INTO `db_company_versions` (`id`, `company_id`, `previous_version_id`, `country_id`, `marked`, `name`, `name_en`, `name_pronounce`, `established_at`, `note`, `created_at`, `updated_at`, `editor_id`) VALUES
-	(1, 1, NULL, 1, 0, 'sugar pot', 'sugar pot', 'sugar pot', NULL, NULL, '2017-10-13 03:14:53', '2017-10-13 03:14:53', NULL),
-	(5, 5, NULL, 1, 0, '株式会社ビジュアルアーツ', 'Visual Art\'s Co., Ltd.', 'かぶしきがいしゃびじゅあるあーと', NULL, '', '2017-10-13 04:10:19', '2017-10-13 04:10:19', NULL),
-	(6, 5, 6, 1, 0, '株式会社ビジュアルアーツ', 'Visual Art\'s Co., Ltd.', 'かぶしきがいしゃびじゅあるあーと', '1991-01-01', '', '2017-10-13 09:47:06', '2017-10-13 09:47:07', NULL);
+	(1, 1, NULL, 1, 0, 'sugar pot', 'sugar pot', 'sugar pot', NULL, NULL, '2017-10-13 03:14:53', '2017-10-13 03:14:53', 1),
+	(5, 5, NULL, 1, 0, '株式会社ビジュアルアーツ', 'Visual Art\'s Co., Ltd.', 'かぶしきがいしゃびじゅあるあーと', NULL, '', '2017-10-13 04:10:19', '2017-10-13 04:10:19', 1),
+	(6, 5, 5, 1, 0, '株式会社ビジュアルアーツ', 'Visual Art\'s Co., Ltd.', 'かぶしきがいしゃびじゅあるあーと', '1991-01-01', '', '2017-10-13 09:47:06', '2017-10-13 09:47:07', 1),
+	(7, 5, 6, 1, 0, '株式会社ビジュアル', 'Visual Art\'s Co., Ltd.', 'かぶしきがいしゃびじゅあるあーと', '1991-01-01', '', '2017-10-25 07:23:07', '2017-10-25 07:23:07', 1);
 /*!40000 ALTER TABLE `db_company_versions` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_discs
-DROP TABLE IF EXISTS `db_discs`;
 CREATE TABLE IF NOT EXISTS `db_discs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `marked` tinyint(1) DEFAULT '0',
@@ -282,48 +278,50 @@ CREATE TABLE IF NOT EXISTS `db_discs` (
   `title` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `editor_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_db_discs_on_marked` (`marked`),
-  KEY `index_db_discs_on_number` (`number`)
+  KEY `index_db_discs_on_number` (`number`),
+  KEY `index_db_discs_on_editor_id` (`editor_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_discs: ~2 rows (approximately)
+-- Dumping data for table nyoro2_development.db_discs: ~3 rows (approximately)
 DELETE FROM `db_discs`;
 /*!40000 ALTER TABLE `db_discs` DISABLE KEYS */;
-INSERT INTO `db_discs` (`id`, `marked`, `number`, `title`, `created_at`, `updated_at`) VALUES
-	(2, 0, 1, '', '2017-09-19 11:44:16', '2017-09-19 11:44:16'),
-	(3, 0, 1, '', '2017-09-28 10:58:38', '2017-09-28 10:58:38'),
-	(5, 0, 1, '', '2017-10-21 08:00:46', '2017-10-21 08:00:46');
+INSERT INTO `db_discs` (`id`, `marked`, `number`, `title`, `created_at`, `updated_at`, `editor_id`) VALUES
+	(2, 0, 1, '', '2017-09-19 11:44:16', '2017-09-19 11:44:16', 1),
+	(3, 0, 1, '', '2017-09-28 10:58:38', '2017-09-28 10:58:38', 1),
+	(5, 0, 1, '', '2017-10-21 08:00:46', '2017-10-21 08:00:46', 1);
 /*!40000 ALTER TABLE `db_discs` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_people
-DROP TABLE IF EXISTS `db_people`;
 CREATE TABLE IF NOT EXISTS `db_people` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `latest_version_id` bigint(20) DEFAULT NULL,
   `marked` tinyint(1) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `comments_count` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `index_db_people_on_latest_version_id` (`latest_version_id`),
   KEY `index_db_people_on_marked` (`marked`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_people: ~7 rows (approximately)
+-- Dumping data for table nyoro2_development.db_people: ~8 rows (approximately)
 DELETE FROM `db_people`;
 /*!40000 ALTER TABLE `db_people` DISABLE KEYS */;
-INSERT INTO `db_people` (`id`, `latest_version_id`, `marked`, `created_at`, `updated_at`) VALUES
-	(7, 13, NULL, '2017-09-21 10:18:01', '2017-09-21 13:14:16'),
-	(8, 8, NULL, '2017-09-21 11:12:36', '2017-09-21 11:12:36'),
-	(9, 14, NULL, '2017-09-22 06:06:09', '2017-09-22 06:06:09'),
-	(10, 15, NULL, '2017-09-28 11:01:32', '2017-09-28 11:01:32'),
-	(11, 16, NULL, '2017-09-28 11:02:20', '2017-09-28 11:02:20'),
-	(12, 17, NULL, '2017-09-28 11:04:39', '2017-09-28 11:04:39'),
-	(13, 18, NULL, '2017-09-28 11:05:25', '2017-09-28 11:05:25');
+INSERT INTO `db_people` (`id`, `latest_version_id`, `marked`, `created_at`, `updated_at`, `comments_count`) VALUES
+	(7, 13, NULL, '2017-09-21 10:18:01', '2017-10-23 07:31:59', 1),
+	(8, 8, NULL, '2017-09-21 11:12:36', '2017-09-21 11:12:36', 0),
+	(9, 14, NULL, '2017-09-22 06:06:09', '2017-09-22 06:06:09', 0),
+	(10, 15, NULL, '2017-09-28 11:01:32', '2017-09-28 11:01:32', 0),
+	(11, 16, NULL, '2017-09-28 11:02:20', '2017-09-28 11:02:20', 0),
+	(12, 17, NULL, '2017-09-28 11:04:39', '2017-09-28 11:04:39', 0),
+	(13, 18, NULL, '2017-09-28 11:05:25', '2017-09-28 11:05:25', 0),
+	(16, 26, NULL, '2017-10-22 02:38:27', '2017-10-22 02:48:16', 0);
 /*!40000 ALTER TABLE `db_people` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_person_versions
-DROP TABLE IF EXISTS `db_person_versions`;
 CREATE TABLE IF NOT EXISTS `db_person_versions` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `person_id` bigint(20) DEFAULT NULL,
@@ -349,28 +347,31 @@ CREATE TABLE IF NOT EXISTS `db_person_versions` (
   KEY `index_db_person_versions_on_name_pronounce` (`name_pronounce`),
   KEY `index_db_person_versions_on_country_id` (`country_id`),
   KEY `index_db_person_versions_on_editor_id` (`editor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_person_versions: ~12 rows (approximately)
+-- Dumping data for table nyoro2_development.db_person_versions: ~16 rows (approximately)
 DELETE FROM `db_person_versions`;
 /*!40000 ALTER TABLE `db_person_versions` DISABLE KEYS */;
 INSERT INTO `db_person_versions` (`id`, `person_id`, `previous_version_id`, `marked`, `name`, `name_en`, `name_pronounce`, `birthday`, `website`, `twitter`, `note`, `created_at`, `updated_at`, `gender`, `blood_type`, `country_id`, `editor_id`) VALUES
-	(7, 7, NULL, 0, 'nao', 'nao', 'なお', '1985-01-26', '', 'http://orz-nao.com/', NULL, '2017-09-21 10:18:01', '2017-09-21 10:18:01', 0, 'O', NULL, NULL),
-	(8, 8, NULL, 0, 'nao', 'nao', 'なお', '1985-01-26', '', 'http://orz-nao.com/', NULL, '2017-09-21 11:12:36', '2017-09-21 11:12:36', 0, 'O', NULL, NULL),
-	(9, 7, 7, 0, 'na', 'nao', 'なお', '1985-01-26', '', 'http://orz-nao.com/', NULL, '2017-09-21 11:15:49', '2017-09-21 11:15:49', 0, 'O', NULL, NULL),
-	(10, 7, 9, 0, 'ミルノ純', 'Miruno Jun', 'みるのじゅん', NULL, '', 'http://www.synchronist.net/pages/265743/page_201601070927', NULL, '2017-09-21 12:56:21', '2017-09-21 12:56:21', 0, 'O', NULL, NULL),
-	(11, 7, 10, 0, 'ミルノ純', 'Miruno Jun', 'みるのじゅん', '0100-09-14', '', 'http://www.synchronist.net/pages/265743/page_201601070927', NULL, '2017-09-21 13:01:21', '2017-09-21 13:01:21', 0, 'O', NULL, NULL),
-	(12, 7, 11, 0, 'ミルノ純', 'Miruno Jun', 'みるのじゅん', '0100-09-14', '', 'http://www.synchronist.net/pages/265743/page_201601070927', NULL, '2017-09-21 13:14:02', '2017-09-21 13:14:02', NULL, '', NULL, NULL),
-	(13, 7, 12, 0, 'ミルノ純', 'Miruno Jun', 'みるのじゅん', '0100-09-14', '', 'http://www.synchronist.net/pages/265743/page_201601070927', NULL, '2017-09-21 13:14:16', '2017-09-21 13:14:16', 0, 'O', NULL, NULL),
-	(14, 9, NULL, 0, '山下慎一狼', 'Yamashita Junichirou', 'やましたしんいちろう', '1980-02-14', '', 'https://ameblo.jp/phoenrill/', NULL, '2017-09-22 06:06:09', '2017-09-22 06:06:09', 1, 'AB', NULL, NULL),
-	(15, 10, NULL, 0, '華憐', 'Karen', 'かれん', '0100-10-25', '', '', NULL, '2017-09-28 11:01:32', '2017-09-28 11:01:32', 0, '', NULL, NULL),
-	(16, 11, NULL, 0, '電気', 'Denki', 'でんき', '0100-03-25', '', '', NULL, '2017-09-28 11:02:20', '2017-09-28 11:02:20', 1, '', NULL, NULL),
-	(17, 12, NULL, 0, '小春めう', 'Koharu Meu', 'こはるめう', NULL, '', '', NULL, '2017-09-28 11:04:39', '2017-09-28 11:04:39', 0, 'A', NULL, NULL),
-	(18, 13, NULL, 0, '春川あかり', 'Harukawa Akari', 'はるかわあかり', NULL, '', '', NULL, '2017-09-28 11:05:25', '2017-09-28 11:05:25', 0, '', NULL, NULL);
+	(7, 7, NULL, 0, 'nao', 'nao', 'なお', '1985-01-26', '', 'http://orz-nao.com/', NULL, '2017-09-21 10:18:01', '2017-09-21 10:18:01', 0, 'O', NULL, 1),
+	(8, 8, NULL, 0, 'nao', 'nao', 'なお', '1985-01-26', '', 'http://orz-nao.com/', NULL, '2017-09-21 11:12:36', '2017-09-21 11:12:36', 0, 'O', NULL, 1),
+	(9, 7, 7, 0, 'na', 'nao', 'なお', '1985-01-26', '', 'http://orz-nao.com/', NULL, '2017-09-21 11:15:49', '2017-09-21 11:15:49', 0, 'O', NULL, 1),
+	(10, 7, 9, 0, 'ミルノ純', 'Miruno Jun', 'みるのじゅん', NULL, '', 'http://www.synchronist.net/pages/265743/page_201601070927', NULL, '2017-09-21 12:56:21', '2017-09-21 12:56:21', 0, 'O', NULL, 1),
+	(11, 7, 10, 0, 'ミルノ純', 'Miruno Jun', 'みるのじゅん', '0100-09-14', '', 'http://www.synchronist.net/pages/265743/page_201601070927', NULL, '2017-09-21 13:01:21', '2017-09-21 13:01:21', 0, 'O', NULL, 1),
+	(12, 7, 11, 0, 'ミルノ純', 'Miruno Jun', 'みるのじゅん', '0100-09-14', '', 'http://www.synchronist.net/pages/265743/page_201601070927', NULL, '2017-09-21 13:14:02', '2017-09-21 13:14:02', NULL, '', NULL, 1),
+	(13, 7, 12, 0, 'ミルノ純', 'Miruno Jun', 'みるのじゅん', '0100-09-14', '', 'http://www.synchronist.net/pages/265743/page_201601070927', NULL, '2017-09-21 13:14:16', '2017-09-21 13:14:16', 0, 'O', NULL, 1),
+	(14, 9, NULL, 0, '山下慎一狼', 'Yamashita Junichirou', 'やましたしんいちろう', '1980-02-14', '', 'https://ameblo.jp/phoenrill/', NULL, '2017-09-22 06:06:09', '2017-09-22 06:06:09', 1, 'AB', NULL, 1),
+	(15, 10, NULL, 0, '華憐', 'Karen', 'かれん', '0100-10-25', '', '', NULL, '2017-09-28 11:01:32', '2017-09-28 11:01:32', 0, '', NULL, 1),
+	(16, 11, NULL, 0, '電気', 'Denki', 'でんき', '0100-03-25', '', '', NULL, '2017-09-28 11:02:20', '2017-09-28 11:02:20', 1, '', NULL, 1),
+	(17, 12, NULL, 0, '小春めう', 'Koharu Meu', 'こはるめう', NULL, '', '', NULL, '2017-09-28 11:04:39', '2017-09-28 11:04:39', 0, 'A', NULL, 1),
+	(18, 13, NULL, 0, '春川あかり', 'Harukawa Akari', 'はるかわあかり', NULL, '', '', NULL, '2017-09-28 11:05:25', '2017-09-28 11:05:25', 0, '', NULL, 1),
+	(22, 16, NULL, 0, 'dasasdasddasasd', 'sdaasdasdasdads', 'asdasdsads', NULL, '', '', NULL, '2017-10-22 02:38:27', '2017-10-22 02:38:27', NULL, '', NULL, 1),
+	(23, 16, 22, 0, 'dasasdasddasasd', 'sdaasdasdasdads', '123', NULL, '', '', NULL, '2017-10-22 02:39:12', '2017-10-22 02:39:12', NULL, '', NULL, 1),
+	(25, 16, 23, 0, '123asdassa', 'sdaasdasdasdads', '123', NULL, '', '', NULL, '2017-10-22 02:46:53', '2017-10-22 02:46:53', NULL, '', NULL, 1),
+	(26, 16, 26, 0, 'AAAA', 'sdaasdasdasdads', '123', NULL, '', '', NULL, '2017-10-22 02:48:16', '2017-10-22 02:48:16', NULL, '', NULL, 1);
 /*!40000 ALTER TABLE `db_person_versions` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_releases
-DROP TABLE IF EXISTS `db_releases`;
 CREATE TABLE IF NOT EXISTS `db_releases` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `price` float DEFAULT NULL,
@@ -382,24 +383,28 @@ CREATE TABLE IF NOT EXISTS `db_releases` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `publisher_id` bigint(20) DEFAULT NULL,
+  `editor_id` bigint(20) DEFAULT NULL,
+  `marked` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `index_db_releases_on_released_at` (`released_at`),
   KEY `index_db_releases_on_catalog_number` (`catalog_number`),
-  KEY `index_db_releases_on_publisher_id` (`publisher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  KEY `index_db_releases_on_publisher_id` (`publisher_id`),
+  KEY `index_db_releases_on_editor_id` (`editor_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.db_releases: ~6 rows (approximately)
 DELETE FROM `db_releases`;
 /*!40000 ALTER TABLE `db_releases` DISABLE KEYS */;
-INSERT INTO `db_releases` (`id`, `price`, `currency`, `format`, `released_at`, `catalog_number`, `note`, `created_at`, `updated_at`, `publisher_id`) VALUES
-	(9, 12123, 'JPY', 'CD', NULL, '1212321', NULL, '2017-10-21 07:59:14', '2017-10-21 07:59:14', 1),
-	(10, 12123, 'JPY', 'CD', '2017-10-11', '1212321', NULL, '2017-10-21 08:11:30', '2017-10-21 08:11:30', 1),
-	(11, 12123, 'JPY', 'CD', '2017-10-11', '1212321', NULL, '2017-10-21 08:43:02', '2017-10-21 08:43:02', 5),
-	(12, 12123, 'JPY', 'CD', '2017-10-11', '1212321', NULL, '2017-10-21 08:45:47', '2017-10-21 08:45:47', 1);
+INSERT INTO `db_releases` (`id`, `price`, `currency`, `format`, `released_at`, `catalog_number`, `note`, `created_at`, `updated_at`, `publisher_id`, `editor_id`, `marked`) VALUES
+	(9, 12123, 'JPY', 'CD', NULL, '1212321', NULL, '2017-10-21 07:59:14', '2017-10-21 07:59:14', 1, 1, 0),
+	(10, 12123, 'JPY', 'CD', '2017-10-11', '1212321', NULL, '2017-10-21 08:11:30', '2017-10-21 08:11:30', 1, 1, 0),
+	(11, 12123, 'JPY', 'CD', '2017-10-11', '1212321', NULL, '2017-10-21 08:43:02', '2017-10-21 08:43:02', 5, 1, 0),
+	(12, 12123, 'JPY', 'CD', '2017-10-11', '1212321', NULL, '2017-10-21 08:45:47', '2017-10-21 08:45:47', 1, 1, 0),
+	(13, NULL, '', 'CD', '2014-02-28', '', NULL, '2017-10-22 07:49:14', '2017-10-22 07:49:14', 1, 1, 0),
+	(14, 12123, 'JPY', 'CD', '2017-10-11', '1111', NULL, '2017-10-25 06:40:15', '2017-10-25 06:40:15', 1, 1, 0);
 /*!40000 ALTER TABLE `db_releases` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_songs
-DROP TABLE IF EXISTS `db_songs`;
 CREATE TABLE IF NOT EXISTS `db_songs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `disc_id` bigint(20) DEFAULT NULL,
@@ -407,25 +412,25 @@ CREATE TABLE IF NOT EXISTS `db_songs` (
   `marked` tinyint(1) DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `comments_count` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `index_db_songs_on_disc_id` (`disc_id`),
   KEY `index_db_songs_on_latest_version_id` (`latest_version_id`),
   KEY `index_db_songs_on_marked` (`marked`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_songs: ~3 rows (approximately)
+-- Dumping data for table nyoro2_development.db_songs: ~5 rows (approximately)
 DELETE FROM `db_songs`;
 /*!40000 ALTER TABLE `db_songs` DISABLE KEYS */;
-INSERT INTO `db_songs` (`id`, `disc_id`, `latest_version_id`, `marked`, `created_at`, `updated_at`) VALUES
-	(1, 2, 11, 0, '2017-09-19 11:45:05', '2017-09-23 04:07:59'),
-	(2, 2, 2, 0, '2017-09-19 11:48:21', '2017-09-19 11:48:21'),
-	(3, 3, 17, 0, '2017-09-28 11:00:01', '2017-09-28 11:07:04'),
-	(6, 5, 18, 0, '2017-10-21 08:03:57', '2017-10-21 08:03:57'),
-	(7, 5, 19, 0, '2017-10-21 08:06:58', '2017-10-21 08:06:58');
+INSERT INTO `db_songs` (`id`, `disc_id`, `latest_version_id`, `marked`, `created_at`, `updated_at`, `comments_count`) VALUES
+	(1, 2, 11, 0, '2017-09-19 11:45:05', '2017-10-23 07:32:04', 3),
+	(2, 2, 2, 0, '2017-09-19 11:48:21', '2017-09-19 11:48:21', 0),
+	(3, 3, 17, 0, '2017-09-28 11:00:01', '2017-09-28 11:07:04', 0),
+	(6, 5, 21, 0, '2017-10-21 08:03:57', '2017-10-25 06:38:50', 0),
+	(7, 5, 19, 0, '2017-10-21 08:06:58', '2017-10-21 08:06:58', 0);
 /*!40000 ALTER TABLE `db_songs` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_song_versions
-DROP TABLE IF EXISTS `db_song_versions`;
 CREATE TABLE IF NOT EXISTS `db_song_versions` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `previous_version_id` bigint(20) DEFAULT NULL,
@@ -446,9 +451,9 @@ CREATE TABLE IF NOT EXISTS `db_song_versions` (
   KEY `index_db_song_versions_on_title_pronounce` (`title_pronounce`),
   KEY `index_db_song_versions_on_number` (`number`),
   KEY `index_db_song_versions_on_editor_id` (`editor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_song_versions: ~17 rows (approximately)
+-- Dumping data for table nyoro2_development.db_song_versions: ~21 rows (approximately)
 DELETE FROM `db_song_versions`;
 /*!40000 ALTER TABLE `db_song_versions` DISABLE KEYS */;
 INSERT INTO `db_song_versions` (`id`, `previous_version_id`, `song_id`, `marked`, `title`, `title_en`, `title_pronounce`, `length`, `number`, `created_at`, `updated_at`, `editor_id`) VALUES
@@ -470,18 +475,19 @@ INSERT INTO `db_song_versions` (`id`, `previous_version_id`, `song_id`, `marked`
 	(16, 15, 3, 0, '蒸熱♨ユートピア', 'Jounetsu ♨ yuutopia', 'じょうねゆーとぴあ', '1:38', 1, '2017-09-28 11:06:48', '2017-09-28 11:06:48', NULL),
 	(17, 16, 3, 0, '蒸熱♨ユートピア', 'Jounetsu ♨ yuutopia', 'じょうねゆーとぴあ', '1:38', 1, '2017-09-28 11:07:04', '2017-09-28 11:07:04', NULL),
 	(18, NULL, 6, 0, 'asdsadsa', 'asdasdasdads', 'asdasdasd', '3:25', 1, '2017-10-21 08:03:57', '2017-10-21 08:03:57', 1),
-	(19, NULL, 7, 0, 'asasaasa', 'saasasdsaa', 'sasasaasas', '3:44', 2, '2017-10-21 08:06:58', '2017-10-21 08:06:58', 1);
+	(19, NULL, 7, 0, 'asasaasa', 'saasasdsaa', 'sasasaasas', '3:44', 2, '2017-10-21 08:06:58', '2017-10-21 08:06:58', 1),
+	(20, 18, 6, 0, 'asdsadsa', 'asdasdasdads', 'asdasdasd', '3:25', 1, '2017-10-25 06:38:39', '2017-10-25 06:38:39', 1),
+	(21, 20, 6, 0, 'asdsadsa', 'asdasdasdads', 'asdasdasd', '3:25', 1, '2017-10-25 06:38:50', '2017-10-25 06:38:50', 1);
 /*!40000 ALTER TABLE `db_song_versions` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_song_versions_staffs
-DROP TABLE IF EXISTS `db_song_versions_staffs`;
 CREATE TABLE IF NOT EXISTS `db_song_versions_staffs` (
   `song_version_id` bigint(20) NOT NULL,
   `staff_id` bigint(20) NOT NULL,
   KEY `index_db_song_versions_staffs_on_song_version_id_and_staff_id` (`song_version_id`,`staff_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_song_versions_staffs: ~38 rows (approximately)
+-- Dumping data for table nyoro2_development.db_song_versions_staffs: ~41 rows (approximately)
 DELETE FROM `db_song_versions_staffs`;
 /*!40000 ALTER TABLE `db_song_versions_staffs` DISABLE KEYS */;
 INSERT INTO `db_song_versions_staffs` (`song_version_id`, `staff_id`) VALUES
@@ -522,11 +528,13 @@ INSERT INTO `db_song_versions_staffs` (`song_version_id`, `staff_id`) VALUES
 	(17, 8),
 	(17, 9),
 	(17, 10),
-	(17, 11);
+	(17, 11),
+	(20, 12),
+	(21, 12),
+	(21, 13);
 /*!40000 ALTER TABLE `db_song_versions_staffs` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_staffs
-DROP TABLE IF EXISTS `db_staffs`;
 CREATE TABLE IF NOT EXISTS `db_staffs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `latest_version_id` bigint(20) DEFAULT NULL,
@@ -536,9 +544,9 @@ CREATE TABLE IF NOT EXISTS `db_staffs` (
   PRIMARY KEY (`id`),
   KEY `index_db_staffs_on_latest_version_id` (`latest_version_id`),
   KEY `index_db_staffs_on_marked` (`marked`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_staffs: ~11 rows (approximately)
+-- Dumping data for table nyoro2_development.db_staffs: ~13 rows (approximately)
 DELETE FROM `db_staffs`;
 /*!40000 ALTER TABLE `db_staffs` DISABLE KEYS */;
 INSERT INTO `db_staffs` (`id`, `latest_version_id`, `marked`, `created_at`, `updated_at`) VALUES
@@ -552,11 +560,12 @@ INSERT INTO `db_staffs` (`id`, `latest_version_id`, `marked`, `created_at`, `upd
 	(8, 9, 0, '2017-09-28 11:06:25', '2017-09-28 11:06:25'),
 	(9, 10, 0, '2017-09-28 11:06:34', '2017-09-28 11:06:34'),
 	(10, 11, 0, '2017-09-28 11:06:48', '2017-09-28 11:06:48'),
-	(11, 12, 0, '2017-09-28 11:07:04', '2017-09-28 11:07:04');
+	(11, 12, 0, '2017-09-28 11:07:04', '2017-09-28 11:07:04'),
+	(12, 19, 0, '2017-10-25 06:38:38', '2017-10-25 06:39:23'),
+	(13, 18, 0, '2017-10-25 06:38:50', '2017-10-25 06:38:50');
 /*!40000 ALTER TABLE `db_staffs` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_staff_versions
-DROP TABLE IF EXISTS `db_staff_versions`;
 CREATE TABLE IF NOT EXISTS `db_staff_versions` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `staff_id` bigint(20) DEFAULT NULL,
@@ -578,9 +587,9 @@ CREATE TABLE IF NOT EXISTS `db_staff_versions` (
   KEY `index_db_staff_versions_on_person_id` (`person_id`),
   KEY `index_db_staff_versions_on_alias_pronounce` (`alias_pronounce`),
   KEY `index_db_staff_versions_on_editor_id` (`editor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.db_staff_versions: ~16 rows (approximately)
+-- Dumping data for table nyoro2_development.db_staff_versions: ~19 rows (approximately)
 DELETE FROM `db_staff_versions`;
 /*!40000 ALTER TABLE `db_staff_versions` DISABLE KEYS */;
 INSERT INTO `db_staff_versions` (`id`, `staff_id`, `previous_version_id`, `marked`, `person_id`, `position`, `alias`, `alias_en`, `alias_pronounce`, `note`, `created_at`, `updated_at`, `editor_id`) VALUES
@@ -599,11 +608,13 @@ INSERT INTO `db_staff_versions` (`id`, `staff_id`, `previous_version_id`, `marke
 	(13, 7, 8, 0, 10, 'Vocal', 'asdasd', '', '', NULL, '2017-09-28 12:03:16', '2017-09-28 12:03:16', NULL),
 	(14, 7, 13, 0, 10, 'Vocal', 'asdasdasdasdsa', '', '', NULL, '2017-09-28 12:04:36', '2017-09-28 12:04:36', NULL),
 	(15, 7, 14, 0, 10, 'Vocal', 'asdasdasdasdsaasdasdasd', '', '', NULL, '2017-09-28 12:10:41', '2017-09-28 12:10:41', NULL),
-	(16, 7, 15, 0, 10, 'Vocal', 'asdasdasdasdsaasdasdasdasdadasd', '', '', NULL, '2017-09-28 12:22:39', '2017-09-28 12:22:39', NULL);
+	(16, 7, 15, 0, 10, 'Vocal', 'asdasdasdasdsaasdasdasdasdadasd', '', '', NULL, '2017-09-28 12:22:39', '2017-09-28 12:22:39', NULL),
+	(17, 12, NULL, 0, 8, 'Lyrics', '', '', '', NULL, '2017-10-25 06:38:38', '2017-10-25 06:38:38', 1),
+	(18, 13, NULL, 0, 8, 'Vocal', '', '', '', NULL, '2017-10-25 06:38:50', '2017-10-25 06:38:50', 1),
+	(19, 12, 17, 0, 8, 'Arrange', '', '', '', NULL, '2017-10-25 06:39:23', '2017-10-25 06:39:23', 1);
 /*!40000 ALTER TABLE `db_staff_versions` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.db_tags
-DROP TABLE IF EXISTS `db_tags`;
 CREATE TABLE IF NOT EXISTS `db_tags` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
@@ -612,21 +623,149 @@ CREATE TABLE IF NOT EXISTS `db_tags` (
   `description` text,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `comments_count` int(11) DEFAULT '0',
+  `editor_id` bigint(20) DEFAULT NULL,
+  `marked` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `index_db_tags_on_name_pronounce` (`name_pronounce`)
+  KEY `index_db_tags_on_name_pronounce` (`name_pronounce`),
+  KEY `index_db_tags_on_editor_id` (`editor_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.db_tags: ~3 rows (approximately)
 DELETE FROM `db_tags`;
 /*!40000 ALTER TABLE `db_tags` DISABLE KEYS */;
-INSERT INTO `db_tags` (`id`, `name`, `name_en`, `name_pronounce`, `description`, `created_at`, `updated_at`) VALUES
-	(1, 'オリジナル・サウンドトラック', 'Original Soundtrack', 'おりじなるさうんどとらっく', 'ゲームやムービのサウンドトラック', '2017-09-24 04:17:39', '2017-09-24 04:17:39'),
-	(2, 'コマーシャル', 'Commercial', 'こまーしゃる', '', '2017-09-25 14:22:55', '2017-09-25 14:22:55'),
-	(3, 'プレオーダーボーナス', 'Preorder Bonus', 'プレオーダーボーナス', '', '2017-09-25 14:23:43', '2017-09-25 14:23:43');
+INSERT INTO `db_tags` (`id`, `name`, `name_en`, `name_pronounce`, `description`, `created_at`, `updated_at`, `comments_count`, `editor_id`, `marked`) VALUES
+	(1, 'オリジナル・サウンドトラック', 'Original Soundtrack', 'おりじなるさうんどとらっく', 'ゲームやムービのサウンドトラック', '2017-09-24 04:17:39', '2017-10-23 07:32:05', 1, 1, 0),
+	(2, 'コマーシャル', 'Commercial', 'こまーしゃる', '', '2017-09-25 14:22:55', '2017-09-25 14:22:55', 0, 1, 0),
+	(3, 'プレオーダーボーナス', 'Preorder Bonus', 'プレオーダーボーナス', '', '2017-09-25 14:23:43', '2017-09-25 14:23:43', 0, 1, 0);
 /*!40000 ALTER TABLE `db_tags` ENABLE KEYS */;
 
+-- Dumping structure for table nyoro2_development.ec_categories
+CREATE TABLE IF NOT EXISTS `ec_categories` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `parent_id` bigint(20) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` text,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_ec_categories_on_parent_id` (`parent_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_categories: ~8 rows (approximately)
+DELETE FROM `ec_categories`;
+/*!40000 ALTER TABLE `ec_categories` DISABLE KEYS */;
+INSERT INTO `ec_categories` (`id`, `parent_id`, `name`, `description`, `created_at`, `updated_at`) VALUES
+	(2, NULL, 'フィギュア', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(3, NULL, 'ゲーム', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(4, 3, 'PCゲーム', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(5, 3, 'PlayStationゲーム', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(6, NULL, 'DVD/CD', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(7, 6, '音楽', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(8, 6, 'AV', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(9, NULL, '他', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `ec_categories` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_products
+CREATE TABLE IF NOT EXISTS `ec_products` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `category_id` bigint(20) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `shop_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_ec_products_on_category_id` (`category_id`),
+  KEY `index_ec_products_on_shop_id` (`shop_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_products: ~1 rows (approximately)
+DELETE FROM `ec_products`;
+/*!40000 ALTER TABLE `ec_products` DISABLE KEYS */;
+INSERT INTO `ec_products` (`id`, `category_id`, `name`, `description`, `created_at`, `updated_at`, `shop_id`) VALUES
+	(1, 7, '恋するドールと想いのキセキOriginal Soundtrack', NULL, '2017-11-05 10:57:29', '2017-11-05 10:57:29', 1);
+/*!40000 ALTER TABLE `ec_products` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_product_colors
+CREATE TABLE IF NOT EXISTS `ec_product_colors` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `price` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_ec_product_colors_on_product_id` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_product_colors: ~1 rows (approximately)
+DELETE FROM `ec_product_colors`;
+/*!40000 ALTER TABLE `ec_product_colors` DISABLE KEYS */;
+INSERT INTO `ec_product_colors` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'Default', '200000', '2017-11-05 10:58:22', '2017-11-05 10:58:22');
+/*!40000 ALTER TABLE `ec_product_colors` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_product_discounts
+CREATE TABLE IF NOT EXISTS `ec_product_discounts` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) DEFAULT NULL,
+  `shop` float DEFAULT '0',
+  `system` float DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_ec_product_discounts_on_product_id` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_product_discounts: ~0 rows (approximately)
+DELETE FROM `ec_product_discounts`;
+/*!40000 ALTER TABLE `ec_product_discounts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_product_discounts` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_product_images
+CREATE TABLE IF NOT EXISTS `ec_product_images` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `nsfw` tinyint(1) DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_ec_product_images_on_product_id` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_product_images: ~0 rows (approximately)
+DELETE FROM `ec_product_images`;
+/*!40000 ALTER TABLE `ec_product_images` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_product_images` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_shops
+CREATE TABLE IF NOT EXISTS `ec_shops` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `description` text,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_ec_shops_on_user_id` (`user_id`),
+  KEY `index_ec_shops_on_type` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_shops: ~1 rows (approximately)
+DELETE FROM `ec_shops`;
+/*!40000 ALTER TABLE `ec_shops` DISABLE KEYS */;
+INSERT INTO `ec_shops` (`id`, `user_id`, `type`, `name`, `website`, `phone`, `email`, `address`, `description`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'Ec::ApprovedShop', 'はるか', 'haruka_ya.com', '11111111', 'haruka_ya@yahoo.co.jp', '23東京、日本', 'かるかのかわいい店', '2017-11-05 04:10:16', '2017-11-05 04:10:16');
+/*!40000 ALTER TABLE `ec_shops` ENABLE KEYS */;
+
 -- Dumping structure for table nyoro2_development.feature_comments
-DROP TABLE IF EXISTS `feature_comments`;
 CREATE TABLE IF NOT EXISTS `feature_comments` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL,
@@ -638,9 +777,9 @@ CREATE TABLE IF NOT EXISTS `feature_comments` (
   PRIMARY KEY (`id`),
   KEY `index_feature_comments_on_user_id` (`user_id`),
   KEY `index_feature_comments_on_commentable_type_and_commentable_id` (`commentable_type`,`commentable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.feature_comments: ~11 rows (approximately)
+-- Dumping data for table nyoro2_development.feature_comments: ~13 rows (approximately)
 DELETE FROM `feature_comments`;
 /*!40000 ALTER TABLE `feature_comments` DISABLE KEYS */;
 INSERT INTO `feature_comments` (`id`, `user_id`, `commentable_type`, `commentable_id`, `body`, `created_at`, `updated_at`) VALUES
@@ -654,11 +793,12 @@ INSERT INTO `feature_comments` (`id`, `user_id`, `commentable_type`, `commentabl
 	(10, 1, 'Db::Song', 1, 'asdljkdasjdaskjdaskjadkjdas', '2017-10-14 12:14:50', '2017-10-14 12:14:50'),
 	(11, 1, 'Db::Tag', 1, '皆さん今日は。お元気ですか^_^', '2017-10-15 01:57:18', '2017-10-15 01:57:18'),
 	(12, 1, 'Db::Company', 5, 'こｄｓｆじゃｄｓｆｊｋだふぁｄｆｊかｄｓｆｊぁｄｓｆｊｌｋ', '2017-10-15 02:13:38', '2017-10-15 02:13:38'),
-	(13, 1, 'Db::Song', 1, 'hello', '2017-10-15 04:43:04', '2017-10-15 04:43:04');
+	(13, 1, 'Db::Song', 1, 'hello', '2017-10-15 04:43:04', '2017-10-15 04:43:04'),
+	(14, 1, 'Db::Album', 1, 'asadasdsasd', '2017-10-22 04:41:00', '2017-10-22 04:41:00'),
+	(15, 1, 'Db::Album', 2, 'こんにちは', '2017-10-22 08:51:40', '2017-10-22 08:51:40');
 /*!40000 ALTER TABLE `feature_comments` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.feature_logs
-DROP TABLE IF EXISTS `feature_logs`;
 CREATE TABLE IF NOT EXISTS `feature_logs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL,
@@ -675,9 +815,9 @@ CREATE TABLE IF NOT EXISTS `feature_logs` (
   KEY `index_feature_logs_on_loggable_type_and_loggable_id` (`loggable_type`,`loggable_id`),
   KEY `index_feature_logs_on_classification` (`classification`),
   KEY `index_feature_logs_on_classification_and_action` (`classification`,`action`)
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.feature_logs: ~87 rows (approximately)
+-- Dumping data for table nyoro2_development.feature_logs: ~122 rows (approximately)
 DELETE FROM `feature_logs`;
 /*!40000 ALTER TABLE `feature_logs` DISABLE KEYS */;
 INSERT INTO `feature_logs` (`id`, `user_id`, `loggable_type`, `loggable_id`, `title`, `classification`, `action`, `description`, `created_at`, `updated_at`) VALUES
@@ -786,11 +926,26 @@ INSERT INTO `feature_logs` (`id`, `user_id`, `loggable_type`, `loggable_id`, `ti
 	(104, 1, 'Db::Album', 6, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'db', 'update', NULL, '2017-10-21 08:40:21', '2017-10-21 08:40:21'),
 	(105, 1, 'Db::Album', 6, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'db', 'update', NULL, '2017-10-21 08:42:18', '2017-10-21 08:42:18'),
 	(106, 1, 'Db::Album', 6, '発売情報・AAAAAAAAAAAAAAAdassadasdsaasd', 'db', 'update', 'AAAAAAAAAAAAAAAdassadasdsaasdの新しい発売情報が作られました。', '2017-10-21 08:43:02', '2017-10-21 08:43:02'),
-	(107, 1, 'Db::Album', 6, '発売情報・AAAAAAAAAAAAAAAdassadasdsaasd', 'db', 'update', 'AAAAAAAAAAAAAAAdassadasdsaasdの新しい発売情報が作られました。', '2017-10-21 08:45:48', '2017-10-21 08:45:48');
+	(107, 1, 'Db::Album', 6, '発売情報・AAAAAAAAAAAAAAAdassadasdsaasd', 'db', 'update', 'AAAAAAAAAAAAAAAdassadasdsaasdの新しい発売情報が作られました。', '2017-10-21 08:45:48', '2017-10-21 08:45:48'),
+	(108, 1, 'Db::Person', 16, 'dasasdasddasasd', 'db', 'create', NULL, '2017-10-22 02:38:27', '2017-10-22 02:38:27'),
+	(109, 1, 'Db::Person', 16, 'dasasdasddasasd', 'db', 'update', NULL, '2017-10-22 02:39:12', '2017-10-22 02:39:12'),
+	(110, 1, 'Db::Person', 16, 'dasasdasddasasd', 'db', 'update', 'バーション23に戻す。', '2017-10-22 02:43:06', '2017-10-22 02:43:06'),
+	(111, 1, 'Db::Person', 16, '123asdassa', 'db', 'update', NULL, '2017-10-22 02:46:53', '2017-10-22 02:46:53'),
+	(112, 1, 'Db::Person', 16, '123asdassa', 'db', 'update', 'バーション25に戻す。', '2017-10-22 02:47:40', '2017-10-22 02:47:40'),
+	(113, 1, 'Db::Person', 16, 'AAAA', 'db', 'update', NULL, '2017-10-22 02:48:16', '2017-10-22 02:48:16'),
+	(114, 1, 'Feature::Comment', 14, '恋する少女と想いのキセキ Original Sound Track', 'db', 'comment', NULL, '2017-10-22 04:41:00', '2017-10-22 04:41:00'),
+	(115, 1, 'Db::Album', 1, '発売情報・恋する少女と想いのキセキ Original Sound Track', 'db', 'create', '恋する少女と想いのキセキ Original Sound Trackの新しい発売情報が作られました。', '2017-10-22 07:49:14', '2017-10-22 07:49:14'),
+	(116, 1, 'Feature::Comment', 15, 'TRIBAL LINK - L', 'db', 'comment', NULL, '2017-10-22 08:51:40', '2017-10-22 08:51:40'),
+	(117, 1, 'Db::Song', 6, 'スタッフ', 'db', 'create', NULL, '2017-10-25 06:38:39', '2017-10-25 06:38:39'),
+	(118, 1, 'Db::Song', 6, 'スタッフ', 'db', 'create', NULL, '2017-10-25 06:38:50', '2017-10-25 06:38:50'),
+	(119, 1, 'Db::Song', 6, 'スタッフ', 'db', 'update', NULL, '2017-10-25 06:39:23', '2017-10-25 06:39:23'),
+	(120, 1, 'Db::Album', 6, '発売情報・AAAAAAAAAAAAAAAdassadasdsaasd', 'db', 'update', 'AAAAAAAAAAAAAAAdassadasdsaasdの新しい発売情報が作られました。', '2017-10-25 06:40:15', '2017-10-25 06:40:15'),
+	(121, 1, 'Db::Tag', 4, 'test_tag', 'db', 'create', NULL, '2017-10-25 07:14:18', '2017-10-25 07:14:18'),
+	(122, 1, 'Db::Company', 5, '株式会社ビジュアル', 'db', 'update', '株式会社ビジュアルを作りました。', '2017-10-25 07:23:07', '2017-10-25 07:23:07'),
+	(123, 1, 'Db::Company', 5, '株式会社ビジュアルアーツ', 'db', 'update', 'バーション6に戻す。', '2017-10-25 07:24:19', '2017-10-25 07:24:19');
 /*!40000 ALTER TABLE `feature_logs` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.feature_ratings
-DROP TABLE IF EXISTS `feature_ratings`;
 CREATE TABLE IF NOT EXISTS `feature_ratings` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL,
@@ -802,27 +957,25 @@ CREATE TABLE IF NOT EXISTS `feature_ratings` (
   PRIMARY KEY (`id`),
   KEY `index_feature_ratings_on_user_id` (`user_id`),
   KEY `index_feature_ratings_on_rateable_type_and_rateable_id` (`rateable_type`,`rateable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.feature_ratings: ~2 rows (approximately)
+-- Dumping data for table nyoro2_development.feature_ratings: ~4 rows (approximately)
 DELETE FROM `feature_ratings`;
 /*!40000 ALTER TABLE `feature_ratings` DISABLE KEYS */;
 INSERT INTO `feature_ratings` (`id`, `user_id`, `rateable_type`, `rateable_id`, `star`, `created_at`, `updated_at`) VALUES
 	(2, 2, 'Db::Album', 1, 7, '2017-10-15 08:40:18', '2017-10-15 08:40:18'),
-	(15, 1, 'Db::Album', 1, 10, '2017-10-17 04:08:34', '2017-10-20 09:11:34'),
+	(15, 1, 'Db::Album', 1, 8, '2017-10-17 04:08:34', '2017-10-23 08:44:59'),
 	(16, 1, 'Db::Album', 4, 9, '2017-10-21 09:02:41', '2017-10-21 09:04:08'),
-	(17, 1, 'Db::Album', 6, 6, '2017-10-21 09:03:40', '2017-10-21 09:03:40'),
-	(18, 1, 'Db::Album', 2, 10, '2017-10-21 09:03:57', '2017-10-21 09:03:57');
+	(17, 1, 'Db::Album', 6, 6, '2017-10-21 09:03:40', '2017-10-21 09:03:40');
 /*!40000 ALTER TABLE `feature_ratings` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.schema_migrations
-DROP TABLE IF EXISTS `schema_migrations`;
 CREATE TABLE IF NOT EXISTS `schema_migrations` (
   `version` varchar(255) NOT NULL,
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.schema_migrations: ~32 rows (approximately)
+-- Dumping data for table nyoro2_development.schema_migrations: ~40 rows (approximately)
 DELETE FROM `schema_migrations`;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
 INSERT INTO `schema_migrations` (`version`) VALUES
@@ -859,11 +1012,16 @@ INSERT INTO `schema_migrations` (`version`) VALUES
 	('20171013030106'),
 	('20171015043152'),
 	('20171021065518'),
-	('20171021072317');
+	('20171021072317'),
+	('20171022084536'),
+	('20171023072709'),
+	('20171024091748'),
+	('20171024092609'),
+	('20171104072816'),
+	('20171105105356');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.users
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(255) DEFAULT NULL,
@@ -901,25 +1059,25 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `index_users_on_confirmation_token` (`confirmation_token`),
   UNIQUE KEY `index_users_on_unlock_token` (`unlock_token`),
   KEY `index_users_on_country_id` (`country_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.users: ~2 rows (approximately)
+-- Dumping data for table nyoro2_development.users: ~3 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `user_name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `confirmation_token`, `confirmed_at`, `confirmation_sent_at`, `unconfirmed_email`, `failed_attempts`, `unlock_token`, `locked_at`, `first_name`, `last_name`, `name_pronounce`, `avatar`, `provider`, `uid`, `created_at`, `updated_at`, `country_id`) VALUES
-	(1, 'moonlight8978', 'bach.bach.1812@gmail.com', '$2a$11$Wy3uSzLqsi/Fz7YsuXyW6eXcKGOvWZ4bcUHUDcFo7G.ppmhAOWx36', NULL, NULL, '2017-09-29 14:52:58', 61, '2017-10-21 02:51:21', '2017-10-20 05:41:20', '127.0.0.1', '127.0.0.1', 'yC-HzUukJ2U2NygrUyMj', '2017-09-29 08:43:07', '2017-09-29 08:41:26', NULL, 0, NULL, NULL, 'ひろし', '鈴木', '', '22_8_2016_ver1._8ffd7478-f59d-492c-8574-38412c37d6ea.png', NULL, NULL, '2017-09-19 10:25:59', '2017-10-21 02:51:21', NULL),
-	(2, 'dep_zai_vkl', 'lesi.bich.181297@gmail.com', '$2a$11$JEP04UfK4cd4RDWW.nNzzOJHl9vdsGOvpiyTV3ADq3fFHsvZjhjNK', NULL, NULL, NULL, 1, '2017-09-29 08:09:32', '2017-09-29 08:09:32', '127.0.0.1', '127.0.0.1', 'mvDRDSYp5USgJS9Ni6m1', '2017-09-29 15:09:20', '2017-09-29 08:08:29', NULL, 0, NULL, NULL, 'ひろし', '鈴木', 'すずきひろし', '3-11-2015_f51500b0-a0ac-4f2f-82a6-ac85bebafeab.jpg', 'google_oauth2', '104325539789436039537', '2017-09-29 08:08:29', '2017-09-29 08:13:05', NULL);
+	(1, 'moonlight8978', 'bach.bach.1812@gmail.com', '$2a$11$Wy3uSzLqsi/Fz7YsuXyW6eXcKGOvWZ4bcUHUDcFo7G.ppmhAOWx36', NULL, NULL, '2017-10-27 07:31:25', 77, '2017-11-05 02:57:28', '2017-11-04 13:14:38', '127.0.0.1', '127.0.0.1', 'yC-HzUukJ2U2NygrUyMj', '2017-09-29 08:43:07', '2017-09-29 08:41:26', NULL, 0, NULL, NULL, 'ひろし', '鈴木', '', NULL, NULL, NULL, '2017-09-19 10:25:59', '2017-11-05 02:57:29', 1),
+	(2, 'depzai', 'lesi.bich.181297@gmail.com', '$2a$11$JEP04UfK4cd4RDWW.nNzzOJHl9vdsGOvpiyTV3ADq3fFHsvZjhjNK', NULL, NULL, NULL, 1, '2017-09-29 08:09:32', '2017-09-29 08:09:32', '127.0.0.1', '127.0.0.1', 'mvDRDSYp5USgJS9Ni6m1', '2017-09-29 15:09:20', '2017-09-29 08:08:29', NULL, 0, NULL, NULL, 'ひろし', '鈴木', 'すずきひろし', NULL, 'google_oauth2', '104325539789436039537', '2017-09-29 08:08:29', '2017-09-29 08:13:05', 1),
+	(4, NULL, 'moonlight8978@gmail.com', '$2a$11$ISKmyDR4pvQApaiQ5WSmOeMoz3sFhvxyMtstLy1DQ0C4B9xoaJ3b2', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 'meRzgiaGGpDcn8zgAzNu', NULL, '2017-10-27 07:30:53', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'facebook', '1405224559595957', '2017-10-27 07:30:53', '2017-10-27 07:30:53', NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.users_user_roles
-DROP TABLE IF EXISTS `users_user_roles`;
 CREATE TABLE IF NOT EXISTS `users_user_roles` (
   `user_id` bigint(20) NOT NULL,
   `role_id` bigint(20) NOT NULL,
   KEY `index_users_user_roles_on_user_id_and_role_id` (`user_id`,`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.users_user_roles: ~5 rows (approximately)
+-- Dumping data for table nyoro2_development.users_user_roles: ~6 rows (approximately)
 DELETE FROM `users_user_roles`;
 /*!40000 ALTER TABLE `users_user_roles` DISABLE KEYS */;
 INSERT INTO `users_user_roles` (`user_id`, `role_id`) VALUES
@@ -927,11 +1085,11 @@ INSERT INTO `users_user_roles` (`user_id`, `role_id`) VALUES
 	(1, 1),
 	(1, 3),
 	(1, 4),
-	(2, 1);
+	(2, 1),
+	(4, 1);
 /*!40000 ALTER TABLE `users_user_roles` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.user_roles
-DROP TABLE IF EXISTS `user_roles`;
 CREATE TABLE IF NOT EXISTS `user_roles` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,

@@ -1,0 +1,9 @@
+<tbody class="b-tbody-data animated fadeIn">
+  <% shops.each do |shop| %>
+    <%= render 'admin/ec/shops_management/list_item', shop: shop %>
+  <% end %>
+</tbody>
+
+<% unless resources.last_page? %>
+  <%= render 'admin/ec/shops_management/list_paginate', next_page: resources.next_page %>
+<% end %>
