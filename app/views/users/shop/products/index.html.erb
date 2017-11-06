@@ -24,8 +24,7 @@
           <th class="b-col-id"></th>
           <th class="b-col-id">ID</th>
           <th class="b-col-wide">製品名</th>
-          <th class="b-col-medium">色</th>
-          <th class="b-col-medium">価格</th>
+          <th class="b-col-medium">タイプ</th>
         </tr>
       </thead>
 
@@ -38,29 +37,27 @@
 
       <tbody class="b-tbody-loading">
         <tr>
-          <td colspan="5"><div class="b-loading"></div></td>
+          <td colspan="4"><div class="b-loading"></div></td>
         </tr>
       </tbody>
 
       <tbody>
-        <tr>
-          <td class="b-col-id"><%= check_box_tag :"shop_products[]", 1 %></td>
-          <td class="b-col-id">
-            1
-          </td>
-          <td class="b-col-wide">Maya Kawamura Tokyo Hot!</td>
-          <td class="b-col-medium">Default</td>
-          <td class="b-col-medium">10000</td>
-        </tr>
-        <tr>
-          <td class="b-col-id"><%= check_box_tag :"shop_products[]", 2 %></td>
-          <td class="b-col-id">
-            2
-          </td>
-          <td class="b-col-wide">Maya Kawamura Tokyo Hot!</td>
-          <td class="b-col-medium">Default</td>
-          <td class="b-col-medium">20000</td>
-        </tr>
+        <% @shop.products.each do |product| %>
+          <tr>
+            <td class="b-col-id">
+              <%= check_box_tag :"shop_products[]", 1 %>
+            </td>
+            <td class="b-col-id">
+              <%= product.id %>
+            </td>
+            <td class="b-col-wide">
+              <%= link_to product.name, shop_product_path(product.id), class: 'b-link b-link-no-color' %>
+            </td>
+            <td class="b-col-medium">
+              <%= product.category.name %>
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>

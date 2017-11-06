@@ -1,0 +1,98 @@
+<%= content_for :side_nav do %>
+  <%= render 'users/shop/side_nav' %>
+<% end %>
+
+<div class="b-box p-3">
+  <table class="b-table">
+    <tr>
+      <th>製品名</th>
+      <td><%= @product.name %></td>
+    </tr>
+    <tr>
+      <th>タイプ</th>
+      <td><%= @product.category.name %></td>
+    </tr>
+    <tr class="b-description">
+      <th colspan="2">デスクリプション</th>
+    </tr>
+    <tr class="b-description">
+      <td colspan="2">
+        <p class="b-description-text"><%= @product.description %></p>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">色</h6>
+
+  <div class="row">
+    <% @product.colors.each do |color| %>
+      <div class="col-6 col-md-4">
+        <div class="b-box p-3">
+          <div class="d-flex">
+            <h6><%= color.name %></h6>
+            <h6><strong>26</strong>残る</h6>
+          </div>
+
+          <h4><%= color.price %> JPY</h4>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">写真</h6>
+
+  <div class="b-box p-3">
+    <%= form_tag '#' do %>
+      <div class="b-carousel b-has-checkbox">
+        <ol class="b-carousel-indicators">
+          <div class="slick" data-slides="4">
+            <li class="">
+              <img class="img-thumbnail" src="/assets/index_parallax_1.jpg">
+              <%= check_box_tag :'slide_ids[]', 1 %>
+            </li>
+            <li class="">
+              <img class="img-thumbnail" src="/assets/index_parallax_1.jpg">
+              <%= check_box_tag :'slide_ids[]', 2 %>
+            </li>
+            <li class="">
+              <img class="img-thumbnail" src="/assets/index_parallax_1.jpg">
+              <%= check_box_tag :'slide_ids[]', 3 %>
+            </li>
+            <li class="">
+              <img class="img-thumbnail" src="/assets/index_parallax_1.jpg">
+              <%= check_box_tag :'slide_ids[]', 4 %>
+            </li>
+            <li class="">
+              <img class="img-thumbnail" src="/assets/index_parallax_1.jpg">
+              <%= check_box_tag :'slide_ids[]', 5 %>
+            </li>
+            <li class="">
+              <img class="img-thumbnail" src="/assets/index_parallax_1.jpg">
+              <%= check_box_tag :'slide_ids[]', 6 %>
+            </li>
+          </div>
+
+          <div class="mt-3">
+            <%= button_tag '消す', name: nil, class: 'b-btn-ripple b-btn b-btn-raised w-100 b-bg-destroy', type: :submit %>
+          </div>
+        </ol>
+
+        <div class="b-carousel-inner">
+          <div class="slick">
+            <img class="img-fluid" src="/assets/index_parallax_1.jpg">
+            <img class="img-fluid" src="/assets/index_parallax_1.jpg">
+            <img class="img-fluid" src="/assets/index_parallax_1.jpg">
+            <img class="img-fluid" src="/assets/index_parallax_1.jpg">
+            <img class="img-fluid" src="/assets/index_parallax_1.jpg">
+            <img class="img-fluid" src="/assets/index_parallax_1.jpg">
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

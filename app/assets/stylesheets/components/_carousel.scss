@@ -1,0 +1,62 @@
+.slick-slide {
+  outline: 0 !important;
+}
+
+.b-carousel {
+  display: flex;
+}
+
+.b-carousel-indicators {
+  flex: 0 0 calc(60px + 1rem);
+  max-width: calc(60px + 1rem);
+  margin: 0;
+  padding: 0;
+  padding-right: 1rem;
+  position: relative;
+
+  &:before {
+    content: '';
+    position :absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    background-color: $border-color;
+  }
+
+  .img-thumbnail { border-color: transparent; }
+
+  .slick-current .img-thumbnail {
+    border: 1px solid $border-color;
+  }
+}
+
+.b-carousel-inner {
+  padding-left: 1rem;
+  flex: 1 0 calc(100% - 1rem - 60px);
+  max-width: calc(100% - 1rem - 60px);
+}
+
+.b-carousel.b-has-checkbox {
+  .b-carousel-inner  {
+    flex: 1 0 calc(100% - 2rem - 60px);
+    max-width: calc(100% - 2rem - 60px);
+  }
+
+  .b-carousel-indicators {
+    flex: 0 0 calc(60px + 2rem);
+    max-width: calc(60px + 2rem);
+
+    li {
+      position: relative;
+      padding-left: 1rem;
+
+      input {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+}

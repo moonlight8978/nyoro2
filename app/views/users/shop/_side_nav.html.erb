@@ -18,6 +18,15 @@
         製品管理
       </li>
     <% end %>
+
+    <% if current_page?(shop_product_path(params[:id] || 0)) %>
+      <%= link_to shop_product_path(params[:id] || 0) do %>
+        <li class="list-group-item list-group-item-action active">
+          <i class="fa fa-calculator"></i>
+          製品
+        </li>
+      <% end %>
+    <% end %>
   </ul>
 
   <%= form_tag '#', method: :get, html: {} do %>

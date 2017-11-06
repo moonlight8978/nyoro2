@@ -19,7 +19,9 @@ class User < ApplicationRecord
     class_name: 'Feature::Comment'
   has_one :shop,
     class_name: 'Ec::Shop'
-  #scopes
+  has_one :approved_shop,
+    class_name: 'Ec::Shop'
+    #scopes
 
   # class methods
   def self.from_omniauth(auth)
