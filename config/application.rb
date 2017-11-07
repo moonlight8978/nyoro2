@@ -41,5 +41,9 @@ module Nyoro2
     
     # Sidekiq
     config.active_job.queue_adapter = :sidekiq
+	
+	# Disable assets auto generator
+	config.generators.stylesheets = false
+	config.generators.javascripts = false
   end
 end
