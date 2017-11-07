@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     # registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-
+    
   devise_scope :user do
     get 'users/cancel', to: 'users/registrations#cancel', as: :cancel_user_registration
     get 'users/sign_up', to: 'users/registrations#new', as: :new_user_registration
@@ -22,13 +22,6 @@ Rails.application.routes.draw do
   scope module: :users do
     resources :profiles, only: [:show, :index, :update] do
       get 'my_list', to: 'my_list#index'
-    end
-    resource :shop, controller: :'shop/shop' do
-      resources :products, controller: 'shop/products' do
-        collection do
-          delete 'destroy_multiple'
-        end
-      end
     end
   end
 
@@ -127,6 +120,22 @@ Rails.application.routes.draw do
   namespace :feature do
     resources :comments
     resources :ratings
+  end
+
+  scope module: :shop do
+    resource :shop do
+      resources :products do
+        delete 'destroy_multiple', on: :collection
+      end
+    end
+
+    resources :products, only: [] do
+      resources :images, controller: 'products/images' do
+        delete 'destroy_multiple', on: :collection
+      end
+      resources :colors
+      resource :discount
+    end
   end
 
   namespace :ec do

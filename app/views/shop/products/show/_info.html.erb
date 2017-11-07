@@ -1,0 +1,18 @@
+<table class="b-table">
+  <tr>
+    <th>製品名</th>
+    <td><%= @product.name %></td>
+  </tr>
+  <tr>
+    <th>タイプ</th>
+    <td><%= @product.category.name %></td>
+  </tr>
+  <tr class="b-description">
+    <th colspan="2">デスクリプション</th>
+  </tr>
+  <tr class="b-description">
+    <td colspan="2">
+      <p class="b-description-text"><%= @product.description %></p>
+    </td>
+  </tr>
+</table>

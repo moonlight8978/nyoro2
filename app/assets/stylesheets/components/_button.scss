@@ -346,3 +346,32 @@ $md-btn-color: #2196f3;
 .b-btn-ripple:focus:after {
   visibility: visible;
 }
+
+.b-btn-edit-toggler {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  float: right;
+  color: rgba(0,0,0,0.5);
+  @include transition-std(color);
+
+  &:hover {
+    color: $black;
+  }
+}
+
+.b-btn-disabled {
+  position: relative;
+
+  &:before {
+    display: block;
+    content: "";
+    position: absolute;
+    z-index: 1;
+    background: rgba(0,0,0,0.2);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

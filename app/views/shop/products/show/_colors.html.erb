@@ -1,0 +1,14 @@
+<div class="row">
+  <% @product.colors.each do |color| %>
+    <div class="col-6 col-md-4">
+      <div class="b-box p-3">
+        <div class="d-flex">
+          <h6><%= color.name %></h6>
+          <h6><strong>26</strong>残る</h6>
+        </div>
+
+        <h4><%= color.price %> JPY</h4>
+      </div>
+    </div>
+  <% end %>
+</div>

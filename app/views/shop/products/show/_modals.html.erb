@@ -1,0 +1,41 @@
+<!-- Modal -->
+<div class="modal fade" id="addSlideModal" tabindex="-1" role="dialog" aria-labelledby="addSlideModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addSlideModalLabel">Add more slides</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- END header -->
+      <%= form_for @product.images.new,
+        url: product_images_path(@product),
+        method: :post, html: { class: 'b-remote-form' } do |f|
+      %>
+        <div class="modal-body">
+          <div class="b-remote-form-error" id="">
+
+          </div>
+
+          <div class="b-form-group form-group">
+            <%= f.file_field :image, class: 'form-control-file', required: true %>
+            <%= f.label :image, '写真をアップロード' %>
+            <small class="form-text text-muted">「800x400」のサイズの写真が最高品質です。</small>
+          </div>
+        </div>
+        <!-- END body -->
+
+        <div class="modal-footer">
+          <button type="button" class="b-btn b-btn-raised b-btn-ripple b-bg-destroy" data-dismiss="modal">キャンセル</button>
+          <%= f.button 'セフ',
+            class: 'b-btn b-btn-raised b-btn-ripple b-bg-create',
+            data: { 'disable-html': '読み込む中...' }
+          %>
+        </div>
+        <!-- END footer -->
+
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<%= content_for :side_nav do %>
+  <%= render 'shop/side_nav' %>
+<% end %>
+
+<div class="b-box p-3">
+  <%= render 'shop/products/show/info' %>
+</div>
+
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">色</h6>
+
+  <%= render 'shop/products/show/colors' %>
+</div>
+
+
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">写真</h6>
+
+  <div class="b-box p-3">
+    <%= render 'shop/products/show/slideshow' %>
+  </div>
+</div>
+
+<%= content_for :modals do %>
+  <%= render 'shop/products/show/modals' %>
+<% end %>

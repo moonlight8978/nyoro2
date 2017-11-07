@@ -6,7 +6,7 @@ class StaticPagesController < ApplicationController
     @user_count = User.all.count
     @full_page = true
   end
-  
+
   def warning
     set_title :'年齢制限'
     @no_navbar = true

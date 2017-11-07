@@ -1,6 +1,6 @@
 .b-img-placeholder {
   position: relative;
-  
+
   &::before {
     content: '';
     display: block;
@@ -8,7 +8,7 @@
     height: 0;
     padding: 0;
   }
-  
+
   &.b-img-placeholder-avatar .b-img-thumb {
     border-radius: 50% !important;
   }
@@ -42,4 +42,8 @@
 
 .b-ratio-5_3::before {
   padding-bottom: 3 / 5 * 100%;
+}
+
+.b-ratio-2_1::before {
+  padding-bottom: 1 / 2 * 100%;
 }

@@ -1,0 +1,78 @@
+<%= content_for :side_nav do %>
+  <%= render 'shop/side_nav' %>
+<% end %>
+
+<%#= content_for :right_col do %>
+  <!-- <div class="b-box p-3">
+    asdsadasas
+  </div> -->
+<%# end %>
+
+<div class="b-box">
+  <%= form_for(@form, url: shop_path, method: :post, html: { class: 'b-form' }) do |f| %>
+    <div class="form-group b-form-group">
+      <%= f.text_field :name, class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:name].present?), autofocus: true %>
+      <%= f.label :name, '店名*' %>
+      <div class="invalid-feedback">
+        <% @form.errors.messages[:name].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group b-form-group">
+      <%= f.text_field :address, class: 'form-control'%>
+      <%= f.label :address, '店の住所' %>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group b-form-group">
+          <%= f.email_field :email, class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:email].present?) %>
+          <%= f.label :email, 'メール' %>
+          <div class="invalid-feedback">
+            <% @form.errors.messages[:email].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="form-group b-form-group">
+          <%= f.phone_field :phone, class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:phone].present?) %>
+          <%= f.label :phone, '電話番号' %>
+          <div class="invalid-feedback">
+            <% @form.errors.messages[:phone].each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group b-form-group">
+      <%= f.text_field :website, class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:website].present?) %>
+      <%= f.label :website, 'ウェブサイト' %>
+      <div class="invalid-feedback">
+        <% @form.errors.messages[:website].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group b-form-group">
+      <%= f.text_area :description, class: class_string('form-control' => true, 'is-invalid' => @form.errors.messages[:description].present?) %>
+      <%= f.label :description, 'ディスクリプション' %>
+      <div class="invalid-feedback">
+        <% @form.errors.messages[:description].each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="b-form-submit b-form-submit-right">
+      <%= f.button '登録する', class: 'b-btn b-btn-raised b-btn-ripple' %>
+    </div>
+  <% end %>
+</div>

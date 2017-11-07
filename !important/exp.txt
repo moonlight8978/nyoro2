@@ -10,6 +10,11 @@ polymorphic: association must be clearly defined, cannot eagerload :~able
 
 counter_cache, owner will have a new field (~_count) in table
 
+carrierwave: 
+resize_to_fit will scale up images if they are smaller than the given size 
+resize_to_limit won't do anything if the image is already smaller than the size given
+resize_to_fill cut image when necessary
+
 SQL
 select(avg, count) require group(~)
 group with condition => having
