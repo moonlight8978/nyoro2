@@ -5,6 +5,7 @@ class Ec::Product < ApplicationRecord
     class_name: :'Ec::Product::Discount'
   has_many :colors,
     class_name: :'Ec::Product::Color'
+  accepts_nested_attributes_for :colors
   has_many :images,
     class_name: :'Ec::Product::Image'
   belongs_to :category,

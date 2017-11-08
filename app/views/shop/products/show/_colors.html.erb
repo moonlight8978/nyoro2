@@ -1,14 +1,27 @@
 <div class="row">
-  <% @product.colors.each do |color| %>
+  <% product.colors.each do |color| %>
     <div class="col-6 col-md-4">
-      <div class="b-box p-3">
-        <div class="d-flex">
-          <h6><%= color.name %></h6>
-          <h6><strong>26</strong>残る</h6>
+      <div class="b-box p-3 h-100">
+        <div class="b-flex-space-between">
+          <div>
+            <span class="b-btn-edit-inline align-baseline"
+              data-toggle="modal" data-target="#editColor<%= color.id %>"
+            >
+              <i class="fa fa-pencil"></i>
+            </span>
+            <span class="b-btn-edit-txt align-top"><%= color.name %></span>
+          </div>
+          <%= color.status %>
         </div>
 
-        <h4><%= color.price %> JPY</h4>
+        <%= color.price %>
       </div>
     </div>
   <% end %>
+
+  <div class="col-6 col-md-4">
+    <div class="b-box p-3 h-100">
+      追加する
+    </div>
+  </div>
 </div>

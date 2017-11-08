@@ -1,4 +1,4 @@
-class Shop::Products::ImageDecorator < ApplicationDecorator
+class Ec::Product::DiscountDecorator < ApplicationDecorator
   delegate_all
 
   # Define presentation-specific methods here. Helpers are accessed through

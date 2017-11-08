@@ -1,4 +1,4 @@
-class Shop::ShopController < ApplicationController
+class Shop::ShopsController < ApplicationController
   layout 'shop'
 
   include Ec::Shop::CheckStatus

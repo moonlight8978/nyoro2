@@ -15,6 +15,14 @@ resize_to_fit will scale up images if they are smaller than the given size
 resize_to_limit won't do anything if the image is already smaller than the size given
 resize_to_fill cut image when necessary
 
+form:
+So first you'll need to make sure that team_id exists on the user model. 
+And seoncdly, as Doon suggested, you don't need fields_for unless you want to interact 
+with the team model and make changes from within that same form.
+
+nested form:
+accept_nest_attributes(blah..blah), delegate associations_attributes= to ActiveModel object or build it.
+
 SQL
 select(avg, count) require group(~)
 group with condition => having

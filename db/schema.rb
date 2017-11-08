@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171105105356) do
+ActiveRecord::Schema.define(version: 20171104072816) do
 
   create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20171105105356) do
 
   create_table "db_people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "latest_version_id"
-    t.boolean "marked"
+    t.boolean "marked", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comments_count", default: 0
@@ -137,13 +137,13 @@ ActiveRecord::Schema.define(version: 20171105105356) do
     t.string "name_en"
     t.string "name_pronounce"
     t.date "birthday"
+    t.boolean "gender"
+    t.string "blood_type"
     t.string "website"
     t.string "twitter"
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "gender"
-    t.string "blood_type"
     t.bigint "country_id"
     t.bigint "editor_id"
     t.index ["country_id"], name: "index_db_person_versions_on_country_id"
@@ -290,13 +290,22 @@ ActiveRecord::Schema.define(version: 20171105105356) do
     t.index ["product_id"], name: "index_ec_product_images_on_product_id"
   end
 
+  create_table "ec_product_storages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "color_id"
+    t.integer "total"
+    t.integer "sold"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_id"], name: "index_ec_product_storages_on_color_id"
+  end
+
   create_table "ec_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "category_id"
+    t.bigint "shop_id"
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "shop_id"
     t.index ["category_id"], name: "index_ec_products_on_category_id"
     t.index ["shop_id"], name: "index_ec_products_on_shop_id"
   end

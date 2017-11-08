@@ -347,17 +347,34 @@ $md-btn-color: #2196f3;
   visibility: visible;
 }
 
-.b-btn-edit-toggler {
-  padding: 0;
-  border: 0;
-  margin: 0;
-  float: right;
+.b-btn-edit-template {
   color: rgba(0,0,0,0.5);
   @include transition-std(color);
 
   &:hover {
     color: $black;
   }
+}
+
+.b-btn-edit-toggler {
+  @extend .b-btn-edit-template;
+
+  padding: 0;
+  border: 0;
+  margin: 0;
+  float: right;
+}
+
+.b-btn-edit-inline {
+  @extend .b-btn-edit-template;
+
+  font-size: 1.5em;
+  padding-right: .25rem;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+
+  ~ .b-btn-edit-txt { vertical-align: middle; }
 }
 
 .b-btn-disabled {

@@ -2,8 +2,32 @@
   <%= render 'shop/side_nav' %>
 <% end %>
 
-<div class="b-box p-3">
-  <%= render 'shop/products/show/info' %>
+<div class="b-box-group">
+  <h6 class="b-box-title">
+    <span class="b-btn-edit-inline">
+      <i class="fa fa-pencil"></i>
+    </span>
+    <span class="b-btn-edit-txt">店情報</span>
+  </h6>
+
+  <div class="b-box p-3">
+    <%= render 'shop/products/show/info' %>
+  </div>
+</div>
+
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">
+    <span class="b-btn-edit-inline"
+      data-toggle="modal" data-target="#editDiscount"
+    >
+      <i class="fa fa-pencil"></i>
+    </span>
+    <span class="b-btn-edit-txt">ディスカウント</span>
+  </h6>
+
+  <div class="b-box p-3">
+    <%= render 'shop/products/show/discount' %>
+  </div>
 </div>
 
 <div class="b-box-group mt-3">

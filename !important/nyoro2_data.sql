@@ -11,67 +11,19 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
--- Dumping database structure for nyoro2_development
-DROP DATABASE IF EXISTS `nyoro2_development`;
-CREATE DATABASE IF NOT EXISTS `nyoro2_development` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `nyoro2_development`;
-
--- Dumping structure for table nyoro2_development.ar_internal_metadata
-DROP TABLE IF EXISTS `ar_internal_metadata`;
-CREATE TABLE IF NOT EXISTS `ar_internal_metadata` (
-  `key` varchar(255) NOT NULL,
-  `value` varchar(255) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table nyoro2_development.ar_internal_metadata: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.ar_internal_metadata: ~0 rows (approximately)
 DELETE FROM `ar_internal_metadata`;
 /*!40000 ALTER TABLE `ar_internal_metadata` DISABLE KEYS */;
 INSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES
 	('environment', 'development', '2017-09-19 10:25:57', '2017-09-19 10:25:57');
 /*!40000 ALTER TABLE `ar_internal_metadata` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.countries
-DROP TABLE IF EXISTS `countries`;
-CREATE TABLE IF NOT EXISTS `countries` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `name_en` varchar(255) DEFAULT NULL,
-  `name_pronounce` varchar(255) DEFAULT NULL,
-  `code` varchar(255) DEFAULT NULL,
-  `note` text,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_countries_on_name_pronounce` (`name_pronounce`),
-  KEY `index_countries_on_code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- Dumping data for table nyoro2_development.countries: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.countries: ~0 rows (approximately)
 DELETE FROM `countries`;
 /*!40000 ALTER TABLE `countries` DISABLE KEYS */;
 INSERT INTO `countries` (`id`, `name`, `name_en`, `name_pronounce`, `code`, `note`, `created_at`, `updated_at`) VALUES
 	(1, '日本', 'Japan', 'にほん', 'jp', NULL, '2017-10-13 02:56:25', '2017-10-13 02:56:25');
 /*!40000 ALTER TABLE `countries` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.db_albums
-DROP TABLE IF EXISTS `db_albums`;
-CREATE TABLE IF NOT EXISTS `db_albums` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `latest_version_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `comments_count` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `index_db_albums_on_latest_version_id` (`latest_version_id`),
-  KEY `index_db_albums_on_marked` (`marked`),
-  KEY `index_db_albums_on_created_at` (`created_at`),
-  KEY `index_db_albums_on_updated_at` (`updated_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.db_albums: ~4 rows (approximately)
 DELETE FROM `db_albums`;
@@ -83,14 +35,6 @@ INSERT INTO `db_albums` (`id`, `latest_version_id`, `marked`, `created_at`, `upd
 	(6, 45, 1, '2017-10-21 07:51:14', '2017-10-25 06:40:13', 0);
 /*!40000 ALTER TABLE `db_albums` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.db_albums_companies
-DROP TABLE IF EXISTS `db_albums_companies`;
-CREATE TABLE IF NOT EXISTS `db_albums_companies` (
-  `album_id` bigint(20) NOT NULL,
-  `company_id` bigint(20) NOT NULL,
-  KEY `index_db_albums_companies_on_album_id_and_company_id` (`album_id`,`company_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- Dumping data for table nyoro2_development.db_albums_companies: ~3 rows (approximately)
 DELETE FROM `db_albums_companies`;
 /*!40000 ALTER TABLE `db_albums_companies` DISABLE KEYS */;
@@ -99,14 +43,6 @@ INSERT INTO `db_albums_companies` (`album_id`, `company_id`) VALUES
 	(2, 5),
 	(6, 1);
 /*!40000 ALTER TABLE `db_albums_companies` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.db_albums_tags
-DROP TABLE IF EXISTS `db_albums_tags`;
-CREATE TABLE IF NOT EXISTS `db_albums_tags` (
-  `album_id` bigint(20) NOT NULL,
-  `tag_id` bigint(20) NOT NULL,
-  KEY `index_db_albums_tags_on_album_id_and_tag_id` (`album_id`,`tag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.db_albums_tags: ~5 rows (approximately)
 DELETE FROM `db_albums_tags`;
@@ -118,31 +54,6 @@ INSERT INTO `db_albums_tags` (`album_id`, `tag_id`) VALUES
 	(4, 2),
 	(6, 1);
 /*!40000 ALTER TABLE `db_albums_tags` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.db_album_versions
-DROP TABLE IF EXISTS `db_album_versions`;
-CREATE TABLE IF NOT EXISTS `db_album_versions` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `previous_version_id` bigint(20) DEFAULT NULL,
-  `album_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  `title` varchar(255) DEFAULT NULL,
-  `title_en` varchar(255) DEFAULT NULL,
-  `title_pronounce` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `note` text,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `editor_id` bigint(20) DEFAULT NULL,
-  `release_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_db_album_versions_on_previous_version_id` (`previous_version_id`),
-  KEY `index_db_album_versions_on_album_id` (`album_id`),
-  KEY `index_db_album_versions_on_marked` (`marked`),
-  KEY `index_db_album_versions_on_title_pronounce` (`title_pronounce`),
-  KEY `index_db_album_versions_on_editor_id` (`editor_id`),
-  KEY `index_db_album_versions_on_release_id` (`release_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.db_album_versions: ~37 rows (approximately)
 DELETE FROM `db_album_versions`;
@@ -187,14 +98,6 @@ INSERT INTO `db_album_versions` (`id`, `previous_version_id`, `album_id`, `marke
 	(45, 43, 6, 0, 'AAAAAAAAAAAAAAAdassadasdsaasd', 'asdasdasd', 'asdasdasdasdasd', NULL, NULL, '2017-10-25 06:40:13', '2017-10-25 06:40:15', 1, 14);
 /*!40000 ALTER TABLE `db_album_versions` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.db_album_versions_discs
-DROP TABLE IF EXISTS `db_album_versions_discs`;
-CREATE TABLE IF NOT EXISTS `db_album_versions_discs` (
-  `album_version_id` bigint(20) NOT NULL,
-  `disc_id` bigint(20) NOT NULL,
-  KEY `index_db_album_versions_discs_on_album_version_id_and_disc_id` (`album_version_id`,`disc_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 -- Dumping data for table nyoro2_development.db_album_versions_discs: ~21 rows (approximately)
 DELETE FROM `db_album_versions_discs`;
 /*!40000 ALTER TABLE `db_album_versions_discs` DISABLE KEYS */;
@@ -222,20 +125,6 @@ INSERT INTO `db_album_versions_discs` (`album_version_id`, `disc_id`) VALUES
 	(45, 5);
 /*!40000 ALTER TABLE `db_album_versions_discs` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.db_companies
-DROP TABLE IF EXISTS `db_companies`;
-CREATE TABLE IF NOT EXISTS `db_companies` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `latest_version_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `comments_count` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `index_db_companies_on_latest_version_id` (`latest_version_id`),
-  KEY `index_db_companies_on_marked` (`marked`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
 -- Dumping data for table nyoro2_development.db_companies: ~2 rows (approximately)
 DELETE FROM `db_companies`;
 /*!40000 ALTER TABLE `db_companies` DISABLE KEYS */;
@@ -243,32 +132,6 @@ INSERT INTO `db_companies` (`id`, `latest_version_id`, `marked`, `created_at`, `
 	(1, 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
 	(5, 6, 0, '2017-10-13 04:10:19', '2017-10-25 07:24:18', 1);
 /*!40000 ALTER TABLE `db_companies` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.db_company_versions
-DROP TABLE IF EXISTS `db_company_versions`;
-CREATE TABLE IF NOT EXISTS `db_company_versions` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `company_id` bigint(20) DEFAULT NULL,
-  `previous_version_id` bigint(20) DEFAULT NULL,
-  `country_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  `name` varchar(255) DEFAULT NULL,
-  `name_en` varchar(255) DEFAULT NULL,
-  `name_pronounce` varchar(255) DEFAULT NULL,
-  `established_at` date DEFAULT NULL,
-  `note` text,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `editor_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_db_company_versions_on_company_id` (`company_id`),
-  KEY `index_db_company_versions_on_previous_version_id` (`previous_version_id`),
-  KEY `index_db_company_versions_on_country_id` (`country_id`),
-  KEY `index_db_company_versions_on_marked` (`marked`),
-  KEY `index_db_company_versions_on_name_pronounce` (`name_pronounce`),
-  KEY `index_db_company_versions_on_established_at` (`established_at`),
-  KEY `index_db_company_versions_on_editor_id` (`editor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.db_company_versions: ~4 rows (approximately)
 DELETE FROM `db_company_versions`;
@@ -280,22 +143,6 @@ INSERT INTO `db_company_versions` (`id`, `company_id`, `previous_version_id`, `c
 	(7, 5, 6, 1, 0, '株式会社ビジュアル', 'Visual Art\'s Co., Ltd.', 'かぶしきがいしゃびじゅあるあーと', '1991-01-01', '', '2017-10-25 07:23:07', '2017-10-25 07:23:07', 1);
 /*!40000 ALTER TABLE `db_company_versions` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.db_discs
-DROP TABLE IF EXISTS `db_discs`;
-CREATE TABLE IF NOT EXISTS `db_discs` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `marked` tinyint(1) DEFAULT '0',
-  `number` int(11) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `editor_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_db_discs_on_marked` (`marked`),
-  KEY `index_db_discs_on_number` (`number`),
-  KEY `index_db_discs_on_editor_id` (`editor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
 -- Dumping data for table nyoro2_development.db_discs: ~3 rows (approximately)
 DELETE FROM `db_discs`;
 /*!40000 ALTER TABLE `db_discs` DISABLE KEYS */;
@@ -304,20 +151,6 @@ INSERT INTO `db_discs` (`id`, `marked`, `number`, `title`, `created_at`, `update
 	(3, 0, 1, '', '2017-09-28 10:58:38', '2017-09-28 10:58:38', 1),
 	(5, 0, 1, '', '2017-10-21 08:00:46', '2017-10-21 08:00:46', 1);
 /*!40000 ALTER TABLE `db_discs` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.db_people
-DROP TABLE IF EXISTS `db_people`;
-CREATE TABLE IF NOT EXISTS `db_people` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `latest_version_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `comments_count` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `index_db_people_on_latest_version_id` (`latest_version_id`),
-  KEY `index_db_people_on_marked` (`marked`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.db_people: ~8 rows (approximately)
 DELETE FROM `db_people`;
@@ -332,35 +165,6 @@ INSERT INTO `db_people` (`id`, `latest_version_id`, `marked`, `created_at`, `upd
 	(13, 18, NULL, '2017-09-28 11:05:25', '2017-09-28 11:05:25', 0),
 	(16, 26, NULL, '2017-10-22 02:38:27', '2017-10-22 02:48:16', 0);
 /*!40000 ALTER TABLE `db_people` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.db_person_versions
-DROP TABLE IF EXISTS `db_person_versions`;
-CREATE TABLE IF NOT EXISTS `db_person_versions` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `person_id` bigint(20) DEFAULT NULL,
-  `previous_version_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  `name` varchar(255) DEFAULT NULL,
-  `name_en` varchar(255) DEFAULT NULL,
-  `name_pronounce` varchar(255) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `gender` tinyint(1) DEFAULT NULL,
-  `blood_type` varchar(255) DEFAULT NULL,
-  `website` varchar(255) DEFAULT NULL,
-  `twitter` varchar(255) DEFAULT NULL,
-  `note` text,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `country_id` bigint(20) DEFAULT NULL,
-  `editor_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_db_person_versions_on_person_id` (`person_id`),
-  KEY `index_db_person_versions_on_previous_version_id` (`previous_version_id`),
-  KEY `index_db_person_versions_on_marked` (`marked`),
-  KEY `index_db_person_versions_on_name_pronounce` (`name_pronounce`),
-  KEY `index_db_person_versions_on_country_id` (`country_id`),
-  KEY `index_db_person_versions_on_editor_id` (`editor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.db_person_versions: ~16 rows (approximately)
 DELETE FROM `db_person_versions`;
@@ -384,28 +188,6 @@ INSERT INTO `db_person_versions` (`id`, `person_id`, `previous_version_id`, `mar
 	(26, 16, 26, 0, 'AAAA', 'sdaasdasdasdads', '123', NULL, NULL, '', '', '', NULL, '2017-10-22 02:48:16', '2017-10-22 02:48:16', NULL, 1);
 /*!40000 ALTER TABLE `db_person_versions` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.db_releases
-DROP TABLE IF EXISTS `db_releases`;
-CREATE TABLE IF NOT EXISTS `db_releases` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `price` float DEFAULT NULL,
-  `currency` varchar(255) DEFAULT NULL,
-  `format` varchar(255) DEFAULT NULL,
-  `released_at` date DEFAULT NULL,
-  `catalog_number` varchar(255) DEFAULT NULL,
-  `note` text,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `publisher_id` bigint(20) DEFAULT NULL,
-  `editor_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `index_db_releases_on_released_at` (`released_at`),
-  KEY `index_db_releases_on_catalog_number` (`catalog_number`),
-  KEY `index_db_releases_on_publisher_id` (`publisher_id`),
-  KEY `index_db_releases_on_editor_id` (`editor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
-
 -- Dumping data for table nyoro2_development.db_releases: ~6 rows (approximately)
 DELETE FROM `db_releases`;
 /*!40000 ALTER TABLE `db_releases` DISABLE KEYS */;
@@ -418,22 +200,6 @@ INSERT INTO `db_releases` (`id`, `price`, `currency`, `format`, `released_at`, `
 	(14, 12123, 'JPY', 'CD', '2017-10-11', '1111', NULL, '2017-10-25 06:40:15', '2017-10-25 06:40:15', 1, 1, 0);
 /*!40000 ALTER TABLE `db_releases` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.db_songs
-DROP TABLE IF EXISTS `db_songs`;
-CREATE TABLE IF NOT EXISTS `db_songs` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `disc_id` bigint(20) DEFAULT NULL,
-  `latest_version_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `comments_count` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `index_db_songs_on_disc_id` (`disc_id`),
-  KEY `index_db_songs_on_latest_version_id` (`latest_version_id`),
-  KEY `index_db_songs_on_marked` (`marked`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-
 -- Dumping data for table nyoro2_development.db_songs: ~5 rows (approximately)
 DELETE FROM `db_songs`;
 /*!40000 ALTER TABLE `db_songs` DISABLE KEYS */;
@@ -444,30 +210,6 @@ INSERT INTO `db_songs` (`id`, `disc_id`, `latest_version_id`, `marked`, `created
 	(6, 5, 21, 0, '2017-10-21 08:03:57', '2017-10-25 06:38:50', 0),
 	(7, 5, 19, 0, '2017-10-21 08:06:58', '2017-10-21 08:06:58', 0);
 /*!40000 ALTER TABLE `db_songs` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.db_song_versions
-DROP TABLE IF EXISTS `db_song_versions`;
-CREATE TABLE IF NOT EXISTS `db_song_versions` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `previous_version_id` bigint(20) DEFAULT NULL,
-  `song_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  `title` varchar(255) DEFAULT NULL,
-  `title_en` varchar(255) DEFAULT NULL,
-  `title_pronounce` varchar(255) DEFAULT NULL,
-  `length` varchar(255) DEFAULT NULL,
-  `number` int(11) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `editor_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_db_song_versions_on_previous_version_id` (`previous_version_id`),
-  KEY `index_db_song_versions_on_song_id` (`song_id`),
-  KEY `index_db_song_versions_on_marked` (`marked`),
-  KEY `index_db_song_versions_on_title_pronounce` (`title_pronounce`),
-  KEY `index_db_song_versions_on_number` (`number`),
-  KEY `index_db_song_versions_on_editor_id` (`editor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.db_song_versions: ~21 rows (approximately)
 DELETE FROM `db_song_versions`;
@@ -495,14 +237,6 @@ INSERT INTO `db_song_versions` (`id`, `previous_version_id`, `song_id`, `marked`
 	(20, 18, 6, 0, 'asdsadsa', 'asdasdasdads', 'asdasdasd', '3:25', 1, '2017-10-25 06:38:39', '2017-10-25 06:38:39', 1),
 	(21, 20, 6, 0, 'asdsadsa', 'asdasdasdads', 'asdasdasd', '3:25', 1, '2017-10-25 06:38:50', '2017-10-25 06:38:50', 1);
 /*!40000 ALTER TABLE `db_song_versions` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.db_song_versions_staffs
-DROP TABLE IF EXISTS `db_song_versions_staffs`;
-CREATE TABLE IF NOT EXISTS `db_song_versions_staffs` (
-  `song_version_id` bigint(20) NOT NULL,
-  `staff_id` bigint(20) NOT NULL,
-  KEY `index_db_song_versions_staffs_on_song_version_id_and_staff_id` (`song_version_id`,`staff_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.db_song_versions_staffs: ~41 rows (approximately)
 DELETE FROM `db_song_versions_staffs`;
@@ -551,19 +285,6 @@ INSERT INTO `db_song_versions_staffs` (`song_version_id`, `staff_id`) VALUES
 	(21, 13);
 /*!40000 ALTER TABLE `db_song_versions_staffs` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.db_staffs
-DROP TABLE IF EXISTS `db_staffs`;
-CREATE TABLE IF NOT EXISTS `db_staffs` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `latest_version_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_db_staffs_on_latest_version_id` (`latest_version_id`),
-  KEY `index_db_staffs_on_marked` (`marked`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
-
 -- Dumping data for table nyoro2_development.db_staffs: ~13 rows (approximately)
 DELETE FROM `db_staffs`;
 /*!40000 ALTER TABLE `db_staffs` DISABLE KEYS */;
@@ -582,31 +303,6 @@ INSERT INTO `db_staffs` (`id`, `latest_version_id`, `marked`, `created_at`, `upd
 	(12, 19, 0, '2017-10-25 06:38:38', '2017-10-25 06:39:23'),
 	(13, 18, 0, '2017-10-25 06:38:50', '2017-10-25 06:38:50');
 /*!40000 ALTER TABLE `db_staffs` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.db_staff_versions
-DROP TABLE IF EXISTS `db_staff_versions`;
-CREATE TABLE IF NOT EXISTS `db_staff_versions` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `staff_id` bigint(20) DEFAULT NULL,
-  `previous_version_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  `person_id` bigint(20) DEFAULT NULL,
-  `position` varchar(255) DEFAULT NULL,
-  `alias` varchar(255) DEFAULT NULL,
-  `alias_en` varchar(255) DEFAULT NULL,
-  `alias_pronounce` varchar(255) DEFAULT NULL,
-  `note` text,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `editor_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_db_staff_versions_on_staff_id` (`staff_id`),
-  KEY `index_db_staff_versions_on_previous_version_id` (`previous_version_id`),
-  KEY `index_db_staff_versions_on_marked` (`marked`),
-  KEY `index_db_staff_versions_on_person_id` (`person_id`),
-  KEY `index_db_staff_versions_on_alias_pronounce` (`alias_pronounce`),
-  KEY `index_db_staff_versions_on_editor_id` (`editor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.db_staff_versions: ~19 rows (approximately)
 DELETE FROM `db_staff_versions`;
@@ -633,24 +329,6 @@ INSERT INTO `db_staff_versions` (`id`, `staff_id`, `previous_version_id`, `marke
 	(19, 12, 17, 0, 8, 'Arrange', '', '', '', NULL, '2017-10-25 06:39:23', '2017-10-25 06:39:23', 1);
 /*!40000 ALTER TABLE `db_staff_versions` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.db_tags
-DROP TABLE IF EXISTS `db_tags`;
-CREATE TABLE IF NOT EXISTS `db_tags` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `name_en` varchar(255) DEFAULT NULL,
-  `name_pronounce` varchar(255) DEFAULT NULL,
-  `description` text,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `comments_count` int(11) DEFAULT '0',
-  `editor_id` bigint(20) DEFAULT NULL,
-  `marked` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `index_db_tags_on_name_pronounce` (`name_pronounce`),
-  KEY `index_db_tags_on_editor_id` (`editor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
 -- Dumping data for table nyoro2_development.db_tags: ~3 rows (approximately)
 DELETE FROM `db_tags`;
 /*!40000 ALTER TABLE `db_tags` DISABLE KEYS */;
@@ -659,19 +337,6 @@ INSERT INTO `db_tags` (`id`, `name`, `name_en`, `name_pronounce`, `description`,
 	(2, 'コマーシャル', 'Commercial', 'こまーしゃる', '', '2017-09-25 14:22:55', '2017-09-25 14:22:55', 0, 1, 0),
 	(3, 'プレオーダーボーナス', 'Preorder Bonus', 'プレオーダーボーナス', '', '2017-09-25 14:23:43', '2017-09-25 14:23:43', 0, 1, 0);
 /*!40000 ALTER TABLE `db_tags` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.ec_categories
-DROP TABLE IF EXISTS `ec_categories`;
-CREATE TABLE IF NOT EXISTS `ec_categories` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `parent_id` bigint(20) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `description` text,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_ec_categories_on_parent_id` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.ec_categories: ~8 rows (approximately)
 DELETE FROM `ec_categories`;
@@ -687,60 +352,19 @@ INSERT INTO `ec_categories` (`id`, `parent_id`, `name`, `description`, `created_
 	(9, NULL, '他', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `ec_categories` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.ec_products
-DROP TABLE IF EXISTS `ec_products`;
-CREATE TABLE IF NOT EXISTS `ec_products` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `category_id` bigint(20) DEFAULT NULL,
-  `shop_id` bigint(20) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_ec_products_on_category_id` (`category_id`),
-  KEY `index_ec_products_on_shop_id` (`shop_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- Dumping data for table nyoro2_development.ec_products: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_products: ~0 rows (approximately)
 DELETE FROM `ec_products`;
 /*!40000 ALTER TABLE `ec_products` DISABLE KEYS */;
 INSERT INTO `ec_products` (`id`, `category_id`, `shop_id`, `name`, `description`, `created_at`, `updated_at`) VALUES
 	(1, 7, 1, '恋するドールと想いのキセキOriginal Soundtrack', NULL, '2017-11-05 10:57:29', '2017-11-05 10:57:29');
 /*!40000 ALTER TABLE `ec_products` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.ec_product_colors
-DROP TABLE IF EXISTS `ec_product_colors`;
-CREATE TABLE IF NOT EXISTS `ec_product_colors` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `price` varchar(255) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_ec_product_colors_on_product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- Dumping data for table nyoro2_development.ec_product_colors: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_product_colors: ~0 rows (approximately)
 DELETE FROM `ec_product_colors`;
 /*!40000 ALTER TABLE `ec_product_colors` DISABLE KEYS */;
 INSERT INTO `ec_product_colors` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'Default', '200000', '2017-11-05 10:58:22', '2017-11-05 10:58:22');
 /*!40000 ALTER TABLE `ec_product_colors` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.ec_product_discounts
-DROP TABLE IF EXISTS `ec_product_discounts`;
-CREATE TABLE IF NOT EXISTS `ec_product_discounts` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) DEFAULT NULL,
-  `shop` float DEFAULT '0',
-  `system` float DEFAULT '0',
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_ec_product_discounts_on_product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.ec_product_discounts: ~1 rows (approximately)
 DELETE FROM `ec_product_discounts`;
@@ -748,19 +372,6 @@ DELETE FROM `ec_product_discounts`;
 INSERT INTO `ec_product_discounts` (`id`, `product_id`, `shop`, `system`, `created_at`, `updated_at`) VALUES
 	(1, 1, 0, 0, '2017-11-08 02:49:09', '2017-11-08 02:49:09');
 /*!40000 ALTER TABLE `ec_product_discounts` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.ec_product_images
-DROP TABLE IF EXISTS `ec_product_images`;
-CREATE TABLE IF NOT EXISTS `ec_product_images` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `product_id` bigint(20) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `nsfw` tinyint(1) DEFAULT '0',
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_ec_product_images_on_product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.ec_product_images: ~4 rows (approximately)
 DELETE FROM `ec_product_images`;
@@ -772,19 +383,6 @@ INSERT INTO `ec_product_images` (`id`, `product_id`, `image`, `nsfw`, `created_a
 	(24, 1, 'index_parallax_3.jpg', 0, '2017-11-07 05:56:14', '2017-11-07 05:56:14');
 /*!40000 ALTER TABLE `ec_product_images` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.ec_product_storages
-DROP TABLE IF EXISTS `ec_product_storages`;
-CREATE TABLE IF NOT EXISTS `ec_product_storages` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `color_id` bigint(20) DEFAULT NULL,
-  `total` int(11) DEFAULT NULL,
-  `sold` int(11) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_ec_product_storages_on_color_id` (`color_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
 -- Dumping data for table nyoro2_development.ec_product_storages: ~1 rows (approximately)
 DELETE FROM `ec_product_storages`;
 /*!40000 ALTER TABLE `ec_product_storages` DISABLE KEYS */;
@@ -792,46 +390,12 @@ INSERT INTO `ec_product_storages` (`id`, `color_id`, `total`, `sold`, `created_a
 	(1, 1, 20, 0, '2017-11-08 00:41:43', '2017-11-08 00:41:43');
 /*!40000 ALTER TABLE `ec_product_storages` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.ec_shops
-DROP TABLE IF EXISTS `ec_shops`;
-CREATE TABLE IF NOT EXISTS `ec_shops` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `website` varchar(255) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `description` text,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_ec_shops_on_user_id` (`user_id`),
-  KEY `index_ec_shops_on_type` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- Dumping data for table nyoro2_development.ec_shops: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_shops: ~0 rows (approximately)
 DELETE FROM `ec_shops`;
 /*!40000 ALTER TABLE `ec_shops` DISABLE KEYS */;
 INSERT INTO `ec_shops` (`id`, `user_id`, `type`, `name`, `website`, `phone`, `email`, `address`, `description`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'Ec::ApprovedShop', 'はるか', 'haruka_ya.com', '11111111111', 'haruka_ya@yahoo.co.jp', '23東京、日本', 'かるかのかわいい店', '2017-11-05 04:10:16', '2017-11-07 02:04:51');
 /*!40000 ALTER TABLE `ec_shops` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.feature_comments
-DROP TABLE IF EXISTS `feature_comments`;
-CREATE TABLE IF NOT EXISTS `feature_comments` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) DEFAULT NULL,
-  `commentable_type` varchar(255) DEFAULT NULL,
-  `commentable_id` bigint(20) DEFAULT NULL,
-  `body` text,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_feature_comments_on_user_id` (`user_id`),
-  KEY `index_feature_comments_on_commentable_type_and_commentable_id` (`commentable_type`,`commentable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.feature_comments: ~13 rows (approximately)
 DELETE FROM `feature_comments`;
@@ -851,26 +415,6 @@ INSERT INTO `feature_comments` (`id`, `user_id`, `commentable_type`, `commentabl
 	(14, 1, 'Db::Album', 1, 'asadasdsasd', '2017-10-22 04:41:00', '2017-10-22 04:41:00'),
 	(15, 1, 'Db::Album', 2, 'こんにちは', '2017-10-22 08:51:40', '2017-10-22 08:51:40');
 /*!40000 ALTER TABLE `feature_comments` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.feature_logs
-DROP TABLE IF EXISTS `feature_logs`;
-CREATE TABLE IF NOT EXISTS `feature_logs` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) DEFAULT NULL,
-  `loggable_type` varchar(255) DEFAULT NULL,
-  `loggable_id` bigint(20) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `classification` varchar(255) DEFAULT NULL,
-  `action` varchar(255) DEFAULT NULL,
-  `description` text,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_feature_logs_on_user_id` (`user_id`),
-  KEY `index_feature_logs_on_loggable_type_and_loggable_id` (`loggable_type`,`loggable_id`),
-  KEY `index_feature_logs_on_classification` (`classification`),
-  KEY `index_feature_logs_on_classification_and_action` (`classification`,`action`)
-) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.feature_logs: ~122 rows (approximately)
 DELETE FROM `feature_logs`;
@@ -1000,21 +544,6 @@ INSERT INTO `feature_logs` (`id`, `user_id`, `loggable_type`, `loggable_id`, `ti
 	(123, 1, 'Db::Company', 5, '株式会社ビジュアルアーツ', 'db', 'update', 'バーション6に戻す。', '2017-10-25 07:24:19', '2017-10-25 07:24:19');
 /*!40000 ALTER TABLE `feature_logs` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.feature_ratings
-DROP TABLE IF EXISTS `feature_ratings`;
-CREATE TABLE IF NOT EXISTS `feature_ratings` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) DEFAULT NULL,
-  `rateable_type` varchar(255) DEFAULT NULL,
-  `rateable_id` bigint(20) DEFAULT NULL,
-  `star` int(11) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_feature_ratings_on_user_id` (`user_id`),
-  KEY `index_feature_ratings_on_rateable_type_and_rateable_id` (`rateable_type`,`rateable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-
 -- Dumping data for table nyoro2_development.feature_ratings: ~4 rows (approximately)
 DELETE FROM `feature_ratings`;
 /*!40000 ALTER TABLE `feature_ratings` DISABLE KEYS */;
@@ -1024,13 +553,6 @@ INSERT INTO `feature_ratings` (`id`, `user_id`, `rateable_type`, `rateable_id`, 
 	(16, 1, 'Db::Album', 4, 9, '2017-10-21 09:02:41', '2017-10-21 09:04:08'),
 	(17, 1, 'Db::Album', 6, 6, '2017-10-21 09:03:40', '2017-10-21 09:03:40');
 /*!40000 ALTER TABLE `feature_ratings` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.schema_migrations
-DROP TABLE IF EXISTS `schema_migrations`;
-CREATE TABLE IF NOT EXISTS `schema_migrations` (
-  `version` varchar(255) NOT NULL,
-  PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.schema_migrations: ~39 rows (approximately)
 DELETE FROM `schema_migrations`;
@@ -1077,47 +599,6 @@ INSERT INTO `schema_migrations` (`version`) VALUES
 	('20171104072816');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 
--- Dumping structure for table nyoro2_development.users
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) NOT NULL DEFAULT '',
-  `encrypted_password` varchar(255) NOT NULL DEFAULT '',
-  `reset_password_token` varchar(255) DEFAULT NULL,
-  `reset_password_sent_at` datetime DEFAULT NULL,
-  `remember_created_at` datetime DEFAULT NULL,
-  `sign_in_count` int(11) NOT NULL DEFAULT '0',
-  `current_sign_in_at` datetime DEFAULT NULL,
-  `last_sign_in_at` datetime DEFAULT NULL,
-  `current_sign_in_ip` varchar(255) DEFAULT NULL,
-  `last_sign_in_ip` varchar(255) DEFAULT NULL,
-  `confirmation_token` varchar(255) DEFAULT NULL,
-  `confirmed_at` datetime DEFAULT NULL,
-  `confirmation_sent_at` datetime DEFAULT NULL,
-  `unconfirmed_email` varchar(255) DEFAULT NULL,
-  `failed_attempts` int(11) NOT NULL DEFAULT '0',
-  `unlock_token` varchar(255) DEFAULT NULL,
-  `locked_at` datetime DEFAULT NULL,
-  `first_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
-  `name_pronounce` varchar(255) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
-  `provider` varchar(255) DEFAULT NULL,
-  `uid` varchar(255) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `country_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `index_users_on_email` (`email`),
-  UNIQUE KEY `index_users_on_user_name` (`user_name`),
-  UNIQUE KEY `index_users_on_provider_and_uid` (`provider`,`uid`),
-  UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`),
-  UNIQUE KEY `index_users_on_confirmation_token` (`confirmation_token`),
-  UNIQUE KEY `index_users_on_unlock_token` (`unlock_token`),
-  KEY `index_users_on_country_id` (`country_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
 -- Dumping data for table nyoro2_development.users: ~3 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
@@ -1126,14 +607,6 @@ INSERT INTO `users` (`id`, `user_name`, `email`, `encrypted_password`, `reset_pa
 	(2, 'depzai', 'lesi.bich.181297@gmail.com', '$2a$11$JEP04UfK4cd4RDWW.nNzzOJHl9vdsGOvpiyTV3ADq3fFHsvZjhjNK', NULL, NULL, NULL, 1, '2017-09-29 08:09:32', '2017-09-29 08:09:32', '127.0.0.1', '127.0.0.1', 'mvDRDSYp5USgJS9Ni6m1', '2017-09-29 15:09:20', '2017-09-29 08:08:29', NULL, 0, NULL, NULL, 'ひろし', '鈴木', 'すずきひろし', NULL, 'google_oauth2', '104325539789436039537', '2017-09-29 08:08:29', '2017-09-29 08:13:05', 1),
 	(4, NULL, 'moonlight8978@gmail.com', '$2a$11$ISKmyDR4pvQApaiQ5WSmOeMoz3sFhvxyMtstLy1DQ0C4B9xoaJ3b2', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 'meRzgiaGGpDcn8zgAzNu', NULL, '2017-10-27 07:30:53', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'facebook', '1405224559595957', '2017-10-27 07:30:53', '2017-10-27 07:30:53', NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.users_user_roles
-DROP TABLE IF EXISTS `users_user_roles`;
-CREATE TABLE IF NOT EXISTS `users_user_roles` (
-  `user_id` bigint(20) NOT NULL,
-  `role_id` bigint(20) NOT NULL,
-  KEY `index_users_user_roles_on_user_id_and_role_id` (`user_id`,`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.users_user_roles: ~6 rows (approximately)
 DELETE FROM `users_user_roles`;
@@ -1146,17 +619,6 @@ INSERT INTO `users_user_roles` (`user_id`, `role_id`) VALUES
 	(2, 1),
 	(4, 1);
 /*!40000 ALTER TABLE `users_user_roles` ENABLE KEYS */;
-
--- Dumping structure for table nyoro2_development.user_roles
-DROP TABLE IF EXISTS `user_roles`;
-CREATE TABLE IF NOT EXISTS `user_roles` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `index_user_roles_on_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.user_roles: ~4 rows (approximately)
 DELETE FROM `user_roles`;

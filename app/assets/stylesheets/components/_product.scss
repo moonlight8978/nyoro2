@@ -1,0 +1,13 @@
+.b-product-price {
+  color: $red;
+
+  .b-price-currency {
+    font-size: 1.25rem;
+  }
+
+  .b-price-cost {
+    font-size: 2rem;
+    vertical-align: middle;
+    padding-left: .5rem;
+  }
+}

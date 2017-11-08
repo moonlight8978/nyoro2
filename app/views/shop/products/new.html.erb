@@ -1,0 +1,7 @@
+<%= content_for :side_nav do %>
+  <%= render 'shop/side_nav' %>
+<% end %>
+
+<div class="b-box">
+  <%= render 'shop/products/form', method: :post, url: shop_products_path, submit_content: '追加する' %>
+</div>

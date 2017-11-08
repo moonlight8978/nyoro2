@@ -52,3 +52,4 @@ production:
   database: nyoro2_production
   username: nyoro2
   password: <%= ENV['NYORO2_DATABASE_PASSWORD'] %>
+  
