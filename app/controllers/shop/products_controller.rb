@@ -17,14 +17,17 @@ class Shop::ProductsController < ApplicationController
 
   def new
     @form = EcForm::Product.new(shop: @shop)
-    3.times { |_| @form.colors.build }
+    @form.check
   end
 
   def create
     @form = EcForm::Product.new(shop: @shop)
-    @form.save(product_params)
-    p @form.product
-    p @form.product.colors 
+    if @form.save(product: product_params, color: color_params, storage: storage_params)
+      @form.check
+    else
+      @form.check
+      render action: :new
+    end
   end
 
   def destroy_multiple
@@ -35,8 +38,19 @@ private
 
   def product_params
     params.require(:ec_form_product).permit(
-      :name, :category_id, :description,
-      colors_attributes: [:name, :price]
+      :name, :category_id, :description
     )
+  end
+
+  def color_params
+    params.require(:ec_form_product).permit(
+      color: [:name, :price]
+    )[:color]
+  end
+
+  def storage_params
+    params.require(:ec_form_product).permit(
+      storage: [:total]
+    )[:storage]
   end
 end

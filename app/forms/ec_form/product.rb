@@ -2,9 +2,9 @@ class EcForm::Product
   include ActiveModel::Dirty
   include ActiveModel::Model
 
-  attr_accessor :shop, :product
+  attr_accessor :shop, :product, :total, :color, :storage
 
-  delegate :name, :category_id, :category, :description, :colors, :colors_attributes=, to: :product
+  delegate :name, :category_id, :category, :description, :colors, to: :product
 
   validates :name,
     presence: { message: '製品の名が入力されていません。' }
@@ -15,21 +15,36 @@ class EcForm::Product
     @product ||= shop.products.new
   end
 
-  def save(params)
-    product.assign_attributes(params)
+  def color
+    @color ||= EcForm::Color.new(product: product)
+  end
+
+  def storage
+    @storage ||= EcForm::Storage.new(color: color.color)
+  end
+
+  def valid?
+    invalid = errors.any? || color.valid? || storage.valid?
+    !invalid
+  end
+
+  def check
+    p color
+    p storage
+  end
+
+  def save(**args)
+    product.assign_attributes(args[:product])
+    color.assign_new_attributes(args[:color])
+    storage.assign_new_attributes(args[:storage])
 
     if valid?
       p "OK"
       true
     else
       p "tach"
+      p product.errors, color.errors, storage.errors
       false
     end
   end
-
-  # def colors_attributes=(attributes)
-  #   attributes.each do |i, color_params|
-  #     @product.colors.push(@product.colors.build(color_params))
-  #   end
-  # end
 end
