@@ -8,6 +8,8 @@ class EcForm::Color
 
   validates :name,
     presence: true
+  validates :price,
+    presence: true
 
   def color
     @color ||= product.colors.build

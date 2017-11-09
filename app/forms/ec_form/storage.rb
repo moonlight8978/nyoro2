@@ -6,6 +6,10 @@ class EcForm::Storage
 
   delegate :total, to: :storage
 
+  validates :total,
+    presence: true,
+    numericality: { only_integer: true , greater_than: 0, message: 'Total must be integer and greater than 0 eg 1, 2, ...' }
+
   def storage
     @storage ||= color.build_storage
   end

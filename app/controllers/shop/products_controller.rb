@@ -23,15 +23,21 @@ class Shop::ProductsController < ApplicationController
   def create
     @form = EcForm::Product.new(shop: @shop)
     if @form.save(product: product_params, color: color_params, storage: storage_params)
-      @form.check
+      redirect_to shop_product_path(@form.product)
     else
-      @form.check
       render action: :new
     end
   end
 
+  def edit
+    @product = @shop.products.find(params[:id])
+    @form = EcForm::Product.new(shop: @shop, product: @product)
+  end
+
   def destroy_multiple
-    #code
+    @products = @shop.products.where(id: params[:shop_product_ids])
+    @products.destroy_all
+    redirect_back fallback_location: shop_products_path
   end
 
 private
@@ -44,13 +50,13 @@ private
 
   def color_params
     params.require(:ec_form_product).permit(
-      color: [:name, :price]
-    )[:color]
+      color_form: [:name, :price]
+    )[:color_form]
   end
 
   def storage_params
     params.require(:ec_form_product).permit(
-      storage: [:total]
-    )[:storage]
+      storage_form: [:total]
+    )[:storage_form]
   end
 end

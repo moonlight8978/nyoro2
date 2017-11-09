@@ -8,20 +8,20 @@
   %>
     <h6>色</h6>
 
-    <div class="form-group b-form-group">
-      <%= f.fields_for :color, @form.color do |color_fields| %>
+    <div class="">
+      <%= f.fields_for :color_form, @form.color_form do |color_fields| %>
         <div class="form-group b-form-group">
           <%= color_fields.text_field :name,
             class: class_string(
               'form-control': true,
-              'is-invalid': @form.color.errors.messages[:name].present?
+              'is-invalid': @form.color_form.errors.messages[:name].present?
             ),
             require: true
           %>
-          <%= color_fields.label :name, '色*' %>
+          <%= color_fields.label :name, '色の名*' %>
           <small class="form-text text-muted">色の名がない場合は「Default」を入力して下さい。</small>
           <div class="invalid-feedback">
-            <% @form.color.errors.messages[:name].each do |message| %>
+            <% @form.color_form.errors.messages[:name].each do |message| %>
               <div><%= message %></div>
             <% end %>
           </div>
@@ -31,33 +31,33 @@
           <%= color_fields.number_field :price,
             class: class_string(
               'form-control': true,
-              'is-invalid': @form.color.errors.messages[:price].present?
+              'is-invalid': @form.color_form.errors.messages[:price].present?
             ),
             require: true
           %>
-          <%= color_fields.label :price, '色*' %>
+          <%= color_fields.label :price, '価格*' %>
           <small class="form-text text-muted">JPY</small>
           <div class="invalid-feedback">
-            <% @form.color.errors.messages[:price].each do |message| %>
+            <% @form.color_form.errors.messages[:price].each do |message| %>
               <div><%= message %></div>
             <% end %>
           </div>
         </div>
       <% end %>
 
-      <%= f.fields_for :storage, @form.storage do |storage_fields| %>
+      <%= f.fields_for :storage_form, @form.storage_form do |storage_fields| %>
         <div class="form-group b-form-group">
           <%= storage_fields.number_field :total,
             class: class_string(
               'form-control': true,
-              'is-invalid': @form.storage.errors.messages[:total].present?
+              'is-invalid': @form.storage_form.errors.messages[:total].present?
             ),
             require: true
           %>
-          <%= storage_fields.label :price, '色*' %>
+          <%= storage_fields.label :price, '在庫数*' %>
           <small class="form-text text-muted">JPY</small>
           <div class="invalid-feedback">
-            <% @form.storage.errors.messages[:total].each do |message| %>
+            <% @form.storage_form.errors.messages[:total].each do |message| %>
               <div><%= message %></div>
             <% end %>
           </div>

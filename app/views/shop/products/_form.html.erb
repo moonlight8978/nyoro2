@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-3">
       <div class="form-group b-form-group">
-        <%= f.collection_select :category_id, Ec::Category.all, :id, :name, {},
+        <%= f.collection_select :category_id, Ec::Category.selectable, :id, :name, { prompt: 'Select smth' },
           class: class_string(
             'form-control': true,
             'is-invalid': @form.errors.messages[:category].present?
@@ -22,7 +22,7 @@
 
     <div class="col-9">
       <div class="form-group b-form-group">
-        <%= f.text_field :name, class: class_string('form-control': true, 'is-invalid' => @form.errors.messages[:name].present?), autofocus: true, require: true %>
+        <%= f.text_field :name, class: class_string('form-control': true, 'is-invalid': @form.errors.messages[:name].present?), autofocus: true, require: true %>
         <%= f.label :name, '製品の名*' %>
         <div class="invalid-feedback">
           <% @form.errors.messages[:name].each do |message| %>
@@ -34,8 +34,8 @@
   </div>
 
   <div class="form-group b-form-group">
-    <%= f.text_area :description, class: class_string('form-control': true, 'is-invalid' => @form.errors.messages[:description].present?) %>
-    <%= f.label :description, '製品の名*' %>
+    <%= f.text_area :description, class: class_string('form-control': true, 'is-invalid': @form.errors.messages[:description].present?) %>
+    <%= f.label :description, 'ディスクリプション' %>
     <div class="invalid-feedback">
       <% @form.errors.messages[:description].each do |message| %>
         <div><%= message %></div>

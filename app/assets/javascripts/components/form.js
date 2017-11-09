@@ -44,4 +44,11 @@
         $btn.attr('disabled', false);
       }
     });
+
+  $(document)
+    .on('input', '.b-form-control-range', function (event) {
+      let $this = $(this);
+      let $displayAt = $($this.data('display-at'));
+      $displayAt.text($this.val());
+    });
 })();

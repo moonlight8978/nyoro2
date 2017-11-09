@@ -5,7 +5,9 @@
 <div class="b-box-group">
   <h6 class="b-box-title">
     <span class="b-btn-edit-inline">
-      <i class="fa fa-pencil"></i>
+      <%= link_to edit_shop_product_path(@product), class: 'b-link-no-decoration' do %>
+        <i class="fa fa-pencil"></i>
+      <% end %>
     </span>
     <span class="b-btn-edit-txt">店情報</span>
   </h6>

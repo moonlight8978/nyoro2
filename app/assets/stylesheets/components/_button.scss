@@ -366,13 +366,15 @@ $md-btn-color: #2196f3;
 }
 
 .b-btn-edit-inline {
-  @extend .b-btn-edit-template;
-
-  font-size: 1.5em;
   padding-right: .25rem;
   line-height: 1;
   display: inline-block;
   vertical-align: middle;
+
+  i {
+    @extend .b-btn-edit-template;
+    font-size: 1.5em;
+  }
 
   ~ .b-btn-edit-txt { vertical-align: middle; }
 }

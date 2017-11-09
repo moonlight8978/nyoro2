@@ -10,13 +10,20 @@
         </button>
       </div>
       <div class="modal-body">
-        「<%= modal_title %>」が消されます。本当にいいですか？
+        「<%= modal_title %>」が削除されます。本当にいいですか？
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-        <%= link_to '消す', destroy_path, method: :delete, 
-          class: 'btn btn-primary' 
-        %>
+        <button type="button" class="b-btn b-btn-raised b-btn-ripple" data-dismiss="modal">キャンセル</button>
+
+        <% if defined? form %>
+          <button class="b-btn b-btn-raised b-btn-ripple b-bg-destroy" name="button">
+            削除
+          </button>
+        <% else %>
+          <%= link_to '削除', destroy_path, method: :delete,
+            class: 'b-btn b-btn-raised b-btn-ripple b-bg-destroy'
+          %>
+        <% end %>
       </div>
     </div>
   </div>

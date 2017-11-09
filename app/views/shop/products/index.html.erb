@@ -1,18 +1,55 @@
 <%= content_for :side_nav do %>
-  <%= render 'shop/side_nav' %>
+  <%= render layout: 'shop/side_nav' do %>
+    <%= form_tag request.query_parameters, method: :get, html: {} do %>
+      <ul class="list-group">
+        <h6 class="b-list-group-header b-flex-space-between">
+          <span>Filter</span>
+          <%= button_tag 'Apply', name: nil %>
+        </h6>
+
+        <h6 class="b-list-group-header">Type</h6>
+
+        <% Ec::Category.selectable.each do |category| %>
+          <%= label_tag :"types_#{category.id}", class: 'd-block m-0' do %>
+            <li class="list-group-item list-group-item-action">
+              <%= check_box_tag :"types[]", category.name,
+                params[:types] && params[:types].include?(category.name),
+                id: :"types_#{category.id}"
+              %>
+              <%= category.name %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+
+      <ul class="list-group">
+        <h6 class="b-list-group-header">Price</h6>
+
+        <li class="list-group-item">
+          <%= range_field_tag :price, params[:price] || Ec::Product::MAX_PRICE,
+            min: Ec::Product::MIN_PRICE, max: Ec::Product::MAX_PRICE,
+            class: 'b-form-control-range', 'data-display-at': "#priceRangeValue"
+          %>
+          <span class="b-form-value-range" id="priceRangeValue">
+            <%= params[:price] || Ec::Product::MAX_PRICE %>
+          </span>
+        </li>
+      </ul>
+    <% end %>
+  <% end %>
 <% end %>
 
 <%= form_tag destroy_multiple_shop_products_path, method: :delete do %>
   <div class="mt-3">
     <div class="">
       <%= link_to new_shop_product_path, class: 'b-link-no-decoration' do %>
-        <button type="button" class="b-btn b-btn-raised b-btn-ripple b-bg-create" name="button">
+        <button type="button" class="b-btn b-btn-raised b-btn-ripple b-bg-create">
           <i class="fa fa-plus-square-o"></i>
           <span>製品を作る</span>
         </button>
       <% end %>
 
-      <button class="b-btn b-btn-raised b-btn-ripple b-bg-destroy" name="button">
+      <button class="b-btn b-btn-raised b-btn-ripple b-bg-destroy">
         <i class="fa fa-trash"></i>
         <span>製品を消す</span>
       </button>
@@ -47,7 +84,7 @@
         <% @products.each do |product| %>
           <tr>
             <td class="b-col-id">
-              <%= check_box_tag :"shop_products[]", 1 %>
+              <%= check_box_tag :"shop_product_ids[]", product.id %>
             </td>
             <td class="b-col-id">
               <%= product.id %>
@@ -64,3 +101,12 @@
     </table>
   </div>
 <% end %>
+
+<%#= content_for :modals do %>
+  <%#= render partial: 'components/confirm_destroy',
+    locals: {
+      modal_title: "選択した製品",
+      form: true
+    }
+  %>
+<%# end %>
