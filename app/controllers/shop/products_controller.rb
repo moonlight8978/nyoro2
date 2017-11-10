@@ -5,10 +5,10 @@ class Shop::ProductsController < ApplicationController
   include Ec::Shop::CheckExistence
 
   before_action :authenticate_user!, :must_have_shop!, :shop_must_be_approved!
-  decorates_assigned :product
+  decorates_assigned :product, :products
 
   def index
-    @products = @shop.products
+    @products = @shop.products.includes(:category).with_price_range
   end
 
   def show

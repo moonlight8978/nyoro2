@@ -1,0 +1,46 @@
+<table class="b-data-table b-table-loading" id="manageShopProducts">
+  <thead>
+    <tr>
+      <th class="b-col-id"></th>
+      <th class="b-col-id">ID</th>
+      <th class="b-col-wide">製品名</th>
+      <th class="b-col-medium">タイプ</th>
+      <th class="b-col-semi-wide">価格</th>
+    </tr>
+  </thead>
+
+  <!-- To fix tr hover make border disappear -->
+  <tbody>
+    <tr>
+      <td class="p-0 m-0"></td>
+    </tr>
+  </tbody>
+
+  <tbody class="b-tbody-loading">
+    <tr>
+      <td colspan="5"><div class="b-loading"></div></td>
+    </tr>
+  </tbody>
+
+  <tbody>
+    <% products.each do |product| %>
+      <tr>
+        <td class="b-col-id">
+          <%= check_box_tag :"shop_product_ids[]", product.id %>
+        </td>
+        <td class="b-col-id">
+          <%= product.id %>
+        </td>
+        <td class="b-col-wide">
+          <%= link_to product.name, shop_product_path(product.id), class: 'b-link b-link-no-color' %>
+        </td>
+        <td class="b-col-medium">
+          <%= product.category.name %>
+        </td>
+        <td class="b-col-semi-wide">
+          <%= product.price_range %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

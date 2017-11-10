@@ -81,3 +81,23 @@
   display: block;
   width: 100%;
 }
+
+.b-form-control-with-icon {
+  display: flex;
+
+  .b-form-control-icon {
+    flex: 0 0 40px;
+    max-width: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    i { font-size: 1.25rem; }
+  }
+
+  .b-form-group {
+    flex: 0 0 calc(100% - 40px);
+    max-width: calc(100% - 40px);
+  }
+}

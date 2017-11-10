@@ -1,0 +1,41 @@
+<%= form_tag request.query_parameters, method: :get do %>
+  <%= hidden_field_tag :q, params[:q] %>
+
+  <ul class="list-group">
+    <h6 class="b-list-group-header b-flex-space-between">
+      <span>Filter</span>
+      <%= button_tag name: nil, class: "b-btn-clear b-as-link" do %>
+        <span>Apply</span>
+        <i class="fa fa-filter" aria-hidden="true"></i>
+      <% end %>
+    </h6>
+
+    <h6 class="b-list-group-header">Type</h6>
+
+    <% Ec::Category.selectable.each do |category| %>
+      <%= label_tag :"types_#{category.id}", class: 'd-block m-0' do %>
+        <li class="list-group-item list-group-item-action">
+          <%= check_box_tag :"types[]", category.name,
+            params[:types] && params[:types].include?(category.name),
+            id: :"types_#{category.id}"
+          %>
+          <%= category.name %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <ul class="list-group">
+    <h6 class="b-list-group-header">Price</h6>
+
+    <li class="list-group-item">
+      <%= range_field_tag :price, params[:price] || Ec::Product::MAX_PRICE,
+        min: Ec::Product::MIN_PRICE, max: Ec::Product::MAX_PRICE,
+        class: 'b-form-control-range', 'data-display-at': "#priceRangeValue"
+      %>
+      <span class="b-form-value-range" id="priceRangeValue">
+        <%= params[:price] || Ec::Product::MAX_PRICE %>
+      </span>
+    </li>
+  </ul>
+<% end %>

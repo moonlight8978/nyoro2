@@ -1,0 +1,28 @@
+.ec-products-management-search-form {
+  form {
+    max-width: 100%;
+    @include responsive(sm) { max-width: 50%; }
+  }
+
+  .b-form-group {
+    margin: 0;
+    padding: 0;
+  }
+
+  .b-form-control { background-color: transparent; }
+}
+
+.ec-products-management-data-table {
+  margin-top: 4rem;
+  @include responsive(sm) { margin-top: 1rem; }
+
+  form {
+    position: relative;
+  }
+
+  .b-btn-group {
+    position: absolute;
+    right: 0;
+    top: -3rem;
+  }
+}
