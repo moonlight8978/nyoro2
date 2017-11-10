@@ -57,24 +57,22 @@
         %>
           <div class="modal-body">
             <div class="b-remote-form-error" id="">
-
+            </div>
+            
+            <div class="b-form-group form-group">
+              <%= f.text_field :name, class: 'b-form-control form-control', required: true %>
+              <%= f.label :name, '色' %>
+              <small class="form-text text-muted">色がなければ、「Default」を入力してください。</small>
             </div>
 
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="b-form-group form-group">
-                  <%= f.text_field :name, class: 'b-form-control form-control', required: true %>
-                  <%= f.label :name, '色' %>
-                  <small class="form-text text-muted">色がなければ、「Default」を入力してください。</small>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <div class="b-form-group form-group">
-                  <%= f.number_field :price, class: 'b-form-control form-control', min: 0, required: true %>
-                  <%= f.label :price, '価格' %>
-                </div>
-              </div>
+            <div class="b-form-group form-group">
+              <%= f.number_field :price, class: 'b-form-control form-control', min: 0, required: true %>
+              <%= f.label :price, '価格' %>
+            </div>
+            
+            <div class="b-form-group form-group">
+              <%= f.number_field :quantity, class: 'b-form-control form-control', min: 0, required: true %>
+              <%= f.label :quantity, '価格' %>
             </div>
           </div>
           <!-- END body -->

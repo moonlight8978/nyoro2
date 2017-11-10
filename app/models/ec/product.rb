@@ -32,11 +32,29 @@ class Ec::Product < ApplicationRecord
     integer :min_price do
       self.colors.any? ? self.colors.minimum(:price) : MIN_PRICE
     end
-    text :category do
+    string :category do
       self.category.name
     end
+  end
+  
+  def self.search_and_filter(**args)
+    self.search(include: [:category]) do
+      fulltext args[:q],
+        fields: [:name] if args[:q].present?
+      with(:category, args[:types]) if args[:types].present?
+      with(:min_price).greater_than_or_equal_to(args[:min_price]) if args[:min_price].present?
+      with(:max_price).less_than_or_equal_to(args[:max_price]) if args[:max_price].present?
+      paginate page: 1, per_page: 20
+    end.results
   end
   # validates
   # callbacks
   # instance methods
+  def min_price
+    colors.minimum(:price)
+  end
+  
+  def max_price
+    colors.maximum(:price)
+  end
 end

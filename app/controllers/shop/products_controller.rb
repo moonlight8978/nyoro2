@@ -8,7 +8,15 @@ class Shop::ProductsController < ApplicationController
   decorates_assigned :product, :products
 
   def index
-    @products = @shop.products.includes(:category).with_price_range
+    # @products = @shop
+    #   .products.includes(:category)
+    #   .with_price_range
+    @products =  Ec::Product.search_and_filter(
+      q: params[:q],
+      types: params[:types],
+      min_price: params[:min_price] || 0,
+      max_price: params[:max_price]
+    )
   end
 
   def show
@@ -22,7 +30,7 @@ class Shop::ProductsController < ApplicationController
 
   def create
     @form = EcForm::Product.new(shop: @shop)
-    if @form.save(product: product_params, color: color_params, storage: storage_params)
+    if @form.create(product: product_params, color: color_params, storage: storage_params)
       redirect_to shop_product_path(@form.product)
     else
       render action: :new
@@ -32,6 +40,16 @@ class Shop::ProductsController < ApplicationController
   def edit
     @product = @shop.products.find(params[:id])
     @form = EcForm::Product.new(shop: @shop, product: @product)
+  end
+  
+  def update
+    @product = @shop.products.find(params[:id])
+    @form = EcForm::Product.new(shop: @shop, product: @product)
+    if @form.update(product: product_params)
+      redirect_to shop_product_path(@product) 
+    else
+      render action: :edit
+    end
   end
 
   def destroy_multiple

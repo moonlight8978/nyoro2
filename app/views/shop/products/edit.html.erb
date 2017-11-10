@@ -4,6 +4,6 @@
 
 <div class="b-box">
   <%= render partial: 'shop/products/form',
-    locals: { method: :post, url: shop_products_path, submit_content: '追加する' }
+    locals: { method: :put, url: shop_product_path(@product), submit_content: '追加する' }
   %>
 </div>

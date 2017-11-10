@@ -29,12 +29,12 @@
     <h6 class="b-list-group-header">Price</h6>
 
     <li class="list-group-item">
-      <%= range_field_tag :price, params[:price] || Ec::Product::MAX_PRICE,
+      <%= range_field_tag :max_price, params[:max_price] || Ec::Product::MAX_PRICE,
         min: Ec::Product::MIN_PRICE, max: Ec::Product::MAX_PRICE,
         class: 'b-form-control-range', 'data-display-at': "#priceRangeValue"
       %>
       <span class="b-form-value-range" id="priceRangeValue">
-        <%= params[:price] || Ec::Product::MAX_PRICE %>
+        <%= params[:max_price] || Ec::Product::MAX_PRICE %>
       </span>
     </li>
   </ul>

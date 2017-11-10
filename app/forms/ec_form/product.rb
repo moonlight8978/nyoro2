@@ -27,24 +27,37 @@ class EcForm::Product
     @storage ||= EcForm::Storage.new(storage: color_form.color.build_storage)
   end
 
-  def valid?
+  def valid?(action:)
     product_valid = super
-    default_color_valid = color_form.valid?
-    storage_valid = storage_form.valid?
-    product_valid && default_color_valid && storage_valid
+    case action
+    when :create
+      default_color_valid = color_form.valid?
+      storage_valid = storage_form.valid?
+      product_valid && default_color_valid && storage_valid
+    when :update
+      product_valid
+    end
   end
 
   def check
     p color_form, storage_form
   end
 
-  def save(**args)
+  def create(**args)
     product.assign_attributes(args[:product])
     color_form.color.assign_attributes(args[:color])
     storage_form.storage.assign_attributes(args[:storage])
 
-    valid? && create_product(**args)
+    valid?(action: :create) && create_product(**args)
   end
+  
+  def update(**args)
+    product.assign_attributes(args[:product])
+    
+    valid?(action: :update) && update_product(**args)
+  end
+
+private
 
   def create_product(**args)
     self.product = EcService::CreateProduct
@@ -53,6 +66,17 @@ class EcForm::Product
         default_color_params: args[:color],
         default_color_storage_params: args[:storage],
         shop: shop
+      )
+      .perform
+      
+    product
+  end
+  
+  def update_product(**args)
+    self.product = EcService::UpdateProduct
+      .new(
+        product_params: args[:product],
+        product: product
       )
       .perform
       
