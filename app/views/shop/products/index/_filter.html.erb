@@ -13,11 +13,11 @@
     <h6 class="b-list-group-header">Type</h6>
 
     <% Ec::Category.selectable.each do |category| %>
-      <%= label_tag :"types_#{category.id}", class: 'd-block m-0' do %>
+      <%= label_tag :"categories_#{category.id}", class: 'd-block m-0' do %>
         <li class="list-group-item list-group-item-action">
-          <%= check_box_tag :"types[]", category.name,
-            params[:types] && params[:types].include?(category.name),
-            id: :"types_#{category.id}"
+          <%= check_box_tag :"categories[]", category.name,
+            params[:categories] && params[:categories].include?(category.name),
+            id: :"categories_#{category.id}"
           %>
           <%= category.name %>
         </li>

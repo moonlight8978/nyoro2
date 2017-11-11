@@ -1,4 +1,5 @@
 class EcForm::Product
+  # FIXME storage will receive :quantity instead of :total / :sold
   include ActiveModel::Dirty
   include ActiveModel::Model
 
@@ -50,10 +51,10 @@ class EcForm::Product
 
     valid?(action: :create) && create_product(**args)
   end
-  
+
   def update(**args)
     product.assign_attributes(args[:product])
-    
+
     valid?(action: :update) && update_product(**args)
   end
 
@@ -68,10 +69,10 @@ private
         shop: shop
       )
       .perform
-      
+
     product
   end
-  
+
   def update_product(**args)
     self.product = EcService::UpdateProduct
       .new(
@@ -79,7 +80,7 @@ private
         product: product
       )
       .perform
-      
+
     product
   end
 end

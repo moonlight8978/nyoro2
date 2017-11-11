@@ -23,7 +23,7 @@
   </tbody>
 
   <tbody>
-    <% products.each do |product| %>
+    <% products.each_with_index  do |product, index| %>
       <tr>
         <td class="b-col-id">
           <%= check_box_tag :"shop_product_ids[]", product.id %>
@@ -35,10 +35,10 @@
           <%= link_to product.name, shop_product_path(product.id), class: 'b-link b-link-no-color' %>
         </td>
         <td class="b-col-medium">
-          <%= product.category.name %>
+          <%= @search.hits[index].stored(:category) %>
         </td>
         <td class="b-col-semi-wide">
-          <%= product.price_range %>
+          <%= price_range(min: @search.hits[index].stored(:min_price), max: @search.hits[index].stored(:max_price)) %>
         </td>
       </tr>
     <% end %>

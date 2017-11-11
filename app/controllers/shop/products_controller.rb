@@ -8,19 +8,20 @@ class Shop::ProductsController < ApplicationController
   decorates_assigned :product, :products
 
   def index
-    # @products = @shop
-    #   .products.includes(:category)
-    #   .with_price_range
-    @products =  Ec::Product.search_and_filter(
+    @search =  Ec::Product.search_and_filter(
       q: params[:q],
       types: params[:types],
       min_price: params[:min_price] || 0,
-      max_price: params[:max_price]
+      max_price: params[:max_price],
+      shop_id: @shop.id
     )
+    @products = @search.results
   end
 
   def show
-    @product = @shop.products.find(params[:id])
+    @product = @shop.products
+      .includes(colors: :storage)
+      .find(params[:id])
   end
 
   def new
@@ -41,12 +42,12 @@ class Shop::ProductsController < ApplicationController
     @product = @shop.products.find(params[:id])
     @form = EcForm::Product.new(shop: @shop, product: @product)
   end
-  
+
   def update
     @product = @shop.products.find(params[:id])
     @form = EcForm::Product.new(shop: @shop, product: @product)
     if @form.update(product: product_params)
-      redirect_to shop_product_path(@product) 
+      redirect_to shop_product_path(@product)
     else
       render action: :edit
     end

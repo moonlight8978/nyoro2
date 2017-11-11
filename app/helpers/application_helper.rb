@@ -43,6 +43,14 @@ module ApplicationHelper
     end
   end
 
+  def price_range(min:, max:)
+    if min == max
+      "¥#{min}"
+    else
+      "¥#{min} - ¥#{max}"
+    end
+  end
+
 private
 
   def country_template(code, name)

@@ -15,6 +15,10 @@ resize_to_fit will scale up images if they are smaller than the given size
 resize_to_limit won't do anything if the image is already smaller than the size given
 resize_to_fill cut image when necessary
 
+has_many:
+a.collection [1,2]
+a.collection.build => [1,2,new_object]
+
 form:
 So first you'll need to make sure that team_id exists on the user model. 
 And seoncdly, as Doon suggested, you don't need fields_for unless you want to interact 

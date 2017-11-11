@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     # registrations: 'users/registrations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-    
+
   devise_scope :user do
     get 'users/cancel', to: 'users/registrations#cancel', as: :cancel_user_registration
     get 'users/sign_up', to: 'users/registrations#new', as: :new_user_registration
@@ -133,8 +133,8 @@ Rails.application.routes.draw do
       resources :images, controller: 'products/images' do
         delete 'destroy_multiple', on: :collection
       end
-      resources :colors
-      resource :discount
+      resources :colors, controller: 'products/colors'
+      resource :discount, controller: 'products/discounts'
     end
   end
 

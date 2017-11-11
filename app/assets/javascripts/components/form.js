@@ -4,7 +4,7 @@
       event.preventDefault();
 
       let $this = $(this);
-      let $btn = $this.find('button[type="submit"]');
+      let $btn = $this.find('[type="submit"]');
       let $error = $this.find('.b-remote-form-error');
 
       let txt = $btn.html();

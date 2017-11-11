@@ -4,11 +4,15 @@ class EcForm::Storage
 
   attr_accessor :color, :storage
 
-  delegate :total, to: :storage
+  delegate :total, :quantity, to: :storage
 
-  validates :total,
+  validates :quantity,
     presence: true,
-    numericality: { only_integer: true , greater_than: 0, message: 'Total must be integer and greater than 0 eg 1, 2, ...' }
+    numericality: {
+      only_integer: true ,
+      greater_than: 0,
+      message: 'Total must be integer and greater than 0 eg 1, 2, ...'
+    }
 
   def storage
     @storage ||= color.build_storage

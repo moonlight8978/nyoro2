@@ -1,4 +1,4 @@
-<!-- Modal -->
+<!-- Modal slideshows -->
 <div class="modal fade" id="addSlideModal" tabindex="-1" role="dialog" aria-labelledby="addSlideModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -38,9 +38,70 @@
     </div>
   </div>
 </div>
+<!-- END slideshow modal -->
 
+<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+
+<!-- new color modal -->
+<div class="modal fade" id="addColorModal" tabindex="-1" role="dialog" aria-labelledby="addColorModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addColorModalLabel">Edit color</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- END header -->
+      <% new_color_form = EcForm::Color.new(color: Ec::Product::Color.new) %>
+
+      <%= form_for new_color_form,
+        url: product_colors_path(@product),
+        method: :post, html: { class: 'b-remote-form' } do |f|
+      %>
+        <div class="modal-body">
+          <div class="b-remote-form-error" id="">
+          </div>
+
+          <div class="b-form-group form-group">
+            <%= f.text_field :name, class: 'b-form-control form-control', required: true %>
+            <%= f.label :name, '色' %>
+            <small class="form-text text-muted">色がなければ、「Default」を入力してください。</small>
+          </div>
+
+          <div class="b-form-group form-group">
+            <%= f.number_field :price, class: 'b-form-control form-control', min: 0, required: true %>
+            <%= f.label :price, '価格' %>
+          </div>
+
+          <div class="b-form-group form-group">
+            <%= f.fields_for :storage_form, new_color_form.storage_form do |storage_f| %>
+              <%= storage_f.number_field :quantity,
+                class: 'b-form-control form-control', min: 0, required: true
+              %>
+              <%= storage_f.label :quantity, '価格' %>
+            <% end %>
+          </div>
+        </div>
+        <!-- END body -->
+
+        <div class="modal-footer">
+          <button type="button" class="b-btn b-btn-raised b-btn-ripple b-bg-destroy" data-dismiss="modal">キャンセル</button>
+          <%= f.button 'セフ',
+            class: 'b-btn b-btn-raised b-btn-ripple b-bg-create',
+            data: { 'disable-html': '読み込む中...' }
+          %>
+        </div>
+        <!-- END footer -->
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- END modal -->
+
+<!-- edit color modals -->
 <% @product.colors.each do |color| %>
-  <!-- Modal -->
+  <!-- begin -->
   <div class="modal fade" id="editColor<%= color.id %>" tabindex="-1" role="dialog" aria-labelledby="editColor<%= color.id %>Label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -51,14 +112,16 @@
           </button>
         </div>
         <!-- END header -->
-        <%= form_for color,
-          url: product_images_path(@product),
-          method: :post, html: { class: 'b-remote-form' } do |f|
+        <% color_form = EcForm::Color.new(color: color) %>
+
+        <%= form_for color_form,
+          url: product_color_path(@product, color),
+          method: :put, html: { class: 'b-remote-form' } do |f|
         %>
           <div class="modal-body">
             <div class="b-remote-form-error" id="">
             </div>
-            
+
             <div class="b-form-group form-group">
               <%= f.text_field :name, class: 'b-form-control form-control', required: true %>
               <%= f.label :name, '色' %>
@@ -69,10 +132,12 @@
               <%= f.number_field :price, class: 'b-form-control form-control', min: 0, required: true %>
               <%= f.label :price, '価格' %>
             </div>
-            
+
             <div class="b-form-group form-group">
-              <%= f.number_field :quantity, class: 'b-form-control form-control', min: 0, required: true %>
-              <%= f.label :quantity, '価格' %>
+              <%= f.fields_for :storage_form, color_form.storage_form do |storage_f| %>
+                <%= storage_f.number_field :quantity, class: 'b-form-control form-control', min: 0, required: true %>
+                <%= storage_f.label :quantity, '価格' %>
+              <% end %>
             </div>
           </div>
           <!-- END body -->
@@ -89,4 +154,50 @@
       </div>
     </div>
   </div>
+  <!-- END modal -->
 <% end %>
+<!-- END modals -->
+
+<!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+
+<!-- edit discount modal -->
+<div class="modal fade" id="editDiscountModal" tabindex="-1" role="dialog" aria-labelledby="editDiscountModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editDiscountModalLabel">Add more slides</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- END header -->
+      <%= form_for @product.discount,
+        url: product_discount_path(@product),
+        method: :put, html: { class: 'b-remote-form' } do |f|
+      %>
+        <div class="modal-body">
+          <div class="b-remote-form-error" id="">
+
+          </div>
+
+          <div class="b-form-group form-group">
+            <%= f.number_field :shop, class: 'form-control', step: 0.01, required: true %>
+            <%= f.label :shop, 'ショップディスカウント' %>
+            <small class="form-text text-muted">0 ~ 0.7 (1% = 0.01, 5% => 0.05, ...)</small>
+          </div>
+        </div>
+        <!-- END body -->
+
+        <div class="modal-footer">
+          <button type="button" class="b-btn b-btn-raised b-btn-ripple b-bg-destroy" data-dismiss="modal">キャンセル</button>
+          <%= f.button 'セフ',
+            class: 'b-btn b-btn-raised b-btn-ripple b-bg-create',
+            data: { 'disable-html': '読み込む中...' }
+          %>
+        </div>
+        <!-- END footer -->
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- END discount modal -->

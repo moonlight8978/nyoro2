@@ -17,13 +17,13 @@ class Ec::Product::Discount < ApplicationRecord
   # validates
   # callbacks
   def set_default_values
-    self.system = 0
-    self.shop = 0
+    self.system ||= 0
+    self.shop ||= 0
   end
 
   def round_numbers
-    self.system.round(1)
-    self.shop.round(1)
+    self.system.round(2)
+    self.shop.round(2)
   end
 
   # instance methods

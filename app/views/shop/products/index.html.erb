@@ -7,8 +7,8 @@
 <div class="ec-products-management-search-form">
   <%= form_tag request.query_parameters, method: :get do %>
     <%= hidden_field_tag :max_price, params[:max_price] || Ec::Product::MAX_PRICE %>
-    <% params[:types] && params[:types].each do |type| %>
-      <%= hidden_field_tag :"types[]", type %>
+    <% params[:categories] && params[:categories].each do |category| %>
+      <%= hidden_field_tag :"categories[]", category %>
     <% end %>
     <div class="b-form-control-with-icon">
       <div class="b-form-control-icon">
