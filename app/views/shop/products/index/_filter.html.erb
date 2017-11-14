@@ -3,14 +3,14 @@
 
   <ul class="list-group">
     <h6 class="b-list-group-header b-flex-space-between">
-      <span>Filter</span>
+      <span>検索</span>
       <%= button_tag name: nil, class: "b-btn-clear b-as-link" do %>
-        <span>Apply</span>
+        <span>絞り込む</span>
         <i class="fa fa-filter" aria-hidden="true"></i>
       <% end %>
     </h6>
 
-    <h6 class="b-list-group-header">Type</h6>
+    <h6 class="b-list-group-header">カテゴリ</h6>
 
     <% Ec::Category.selectable.each do |category| %>
       <%= label_tag :"categories_#{category.id}", class: 'd-block m-0' do %>
@@ -26,7 +26,7 @@
   </ul>
 
   <ul class="list-group">
-    <h6 class="b-list-group-header">Price</h6>
+    <h6 class="b-list-group-header">価格</h6>
 
     <li class="list-group-item">
       <%= range_field_tag :max_price, params[:max_price] || Ec::Product::MAX_PRICE,

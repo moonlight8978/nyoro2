@@ -17,7 +17,7 @@ class CreateEcSprint1 < ActiveRecord::Migration[5.1]
     create_table :ec_products do |t|
       t.references :category, index: true
       t.references :shop, index: true
-	  
+
       t.string :name
       t.string :description
 
@@ -28,11 +28,11 @@ class CreateEcSprint1 < ActiveRecord::Migration[5.1]
       t.references :product, index: true
 
       t.string :name
-      t.string :price
+      t.integer :price
 
       t.timestamps
     end
-	
+
 	create_table :ec_product_storages do |t|
 	  t.references :color, index: true
 

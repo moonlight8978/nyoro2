@@ -9,4 +9,7 @@ class Ec::Category < ApplicationRecord
       "id IN (SELECT parent_id FROM ec_categories WHERE parent_id IS NOT NULL) " \
       "OR id IS NULL"
     ) }
+
+  scope :first_class,
+    -> { where(parent_id: nil) }
 end

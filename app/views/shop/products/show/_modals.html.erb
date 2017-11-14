@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addSlideModalLabel">Add more slides</h5>
+        <h5 class="modal-title" id="addSlideModalLabel">写真を追加する</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -47,7 +47,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addColorModalLabel">Edit color</h5>
+        <h5 class="modal-title" id="addColorModalLabel">新しい色</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -72,6 +72,7 @@
           <div class="b-form-group form-group">
             <%= f.number_field :price, class: 'b-form-control form-control', min: 0, required: true %>
             <%= f.label :price, '価格' %>
+            <small class="form-text text-muted">JPYをお願いします。</small>
           </div>
 
           <div class="b-form-group form-group">
@@ -106,7 +107,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editColor<%= color.id %>Label">Edit color</h5>
+          <h5 class="modal-title" id="editColor<%= color.id %>Label">製品色を編集する</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -131,6 +132,7 @@
             <div class="b-form-group form-group">
               <%= f.number_field :price, class: 'b-form-control form-control', min: 0, required: true %>
               <%= f.label :price, '価格' %>
+              <small class="form-text text-muted">JPYをお願いします。</small>
             </div>
 
             <div class="b-form-group form-group">
@@ -165,13 +167,15 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editDiscountModalLabel">Add more slides</h5>
+        <h5 class="modal-title" id="editDiscountModalLabel">ディスカウント</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <!-- END header -->
-      <%= form_for @product.discount,
+      <% discount_form = EcForm::Discount.new(discount: @product.discount) %>
+
+      <%= form_for discount_form,
         url: product_discount_path(@product),
         method: :put, html: { class: 'b-remote-form' } do |f|
       %>

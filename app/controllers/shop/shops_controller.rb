@@ -1,5 +1,5 @@
 class Shop::ShopsController < ApplicationController
-  layout 'shop'
+  layout 'ec'
 
   include Ec::Shop::CheckStatus
   include Ec::Shop::CheckExistence

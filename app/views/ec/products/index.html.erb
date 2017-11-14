@@ -1,0 +1,23 @@
+<%= content_for :side_nav do %>
+  <%= render layout: 'ec/side_nav' do %>
+    <%= catemenu_for(params[:category]) %>
+
+    <%= render "ec/products/index/filter" %>
+  <% end%>
+<% end %>
+
+<div class="b-box-group">
+  <h6 class="b-box-title">
+    Loz
+  </h6>
+
+  <div class="b-box-container">
+    <%= render "ec/products/index/list" %>
+  </div>
+
+  <% unless @products.last_page? %>
+    <div class="">
+      <%= render "ec/products/index/paginate" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,21 @@
+<ul class="list-group">
+  <h6 class="b-list-group-header b-flex-space-between">
+    <span>カテゴリ</span>
+
+    <%= link_to '全部', request.query_parameters.merge(category: nil), class: 'b-link-no-decoration' %>
+  </h6>
+
+  <% if category %>
+    <li class="list-group-item list-group-item-action active">
+      <%= category.name %>
+    </li>
+  <% end %>
+
+  <% categories.each do |category| %>
+    <%= link_to request.query_parameters.merge(category: category.id) do %>
+      <li class="list-group-item list-group-item-action">
+        <%= category.name %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

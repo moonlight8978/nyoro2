@@ -1,5 +1,5 @@
 class Shop::ProductsController < ApplicationController
-  layout 'shop'
+  layout 'ec'
 
   include Ec::Shop::CheckStatus
   include Ec::Shop::CheckExistence
@@ -18,6 +18,7 @@ class Shop::ProductsController < ApplicationController
     @products = @search.results
   end
 
+  # FIXME(html _colors): colors box class with margin
   def show
     @product = @shop.products
       .includes(colors: :storage)

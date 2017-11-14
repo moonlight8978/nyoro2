@@ -1,7 +1,21 @@
 <div id="b-sideNav" class="b-side-nav">
   <ul class="list-group">
-    <li class="list-group-item list-group-item-action">user_name</li>
+    <li class="list-group-item list-group-item-action">
+      <div class="row">
+        <div class="col-3 pr-0">
+          <div class="b-img-placeholder b-img-placeholder-avatar b-ratio-1_1">
+            <div class="b-img-thumb" data-background-image="<%= current_user.avatar %>"></div>
+          </div>
+        </div>
+        <div class="col-9 pl-2">
+          <div class="b-ellipsis">
+            <%= current_user.user_name %>
+          </div>
+        </div>
+      </div>
+    </li>
   </ul>
+  
   <ul class="list-group">
     <h6 class="b-list-group-header">ショップ</h6>
 

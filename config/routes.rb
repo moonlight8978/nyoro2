@@ -139,11 +139,12 @@ Rails.application.routes.draw do
   end
 
   namespace :ec do
-    resources :products do
-      resources :images
-      resource :discount
-      resources :colors
-    end
+    resources :products
+
     resources :categories
+
+    resources :shops do
+      resources :products, controller: 'shop/products'
+    end
   end
 end

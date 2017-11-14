@@ -1,27 +1,29 @@
-<div class="row">
-  <% product.colors.each do |color| %>
-    <div class="col-6 col-md-4">
-      <div class="b-box p-3 h-100">
-        <div class="b-flex-space-between">
-          <div>
-            <span class="b-btn-edit-inline align-baseline"
-              data-toggle="modal" data-target="#editColor<%= color.id %>"
-            >
-              <i class="fa fa-pencil"></i>
-            </span>
-            <span class="b-btn-edit-txt align-top"><%= color.name %></span>
+<div class="b-box-container">
+  <div class="row">
+    <% product.colors.each do |color| %>
+      <div class="col-sm-6 col-lg-4 mb-3">
+        <div class="b-box p-3 h-100">
+          <div class="b-flex-space-between">
+            <div>
+              <span class="b-btn-edit-inline align-baseline"
+                data-toggle="modal" data-target="#editColor<%= color.id %>"
+              >
+                <i class="fa fa-pencil"></i>
+              </span>
+              <span class="b-btn-edit-txt align-top"><%= color.name %></span>
+            </div>
+            <%= color.status %>
           </div>
-          <%= color.status %>
+
+          <%= color.price %>
         </div>
-
-        <%= color.price %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
 
-  <div class="col-6 col-md-4">
-    <div class="b-box p-3 h-100">
-      <a data-toggle="modal" data-target="#addColorModal">追加する</a>
+    <div class="col-sm-6 col-lg-4 mb-3">
+      <div class="b-box p-3 h-100">
+        <a data-toggle="modal" data-target="#addColorModal">追加する</a>
+      </div>
     </div>
   </div>
 </div>

@@ -36,6 +36,7 @@ class Ec::Product < ApplicationRecord
       self.category.name
     end
     integer :shop_id, :references => Ec::Shop
+    integer :category_id, :references => Ec::Category
   end
 
   def self.search_and_filter(**args)
@@ -46,6 +47,7 @@ class Ec::Product < ApplicationRecord
       with(:min_price).greater_than_or_equal_to(args[:min_price] || MIN_PRICE)
       with(:max_price).less_than_or_equal_to(args[:max_price] || MAX_PRICE)
       with(:shop_id, args[:shop_id]) if args[:shop_id].present?
+      with(:category_id, args[:category_id]) if args[:category_id].present?
       paginate page: 1, per_page: 20
     end
   end
