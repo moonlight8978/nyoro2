@@ -1,0 +1,45 @@
+<div class="b-row-horizontal-group row">
+  <div class="col-sm-4 b-row-horizontal mt-3 mt-sm-0">
+    <div class="b-avatar-with-username">
+      <div class="b-avatar">
+        <div class="b-img-placeholder b-ratio-1_1 b-img-placeholder-avatar">
+          <div class="b-img-thumb" data-background-image="<%= product.shop.avatar %>"></div>
+        </div>
+      </div>
+
+      <div class="b-username">
+        <div class="b-ellipsis">
+          <%= product.shop.name %>
+        </div>
+        <div class="b-ellipsis">
+          (<%= link_to product.shop.user_name,
+            profile_path(product.shop.user),
+            class: 'b-link-no-color'
+          %>)
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-2">
+      <span>Level:</span>
+      <i class="fa fa-diamond"></i>
+      <span>Diamond</span>
+    </div>
+  </div>
+
+  <div class="col-sm-4 b-row-horizontal mt-3 mt-sm-0">
+    ????
+  </div>
+
+  <div class="col-sm-4 b-row-horizontal mt-3 mt-sm-0">
+    <div class="b-rating-inside-star">
+      <i class="fa fa-star">
+        <span><%= 10 %></span>
+      </i>
+
+      <div class="b-rating-description">
+        (<%= 10 %>人)
+      </div>
+    </div>
+  </div>
+</div>

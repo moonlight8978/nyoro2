@@ -51,3 +51,19 @@
 .b-ratio-1_1 .b-img-thumb {
   background-image: asset_path('500x500');
 }
+
+.b-ratio-2_1 .b-img-thumb {
+  background-image: asset_path('800x400');
+}
+
+.b-avatar-with-username {
+  display: flex;
+
+  .b-username {
+    flex: 0 0 calc(100% - 40px);
+    max-width: calc(100% - 40px);
+    padding-left: 0.5rem;
+    text-align: left;
+    @extend .flex-middle;
+  }
+}

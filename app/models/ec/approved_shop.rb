@@ -1,3 +1,3 @@
 class Ec::ApprovedShop < Ec::Shop
-  #code
+  delegate :avatar, :user_name, to: :user
 end

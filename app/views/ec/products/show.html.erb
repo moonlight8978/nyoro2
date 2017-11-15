@@ -20,42 +20,36 @@
   </div>
 <% end %>
 
-<div class="b-box-group">
-  <div class="b-box">
-    <div class="b-box-another top">
-      <%= render "ec/products/show/shop" %>
-    </div>
-    <div class="">
-      <%= render "ec/products/show/info" %>
-    </div>
-    <!-- <div class="row">
-      <div class="col-sm-4 col-lg-3">
-
+<div class="ec-product-detail">
+  <div class="b-box-group">
+    <div class="b-box">
+      <div class="b-box-another top">
+        <%= render "ec/products/show/header" %>
       </div>
-      <div class="col-sm-8 col-lg-9">
-
+      <div class="p-3">
+        <%= render "ec/products/show/info" %>
       </div>
-    </div> -->
+    </div>
   </div>
-</div>
 
-<div class="b-box-group mt-3">
-  <h6 class="b-box-title">写真</h6>
-  <div class="b-box p-3">
-    slideshows
+  <div class="b-box-group mt-3">
+    <h6 class="b-box-title">写真</h6>
+    <div class="b-box p-3">
+      <%= render "ec/products/show/slideshow" %>
+    </div>
   </div>
-</div>
 
-<div class="b-box-group mt-3">
-  <h6 class="b-box-title">ディスクリプション</h6>
-  <div class="b-box p-3">
-    description
+  <div class="b-box-group mt-3">
+    <h6 class="b-box-title">ディスクリプション</h6>
+    <div class="b-box p-3">
+      description
+    </div>
   </div>
-</div>
 
-<div class="b-box-group mt-3">
-  <h6 class="b-box-title">コメント</h6>
-  <div class="b-box p-3">
-    comments
+  <div class="b-box-group mt-3">
+    <h6 class="b-box-title">コメント</h6>
+    <div class="b-box p-3">
+      comments
+    </div>
   </div>
 </div>

@@ -1,0 +1,25 @@
+<div class="b-carousel">
+  <ol class="b-carousel-indicators">
+    <div class="slick" data-slides="<%= images.size %>">
+      <% images.each do |slide| %>
+        <li class="">
+          <div class="img-thumbnail">
+            <div class="b-img-placeholder b-ratio-5_3">
+              <div class="b-img-thumb" data-background-image="<%= slide.image.thumb.url %>"></div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </div>
+  </ol>
+
+  <div class="b-carousel-inner">
+    <div class="slick">
+      <% images.each do |slide| %>
+        <div class="b-img-placeholder b-ratio-2_1">
+          <div class="b-img-thumb" data-background-image="<%= slide.image.url %>"></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

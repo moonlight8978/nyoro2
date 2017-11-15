@@ -42,6 +42,7 @@
       background-color: transparent;
       font-size: 0.9rem;
       padding: .5rem 1rem;
+      text-align: center;
       @extend .flex-middle;
       @include transition-std(all);
 

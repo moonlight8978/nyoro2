@@ -33,7 +33,7 @@ $(document).on('turbolinks:load', loadAllImages);
 
 function asset_path(resource, url = false) {
   if (!url) {
-    return `assets/${resource}`;
+    return `/assets/${resource}`;
   } else {
     return `${resource}`;
   }

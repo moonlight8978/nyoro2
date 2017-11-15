@@ -1,0 +1,11 @@
+<% if with_form %>
+  <%= render(
+    partial: "components/slideshow/with_form",
+    locals: { images: images }
+  ) %>
+<% else %>
+  <%= render(
+    partial: "components/slideshow/without_form",
+    locals: { images: images }
+  ) %>
+<% end %>
