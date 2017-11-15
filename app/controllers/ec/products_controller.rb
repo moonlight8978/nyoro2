@@ -23,7 +23,7 @@ private
       min_price: params[:min_price] || 0,
       max_price: params[:max_price],
       category_id: params[:category],
-      sort_by: params[:sort],
+      order_by: params[:sort],
       reverse_sort: params[:reverse_sort],
       associations: [:discount]
     )

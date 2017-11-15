@@ -1,0 +1,61 @@
+<%= content_for :side_nav do %>
+  <%= render layout: 'ec/side_nav' do %>
+    <%= catemenu_for(nil) %>
+  <% end %>
+<% end %>
+
+<%= content_for :right_col do %>
+  <div class="b-box-group">
+    <h6 class="b-box-title">top_sellers</h6>
+    <div class="b-box p-3">
+      top_sellers
+    </div>
+  </div>
+
+  <div class="b-box-group mt-3">
+    <h6 class="b-box-title">history</h6>
+    <div class="b-box p-3">
+      history
+    </div>
+  </div>
+<% end %>
+
+<div class="b-box-group">
+  <div class="b-box">
+    <div class="b-box-another top">
+      <%= render "ec/products/show/shop" %>
+    </div>
+    <div class="">
+      <%= render "ec/products/show/info" %>
+    </div>
+    <!-- <div class="row">
+      <div class="col-sm-4 col-lg-3">
+
+      </div>
+      <div class="col-sm-8 col-lg-9">
+
+      </div>
+    </div> -->
+  </div>
+</div>
+
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">写真</h6>
+  <div class="b-box p-3">
+    slideshows
+  </div>
+</div>
+
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">ディスクリプション</h6>
+  <div class="b-box p-3">
+    description
+  </div>
+</div>
+
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">コメント</h6>
+  <div class="b-box p-3">
+    comments
+  </div>
+</div>

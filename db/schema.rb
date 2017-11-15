@@ -266,7 +266,7 @@ ActiveRecord::Schema.define(version: 20171104072816) do
   create_table "ec_product_colors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "product_id"
     t.string "name"
-    t.string "price"
+    t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_ec_product_colors_on_product_id"

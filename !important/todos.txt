@@ -33,7 +33,7 @@ album version add more release => add
 
 5. Can be favorited, rated, commented, reviewed by users (with visualization).
 
-6. User utils: 
+6. User utils:
 - notification
 - friend
 - chat
@@ -46,3 +46,4 @@ album version add more release => add
 
 9. E-Commerce.
 - Each product has ability to add db model for related section.
+- Wishlist

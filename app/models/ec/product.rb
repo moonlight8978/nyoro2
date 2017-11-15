@@ -48,6 +48,7 @@ class Ec::Product < ApplicationRecord
       with(:max_price).less_than_or_equal_to(args[:max_price] || MAX_PRICE)
       with(:shop_id, args[:shop_id]) if args[:shop_id].present?
       with(:category_id, args[:category_id]) if args[:category_id].present?
+      order_by(args[:order_by], args[:reverse_sort].present? ? 'desc' : 'asc') if args[:order_by].present?
       paginate page: 1, per_page: 20
     end
   end
