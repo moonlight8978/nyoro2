@@ -1,22 +1,66 @@
 <div class="row">
-  <% products.each do |product| %>
+  <% products.each_with_index do |product, index| %>
     <div class="col-sm-6 col-lg-4 mb-3">
-      <div class="b-box b-box-hover p-3">
-        <div class="">
-          image
+      <div class="b-box b-box-hover h-100 b-product-card">
+        <div class="product-img">
+          <div class="b-img-placeholder b-ratio-1_1 b-lazyload">
+            <div class="b-img-thumb" data-background-image="<%= asset_path "product.jpg" %>">
+
+            </div>
+
+          </div>
         </div>
 
-        <div class="">
-          name
+        <div class="product-name">
+          <%= link_to product.name, ec_product_path(product), class: 'b-link-no-color' %>
         </div>
 
-        <div class="">
-          star, comments
+        <div class="product-utils">
+          <div class="">
+            <span>xx</span>
+            <i class="fa fa-star b-star"></i>
+            <span>(xx人)</span>
+          </div>
+
+          <div class="">
+            <i class="fa fa-comments-o"></i>
+            <span>xx</span>
+          </div>
         </div>
 
-        <div class="">
-          price<br>
-          original_price
+        <div class="b-line w-100 my-2"></div>
+
+        <div class="product-price">
+          <div class="">
+            <span class="discount-price">
+              <%= price_range(
+                min: @hits[index].stored(:min_price),
+                max: @hits[index].stored(:max_price),
+                discount: product.discount.total
+              ) %>
+            </span>
+          </div>
+          <div class="">
+            <span class="original-price">
+              <%= price_range(
+                min: @hits[index].stored(:min_price),
+                max: @hits[index].stored(:max_price)
+              ) %>
+            </span>
+            <span class="pl-2"><%= product.discount.total_percents %></span>
+          </div>
+        </div>
+
+        <div class="product-btn-group">
+          <a href="#">
+            <i class="fa fa-money"></i>
+            <span>すぐ買う</span>
+          </a>
+
+          <a href="#">
+            <i class="fa fa-cart-plus"></i>
+            <span>カートに追加する</span>
+          </a>
         </div>
       </div>
     </div>

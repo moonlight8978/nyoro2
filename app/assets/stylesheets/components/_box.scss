@@ -3,7 +3,7 @@
 //     情報
 //   </h6>
 //
-//   <div class="b-box">
+//   <div class="b-box b-box-hover">
 //     <div class="b-box-another top">
 //       紹介
 //     </div>
@@ -21,6 +21,11 @@
 
 .b-box-p {
   padding: 1rem;
+}
+
+.b-box-hover {
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  &:hover { @include box(2); }
 }
 
 .b-box-group {
@@ -96,8 +101,4 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
-
-.b-box-hover:hover {
-
 }

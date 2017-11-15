@@ -43,12 +43,12 @@ module ApplicationHelper
     end
   end
 
-  def price_range(min:, max:)
-    if min == max
-      "¥#{min}"
-    else
-      "¥#{min} - ¥#{max}"
-    end
+  def price_range(**args)
+    p args
+    discount = args[:discount].to_f || 0
+    min = (args[:min].to_i * (1 - discount)).round
+    max = (args[:max].to_i * (1 - discount)).round
+    min == max ? "¥#{min}" : "¥#{min} - ¥#{max}"
   end
 
 private

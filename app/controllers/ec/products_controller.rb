@@ -6,10 +6,12 @@ class Ec::ProductsController < ApplicationController
   def index
     @search = search
     @products = @search.results
+    @hits = @search.hits
   end
 
   def show
-    #code
+    @product = Ec::Product
+      .find(params[:id])
   end
 
 private
@@ -22,7 +24,8 @@ private
       max_price: params[:max_price],
       category_id: params[:category],
       sort_by: params[:sort],
-      reverse_sort: params[:reverse_sort]
+      reverse_sort: params[:reverse_sort],
+      associations: [:discount]
     )
   end
 end

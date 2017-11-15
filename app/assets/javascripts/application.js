@@ -65,16 +65,16 @@ var $loading;
   const wow = new WOW({
     offset: 150
   });
-  
+
   $(document).on('turbolinks:load', () => {
     wow.init();
-    $(".lazy").lazyload({
-      effect : 'fadeIn'
-    });
+    // $(".lazy").lazyload({
+    //   effect : 'fadeIn'
+    // });
     console.log('turbolinks')
-    
+
     $loading = $('.loading');
-    
+
     $(document)
       .on('ajax:send', '[data-remote="true"]', (event, xhr) => {
         NProgress.start();

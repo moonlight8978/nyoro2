@@ -47,3 +47,7 @@
 .b-ratio-2_1::before {
   padding-bottom: 1 / 2 * 100%;
 }
+
+.b-ratio-1_1 .b-img-thumb {
+  background-image: asset_path('500x500');
+}

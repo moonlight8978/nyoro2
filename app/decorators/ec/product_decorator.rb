@@ -3,6 +3,8 @@ class Ec::ProductDecorator < ApplicationDecorator
 
   decorates_association :colors,
     with: Ec::Product::ColorsDecorator
+  decorates_association :discount,
+    with: Ec::Product::DiscountDecorator
 
   def price_range
     if object.min_price == object.max_price
@@ -10,9 +12,5 @@ class Ec::ProductDecorator < ApplicationDecorator
     else
       "¥#{object.min_price} - ¥#{object.max_price}"
     end
-  end
-
-  def asd
-    :asd
   end
 end

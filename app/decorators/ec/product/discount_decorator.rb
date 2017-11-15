@@ -10,4 +10,9 @@ class Ec::Product::DiscountDecorator < ApplicationDecorator
   #     end
   #   end
 
+
+  def total_percents
+    # object.total > 0 ? "-#{object.total * 100}%" : nil
+    "-#{(object.total * 100).to_i}%"
+  end
 end
