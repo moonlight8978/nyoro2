@@ -10,33 +10,52 @@
   <tr>
     <th>色</th>
     <td>
-      <%= product.colors.map { |color| color.name }.join(', ') %>
-      <ul class="nav nav-tabs" role="tablist">
-        <% product.colors.each_with_index do |color, index| %>
-          <li class="nav-item">
-            <a class="nav-link <%= index == 0 ? 'active' : '' %>" id="colorTab<%= color.id %>" data-toggle="tab"
-              data-target="#colorDetail<%= color.id %>" role="tab"
-              aria-controls="#colorDetail<%= color.id %>" aria-selected="true"
-            >
-              <%= color.name %>
-            </a>
-          </li>
-        <% end %>
-      </ul>
+      <div class="">
+        <ul class="nav nav-tabs ec-product-colors-menu" role="tablist">
+          <% product.colors.each_with_index do |color, index| %>
+            <li class="nav-item">
+              <a class="nav-link <%= index == 0 ? 'active' : '' %>" id="colorTab<%= color.id %>" data-toggle="tab"
+                data-target="#colorDetail<%= color.id %>" role="tab"
+                aria-controls="#colorDetail<%= color.id %>" aria-selected="true"
+              >
+                <%= color.name %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
     </td>
   </tr>
 </table>
 
-<div class="">
+<div class="tab-content ec-product-colors-tabs">
+  <% product.colors.each_with_index do |color, index| %>
+    <div class="tab-pane fade show <%= index == 0 ? 'active' : '' %>" id="colorDetail<%= color.id %>"
+      role="tabpanel" aria-labelledby="colorTab<%= color.id %>"
+    >
+      <div class="row">
+        <div class="col-4">
+          <div class="">
+            Buy now
+          </div>
+          <div class="">
+            Add to Cart
+          </div>
+        </div>
 
-  <div class="tab-content">
-    <% product.colors.each_with_index do |color, index| %>
-      <div class="tab-pane fade show <%= index == 0 ? 'active' : '' %>" id="colorDetail<%= color.id %>"
-        role="tabpanel" aria-labelledby="colorTab<%= color.id %>"
-      >
-        <%= color.price %>
-        <%= color.status %>
+        <div class="col-4">
+          <span>残り</span>
+          <div class="">
+            <%= color.storage.quantity %>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <%= color.price_after_discount %>
+          <%= color.price %>
+        </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

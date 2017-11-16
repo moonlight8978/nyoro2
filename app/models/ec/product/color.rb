@@ -28,6 +28,6 @@ class Ec::Product::Color < ApplicationRecord
 
   # instance methods
   def price_after_discount
-    price - price * product.discount.total
+    (price * (1 - product.discount.total)).round
   end
 end

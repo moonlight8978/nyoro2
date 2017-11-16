@@ -11,6 +11,7 @@ class Ec::ProductsController < ApplicationController
 
   def show
     @product = Ec::Product
+      .includes(colors: [:storage])
       .find(params[:id])
   end
 

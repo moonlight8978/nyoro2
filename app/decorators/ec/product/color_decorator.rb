@@ -4,7 +4,11 @@ class Ec::Product::ColorDecorator < ApplicationDecorator
 
   decorates_association :storage
 
-  def price
+  def discount_price_meta
+    
+  end
+
+  def price_meta
     h.content_tag :div, class: 'b-product-price' do
       h.content_tag(:span, '¥', class: 'b-price-currency') \
       + h.content_tag(:strong, object.price, class: 'b-price-cost')
