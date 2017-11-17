@@ -51,6 +51,10 @@ module ApplicationHelper
     min == max ? "¥#{min}" : "¥#{min} - ¥#{max}"
   end
 
+  def products_filter
+    render "components/filter/products/container"
+  end
+
 private
 
   def country_template(code, name)

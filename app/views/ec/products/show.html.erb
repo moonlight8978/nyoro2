@@ -1,3 +1,9 @@
+<%= breadcrumb(
+  { name: "ホーム", path: home_path },
+  { name: "商品", path: ec_products_path },
+  product.name
+) %>
+
 <%= content_for :side_nav do %>
   <%= render layout: 'ec/side_nav' do %>
     <%= catemenu_for(nil) %>
@@ -46,10 +52,5 @@
     </div>
   </div>
 
-  <div class="b-box-group mt-3">
-    <h6 class="b-box-title">コメント</h6>
-    <div class="b-box p-3">
-      comments
-    </div>
-  </div>
+  <%= comments_for(product) %>
 </div>

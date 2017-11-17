@@ -1,0 +1,27 @@
+<%= breadcrumb(
+  { name: "ホーム", path: home_path },
+  { name: "ショップ", path: ec_shops_path },
+  "はるか"
+) %>
+
+<%= content_for :side_nav do %>
+  <%= render layout: 'ec/side_nav' do %>
+    <%= catemenu_for(params[:category]) %>
+
+    <%= products_filter %>
+  <% end %>
+<% end %>
+
+<div class="b-box">
+  <%= render "ec/shops/show/info" %>
+</div>
+
+<div class="b-box-group mt-3">
+  <div class="">
+    <h6 class="b-box-title">商品</h6>
+  </div>
+
+  <div class="b-box-container">
+    <%= render "ec/shops/show/list" %>
+  </div>
+</div>

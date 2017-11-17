@@ -18,7 +18,7 @@
       @include transition-std(all);
 
       &.active, &:hover {
-        background-color: $red;
+        background-color: rgba(0,0,0,0.6);
         color: $white;
       }
     }
@@ -27,4 +27,12 @@
   .ec-product-colors-tabs {
 
   }
+}
+
+.b-font-price-original {
+  font-size: 1.1rem;
+}
+
+.b-font-price-discount {
+  font-size: 1.5rem;
 }

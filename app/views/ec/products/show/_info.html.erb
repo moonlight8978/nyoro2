@@ -1,11 +1,16 @@
 <table class="b-table">
   <tr>
-    <th>商品な</th>
+    <th>商品名</th>
     <td><%= product.name %></td>
   </tr>
   <tr>
     <th>カテゴリ</th>
-    <td><%= product.category.name %></td>
+    <td>
+      <%= link_to product.category.name,
+        ec_products_path(category: product.category.id),
+        class: 'b-link-no-color'
+      %>
+    </td>
   </tr>
   <tr>
     <th>色</th>
@@ -18,7 +23,7 @@
                 data-target="#colorDetail<%= color.id %>" role="tab"
                 aria-controls="#colorDetail<%= color.id %>" aria-selected="true"
               >
-                <%= color.name %>
+                <span class="b-pointer"><%= color.name %></span>
               </a>
             </li>
           <% end %>
@@ -31,29 +36,47 @@
 
 <div class="tab-content ec-product-colors-tabs">
   <% product.colors.each_with_index do |color, index| %>
-    <div class="tab-pane fade show <%= index == 0 ? 'active' : '' %>" id="colorDetail<%= color.id %>"
+    <div class="tab-pane fade show pt-4 pb-2 <%= index == 0 ? 'active' : '' %>" id="colorDetail<%= color.id %>"
       role="tabpanel" aria-labelledby="colorTab<%= color.id %>"
     >
       <div class="row">
-        <div class="col-4">
+        <div class="col-8 col-sm-5">
           <div class="">
-            Buy now
+            <button class="b-btn b-btn-raised b-btn-ripple w-100 b-bg-black" type="button" name="button">
+              <i class="fa fa-fw fa-shopping-cart"></i>
+              <span>すぐ買う</span>
+            </button>
           </div>
-          <div class="">
-            Add to Cart
+
+          <div class="mt-2">
+            <button class="b-btn b-btn-raised b-btn-ripple w-100 b-bg-black" type="button" name="button">
+              <i class="fa fa-fw fa-chevron-right"></i>
+              <span>カートに入れる</span>
+            </button>
           </div>
         </div>
 
-        <div class="col-4">
-          <span>残り</span>
+        <div class="col-4 col-sm-3 text-right">
           <div class="">
+            <%= color.storage.status_icon %>
+            <span>在庫数</span>
+          </div>
+
+          <div class="b-product-quantity">
             <%= color.storage.quantity %>
           </div>
         </div>
 
-        <div class="col-4">
-          <%= color.price_after_discount %>
-          <%= color.price %>
+        <div class="col-sm-4 text-right">
+          <%= color.price_meta(discount: true) %>
+          <div class="pt-2">
+            <span class="pr-2">
+              <%= product.discount.total_percents %>
+            </span>
+            <span class="b-font-price-original">
+              <%= color.price_meta(style: :normal, strike: true) %>
+            </span>
+          </div>
         </div>
       </div>
     </div>

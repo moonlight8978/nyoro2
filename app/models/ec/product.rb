@@ -1,4 +1,6 @@
 class Ec::Product < ApplicationRecord
+  include Commentable
+  
   MAX_PRICE = 1_000_000
   MIN_PRICE = 0
   # associations

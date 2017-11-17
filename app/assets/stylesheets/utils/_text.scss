@@ -21,3 +21,10 @@
 .b-font-85 { font-size: 0.85rem; }
 .b-font-80 { font-size: 0.8rem; }
 .b-font-75 { font-size: 0.75rem; }
+
+.b-line-through {
+  text-decoration: line-through;
+}
+
+.b-color-red { color: $red; }
+.b-color-green { color: $green; }

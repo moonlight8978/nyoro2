@@ -5,6 +5,12 @@ class Ec::Product::StorageDecorator < ApplicationDecorator
     object.quantity > 0 ? quantity_in_words(object.quantity) : '完売'
   end
 
+  def status_icon
+    object.quantity > 0 ?
+      h.content_tag(:i, nil, class: "fa fa-check-circle b-color-green") :
+      h.content_tag(:i, nil, class: "fa fa-times-circle b-color-red")
+  end
+
 private
 
   def quantity_in_words(quantity)

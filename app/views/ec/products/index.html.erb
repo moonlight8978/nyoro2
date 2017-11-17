@@ -1,8 +1,13 @@
+<%= breadcrumb(
+  { name: "ホーム", path: home_path },
+  "商品"
+) %>
+
 <%= content_for :side_nav do %>
   <%= render layout: 'ec/side_nav' do %>
     <%= catemenu_for(params[:category]) %>
 
-    <%= render "ec/products/index/filter" %>
+    <%= products_filter %>
   <% end%>
 <% end %>
 

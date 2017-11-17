@@ -3,11 +3,21 @@
 
   .b-price-currency {
     font-size: 1.25rem;
+    vertical-align: text-top;
   }
 
   .b-price-cost {
     font-size: 2rem;
-    vertical-align: middle;
+    vertical-align: text-top;
     padding-left: .5rem;
+    line-height: 1;
   }
+}
+
+.b-product-quantity {
+  display: inline-block;
+  padding: 5px .5rem;
+  border-bottom: 4px solid $blue;
+  font-size: 1.15rem;
+  font-weight: bold;
 }

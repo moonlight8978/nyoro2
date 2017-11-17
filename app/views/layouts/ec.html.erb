@@ -10,10 +10,12 @@
   <div class="pt-4"></div>
   <div class="pt-3"></div>
 
+  <%= yield :breadcrumb %>
+
   <div class="animated fadeIn">
     <div class="container pb-4">
       <div class="row">
-        <div class="d-none pr-1 
+        <div class="d-none pr-1
           <%= content_for?(:right_col) ?
             'd-lg-block col-lg-2' :
             'd-md-block col-md-3 col-lg-2'

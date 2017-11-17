@@ -9,7 +9,9 @@
 
       <div class="b-username">
         <div class="b-ellipsis">
-          <%= product.shop.name %>
+          <%= link_to product.shop.name, ec_shop_path(product.shop),
+            class: 'b-link-no-color'
+          %>
         </div>
         <div class="b-ellipsis">
           (<%= link_to product.shop.user_name,
