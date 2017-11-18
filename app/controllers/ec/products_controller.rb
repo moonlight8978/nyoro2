@@ -1,4 +1,6 @@
 class Ec::ProductsController < ApplicationController
+  include Ec::Products::ProductsFilter
+
   layout 'ec'
 
   decorates_assigned :product, :products
@@ -17,16 +19,7 @@ class Ec::ProductsController < ApplicationController
 
 private
 
-  def search
-    Ec::Product.search_and_filter(
-      q: params[:q],
-      types: params[:types],
-      min_price: params[:min_price] || 0,
-      max_price: params[:max_price],
-      category_id: params[:category],
-      order_by: params[:sort],
-      reverse_sort: params[:reverse_sort],
-      associations: [:discount]
-    )
+  def additional_params
+    { associations: [:discount] }
   end
 end

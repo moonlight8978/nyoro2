@@ -15,29 +15,29 @@
       </div>
     </li>
   </ul>
-  
+
   <ul class="list-group">
     <h6 class="b-list-group-header">ショップ</h6>
 
     <%= link_to shop_path do %>
       <li class="list-group-item list-group-item-action <%= current_page?(shop_path) ? 'active' : '' %>">
-        <i class="fa fa-line-chart"></i>
+        <i class="fa fa-fw fa-line-chart"></i>
         全体
       </li>
     <% end %>
 
     <%= link_to shop_products_path do %>
       <li class="list-group-item list-group-item-action <%= current_page?(shop_products_path) ? 'active' : '' %>">
-        <i class="fa fa-calculator"></i>
-        製品管理
+        <i class="fa fa-fw fa-calculator"></i>
+        商品管理
       </li>
     <% end %>
 
     <% if current_page?(shop_product_path(params[:id] || 0)) %>
       <%= link_to shop_product_path(params[:id] || 0) do %>
         <li class="list-group-item list-group-item-action active">
-          <i class="fa fa-calculator"></i>
-          製品
+          <i class="fa fa-fw fa-product-hunt"></i>
+          商品
         </li>
       <% end %>
     <% end %>

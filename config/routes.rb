@@ -139,10 +139,9 @@ Rails.application.routes.draw do
   end
 
   namespace :ec do
+    root to: 'home#index', as: ''
     resources :products
-
     resources :categories
-
     resources :shops do
       resources :products, controller: 'shop/products'
     end

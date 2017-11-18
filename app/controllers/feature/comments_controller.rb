@@ -24,7 +24,7 @@ class Feature::CommentsController < ApplicationController
   def create
     @comment = @commentable.comments.build(comment_params)
     @comment.user = current_user
-    @comment.save && @comment.log_comment(current_user, @commentable.title, params[:description])
+    @comment.save && log_comment
     redirect_to @commentable
   end
 
@@ -53,6 +53,12 @@ private
       @comment = Feature::Comment.find(params[:id])
     else
       @comment = current_user.comments.find(params[:id])
+    end
+  end
+
+  def log_comment
+    if @comment.commentable_type.split('::').first == 'Db'
+      @comment.log_comment(current_user, @commentable.title, params[:description])
     end
   end
 end

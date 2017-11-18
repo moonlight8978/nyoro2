@@ -1,0 +1,26 @@
+<% shops.each_with_index do |shop, index| %>
+  <div class="b-box-row">
+    <div class="row">
+      <div class="col-2">
+        <%= pagination_index(page: params[:page], index: index) %>
+      </div>
+
+      <div class="col-6">
+        <div class="b-ellipsis">
+          <%= link_to(
+            shop.name, ec_shop_path(shop)
+          ) %>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="b-ellipsis">
+          <%= link_to(
+            shop.user_name, profile_path(shop.user),
+            class: 'b-link-no-color'
+          ) %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

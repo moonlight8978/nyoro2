@@ -1,3 +1,6 @@
+Ruby
+module_function => class level method. If include => instance private method
+
 Ruby on Rails
 joins(:association).order("table_name.attribute direction")
   != joins(:association).order("table_name.attribute": :direction)

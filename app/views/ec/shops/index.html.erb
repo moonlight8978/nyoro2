@@ -1,0 +1,32 @@
+<%= breadcrumb(
+  { name: "ホーム", path: home_path },
+  "ショップランキング"
+) %>
+
+<%= content_for :side_nav do %>
+  <%= render layout: 'ec/side_nav' do %>
+    <span>sidenav</span>
+  <% end %>
+<% end %>
+
+<%= content_for :right_col do %>
+  <div class="b-box p-3">
+    <span>sidebar</span>
+  </div>
+<% end %>
+
+<div class="b-box">
+  <div class="b-box-another top">
+    <%= render "ec/shops/index/list_header" %>
+  </div>
+
+  <div class="">
+    <%= render "ec/shops/index/list" %>
+  </div>
+</div>
+
+<% unless @shops.last_page? %>
+  <div class="">
+    <%= paginate @shops %>
+  </div>
+<% end %>

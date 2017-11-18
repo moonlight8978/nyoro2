@@ -1,33 +1,34 @@
 class Ec::ShopsController < ApplicationController
+  include Ec::Products::ProductsFilter
+
   layout 'ec'
 
   decorates_assigned :shop, :shops
   decorates_assigned :products
 
   def index
-    #code
+    @shops = Ec::ApprovedShop
+      .all
+      .page(params[:page] || 1)
+      .per(20)
   end
 
   def show
-    @shop = Ec::Shop
+    @shop = Ec::ApprovedShop
       .find(params[:id])
+    @shop.user == current_user && (redirect_to shop_path and return)
+
     @search = search
     @products = @search.results
+    @hits = @search.hits
   end
 
 private
 
-  def search
-    Ec::Product.search_and_filter(
-      q: params[:q],
-      types: params[:types],
-      min_price: params[:min_price] || 0,
-      max_price: params[:max_price],
-      category_id: params[:category],
-      order_by: params[:sort],
-      reverse_sort: params[:reverse_sort],
+  def additional_params
+    {
       associations: [:discount],
       shop_id: @shop.id
-    )
+    }
   end
 end

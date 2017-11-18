@@ -1,0 +1,45 @@
+<ul class="list-group">
+  <h6 class="b-list-group-header">並べ替え</h6>
+
+  <%= label_tag :sort_, class: 'd-block m-0' do %>
+    <li class="list-group-item list-group-item-action">
+      <%= radio_button_tag :sort, '', params[:sort] == '' %>
+      並べ替えない
+    </li>
+  <% end %>
+
+  <%= label_tag :sort_name, class: 'd-block m-0' do %>
+    <li class="list-group-item list-group-item-action">
+      <%= radio_button_tag :sort, :name, params[:sort] == 'name' %>
+      商品名
+    </li>
+  <% end %>
+
+  <%= label_tag :sort_min_price, class: 'd-block m-0' do %>
+    <li class="list-group-item list-group-item-action">
+      <%= radio_button_tag :sort, :min_price, params[:sort] == 'min_price' %>
+      最小価格
+    </li>
+  <% end %>
+
+  <%= label_tag :sort_max_price, class: 'd-block m-0' do %>
+    <li class="list-group-item list-group-item-action">
+      <%= radio_button_tag :sort, :max_price, params[:sort] == 'max_price' %>
+      最大価格
+    </li>
+  <% end %>
+
+  <%= label_tag :sort_status, class: 'd-block m-0' do %>
+    <li class="list-group-item list-group-item-action">
+      <%= radio_button_tag :sort, :status, params[:sort] == 'status' %>
+      最大価格
+    </li>
+  <% end %>
+
+  <%= label_tag :reverse_sort, class: 'd-block m-0' do %>
+    <li class="list-group-item list-group-item-action">
+      <%= check_box_tag :reverse_sort, :yes, params[:reverse_sort].present? %>
+      逆に並べ替える
+    </li>
+  <% end %>
+</ul>

@@ -1,6 +1,7 @@
 class Ec::Product < ApplicationRecord
   include Commentable
-  
+  include Rateable
+
   MAX_PRICE = 1_000_000
   MIN_PRICE = 0
   # associations
@@ -25,18 +26,19 @@ class Ec::Product < ApplicationRecord
       )
       .group("ec_products.id")
   }
+
   # class methods
   searchable do
-    text :name, boost: 3
+    text :name_fulltext, boost: 3 do
+      self.name
+    end
     integer :max_price, :stored => true do
       self.colors.any? ? self.colors.maximum(:price) : MAX_PRICE
     end
     integer :min_price, :stored => true do
       self.colors.any? ? self.colors.minimum(:price) : MIN_PRICE
     end
-    string :category, :stored => true do
-      self.category.name
-    end
+    string :name
     integer :shop_id, :references => Ec::Shop
     integer :category_id, :references => Ec::Category
   end
@@ -44,12 +46,11 @@ class Ec::Product < ApplicationRecord
   def self.search_and_filter(**args)
     self.search(include: args[:associations]) do
       fulltext args[:q],
-        fields: [:name] if args[:q].present?
-      with(:category, args[:types]) if args[:types].present?
+        fields: [:name_fulltext] if args[:q].present?
       with(:min_price).greater_than_or_equal_to(args[:min_price] || MIN_PRICE)
       with(:max_price).less_than_or_equal_to(args[:max_price] || MAX_PRICE)
       with(:shop_id, args[:shop_id]) if args[:shop_id].present?
-      with(:category_id, args[:category_id]) if args[:category_id].present?
+      with(:category_id, args[:categories]) if args[:categories].present?
       order_by(args[:order_by], args[:reverse_sort].present? ? 'desc' : 'asc') if args[:order_by].present?
       paginate page: 1, per_page: 20
     end

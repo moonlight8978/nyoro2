@@ -18,7 +18,7 @@
             <%= link_to 'ホーム', home_path, { class: 'nav-link' } %>
           </li>
           <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link">ショップ</a>
+            <%= link_to 'ショップ', ec_path, { class: 'nav-link' } %>
           </li>
           <li class="nav-item">
             <%= link_to 'DB', db_path, { class: 'nav-link' } %>
@@ -88,6 +88,9 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                 <%= link_to 'ダッシュボード', admin_dashboard_statistics_path,
                   class: 'dropdown-item' if current_user.is_admin?
+                %>
+                <%= link_to 'My shop', shop_path,
+                  class: 'dropdown-item'
                 %>
                 <%= link_to 'My List', profile_my_list_path(current_user),
                   class: 'dropdown-item'

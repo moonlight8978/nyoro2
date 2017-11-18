@@ -1,6 +1,8 @@
 <%= content_for :side_nav do %>
   <%= render layout: 'shop/side_nav' do %>
-    <%= render "shop/products/index/filter" %>
+    <%#= render "shop/products/index/filter" %>
+    <%#= catemenu_for(params[:category]) %>
+    <%= products_filter %>
   <% end %>
 <% end %>
 

@@ -1,8 +1,8 @@
 <div class="row">
-  <% products.each do |product, index| %>
+  <% products.each_with_index do |product, index| %>
     <div class="col-sm-6 col-lg-4 mb-3">
       <%= render partial: "components/product/container",
-        locals: { product: product }
+        locals: { product: product, hit: @hits[index] }
       %>
     </div>
   <% end %>

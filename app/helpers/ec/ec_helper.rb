@@ -5,7 +5,7 @@ module Ec::EcHelper
     categories ||= Ec::Category.first_class
 
     render(
-      partial: 'components/categories/container',
+      partial: 'components/catemenu/container',
       locals: {
         category: category,
         categories: categories

@@ -1,72 +1,19 @@
 <%= form_tag request.query_parameters, method: :get do %>
   <%= hidden_field_tag :q, params[:q] %>
-  <%= hidden_field_tag :category, params[:category] %>
 
-  <ul class="list-group">
-    <h6 class="b-list-group-header b-flex-space-between">
-      <span>検索</span>
-      <%= button_tag name: nil, class: "b-btn-clear b-as-link" do %>
-        <span>絞り込む</span>
-        <i class="fa fa-filter" aria-hidden="true"></i>
-      <% end %>
-    </h6>
+  <div class="">
+    <ul class="list-group">
+      <h6 class="b-list-group-header b-flex-space-between">
+        <span>検索</span>
+        <%= button_tag name: nil, class: "b-btn-clear b-as-link" do %>
+          <span>絞り込む</span>
+          <i class="fa fa-filter" aria-hidden="true"></i>
+        <% end %>
+      </h6>
+    </ul>
 
-    <h6 class="b-list-group-header">並べ替え</h6>
-
-    <%= label_tag :sort_, class: 'd-block m-0' do %>
-      <li class="list-group-item list-group-item-action">
-        <%= radio_button_tag :sort, '', params[:sort] == '' %>
-        並べ替えない
-      </li>
-    <% end %>
-
-    <%= label_tag :sort_name, class: 'd-block m-0' do %>
-      <li class="list-group-item list-group-item-action">
-        <%= radio_button_tag :sort, :name, params[:sort] == 'name' %>
-        商品名
-      </li>
-    <% end %>
-
-    <%= label_tag :sort_min_price, class: 'd-block m-0' do %>
-      <li class="list-group-item list-group-item-action">
-        <%= radio_button_tag :sort, :min_price, params[:sort] == 'min_price' %>
-        最小価格
-      </li>
-    <% end %>
-
-    <%= label_tag :sort_max_price, class: 'd-block m-0' do %>
-      <li class="list-group-item list-group-item-action">
-        <%= radio_button_tag :sort, :max_price, params[:sort] == 'max_price' %>
-        最大価格
-      </li>
-    <% end %>
-
-    <%= label_tag :sort_status, class: 'd-block m-0' do %>
-      <li class="list-group-item list-group-item-action">
-        <%= radio_button_tag :sort, :status, params[:sort] == 'status' %>
-        最大価格
-      </li>
-    <% end %>
-
-    <%= label_tag :reverse_sort, class: 'd-block m-0' do %>
-      <li class="list-group-item list-group-item-action">
-        <%= check_box_tag :reverse_sort, :yes, params[:reverse_sort].present? %>
-        逆に並べ替える
-      </li>
-    <% end %>
-  </ul>
-
-  <ul class="list-group">
-    <h6 class="b-list-group-header">価格</h6>
-
-    <li class="list-group-item">
-      <%= range_field_tag :max_price, params[:max_price] || Ec::Product::MAX_PRICE,
-        min: Ec::Product::MIN_PRICE, max: Ec::Product::MAX_PRICE,
-        class: 'b-form-control-range', 'data-display-at': "#priceRangeValue"
-      %>
-      <span class="b-form-value-range" id="priceRangeValue">
-        <%= params[:max_price] || Ec::Product::MAX_PRICE %>
-      </span>
-    </li>
-  </ul>
+    <%= render "components/filter/products/categories" %>
+    <%= render "components/filter/products/sort" %>
+    <%= render "components/filter/products/price" %>
+  </div>
 <% end %>

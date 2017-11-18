@@ -1,0 +1,15 @@
+<ul class="list-group">
+  <h6 class="b-list-group-header">カテゴリ</h6>
+
+  <% Ec::Category.selectable.each do |category| %>
+    <%= label_tag :"categories_#{category.id}", class: 'd-block m-0' do %>
+      <li class="list-group-item list-group-item-action">
+        <%= check_box_tag :"categories[]", category.id,
+          params[:categories] && params[:categories].include?(category.id.to_s),
+          id: :"categories_#{category.id}"
+        %>
+        <%= category.name %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

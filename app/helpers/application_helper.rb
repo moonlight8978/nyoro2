@@ -55,6 +55,16 @@ module ApplicationHelper
     render "components/filter/products/container"
   end
 
+  # It will receive :page, :per, :index
+  # result will be index of object in full list
+  def pagination_index(**args)
+    page = args[:page] || 1
+    per = args[:per] || 20
+    index = args[:index]
+
+    per * (page - 1) + index + 1
+  end
+
 private
 
   def country_template(code, name)

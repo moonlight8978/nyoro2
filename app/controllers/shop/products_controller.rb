@@ -3,22 +3,17 @@ class Shop::ProductsController < ApplicationController
 
   include Ec::Shop::CheckStatus
   include Ec::Shop::CheckExistence
+  include Ec::Products::ProductsFilter
 
   before_action :authenticate_user!, :must_have_shop!, :shop_must_be_approved!
   decorates_assigned :product, :products
 
   def index
-    @search =  Ec::Product.search_and_filter(
-      q: params[:q],
-      types: params[:types],
-      min_price: params[:min_price] || 0,
-      max_price: params[:max_price],
-      shop_id: @shop.id
-    )
+    @search = search
     @products = @search.results
+    @hits = @search.hits
   end
 
-  # FIXME(html _colors): colors box class with margin
   def show
     @product = @shop.products
       .includes(colors: :storage)
@@ -78,5 +73,9 @@ private
     params.require(:ec_form_product).permit(
       storage_form: [:total]
     )[:storage_form]
+  end
+
+  def additional_params
+    { shop_id: @shop.id }
   end
 end
