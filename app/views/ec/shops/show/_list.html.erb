@@ -1,6 +1,6 @@
 <div class="row">
   <% products.each_with_index do |product, index| %>
-    <div class="col-sm-6 col-lg-4 mb-3">
+    <div class="col-sm-6 col-lg-4 col-xl-3 mb-3">
       <%= render partial: "components/product/container",
         locals: { product: product, hit: @hits[index] }
       %>

@@ -1,0 +1,54 @@
+<div class="pt-1"></div>
+
+<% @categories.each do |category| %>
+  <div class="b-box-group mt-3">
+    <h6 class="b-box-title"><%= category.name %></h6>
+
+    <div class="b-box">
+      <div class="b-cards-slick b-horizontal-list">
+        <% category.products.includes(:discount).each do |_product| %>
+          <% product = _product.decorate %>
+
+          <div class="b-product-card b-product-card-hover h-100">
+            <div class="product-img">
+              <div class="b-img-placeholder b-ratio-1_1 b-lazyload">
+                <div class="b-img-thumb" data-background-image="<%= asset_path "product.jpg" %>">
+                </div>
+              </div>
+            </div>
+
+            <div class="product-name">
+              <%= link_to product.name, ec_product_path(product), class: 'b-link-no-color' %>
+            </div>
+
+            <div class="product-utils">
+              <div class="">
+                <span><%= product.average_stars %></span>
+                <i class="fa fa-star b-star"></i>
+                <span>(<%= product.ratings.size %>人)</span>
+              </div>
+
+              <div class="">
+                <span><%= product.discount.total_percents %></span>
+                <!-- <i class="fa fa-comments-o"></i>
+                <span><%# product.comments.size %></span> -->
+              </div>
+            </div>
+
+            <div class="product-price">
+              <div class="">
+                <span class="discount-price b-font-110">
+                  <%= price_range(
+                    min: product.min_price,
+                    max: product.max_price,
+                    discount: product.discount.total
+                  ) %>
+                </span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

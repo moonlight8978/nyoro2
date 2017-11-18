@@ -9,7 +9,7 @@
   }
 
   .b-list-group-header {
-    color: $black--light;
+    color: map-get($palette_color, second);
     // padding: 4px .5rem;
     padding: 5px .5rem;
     margin: 0;
@@ -20,7 +20,7 @@
     background-color: transparent;
     border: 0;
     margin: 0;
-    color: #212529;
+    color: map-get($palette_color, primary);
     border: 1px solid transparent;
     // padding: 4px .5rem;
     padding: 5px .5rem;
@@ -31,8 +31,8 @@
 
   .list-group-item-action {
     &:focus, &:hover, &.active {
-      background-color: $white;
-      border-color: $border-color;
+      background-color: map-get($palette_bg, site_hover);
+      border-color: map-get($palette_border, primary);
     }
   }
 }

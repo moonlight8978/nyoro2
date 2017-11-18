@@ -1,0 +1,26 @@
+<%= breadcrumb(
+  { name: "ホーム", path: home_path },
+  "ショップランキング"
+) %>
+
+<%= content_for :side_nav do %>
+  <%= render layout: 'ec/side_nav' do %>
+    <span>sidenav</span>
+  <% end %>
+<% end %>
+
+<%= content_for :right_col do %>
+  <div class="b-box p-3">
+    <span>sidebar</span>
+  </div>
+<% end %>
+
+<div class="b-box-group">
+  <h6 class="b-box-title">おすすめ</h6>
+
+  <div class="b-box">
+    <%= render "ec/home/featured" %>
+  </div>
+</div>
+
+<%= render "ec/home/categories" %>

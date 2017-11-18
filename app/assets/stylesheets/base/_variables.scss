@@ -1,3 +1,5 @@
+$fonts: '-apple-system', BlinkMacSystemFont, "Segoe UI", Roboto, 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
 $text-color__nav: #fff;
 $background-color__nav-fixed: rgba(27,31,35,0.7);
 $nav-fixed--active__background-color: rgba(27,31,35,0.9);
@@ -9,6 +11,59 @@ $grid-breakpoints: (
   lg: 992px,
   xl: 1200px
 ) !default;
+
+$x-black: #212529; // #1d2129 used by Facebook
+$x-white: #ffffff;
+$x-gray_bg: #e9ebee;
+$x-red: #e51c23;
+$x-green: #259b24;
+$x-blue: #03a9f4;
+$x-teal: #009688;
+$x-amber: #ffc107;
+$x-orange: #ff9800;
+$x-sakura: #f75a96;
+
+$palette_bg: (
+  site: $x-gray_bg,
+  site_hover: #f6f7f8,
+
+  primary: $x-white,
+  primary_hover: $x-gray_bg,
+
+  second: #f6f7f8,
+  second_hover: $x-gray_bg,
+  
+  danger: $x-red,
+  success: $x-green,
+  regular: $x-blue,
+  info: $x-teal,
+  warning: $x-orange,
+  sakura: $x-sakura
+);
+
+$palette_social: (
+  google: #dd4b39,
+  twitter: #55acee,
+  facebook: #3d5a98,
+);
+
+$palette_border: (
+  primary: #ddd
+);
+
+$palette_color: (
+  primary: $x-black,
+  second: #616770,
+  second_hover: $x-black,
+  mute: #4b4f56,
+  light: $x-white,
+  placeholder: #90949c,
+  star: #00b0f0
+);
+
+$palette_components: (
+  price: $x-red
+);
 
 $white: #fff;
 
@@ -96,13 +151,3 @@ $admin-sidebar-width: 240;
 
 
 
-
-
-
-
-
-
-
-
-
-$arrow-url: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0yOTMuNzUxLDQ1NS44NjhjLTIwLjE4MSwyMC4xNzktNTMuMTY1LDE5LjkxMy03My42NzMtMC41OTVsMCwwYy0yMC41MDgtMjAuNTA4LTIwLjc3My01My40OTMtMC41OTQtNzMuNjcyICBsMTg5Ljk5OS0xOTBjMjAuMTc4LTIwLjE3OCw1My4xNjQtMTkuOTEzLDczLjY3MiwwLjU5NWwwLDBjMjAuNTA4LDIwLjUwOSwyMC43NzIsNTMuNDkyLDAuNTk1LDczLjY3MUwyOTMuNzUxLDQ1NS44Njh6Ii8+DQo8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMjIwLjI0OSw0NTUuODY4YzIwLjE4LDIwLjE3OSw1My4xNjQsMTkuOTEzLDczLjY3Mi0wLjU5NWwwLDBjMjAuNTA5LTIwLjUwOCwyMC43NzQtNTMuNDkzLDAuNTk2LTczLjY3MiAgbC0xOTAtMTkwYy0yMC4xNzgtMjAuMTc4LTUzLjE2NC0xOS45MTMtNzMuNjcxLDAuNTk1bDAsMGMtMjAuNTA4LDIwLjUwOS0yMC43NzIsNTMuNDkyLTAuNTk1LDczLjY3MUwyMjAuMjQ5LDQ1NS44Njh6Ii8+DQo8L3N2Zz4=);

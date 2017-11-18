@@ -1,0 +1,43 @@
+<div class="b-cards-featured-slick b-horizontal-list">
+  <% products.each do |product| %>
+    <% hit ||= nil %>
+    <div class="b-product-card b-product-card-hover h-100">
+      <div class="product-img">
+        <div class="b-img-placeholder b-ratio-2_1 b-lazyload">
+          <div class="b-img-thumb" data-background-image="<%= asset_path "800x400.png" %>">
+          </div>
+        </div>
+      </div>
+
+      <div class="product-name">
+        <%= link_to product.name, ec_product_path(product), class: 'b-link-no-color' %>
+      </div>
+
+      <div class="product-utils">
+        <div class="">
+          <span><%= product.average_stars %></span>
+          <i class="fa fa-star b-star"></i>
+          <span>(<%= product.ratings.size %>人)</span>
+        </div>
+
+        <div class="">
+          <span><%= product.discount.total_percents %></span>
+          <!-- <i class="fa fa-comments-o"></i>
+          <span><%# product.comments.size %></span> -->
+        </div>
+      </div>
+
+      <div class="product-price">
+        <div class="">
+          <span class="discount-price b-font-125">
+            <%= price_range(
+              min: (hit && hit.stored(:min_price)) || product.min_price,
+              max: (hit && hit.stored(:max_price)) || product.max_price,
+              discount: product.discount.total
+            ) %>
+          </span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

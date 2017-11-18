@@ -14,13 +14,12 @@
     margin-top: .25rem;
     display: flex;
     justify-content: space-between;
-
   }
 
   .product-price {
     .discount-price {
       font-size: 1.5rem;
-      color: $red;
+      color: map-get($palette_components, price);
       font-weight: 600;
     }
 
@@ -37,7 +36,7 @@
     a {
       flex: 1 0 50%;
       border-top: 1px solid #ddd;
-      color: $black;
+      color: map-get($palette_color, primary);
       text-decoration: none;
       background-color: transparent;
       font-size: 0.9rem;
@@ -46,7 +45,7 @@
       @extend .flex-middle;
       @include transition-std(all);
 
-      &:not(:last-child) { border-right: 1px solid $border-color; }
+      &:not(:last-child) { border-right: 1px solid map-get($palette_border, primary); }
 
       &:hover, &:active, &:focus {
         // color: $white;
@@ -56,6 +55,14 @@
   }
 }
 
+.b-product-card-hover {
+  @include transition-std(background-color);
+
+  &:hover {
+    background-color: map-get($palette_bg, primary_hover);
+  }
+}
+
 .b-star {
-  color: #00b0f0;
+  color: map-get($palette_color, star);
 }

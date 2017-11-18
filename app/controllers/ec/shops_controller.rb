@@ -16,7 +16,7 @@ class Ec::ShopsController < ApplicationController
   def show
     @shop = Ec::ApprovedShop
       .find(params[:id])
-    @shop.user == current_user && (redirect_to shop_path and return)
+    # @shop.user == current_user && (redirect_to shop_path and return)
 
     @search = search
     @products = @search.results

@@ -15,7 +15,7 @@
 // </div>
 
 .b-box {
-  background-color: white;
+  background-color: map-get($palette_bg, primary);
   @include box(1);
 }
 
@@ -39,10 +39,10 @@
 
 .b-box-another {
   padding: 1rem;
-  background: #f6f7f9;
+  background: map-get($palette_bg, second);
 
-  &.top { border-bottom: 1px solid #ddd; }
-  &.bottom { border-top: 1px solid #ddd; }
+  &.top { border-bottom: 1px solid map-get($palette_border, primary); }
+  &.bottom { border-top: 1px solid map-get($palette_border, primary); }
 }
 
 .b-box .b-box-row {
@@ -57,7 +57,7 @@
     right: 10px;
     left: 10px;
     bottom: 0;
-    background-color: $border-color;
+    background-color: map-get($palette_border, primary);
   }
 }
 
@@ -90,7 +90,7 @@
     bottom: 0;
     right: 0;
     width: 1px;
-    background-color: $border-color;
+    background-color: map-get($palette_border, primary);
     z-index: 1;
   }
 }

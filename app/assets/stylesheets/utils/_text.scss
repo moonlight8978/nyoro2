@@ -16,11 +16,15 @@
   @include text-limit-lines(3, 1.5, 0.9);
 }
 
-.b-font-95 { font-size: 0.95rem; }
-.b-font-90 { font-size: 0.9rem; }
-.b-font-85 { font-size: 0.85rem; }
-.b-font-80 { font-size: 0.8rem; }
-.b-font-75 { font-size: 0.75rem; }
+.b-font-150 { font-size: 1.5rem !important; }
+.b-font-125 { font-size: 1.25rem !important; }
+.b-font-115 { font-size: 1.15rem !important; }
+.b-font-110 { font-size: 1.1rem !important; }
+.b-font-95 { font-size: 0.95rem !important; }
+.b-font-90 { font-size: 0.9rem !important; }
+.b-font-85 { font-size: 0.85rem !important; }
+.b-font-80 { font-size: 0.8rem !important; }
+.b-font-75 { font-size: 0.75rem !important; }
 
 .b-line-through {
   text-decoration: line-through;

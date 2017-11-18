@@ -13,7 +13,8 @@ class Ec::Product::ColorDecorator < ApplicationDecorator
       discount: false,
       strike: false,
       currency: '¥',
-      style: :wow
+      style: :wow,
+      size: 150
     }.merge(options)
 
     price = options[:discount] ? object.price_after_discount : object.price

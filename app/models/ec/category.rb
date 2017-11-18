@@ -4,6 +4,8 @@ class Ec::Category < ApplicationRecord
     class_name: :'Ec::Category', optional: true
   has_many :subs,
     class_name: :'Ec::Category', foreign_key: :parent_id
+  has_many :products,
+    class_name: :'Ec::Product'
 
   # scopes
   scope :selectable,
