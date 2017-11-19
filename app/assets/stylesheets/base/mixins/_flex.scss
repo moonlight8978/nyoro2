@@ -1,0 +1,20 @@
+.flex-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@mixin flex-middle($text-middle: false) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @if $text-middle == true {
+    text-align: center;
+  }
+}
+
+@mixin flex-grid($cols) {
+  flex: 0 0 #{100% / $cols};
+  max-width: #{100% / $cols};
+}

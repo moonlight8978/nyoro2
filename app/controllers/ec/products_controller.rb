@@ -3,6 +3,8 @@ class Ec::ProductsController < ApplicationController
 
   layout 'ec'
 
+  before_action :sidebar
+
   decorates_assigned :product, :products
 
   def index
@@ -21,5 +23,16 @@ private
 
   def additional_params
     { associations: [:discount] }
+  end
+
+  def sidebar
+    @tops = Ec::Product
+      .includes(:discount)
+      .all
+      .limit(5)
+    @histories = Ec::Product
+      .includes(:discount)
+      .all
+      .limit(5)
   end
 end

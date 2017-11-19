@@ -1,0 +1,11 @@
+@mixin responsive($media) {
+  @media (min-width: map-get($grid-breakpoints, $media)) { 
+    @content; 
+  }
+}
+
+@mixin responsive-px($min-width) {
+  @media (min-width: $min-width) { 
+    @content; 
+  }
+}

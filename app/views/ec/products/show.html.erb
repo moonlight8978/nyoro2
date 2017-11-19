@@ -6,24 +6,12 @@
 
 <%= content_for :side_nav do %>
   <%= render layout: 'ec/side_nav' do %>
-    <%= catemenu_for(nil) %>
+    <span>何を書いていい？</span>
   <% end %>
 <% end %>
 
 <%= content_for :right_col do %>
-  <div class="b-box-group">
-    <h6 class="b-box-title">top_sellers</h6>
-    <div class="b-box p-3">
-      top_sellers
-    </div>
-  </div>
-
-  <div class="b-box-group mt-3">
-    <h6 class="b-box-title">history</h6>
-    <div class="b-box p-3">
-      history
-    </div>
-  </div>
+  <%= render "ec/sidebar" %>
 <% end %>
 
 <div class="ec-product-detail">

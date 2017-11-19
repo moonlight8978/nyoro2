@@ -1,0 +1,35 @@
+// variables map get
+
+@function palette-bg($key: primary) {
+  @return map-get($palette-bg, $key);
+}
+
+@function palette-theme($key: primary) {
+  @return map-get($palette-theme, $key);
+}
+
+@function palette-social($key: facebook) {
+  @return map-get($palette-social, $key);
+}
+
+@function palette-border($key: primary) {
+  @return map-get($palette-border, $key);
+}
+
+@function palette-color($key: primary) {
+  @return map-get($palette-color, $key);
+}
+
+@function font-size($key: normal) {
+  @return map-get($font-size, $key);
+}
+
+@function line-height($key: normal) {
+  @return map-get($line-height, $key);
+}
+
+// rails asset path
+@function asset_path($resource) {
+  @return url('/assets/#{$resource}');
+}
+

@@ -1,8 +1,98 @@
-$fonts: '-apple-system', BlinkMacSystemFont, "Segoe UI", Roboto, 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+// Menu //
+//////////
 
-$text-color__nav: #fff;
-$background-color__nav-fixed: rgba(27,31,35,0.7);
-$nav-fixed--active__background-color: rgba(27,31,35,0.9);
+// Colors
+// Grid breakpoints
+// Fonts
+// Body
+// Navbar
+// List group
+// Product card
+// Sidebar product row
+// Boxs
+
+
+//
+// Colors
+//
+
+$x-black: #212529; 
+$x-white: #ffffff;
+
+$x-gray-100: #f6f7f8;
+$x-gray-200: #e9ebee;
+$x-gray-300: #e5e5e5;
+$x-gray-400: #dddfe2;
+$x-gray-500: #90949c;
+$x-gray-600: #616770;
+$x-gray-700: #4b4f56;
+$x-gray-800: #212529; // #1d2129 used by Facebook
+
+$x-red: #e51c23;
+$x-green: #259b24;
+$x-blue: #03a9f4;
+$x-teal: #009688;
+$x-amber: #ffc107;
+$x-orange: #ff9800;
+$x-sakura: #f75a96;
+
+// background colors
+$palette-bg: (
+  site: $x-gray-200,
+  site_hover: $x-gray-100,
+  site-hover: $x-gray-100,
+  primary: $x-white,
+  primary_hover: $x-gray-200,
+  primary-hover: $x-gray-200,
+  second: $x-gray-100,
+  second_hover: $x-gray-200,
+  reverse: $x-gray-800,
+  "transparent": transparent
+) !default;
+
+// theme colors
+$palette-theme: (
+  danger: $x-red,
+  success: $x-green,
+  primary: $x-blue,
+  info: $x-teal,
+  warning: $x-orange,
+  sakura: $x-sakura,
+  light: $x-white,
+  dark: $x-gray-700,
+  darker: $x-gray-800
+) !default;
+
+// social colors
+$palette-social: (
+  google: #dd4b39,
+  twitter: #55acee,
+  facebook: #3d5a98,
+) !default;
+
+// border colors
+$palette-border: (
+  primary: #ddd,
+  "transparent": transparent
+) !default;
+
+// text colors
+$palette-color: (
+  primary: $x-gray-800,
+  second: $x-gray-600,
+  second_hover: $x-gray-800,
+  mute: $x-gray-700,
+  reverse: $x-white
+) !default;
+
+// END colors
+//
+
+
+
+//
+// GRID breakpoints
+//
 
 $grid-breakpoints: (
   xs: 0,
@@ -12,58 +102,236 @@ $grid-breakpoints: (
   xl: 1200px
 ) !default;
 
-$x-black: #212529; // #1d2129 used by Facebook
-$x-white: #ffffff;
-$x-gray_bg: #e9ebee;
-$x-red: #e51c23;
-$x-green: #259b24;
-$x-blue: #03a9f4;
-$x-teal: #009688;
-$x-amber: #ffc107;
-$x-orange: #ff9800;
-$x-sakura: #f75a96;
+// END Grid breakpoints
+//
 
-$palette_bg: (
-  site: $x-gray_bg,
-  site_hover: #f6f7f8,
 
-  primary: $x-white,
-  primary_hover: $x-gray_bg,
 
-  second: #f6f7f8,
-  second_hover: $x-gray_bg,
-  
-  danger: $x-red,
-  success: $x-green,
-  regular: $x-blue,
-  info: $x-teal,
-  warning: $x-orange,
-  sakura: $x-sakura
-);
+//
+// Fonts
+//
 
-$palette_social: (
-  google: #dd4b39,
-  twitter: #55acee,
-  facebook: #3d5a98,
-);
+$fonts: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-$palette_border: (
-  primary: #ddd
-);
+$font-size: (
+  bigger: 1.25rem,
+  big: 1.1rem,
+  normal: 1rem,
+  small: .9rem,
+  smaller: .75rem
+) !default;
 
-$palette_color: (
-  primary: $x-black,
-  second: #616770,
-  second_hover: $x-black,
-  mute: #4b4f56,
-  light: $x-white,
-  placeholder: #90949c,
-  star: #00b0f0
-);
+$line-height: (
+  normal: 1.5,
+  short: 1.3,
+  paragraph: 1.1,
+  fixed: 1,
+) !default;
 
-$palette_components: (
-  price: $x-red
-);
+$border-width: 1px;
+$border-width-bold: $border-width * 2;
+$border-width-bolder: $border-width-bold * 2;
+
+$placeholder-color: $x-gray-500;
+$star-color: $x-blue; // #00b0f0
+$price-color: $x-red;
+
+$link-color: #007bff;
+$link-hover-color: darken($link-color, 15%);
+
+$flag-border-width: $border-width;
+$flag-border-color: palette-border("primary");
+
+// END fonts
+//
+
+
+
+//
+// Body
+//
+
+$body-bg: palette-bg("site");
+
+// END body
+//
+
+
+
+//
+// Navbar
+//
+
+
+
+// END navbar
+
+
+
+//
+// List group
+//
+
+$list-group-margin-bottom: 1rem;
+$list-group-link-decoration: none;
+
+$list-group-header-color: palette-color("second");
+$list-group-header-padding-x: .5rem;
+$list-group-header-padding-y: 5px;
+$list-group-header-font-weight: 600;
+
+$list-group-item-color: palette-color("primary");
+$list-group-item-bg: palette-bg("transparent");
+$list-group-item-padding-x: .5rem;
+$list-group-item-padding-y: 5px;
+$list-group-item-border-width: $border-width;
+$list-group-item-border-color: palette-border("transparent");
+$list-group-item-hover-border-color: palette-border("primary");
+
+$list-group-item-action-hover-bg: palette-bg("site-hover");
+$list-group-item-action-hover-border-color: palette-border("primary");
+
+// END navbar
+
+
+
+//
+// Components: product card
+//
+
+$product-card-padding: 1rem;
+$product-card-cursor: pointer;
+$product-card-hover-background: palette-bg("primary-hover");
+
+$product-card-name-font-size: font-size("small");
+$product-card-name-line-height: line-height("normal");
+$product-card-name-lines: 2;
+$product-card-name-margin-top: .5rem;
+
+$product-card-utils-margin-top: .25rem;
+$product-card-utils-font-size: font-size("small");
+
+$product-card-price-discount-font-size: font-size("bigger");
+$product-card-price-discount-font-weight: 600;
+$product-card-price-discount-color: $price-color;
+
+$product-card-price-original-font-size: font-size("normal");
+$product-card-price-original-color: palette-color("primary");
+$product-card-price-original-decoration: line-through;
+
+$product-card-btn-group-margin: 1rem -1rem -1rem -1rem; // fix padding 1rem of wrapper
+$product-card-btn-color: palette-color("primary");
+$product-card-btn-decoration: none;
+$product-card-btn-padding-x: 1rem;
+$product-card-btn-padding-y: .5rem;
+$product-card-btn-border-width: 1px;
+$product-card-btn-border-color: palette-border("primary");
+$product-card-btn-background: palette-bg("transparent");
+$product-card-btn-font-size: font-size("small");
+$product-card-btn-hover-background: palette-bg("second");
+
+// END product card
+//
+
+
+
+//
+// Components: Sidebar product row
+//
+
+$sidebar-product-row-name-font-size: font-size("small");
+$sidebar-product-row-name-line-height: line-height("short");
+$sidebar-product-row-name-max-lines: 3;
+
+$sidebar-product-row-price-color: $price-color;
+$sidebar-product-row-price-font-size: font-size("normal");
+$sidebar-product-row-price-font-weight: 600;
+
+// END Sidebar product row
+//
+
+
+
+//
+// Components: Boxs
+//
+
+$box-bg: palette-bg("primary");
+$box-padding-x: 1rem;
+$box-padding-y: 1rem;
+
+$box-title-font-weight: 600;
+$box-title-margin-bottom: .5rem;
+$box-title-padding-left: .5rem;
+
+$box-another-bg: palette-bg("second");
+$box-another-padding-x: 1rem;
+$box-another-padding-y: 1rem;
+$box-another-border-width: $border-width;
+$box-another-border-color: palette-border("primary");
+
+$box-row-border-color: palette-border("primary");
+$box-row-border-width: $border-width;
+$box-row-border-offset: 10px;
+$box-row-padding-x: 1rem;
+$box-row-padding-y: 1rem;
+$box-row-hover-bg: palette-bg("second");
+
+$row-horizontal-padding-x: 1rem;
+$row-horizontal-padding-y: 0;
+$row-horizontal-border-width: $border-width;
+$row-horizontal-border-color: palette-border("primary");
+
+$row-horizontal-toggler-width: 20px;
+// END Boxs
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$text-color__nav: #fff;
+$background-color__nav-fixed: rgba(27,31,35,0.7);
+$nav-fixed--active__background-color: rgba(27,31,35,0.9);
 
 $white: #fff;
 

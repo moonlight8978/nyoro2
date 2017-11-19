@@ -15,51 +15,70 @@
 // </div>
 
 .b-box {
-  background-color: map-get($palette_bg, primary);
+  background-color: $box-bg;
   @include box(1);
 }
 
 .b-box-p {
-  padding: 1rem;
+  padding: $box-padding-y $box-padding-x;
 }
 
 .b-box-hover {
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-  &:hover { @include box(2); }
+
+  &:hover { 
+    @include box(2); 
+  }
 }
 
 .b-box-group {
   .b-box-title {
-    font-weight: bold;
-    padding-left: 0.5rem;
-    margin-bottom: .5rem;
+    font-weight: $box-title-font-weight;
+    padding-left: $box-title-padding-left;
+    margin-bottom: $box-title-margin-bottom;
     display: inline-block;
   }
 }
 
 .b-box-another {
-  padding: 1rem;
-  background: map-get($palette_bg, second);
+  padding: $box-another-padding-y $box-another-padding-x;
+  background-color: $box-another-bg;
 
-  &.top { border-bottom: 1px solid map-get($palette_border, primary); }
-  &.bottom { border-top: 1px solid map-get($palette_border, primary); }
-}
+  &.top { 
+    border-bottom: $box-another-border-width solid $box-another-border-color; 
+  }
 
-.b-box .b-box-row {
-  position: relative;
-  padding: 1rem;
-
-  &:not(:last-child):before {
-    content: "";
-    display: block;
-    height: 1px;
-    position: absolute;
-    right: 10px;
-    left: 10px;
-    bottom: 0;
-    background-color: map-get($palette_border, primary);
+  &.bottom { 
+    border-top: $box-another-border-width solid $box-another-border-color;
   }
 }
+
+.b-box-row {
+  position: relative;
+  padding: $box-row-padding-y $box-row-padding-x;
+
+  @include except-last {
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 0;
+      height: $box-row-border-width;
+      right: $box-row-border-offset;
+      left: $box-row-border-offset;
+      background-color: $box-row-border-color;
+    }
+  }
+}
+
+.b-box-row-hover {
+  @include transition-std(background-color);
+
+  &:hover {
+    background-color: $box-row-hover-bg;
+  }
+}
+
 
 .b-box-row:hover .b-box-row-options { display: block; }
 
@@ -81,24 +100,25 @@
 .b-row-horizontal {
   flex: 0 0 auto;
   position: relative;
-  padding: 0 1rem;
+  padding: $row-horizontal-padding-y $row-horizontal-padding-x;
 
-  &:not(:last-child):after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 1px;
-    background-color: map-get($palette_border, primary);
-    z-index: 1;
+  @include except-last {
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: $row-horizontal-border-width;
+      background-color: $row-horizontal-border-color;
+      z-index: 1;
+    }
   }
 }
 
 .b-row-horizontal-toggler {
-  flex: 0 0 20px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  flex: 0 0 $row-horizontal-toggler-width;
+  max-width: $row-horizontal-toggler-width;
+
+  @include flex-middle(true);
 }

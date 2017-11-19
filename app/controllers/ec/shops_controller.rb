@@ -3,6 +3,8 @@ class Ec::ShopsController < ApplicationController
 
   layout 'ec'
 
+  before_action :sidebar
+  
   decorates_assigned :shop, :shops
   decorates_assigned :products
 
@@ -30,5 +32,14 @@ private
       associations: [:discount],
       shop_id: @shop.id
     }
+  end
+
+  def sidebar
+    @tops = Ec::Product
+      .all
+      .limit(5)
+    @histories = Ec::Product
+      .all
+      .limit(5)
   end
 end

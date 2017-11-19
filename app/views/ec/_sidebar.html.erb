@@ -1,0 +1,67 @@
+<div class="b-box-group">
+  <h6 class="b-box-title">おすすめ</h6>
+  <div class="b-box">
+    <% @tops.each do |_product| %>
+      <% product = _product.decorate %>
+      <div class="b-box-row b-box-row-hover">
+        <div class="b-sidebar-product-row">
+          <div class="row">
+            <div class="col-8">
+              <div class="product-name">
+                <%= link_to product.name, ec_product_path(product), class: 'b-link-no-color' %>
+              </div>
+
+              <div class="product-price">
+                <%= price_range(
+                  min: product.min_price, 
+                  max: product.max_price, 
+                  discount: product.discount.total
+                ) %>
+              </div>
+            </div>
+
+            <div class="col-4 product-image">
+              <div class="b-img-placeholder b-ratio-1_1">
+                <div class="b-img-thumb" data-background-image="<%= asset_path 'product.jpg' %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="b-box-group mt-3">
+  <h6 class="b-box-title">最近見た商品</h6>
+  <div class="b-box">
+    <% @histories.each do |_product| %>
+      <% product = _product.decorate %>
+      <div class="b-box-row b-box-row-hover">
+        <div class="b-sidebar-product-row">
+          <div class="row">
+            <div class="col-8">
+              <div class="product-name">
+                <%= link_to product.name, ec_product_path(product), class: 'b-link-no-color' %>
+              </div>
+
+              <div class="product-price">
+                <%= price_range(
+                  min: product.min_price, 
+                  max: product.max_price, 
+                  discount: product.discount.total
+                ) %>
+              </div>
+            </div>
+
+            <div class="col-4 product-image">
+              <div class="b-img-placeholder b-ratio-1_1">
+                <div class="b-img-thumb" data-background-image="<%= asset_path 'product.jpg' %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>    
+  </div>
+</div>

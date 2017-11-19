@@ -7,7 +7,7 @@
 
 .page-title, .b-page-title {
   padding: 15px 0;
-  background-color: map-get($palette_bg, second);
+  background-color: map-get($palette-bg, second);
   box-shadow: 0 2px 4px $box-shadow__color;
   
   .b-big-title {

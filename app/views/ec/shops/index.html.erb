@@ -5,14 +5,12 @@
 
 <%= content_for :side_nav do %>
   <%= render layout: 'ec/side_nav' do %>
-    <span>sidenav</span>
+    <span>何を書いていい？</span>
   <% end %>
 <% end %>
 
 <%= content_for :right_col do %>
-  <div class="b-box p-3">
-    <span>sidebar</span>
-  </div>
+  <%= render "ec/sidebar" %>
 <% end %>
 
 <div class="b-box">

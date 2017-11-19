@@ -21,3 +21,19 @@
   font-size: 1.15rem;
   font-weight: bold;
 }
+
+.b-sidebar-product-row {
+  .product-name {
+    @include text-max-lines($sidebar-product-row-name-font-size, $sidebar-product-row-name-line-height, $sidebar-product-row-name-max-lines);
+  }
+
+  .product-price {
+    font-size: $sidebar-product-row-price-font-size;
+    color: $sidebar-product-row-price-color;
+    font-weight: $sidebar-product-row-price-font-weight;
+  }
+
+  .product-image {
+    padding-left: 0;
+  }
+}

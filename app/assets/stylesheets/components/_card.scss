@@ -1,55 +1,56 @@
 .b-product-card {
-  padding: 1rem;
-  cursor: pointer;
+  padding: $product-card-padding;
+  cursor: $product-card-cursor;
 
   .product-name {
-    margin-top: .5rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    height: calc(2 * 1.5 * 1rem);
-    overflow-y: hidden;
+    margin-top: $product-card-name-margin-top;
+
+    @include text-lines($product-card-name-font-size, $product-card-name-line-height, $product-card-name-lines);
   }
 
   .product-utils {
-    margin-top: .25rem;
+    margin-top: $product-card-utils-margin-top;
     display: flex;
     justify-content: space-between;
+    font-size: $product-card-utils-font-size;
   }
 
   .product-price {
     .discount-price {
-      font-size: 1.5rem;
-      color: map-get($palette_components, price);
-      font-weight: 600;
+      font-size: $product-card-price-discount-font-size;
+      color: $product-card-price-discount-color;
+      font-weight: $product-card-price-discount-font-weight;
     }
 
     .original-price {
-      font-size: 1.1rem;
-      text-decoration: line-through;
+      font-size: $product-card-price-original-font-size;
+      text-decoration: $product-card-price-original-decoration;
     }
   }
 
   .product-btn-group {
-    margin: 1rem -1rem -1rem;
+    margin: $product-card-btn-group-margin;
     display: flex;
 
     a {
-      flex: 1 0 50%;
-      border-top: 1px solid #ddd;
-      color: map-get($palette_color, primary);
-      text-decoration: none;
-      background-color: transparent;
-      font-size: 0.9rem;
-      padding: .5rem 1rem;
-      text-align: center;
-      @extend .flex-middle;
+      border-top: $product-card-btn-border-width solid $product-card-btn-border-color;
+      background-color: $product-card-btn-background;
+      font-size: $product-card-btn-font-size;
+      padding: $product-card-btn-padding-y $product-card-btn-padding-x;
+
+      @extend .link-clear;
+
+      @include flex-middle(true);
       @include transition-std(all);
+      @include flex-grid(2);
 
-      &:not(:last-child) { border-right: 1px solid map-get($palette_border, primary); }
+      &:hover,
+      &:active {
+        background-color: $product-card-btn-hover-background;
+      }
 
-      &:hover, &:active, &:focus {
-        // color: $white;
-        background-color: $grey--300;
+      @include except-last { 
+        border-right: $product-card-btn-border-width solid $product-card-btn-border-color; 
       }
     }
   }
@@ -59,10 +60,10 @@
   @include transition-std(background-color);
 
   &:hover {
-    background-color: map-get($palette_bg, primary_hover);
+    background-color: $product-card-hover-background;
   }
 }
 
 .b-star {
-  color: map-get($palette_color, star);
+  color: $star-color;
 }
