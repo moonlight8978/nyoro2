@@ -82,6 +82,19 @@
   }
 }
 
+.nav-link.b-cart-info {
+  position: relative; 
+
+  .b-add-to-cart-message {
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    width: 200px;
+    font-size: 1rem;
+    font-weight: normal;
+  }
+}
+
 .nav-item.dropdown .dropdown-menu a, .navbar-inverse .navbar-nav .nav-link {
   @include transition-std(all);
   color: $text-color__nav;

@@ -1,14 +1,12 @@
 (function () {
   $(document)
-    .on('submit', '.b-remote-form', function (event) {
+    .on('submit', '.b-add-to-card-form', function (event) {
       event.preventDefault();
       
       let $this = $(this);
       let $btn = $this.find('[type="submit"]');
-      let $error = $this.find('.b-remote-form-error');
 
       let txt = $btn.html();
-      $error.empty();
       $btn.addClass("b-btn-disabled");
       $btn.attr('disabled', true);
       $btn.html($btn.attr('data-disable-html'));
@@ -27,28 +25,25 @@
       }, 3000);
 
       function _then(response) {
-        location.reload();
+        $(".b-cart-total-products").text(response.data);
+        $(".b-add-to-cart-message")
+          .html(make_alert_message(SUCCESS, "Product has been added."));
       }
 
       function _catch(error) {
-        console.log(error);
-
-        if (error.response) {
-          $error.html(error.response.data);
-        }
+        $(".b-add-to-cart-message")
+          .html(make_alert_message(DANGER, "Product has not been added."));
       }
 
       function _finally() {
+        remove_after($(".b-add-to-cart-message"));
         $btn.removeClass("b-btn-disabled");
         $btn.html(txt);
         $btn.attr('disabled', false);
       }
     });
 
-  $(document)
-    .on('input', '.b-form-control-range', function (event) {
-      let $this = $(this);
-      let $displayAt = $($this.data('display-at'));
-      $displayAt.text($this.val());
-    });
+  $(document).on("turbolinks:load", function (event) {
+    
+  });
 })();

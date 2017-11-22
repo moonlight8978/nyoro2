@@ -145,5 +145,6 @@ Rails.application.routes.draw do
     resources :shops do
       resources :products, controller: 'shop/products'
     end
+    resource :cart
   end
 end

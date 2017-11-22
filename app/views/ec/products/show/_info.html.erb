@@ -49,10 +49,13 @@
           </div>
 
           <div class="mt-2">
-            <button class="b-btn b-btn-raised b-btn-ripple w-100 b-bg-black" type="button" name="button">
-              <i class="fa fa-fw fa-chevron-right"></i>
-              <span>カートに入れる</span>
-            </button>
+            <%= form_tag ec_cart_path, method: :post, class: "b-add-to-card-form" do %>
+              <%= hidden_field_tag :product_id, @product.id %>
+              <button class="b-btn b-btn-raised b-btn-ripple w-100 b-bg-black" type="submit" name="button" data-disable-html="追加中...">
+                <i class="fa fa-fw fa-chevron-right"></i>
+                <span>カートに入れる</span>
+              </button>
+            <% end %>
           </div>
         </div>
 

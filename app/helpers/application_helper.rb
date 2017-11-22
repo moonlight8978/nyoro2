@@ -65,6 +65,11 @@ module ApplicationHelper
     per * (page - 1) + index + 1
   end
 
+  def cart_quantity
+    session[:cart] = {}
+    session[:cart].values.reduce(0, :+)
+  end
+
 private
 
   def country_template(code, name)

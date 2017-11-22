@@ -76,10 +76,15 @@
         <ul class="navbar-nav">
           <% if user_signed_in? %>
             <li class="nav-item">
-              <a class="nav-link">
+              <%= link_to ec_cart_path, class: "nav-link b-cart-info" do %>
                 <i class="fa fa-shopping-cart"></i>
-                0
-              </a>
+                <span class="b-cart-total-products">
+                  <%= cart_quantity %>
+                </span>
+                <div class="b-add-to-cart-message">
+                  
+                </div>
+              <% end %>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -1,0 +1,8 @@
+<div class="b-box b-box-p">
+  <% products.each do |product| %>
+    <div>
+      <%= product.name %>
+      ( <%= session[:cart]["#{product.id}"] %>)
+    </div>
+  <% end %>
+</div>
