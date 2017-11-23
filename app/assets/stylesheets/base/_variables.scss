@@ -16,7 +16,7 @@
 // Colors
 //
 
-$x-black: #212529; 
+$x-black: #212529;
 $x-white: #ffffff;
 
 $x-gray-100: #f6f7f8;
@@ -288,8 +288,12 @@ $row-horizontal-toggler-width: 20px;
 
 
 
+//
+// Component: Table
+//
 
-
+$table-row-padding-y: 5px;
+$table-row-hover-bg: palette-bg("primary-hover");
 
 
 
@@ -410,12 +414,3 @@ $edit-month-panel: #FFFFFF;
 // sizes
 
 $admin-sidebar-width: 240;
-
-
-
-
-
-
-
-
-

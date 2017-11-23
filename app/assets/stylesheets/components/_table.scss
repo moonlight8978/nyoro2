@@ -117,3 +117,17 @@
     }
   }
 }
+
+
+.b-table-row {
+  .b-table-col {
+    padding-top: $table-row-padding-y;
+    padding-bottom: $table-row-padding-y;
+  }
+
+  &:nth-child(2n+1) {
+    .b-table-col {
+      background-color: $table-row-hover-bg;
+    }
+  }
+}

@@ -281,12 +281,17 @@ $md-btn-color: #2196f3;
   border:0;
   border-radius: 2px;
   background: $md-btn-color;
-  color:#fff;
+  color: #fff;
   outline: none !important;
 
   // &:focus {
   //   background: darken($md-btn-color, 12%)
   // }
+
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
 }
 
 .b-btn-raised {

@@ -1,0 +1,18 @@
+body {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: $body-bg;
+  font-family: $fonts !important;
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+.wow { 
+  visibility: hidden; 
+}
+
+.flag-icon {
+  border: $flag-border-width solid $flag-border-color;
+}

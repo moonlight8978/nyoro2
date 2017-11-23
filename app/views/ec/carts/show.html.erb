@@ -1,8 +1,24 @@
-<div class="b-box b-box-p">
-  <% products.each do |product| %>
-    <div>
-      <%= product.name %>
-      ( <%= session[:cart]["#{product.id}"] %>)
+<%= breadcrumb(
+  { name: "ホーム", path: home_path },
+  { name: "商品", path: ec_products_path },
+  "カート"
+) %>
+
+<%= content_for :right_col do %>
+  <div class="b-box b-box-p">
+    asdsadsad
+  </div>
+<% end %>
+
+<div class="b-shopping-cart">
+  <div class="b-box">
+    <div class="b-box-another top">
+      <%= render "ec/carts/show/header" %>
     </div>
-  <% end %>
+
+    <div class="">
+      <%= render "ec/carts/show/list" %>
+      <%= render "ec/carts/show/footer" %>
+    </div>
+  </div>
 </div>

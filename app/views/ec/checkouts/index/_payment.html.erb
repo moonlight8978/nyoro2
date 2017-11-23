@@ -1,0 +1,17 @@
+<div class="form-group b-form-group">
+  <%= f.collection_select :shipping_id,
+    Ec::Order::Shipping.all, :id, :method,
+    {},
+    class: class_string(
+      'form-control': true,
+      'is-invalid': @order.errors.messages[:shipping].present?
+    ),
+    require: true
+  %>
+  <%= f.label :shipping_id, 'Shipping type' %>
+  <div class="invalid-feedback">
+    <% @order.errors.messages[:shipping].each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+</div>

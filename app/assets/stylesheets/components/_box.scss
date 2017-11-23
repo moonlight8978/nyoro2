@@ -17,6 +17,10 @@
 .b-box {
   background-color: $box-bg;
   @include box(1);
+
+  @include except-first {
+    margin-top: 1rem;
+  }
 }
 
 .b-box-p {
@@ -26,8 +30,8 @@
 .b-box-hover {
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 
-  &:hover { 
-    @include box(2); 
+  &:hover {
+    @include box(2);
   }
 }
 
@@ -44,11 +48,11 @@
   padding: $box-another-padding-y $box-another-padding-x;
   background-color: $box-another-bg;
 
-  &.top { 
-    border-bottom: $box-another-border-width solid $box-another-border-color; 
+  &.top {
+    border-bottom: $box-another-border-width solid $box-another-border-color;
   }
 
-  &.bottom { 
+  &.bottom {
     border-top: $box-another-border-width solid $box-another-border-color;
   }
 }

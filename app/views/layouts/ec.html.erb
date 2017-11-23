@@ -15,24 +15,35 @@
   <div class="animated fadeIn">
     <div class="container pb-4">
       <div class="row">
-        <div class="d-none pr-1
-          <%= content_for?(:right_col) ?
-            'd-lg-block col-lg-2' :
-            'd-md-block col-md-3 col-lg-2'
-          %>"
-        >
+        <div class="d-none pr-1 d-lg-block col-lg-2">
           <%= yield :side_nav %>
         </div>
 
-        <div class="col-md-9 col-lg-<%= content_for?(:right_col) ? 7 : 10 %>">
-          <%= yield %>
-        </div>
+        <div class="col-lg-<%= content_for?(:side_nav) ? "10" : "12" %>">
+          <div class="row">
+            <% if content_for? :sidenav %>
+              <div class="<%= content_for?(:right_col) ? "col-md-8" : "col" %>">
+                <%= yield %>
+              </div>
 
-        <% if content_for? :right_col %>
-          <div class="col-md-3 mt-3 mt-md-0">
-            <%= yield :right_col %>
+              <% if content_for? :right_col %>
+                <div class="col-md-4 mt-3 mt-md-0">
+                  <%= yield :right_col %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="<%= content_for?(:right_col) ? "col-md-8 col-lg-9" : "col" %>">
+                <%= yield %>
+              </div>
+
+              <% if content_for? :right_col %>
+                <div class="col-md-4 col-lg-3 mt-3 mt-md-0">
+                  <%= yield :right_col %>
+                </div>
+              <% end %>
+            <% end %>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>

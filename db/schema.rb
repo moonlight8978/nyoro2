@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171118035626) do
+ActiveRecord::Schema.define(version: 20171123125407) do
 
   create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -263,6 +263,43 @@ ActiveRecord::Schema.define(version: 20171118035626) do
     t.index ["parent_id"], name: "index_ec_categories_on_parent_id"
   end
 
+  create_table "ec_order_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "product_id"
+    t.integer "price"
+    t.string "color"
+    t.float "shop_discount", limit: 24
+    t.float "system_discount", limit: 24
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_ec_order_products_on_product_id"
+  end
+
+  create_table "ec_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "shipping_id"
+    t.bigint "payment_id"
+    t.bigint "user_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payment_id"], name: "index_ec_orders_on_payment_id"
+    t.index ["shipping_id"], name: "index_ec_orders_on_shipping_id"
+    t.index ["user_id"], name: "index_ec_orders_on_user_id"
+  end
+
+  create_table "ec_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "type"
+    t.bigint "user_id"
+    t.string "card_number"
+    t.date "expiration_date"
+    t.boolean "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_number"], name: "index_ec_payments_on_card_number"
+    t.index ["type"], name: "index_ec_payments_on_type"
+    t.index ["user_id"], name: "index_ec_payments_on_user_id"
+  end
+
   create_table "ec_product_colors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "product_id"
     t.string "name"
@@ -309,6 +346,16 @@ ActiveRecord::Schema.define(version: 20171118035626) do
     t.integer "comments_count", default: 0
     t.index ["category_id"], name: "index_ec_products_on_category_id"
     t.index ["shop_id"], name: "index_ec_products_on_shop_id"
+  end
+
+  create_table "ec_shippings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "type"
+    t.string "method"
+    t.integer "price"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_ec_shippings_on_type"
   end
 
   create_table "ec_shops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

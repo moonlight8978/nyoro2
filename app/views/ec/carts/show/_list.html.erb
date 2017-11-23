@@ -1,0 +1,6 @@
+<% index = 0 %>
+
+<% @colors_grouped.each do |_product_id, colors| %>
+  <%= render "ec/carts/show/item", colors: colors, index: index %>
+  <% index += 1 %>
+<% end %>

@@ -1,0 +1,20 @@
+<div class="b-box-row">
+  <div class="row">
+    <div class="col-8">
+      <div>
+        Total:
+        <strong class="b-product-price pl-3">
+          <%= price_meta(
+            price: @total,
+            style: :normal,
+            size: 125
+          ) %>
+        </strong>
+      </div>
+    </div>
+
+    <div class="col-4 text-right">
+      <%= link_to '予約する', ec_checkout_path, role: "button", class: "b-btn b-btn-ripple b-btn-raised" %>
+    </div>
+  </div>
+</div>

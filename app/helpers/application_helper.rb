@@ -66,13 +66,46 @@ module ApplicationHelper
   end
 
   def cart_quantity
-    session[:cart] = {}
+    session[:cart] ||= {}
     session[:cart].values.reduce(0, :+)
+  end
+
+  def price_meta(**options)
+    options = {
+      price: 0,
+      strike: false,
+      currency: '¥',
+      style: :wow,
+      size: 150,
+      class_names: nil
+    }.merge(options)
+
+    price = number_with_delimiter(options[:price].to_i, delimiter: ",")
+
+    meta = styling_price(
+      price,
+      options[:currency],
+      options[:style],
+      options[:class_names]
+    )
+    options[:strike] ? content_tag(:span, meta, class: 'b-line-through') : meta
   end
 
 private
 
   def country_template(code, name)
     "<span class='flag-icon flag-icon-#{code}' data-toggle='tooltip' data-placement='bottom' title='#{name}'></span>"
+  end
+
+  def styling_price(price, currency, style, class_names)
+    case style
+    when :wow
+      content_tag :div, class: "b-product-price #{class_names}" do
+        content_tag(:span, currency, class: 'b-price-currency') \
+        + content_tag(:strong, price, class: 'b-price-cost')
+      end
+    when :normal
+      content_tag(:span, "#{currency}#{price}", class: class_names)
+    end
   end
 end
