@@ -18,18 +18,28 @@ gem 'sidekiq', '~> 5.0', '>= 5.0.5'
 gem 'sunspot_rails', '~> 2.2', '>= 2.2.7'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
-gem 'devise', '~> 4.3'
 gem 'active_model_serializers', '~> 0.10.6'
+gem 'faraday', '~> 0.9.2'
+gem 'i18n', '~> 0.9.0'
+gem 'redis', '~> 3.3', '>= 3.3.5'
+
+## Authenticate + Social login
+gem 'devise', '~> 4.3'
 gem 'omniauth', '~> 1.7', '>= 1.7.1'
 gem 'omniauth-google-oauth2', '~> 0.5.2'
 gem 'omniauth-facebook', '~> 4.0'
 gem 'omniauth-twitter', '~> 1.4'
-gem 'faraday', '~> 0.9.2'
-gem 'i18n', '~> 0.9.0'
-gem 'carrierwave', '~> 1.2', '>= 1.2.1'
+
+## Decorator
 gem 'draper', '~> 3.0', '>= 3.0.1'
+
+## Image uploader
+gem 'carrierwave', '~> 1.2', '>= 1.2.1'
 gem 'mini_magick', '~> 4.8'
-gem 'redis', '~> 3.3', '>= 3.3.5'
+
+## Template engine
+# gem 'slim', '~> 3.0', '>= 3.0.9'
+# gem 'slim-rails', '~> 3.1', '>= 3.1.3'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
