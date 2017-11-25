@@ -146,7 +146,9 @@ Rails.application.routes.draw do
       resources :products, controller: 'shop/products'
     end
     resource :cart
-    get "checkout", to: "checkouts#index"
+    resource :checkout do
+      post "preview", on: :collection
+    end
     resources :orders
   end
 end

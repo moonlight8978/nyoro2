@@ -91,6 +91,22 @@ module ApplicationHelper
     options[:strike] ? content_tag(:span, meta, class: 'b-line-through') : meta
   end
 
+  def colors_grouped(color_ids, **options)
+    options = {
+      action: true
+    }.merge(options)
+
+    colors_grouped = Ec::Product::Color
+      .includes(product: :discount)
+      .where(id: color_ids)
+      .group_by(&:product_id)
+
+    render(
+      "ec/shared/products_grouped/container", 
+      colors_grouped: colors_grouped, action: options[:action]
+    )
+  end
+
 private
 
   def country_template(code, name)

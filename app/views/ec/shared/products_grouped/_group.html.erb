@@ -1,0 +1,11 @@
+<% index = 0 %>
+
+<% colors_grouped.each do |_product_id, colors| %>
+  <%= render(
+    "ec/shared/products_grouped/list", 
+    colors: colors, 
+    index: index,
+    action: action
+  ) %>
+  <% index += 1 %>
+<% end %>

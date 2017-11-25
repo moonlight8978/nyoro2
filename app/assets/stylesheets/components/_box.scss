@@ -21,6 +21,12 @@
   @include except-first {
     margin-top: 1rem;
   }
+
+  > .b-box-title {
+    color: $box-title-color;
+    margin-bottom: $box-title-margin-bottom;
+    font-weight: $box-title-font-weight;
+  }
 }
 
 .b-box-p {

@@ -1,0 +1,48 @@
+<%= breadcrumb(
+  { name: "ホーム", path: home_path },
+  { name: "商品", path: ec_products_path },
+  "カート"
+) %>
+
+<%= content_for :right_col do %>
+  <div class="b-box b-box-p">
+    asdsadsad
+  </div>
+<% end %>
+
+<%= form_for @order_form, 
+  url: preview_ec_checkout_path, method: :post, 
+  html: { 
+    class: 'b-form p-0 m-0' 
+  } do |f| 
+%>
+  <%= hidden_field_tag :action, :preview %>
+
+  <div class="">
+    <div class="b-box">
+      <div class="b-box-another top">
+        <span>1</span>
+        <span>Basic informations</span>
+      </div>
+
+      <div class="b-box-p">
+        <%= render "ec/checkouts/show/basic", f: f %>
+      </div>
+    </div>
+
+    <div class="b-box">
+      <div class="b-box-another top">
+        <span>2</span>
+        <span>Payment information</span>
+      </div>
+
+      <div class="b-box-p">
+        <%= render "ec/checkouts/show/payment", f: f %>
+      </div>
+    </div>
+  </div>
+
+  <div class="b-form-submit b-form-submit-right mt-3">
+    <%= f.submit "予約する", class: "b-btn b-btn-ripple b-btn-raised" %>
+  </div>
+<% end %>

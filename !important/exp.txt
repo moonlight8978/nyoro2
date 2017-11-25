@@ -1,7 +1,20 @@
+RSpec
+expect(x).to matcher(y)
+expect(x).not_to matcher(y)
+
 Ruby
 module_function => class level method. If include => instance private method
+length, size, count
+  length => method of array, string
+  size => enum's method => array, hash
+  count => enum's method, but often used with block to count smth in collection 
 
 Ruby on Rails
+length, size, count
+  length => load array, goi length cua array
+  size => goi count() neu chua load, goi length() neu da load
+  count => goi den ham count()
+
 joins(:association).order("table_name.attribute direction")
   != joins(:association).order("table_name.attribute": :direction)
 

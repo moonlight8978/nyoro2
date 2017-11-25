@@ -1,0 +1,78 @@
+<%= f.fields_for :invoice_form, @order_form.invoice_form do |invoice_f| %>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group b-form-group">
+        <%= invoice_f.text_field :last_name, 
+          class: class_string(
+            'form-control': true, 
+            'is-invalid': @order_form.invoice_form.errors.messages[:last_name].present?
+          ), 
+          autofocus: true, 
+          require: true 
+        %>
+        <%= invoice_f.label :last_name, 'Last name*' %>
+        <div class="invalid-feedback">
+          <% @order_form.invoice_form.errors.messages[:last_name].each do |message| %>
+            <div><%= message %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-group b-form-group">
+        <%= invoice_f.text_field :first_name, 
+          class: class_string(
+            'form-control': true, 
+            'is-invalid': @order_form.invoice_form.errors.messages[:first_name].present?
+          ), 
+          require: true 
+        %>
+        <%= invoice_f.label :first_name, 'First name*' %>
+        <div class="invalid-feedback">
+          <% @order_form.invoice_form.errors.messages[:first_name].each do |message| %>
+            <div><%= message %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group b-form-group">
+        <%= invoice_f.text_field :phone_number, 
+          class: class_string(
+            'form-control': true, 
+            'is-invalid': @order_form.invoice_form.errors.messages[:phone_number].present?
+          ), 
+          require: true 
+        %>
+        <%= invoice_f.label :phone_number, 'Phone number' %>
+        <div class="invalid-feedback">
+          <% @order_form.invoice_form.errors.messages[:phone_number].each do |message| %>
+            <div><%= message %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-group b-form-group">
+        <%= invoice_f.text_field :address, 
+          class: class_string(
+            'form-control': true, 
+            'is-invalid': @order_form.invoice_form.errors.messages[:address].present?
+          ), 
+          require: true 
+        %>
+        <%= invoice_f.label :address, 'Address' %>
+        <div class="invalid-feedback">
+          <% @order_form.invoice_form.errors.messages[:address].each do |message| %>
+            <div><%= message %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

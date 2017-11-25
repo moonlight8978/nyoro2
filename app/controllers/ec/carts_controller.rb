@@ -6,10 +6,10 @@ class Ec::CartsController < ApplicationController
   # decorates_assigned :colors
 
   def show
+    @cart_color_ids = session[:cart].keys
     @colors = Ec::Product::Color
       .includes(product: :discount)
-      .where(id: session[:cart].keys)
-    @colors_grouped = @colors.group_by(&:product_id)
+      .where(id: @cart_color_ids)
     @total = @colors.reduce(0) { |memo, color| memo + color.price_after_discount }
   end
 
@@ -23,6 +23,9 @@ class Ec::CartsController < ApplicationController
   end
 
   def destroy
-
+    session[:cart] ||= {}
+    key = "#{params[:color_id]}"
+    session[:cart].has_key?(key) && session[:cart].delete(key)
+    redirect_to ec_cart_path
   end
 end

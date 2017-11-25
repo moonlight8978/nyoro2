@@ -118,7 +118,6 @@
   }
 }
 
-
 .b-table-row {
   .b-table-col {
     padding-top: $table-row-padding-y;
@@ -129,5 +128,11 @@
     .b-table-col {
       background-color: $table-row-hover-bg;
     }
+  }
+}
+
+.b-table-row-hover {
+  @include hover-focus {
+    background-color: $table-row-hover-bg;
   }
 }

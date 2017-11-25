@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123125407) do
+ActiveRecord::Schema.define(version: 20171125071228) do
 
   create_table "countries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -263,6 +263,44 @@ ActiveRecord::Schema.define(version: 20171123125407) do
     t.index ["parent_id"], name: "index_ec_categories_on_parent_id"
   end
 
+  create_table "ec_invoice_original_invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "order_id"
+    t.integer "total"
+    t.integer "point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "phone_number"
+    t.index ["order_id"], name: "index_ec_invoice_original_invoices_on_order_id"
+  end
+
+  create_table "ec_invoice_original_invoices_order_products", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "original_invoice_id", null: false
+    t.bigint "product_id", null: false
+    t.index ["original_invoice_id", "product_id"], name: "index_ec_original_invoice_id_product_id"
+  end
+
+  create_table "ec_invoice_shop_invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "shop_id"
+    t.bigint "order_id"
+    t.integer "total"
+    t.integer "point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "original_invoice_id"
+    t.index ["order_id"], name: "index_ec_invoice_shop_invoices_on_order_id"
+    t.index ["original_invoice_id"], name: "index_ec_invoice_shop_invoices_on_original_invoice_id"
+    t.index ["shop_id"], name: "index_ec_invoice_shop_invoices_on_shop_id"
+  end
+
+  create_table "ec_invoice_shop_invoices_order_products", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "shop_invoice_id", null: false
+    t.bigint "product_id", null: false
+    t.index ["shop_invoice_id", "product_id"], name: "index_ec_shop_invoice_id_product_id"
+  end
+
   create_table "ec_order_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "product_id"
     t.integer "price"
@@ -275,6 +313,14 @@ ActiveRecord::Schema.define(version: 20171123125407) do
     t.index ["product_id"], name: "index_ec_order_products_on_product_id"
   end
 
+  create_table "ec_order_shippings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "method"
+    t.integer "price"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ec_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "shipping_id"
     t.bigint "payment_id"
@@ -282,6 +328,7 @@ ActiveRecord::Schema.define(version: 20171123125407) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "payment_method"
     t.index ["payment_id"], name: "index_ec_orders_on_payment_id"
     t.index ["shipping_id"], name: "index_ec_orders_on_shipping_id"
     t.index ["user_id"], name: "index_ec_orders_on_user_id"
@@ -346,16 +393,6 @@ ActiveRecord::Schema.define(version: 20171123125407) do
     t.integer "comments_count", default: 0
     t.index ["category_id"], name: "index_ec_products_on_category_id"
     t.index ["shop_id"], name: "index_ec_products_on_shop_id"
-  end
-
-  create_table "ec_shippings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "type"
-    t.string "method"
-    t.integer "price"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["type"], name: "index_ec_shippings_on_type"
   end
 
   create_table "ec_shops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

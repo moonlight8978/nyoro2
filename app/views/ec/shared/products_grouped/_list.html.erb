@@ -26,32 +26,7 @@
 
       <div class="px-3 b-font-90">
         <% colors.each do |color| %>
-          <% color = color.decorate %>
-
-          <div class="row b-table-row">
-            <div class="col-5 b-table-col">
-              <%= color.name %>
-            </div>
-
-            <div class="col-2 b-table-col">
-              <%= session[:cart]["#{color.id}"] %>
-            </div>
-
-            <div class="col-4 b-table-col">
-              <strong>
-                <%= color.price_meta(
-                  discount: true,
-                  size: 100,
-                  style: :normal,
-                  class_names: "b-product-price"
-                ) %>
-              </strong>
-            </div>
-
-            <div class="col-1 text-center b-table-col px-0">
-              <strong>&times;</strong>
-            </div>
-          </div>
+          <%= render("ec/shared/products_grouped/color", color: color, action: action) %>
         <% end %>
       </div>
     </div>
