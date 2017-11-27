@@ -11,14 +11,14 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping data for table nyoro2_development.ar_internal_metadata: ~0 rows (approximately)
+-- Dumping data for table nyoro2_development.ar_internal_metadata: ~1 rows (approximately)
 DELETE FROM `ar_internal_metadata`;
 /*!40000 ALTER TABLE `ar_internal_metadata` DISABLE KEYS */;
 INSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES
 	('environment', 'development', '2017-09-19 10:25:57', '2017-09-19 10:25:57');
 /*!40000 ALTER TABLE `ar_internal_metadata` ENABLE KEYS */;
 
--- Dumping data for table nyoro2_development.countries: ~0 rows (approximately)
+-- Dumping data for table nyoro2_development.countries: ~1 rows (approximately)
 DELETE FROM `countries`;
 /*!40000 ALTER TABLE `countries` DISABLE KEYS */;
 INSERT INTO `countries` (`id`, `name`, `name_en`, `name_pronounce`, `code`, `note`, `created_at`, `updated_at`) VALUES
@@ -352,14 +352,57 @@ INSERT INTO `ec_categories` (`id`, `parent_id`, `name`, `description`, `created_
 	(9, NULL, '他', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `ec_categories` ENABLE KEYS */;
 
--- Dumping data for table nyoro2_development.ec_products: ~3 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_invoice_original_invoices: ~0 rows (approximately)
+DELETE FROM `ec_invoice_original_invoices`;
+/*!40000 ALTER TABLE `ec_invoice_original_invoices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_invoice_original_invoices` ENABLE KEYS */;
+
+-- Dumping data for table nyoro2_development.ec_invoice_original_invoices_order_products: ~0 rows (approximately)
+DELETE FROM `ec_invoice_original_invoices_order_products`;
+/*!40000 ALTER TABLE `ec_invoice_original_invoices_order_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_invoice_original_invoices_order_products` ENABLE KEYS */;
+
+-- Dumping data for table nyoro2_development.ec_invoice_shop_invoices: ~0 rows (approximately)
+DELETE FROM `ec_invoice_shop_invoices`;
+/*!40000 ALTER TABLE `ec_invoice_shop_invoices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_invoice_shop_invoices` ENABLE KEYS */;
+
+-- Dumping data for table nyoro2_development.ec_invoice_shop_invoices_order_products: ~0 rows (approximately)
+DELETE FROM `ec_invoice_shop_invoices_order_products`;
+/*!40000 ALTER TABLE `ec_invoice_shop_invoices_order_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_invoice_shop_invoices_order_products` ENABLE KEYS */;
+
+-- Dumping data for table nyoro2_development.ec_orders: ~0 rows (approximately)
+DELETE FROM `ec_orders`;
+/*!40000 ALTER TABLE `ec_orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_orders` ENABLE KEYS */;
+
+-- Dumping data for table nyoro2_development.ec_order_products: ~0 rows (approximately)
+DELETE FROM `ec_order_products`;
+/*!40000 ALTER TABLE `ec_order_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_order_products` ENABLE KEYS */;
+
+-- Dumping data for table nyoro2_development.ec_order_shippings: ~2 rows (approximately)
+DELETE FROM `ec_order_shippings`;
+/*!40000 ALTER TABLE `ec_order_shippings` DISABLE KEYS */;
+INSERT INTO `ec_order_shippings` (`id`, `method`, `price`, `description`, `created_at`, `updated_at`) VALUES
+	(1, 'Giao hàng tiết kiệm', 0, 'Giao hàng tiết kiệm miễn phí', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(2, 'Giao hàng nhanh', 500, 'Giao hàng nhanh', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `ec_order_shippings` ENABLE KEYS */;
+
+-- Dumping data for table nyoro2_development.ec_payments: ~0 rows (approximately)
+DELETE FROM `ec_payments`;
+/*!40000 ALTER TABLE `ec_payments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_payments` ENABLE KEYS */;
+
+-- Dumping data for table nyoro2_development.ec_products: ~4 rows (approximately)
 DELETE FROM `ec_products`;
 /*!40000 ALTER TABLE `ec_products` DISABLE KEYS */;
-INSERT INTO `ec_products` (`id`, `category_id`, `shop_id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-	(1, 7, 1, '恋するドールと想いのキセキOriginal Soundtrack', 'sdflkjsdfaljkdfasljkadfsljkdlfaskjafdjksl', '2017-11-05 10:57:29', '2017-11-14 06:51:11'),
-	(3, 2, 1, 'セイバー TYPE-MOON RACING Ver. 「Fate/stay night」 1/7 PVC製塗装済み完成品', '', '2017-11-09 10:13:03', '2017-11-09 10:13:03'),
-	(4, 2, 1, 'ランサー/スカサハ 「Fate/Grand Order」 1/7 PVC製塗装済み完成品', '', '2017-11-09 10:14:26', '2017-11-09 10:14:26'),
-	(16, 2, 1, 'asd asd', 'asd', '2017-11-10 03:51:07', '2017-11-10 12:14:34');
+INSERT INTO `ec_products` (`id`, `category_id`, `shop_id`, `name`, `description`, `created_at`, `updated_at`, `comments_count`) VALUES
+	(1, 7, 1, '恋するドールと想いのキセキOriginal Soundtrack', 'sdflkjsdfaljkdfasljkadfsljkdlfaskjafdjksl', '2017-11-05 10:57:29', '2017-11-14 06:51:11', 4),
+	(3, 2, 1, 'セイバー TYPE-MOON RACING Ver. 「Fate/stay night」 1/7 PVC製塗装済み完成品', '', '2017-11-09 10:13:03', '2017-11-09 10:13:03', 1),
+	(4, 2, 1, 'ランサー/スカサハ 「Fate/Grand Order」 1/7 PVC製塗装済み完成品', '', '2017-11-09 10:14:26', '2017-11-09 10:14:26', 0),
+	(16, 2, 1, 'asd asd', 'asd', '2017-11-10 03:51:07', '2017-11-10 12:14:34', 0);
 /*!40000 ALTER TABLE `ec_products` ENABLE KEYS */;
 
 -- Dumping data for table nyoro2_development.ec_product_colors: ~7 rows (approximately)
@@ -386,17 +429,12 @@ INSERT INTO `ec_product_discounts` (`id`, `product_id`, `shop`, `system`, `creat
 	(20, 16, 0, 0, '2017-11-10 03:51:08', '2017-11-10 03:51:08');
 /*!40000 ALTER TABLE `ec_product_discounts` ENABLE KEYS */;
 
--- Dumping data for table nyoro2_development.ec_product_images: ~4 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_product_images: ~0 rows (approximately)
 DELETE FROM `ec_product_images`;
 /*!40000 ALTER TABLE `ec_product_images` DISABLE KEYS */;
-INSERT INTO `ec_product_images` (`id`, `product_id`, `image`, `nsfw`, `created_at`, `updated_at`) VALUES
-	(21, 1, 'index_parallax_1.jpg', 0, '2017-11-07 05:11:01', '2017-11-07 05:11:01'),
-	(22, 1, 'index_parallax_1_.jpg', 0, '2017-11-07 05:11:14', '2017-11-07 05:11:14'),
-	(23, 1, 'index_parallax_5.jpg', 0, '2017-11-07 05:18:50', '2017-11-07 05:18:50'),
-	(24, 1, 'index_parallax_3.jpg', 0, '2017-11-07 05:56:14', '2017-11-07 05:56:14');
 /*!40000 ALTER TABLE `ec_product_images` ENABLE KEYS */;
 
--- Dumping data for table nyoro2_development.ec_product_storages: ~7 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_product_storages: ~10 rows (approximately)
 DELETE FROM `ec_product_storages`;
 /*!40000 ALTER TABLE `ec_product_storages` DISABLE KEYS */;
 INSERT INTO `ec_product_storages` (`id`, `color_id`, `total`, `sold`, `created_at`, `updated_at`) VALUES
@@ -412,14 +450,14 @@ INSERT INTO `ec_product_storages` (`id`, `color_id`, `total`, `sold`, `created_a
 	(22, 27, 111, 0, '2017-11-14 06:51:38', '2017-11-14 06:51:38');
 /*!40000 ALTER TABLE `ec_product_storages` ENABLE KEYS */;
 
--- Dumping data for table nyoro2_development.ec_shops: ~0 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_shops: ~1 rows (approximately)
 DELETE FROM `ec_shops`;
 /*!40000 ALTER TABLE `ec_shops` DISABLE KEYS */;
 INSERT INTO `ec_shops` (`id`, `user_id`, `type`, `name`, `website`, `phone`, `email`, `address`, `description`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'Ec::ApprovedShop', 'はるか', 'haruka_ya.com', '11111111111', 'haruka_ya@yahoo.co.jp', '23東京、日本', 'かるかのかわいい店', '2017-11-05 04:10:16', '2017-11-07 02:04:51');
 /*!40000 ALTER TABLE `ec_shops` ENABLE KEYS */;
 
--- Dumping data for table nyoro2_development.feature_comments: ~13 rows (approximately)
+-- Dumping data for table nyoro2_development.feature_comments: ~18 rows (approximately)
 DELETE FROM `feature_comments`;
 /*!40000 ALTER TABLE `feature_comments` DISABLE KEYS */;
 INSERT INTO `feature_comments` (`id`, `user_id`, `commentable_type`, `commentable_id`, `body`, `created_at`, `updated_at`) VALUES
@@ -435,7 +473,12 @@ INSERT INTO `feature_comments` (`id`, `user_id`, `commentable_type`, `commentabl
 	(12, 1, 'Db::Company', 5, 'こｄｓｆじゃｄｓｆｊｋだふぁｄｆｊかｄｓｆｊぁｄｓｆｊｌｋ', '2017-10-15 02:13:38', '2017-10-15 02:13:38'),
 	(13, 1, 'Db::Song', 1, 'hello', '2017-10-15 04:43:04', '2017-10-15 04:43:04'),
 	(14, 1, 'Db::Album', 1, 'asadasdsasd', '2017-10-22 04:41:00', '2017-10-22 04:41:00'),
-	(15, 1, 'Db::Album', 2, 'こんにちは', '2017-10-22 08:51:40', '2017-10-22 08:51:40');
+	(15, 1, 'Db::Album', 2, 'こんにちは', '2017-10-22 08:51:40', '2017-10-22 08:51:40'),
+	(17, 1, 'Ec::Product', 1, 'hurray', '2017-11-18 04:00:03', '2017-11-18 04:00:03'),
+	(18, 1, 'Ec::Product', 1, 'hurray', '2017-11-18 04:01:57', '2017-11-18 04:01:57'),
+	(19, 1, 'Ec::Product', 1, 'hurray', '2017-11-18 04:03:50', '2017-11-18 04:03:50'),
+	(20, 1, 'Ec::Product', 1, 'yaay', '2017-11-18 04:04:06', '2017-11-18 04:04:06'),
+	(21, 1, 'Ec::Product', 3, 'asddas', '2017-11-20 15:06:31', '2017-11-20 15:06:31');
 /*!40000 ALTER TABLE `feature_comments` ENABLE KEYS */;
 
 -- Dumping data for table nyoro2_development.feature_logs: ~122 rows (approximately)
@@ -566,17 +609,18 @@ INSERT INTO `feature_logs` (`id`, `user_id`, `loggable_type`, `loggable_id`, `ti
 	(123, 1, 'Db::Company', 5, '株式会社ビジュアルアーツ', 'db', 'update', 'バーション6に戻す。', '2017-10-25 07:24:19', '2017-10-25 07:24:19');
 /*!40000 ALTER TABLE `feature_logs` ENABLE KEYS */;
 
--- Dumping data for table nyoro2_development.feature_ratings: ~4 rows (approximately)
+-- Dumping data for table nyoro2_development.feature_ratings: ~5 rows (approximately)
 DELETE FROM `feature_ratings`;
 /*!40000 ALTER TABLE `feature_ratings` DISABLE KEYS */;
 INSERT INTO `feature_ratings` (`id`, `user_id`, `rateable_type`, `rateable_id`, `star`, `created_at`, `updated_at`) VALUES
 	(2, 2, 'Db::Album', 1, 7, '2017-10-15 08:40:18', '2017-10-15 08:40:18'),
 	(15, 1, 'Db::Album', 1, 8, '2017-10-17 04:08:34', '2017-10-23 08:44:59'),
 	(16, 1, 'Db::Album', 4, 9, '2017-10-21 09:02:41', '2017-10-21 09:04:08'),
-	(17, 1, 'Db::Album', 6, 6, '2017-10-21 09:03:40', '2017-10-21 09:03:40');
+	(17, 1, 'Db::Album', 6, 6, '2017-10-21 09:03:40', '2017-10-21 09:03:40'),
+	(18, 1, 'Ec::Product', 1, 10, '2017-11-18 09:39:04', '2017-11-18 09:39:04');
 /*!40000 ALTER TABLE `feature_ratings` ENABLE KEYS */;
 
--- Dumping data for table nyoro2_development.schema_migrations: ~39 rows (approximately)
+-- Dumping data for table nyoro2_development.schema_migrations: ~44 rows (approximately)
 DELETE FROM `schema_migrations`;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
 INSERT INTO `schema_migrations` (`version`) VALUES
@@ -618,14 +662,19 @@ INSERT INTO `schema_migrations` (`version`) VALUES
 	('20171023072709'),
 	('20171024091748'),
 	('20171024092609'),
-	('20171104072816');
+	('20171104072816'),
+	('20171118035626'),
+	('20171123125407'),
+	('20171125065839'),
+	('20171125070154'),
+	('20171125071228');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 
 -- Dumping data for table nyoro2_development.users: ~3 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `user_name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `confirmation_token`, `confirmed_at`, `confirmation_sent_at`, `unconfirmed_email`, `failed_attempts`, `unlock_token`, `locked_at`, `first_name`, `last_name`, `name_pronounce`, `avatar`, `provider`, `uid`, `created_at`, `updated_at`, `country_id`) VALUES
-	(1, 'moonlight8978', 'bach.bach.1812@gmail.com', '$2a$11$Wy3uSzLqsi/Fz7YsuXyW6eXcKGOvWZ4bcUHUDcFo7G.ppmhAOWx36', NULL, NULL, '2017-10-27 07:31:25', 92, '2017-11-15 02:28:25', '2017-11-14 06:22:31', '127.0.0.1', '127.0.0.1', 'yC-HzUukJ2U2NygrUyMj', '2017-09-29 08:43:07', '2017-09-29 08:41:26', NULL, 0, NULL, NULL, 'ひろし', '鈴木', '', NULL, NULL, NULL, '2017-09-19 10:25:59', '2017-11-15 02:28:25', 1),
+	(1, 'moonlight8978', 'bach.bach.1812@gmail.com', '$2a$11$Wy3uSzLqsi/Fz7YsuXyW6eXcKGOvWZ4bcUHUDcFo7G.ppmhAOWx36', NULL, NULL, '2017-11-22 04:11:59', 94, '2017-11-22 04:11:59', '2017-11-15 14:15:49', '127.0.0.1', '127.0.0.1', 'yC-HzUukJ2U2NygrUyMj', '2017-09-29 08:43:07', '2017-09-29 08:41:26', NULL, 0, NULL, NULL, 'ひろし', '鈴木', '', NULL, NULL, NULL, '2017-09-19 10:25:59', '2017-11-22 04:11:59', 1),
 	(2, 'depzai', 'lesi.bich.181297@gmail.com', '$2a$11$JEP04UfK4cd4RDWW.nNzzOJHl9vdsGOvpiyTV3ADq3fFHsvZjhjNK', NULL, NULL, NULL, 1, '2017-09-29 08:09:32', '2017-09-29 08:09:32', '127.0.0.1', '127.0.0.1', 'mvDRDSYp5USgJS9Ni6m1', '2017-09-29 15:09:20', '2017-09-29 08:08:29', NULL, 0, NULL, NULL, 'ひろし', '鈴木', 'すずきひろし', NULL, 'google_oauth2', '104325539789436039537', '2017-09-29 08:08:29', '2017-09-29 08:13:05', 1),
 	(4, NULL, 'moonlight8978@gmail.com', '$2a$11$ISKmyDR4pvQApaiQ5WSmOeMoz3sFhvxyMtstLy1DQ0C4B9xoaJ3b2', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 'meRzgiaGGpDcn8zgAzNu', NULL, '2017-10-27 07:30:53', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'facebook', '1405224559595957', '2017-10-27 07:30:53', '2017-10-27 07:30:53', NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;

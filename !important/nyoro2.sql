@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `ar_internal_metadata` (
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.ar_internal_metadata: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.ar_internal_metadata: ~0 rows (approximately)
 DELETE FROM `ar_internal_metadata`;
 /*!40000 ALTER TABLE `ar_internal_metadata` DISABLE KEYS */;
 INSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `countries` (
   KEY `index_countries_on_code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.countries: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.countries: ~0 rows (approximately)
 DELETE FROM `countries`;
 /*!40000 ALTER TABLE `countries` DISABLE KEYS */;
 INSERT INTO `countries` (`id`, `name`, `name_en`, `name_pronounce`, `code`, `note`, `created_at`, `updated_at`) VALUES
@@ -687,6 +687,161 @@ INSERT INTO `ec_categories` (`id`, `parent_id`, `name`, `description`, `created_
 	(9, NULL, '他', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `ec_categories` ENABLE KEYS */;
 
+-- Dumping structure for table nyoro2_development.ec_invoice_original_invoices
+DROP TABLE IF EXISTS `ec_invoice_original_invoices`;
+CREATE TABLE IF NOT EXISTS `ec_invoice_original_invoices` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) DEFAULT NULL,
+  `total` int(11) DEFAULT NULL,
+  `point` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_ec_invoice_original_invoices_on_order_id` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_invoice_original_invoices: ~0 rows (approximately)
+DELETE FROM `ec_invoice_original_invoices`;
+/*!40000 ALTER TABLE `ec_invoice_original_invoices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_invoice_original_invoices` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_invoice_original_invoices_order_products
+DROP TABLE IF EXISTS `ec_invoice_original_invoices_order_products`;
+CREATE TABLE IF NOT EXISTS `ec_invoice_original_invoices_order_products` (
+  `original_invoice_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  KEY `index_ec_original_invoice_id_product_id` (`original_invoice_id`,`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_invoice_original_invoices_order_products: ~0 rows (approximately)
+DELETE FROM `ec_invoice_original_invoices_order_products`;
+/*!40000 ALTER TABLE `ec_invoice_original_invoices_order_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_invoice_original_invoices_order_products` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_invoice_shop_invoices
+DROP TABLE IF EXISTS `ec_invoice_shop_invoices`;
+CREATE TABLE IF NOT EXISTS `ec_invoice_shop_invoices` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `shop_id` bigint(20) DEFAULT NULL,
+  `order_id` bigint(20) DEFAULT NULL,
+  `total` int(11) DEFAULT NULL,
+  `point` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `original_invoice_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_ec_invoice_shop_invoices_on_shop_id` (`shop_id`),
+  KEY `index_ec_invoice_shop_invoices_on_order_id` (`order_id`),
+  KEY `index_ec_invoice_shop_invoices_on_original_invoice_id` (`original_invoice_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_invoice_shop_invoices: ~0 rows (approximately)
+DELETE FROM `ec_invoice_shop_invoices`;
+/*!40000 ALTER TABLE `ec_invoice_shop_invoices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_invoice_shop_invoices` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_invoice_shop_invoices_order_products
+DROP TABLE IF EXISTS `ec_invoice_shop_invoices_order_products`;
+CREATE TABLE IF NOT EXISTS `ec_invoice_shop_invoices_order_products` (
+  `shop_invoice_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  KEY `index_ec_shop_invoice_id_product_id` (`shop_invoice_id`,`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_invoice_shop_invoices_order_products: ~0 rows (approximately)
+DELETE FROM `ec_invoice_shop_invoices_order_products`;
+/*!40000 ALTER TABLE `ec_invoice_shop_invoices_order_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_invoice_shop_invoices_order_products` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_orders
+DROP TABLE IF EXISTS `ec_orders`;
+CREATE TABLE IF NOT EXISTS `ec_orders` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `shipping_id` bigint(20) DEFAULT NULL,
+  `payment_id` bigint(20) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `payment_method` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_ec_orders_on_shipping_id` (`shipping_id`),
+  KEY `index_ec_orders_on_payment_id` (`payment_id`),
+  KEY `index_ec_orders_on_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_orders: ~0 rows (approximately)
+DELETE FROM `ec_orders`;
+/*!40000 ALTER TABLE `ec_orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_orders` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_order_products
+DROP TABLE IF EXISTS `ec_order_products`;
+CREATE TABLE IF NOT EXISTS `ec_order_products` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `color` varchar(255) DEFAULT NULL,
+  `shop_discount` float DEFAULT NULL,
+  `system_discount` float DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_ec_order_products_on_product_id` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_order_products: ~0 rows (approximately)
+DELETE FROM `ec_order_products`;
+/*!40000 ALTER TABLE `ec_order_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_order_products` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_order_shippings
+DROP TABLE IF EXISTS `ec_order_shippings`;
+CREATE TABLE IF NOT EXISTS `ec_order_shippings` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `method` varchar(255) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `description` text,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_order_shippings: ~2 rows (approximately)
+DELETE FROM `ec_order_shippings`;
+/*!40000 ALTER TABLE `ec_order_shippings` DISABLE KEYS */;
+INSERT INTO `ec_order_shippings` (`id`, `method`, `price`, `description`, `created_at`, `updated_at`) VALUES
+	(1, 'Giao hàng tiết kiệm', 0, 'Giao hàng tiết kiệm miễn phí', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(2, 'Giao hàng nhanh', 500, 'Giao hàng nhanh', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `ec_order_shippings` ENABLE KEYS */;
+
+-- Dumping structure for table nyoro2_development.ec_payments
+DROP TABLE IF EXISTS `ec_payments`;
+CREATE TABLE IF NOT EXISTS `ec_payments` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `card_number` varchar(255) DEFAULT NULL,
+  `expiration_date` date DEFAULT NULL,
+  `completed` tinyint(1) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_ec_payments_on_type` (`type`),
+  KEY `index_ec_payments_on_user_id` (`user_id`),
+  KEY `index_ec_payments_on_card_number` (`card_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table nyoro2_development.ec_payments: ~0 rows (approximately)
+DELETE FROM `ec_payments`;
+/*!40000 ALTER TABLE `ec_payments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ec_payments` ENABLE KEYS */;
+
 -- Dumping structure for table nyoro2_development.ec_products
 DROP TABLE IF EXISTS `ec_products`;
 CREATE TABLE IF NOT EXISTS `ec_products` (
@@ -697,16 +852,20 @@ CREATE TABLE IF NOT EXISTS `ec_products` (
   `description` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `comments_count` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `index_ec_products_on_category_id` (`category_id`),
   KEY `index_ec_products_on_shop_id` (`shop_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.ec_products: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_products: ~4 rows (approximately)
 DELETE FROM `ec_products`;
 /*!40000 ALTER TABLE `ec_products` DISABLE KEYS */;
-INSERT INTO `ec_products` (`id`, `category_id`, `shop_id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-	(1, 7, 1, '恋するドールと想いのキセキOriginal Soundtrack', NULL, '2017-11-05 10:57:29', '2017-11-05 10:57:29');
+INSERT INTO `ec_products` (`id`, `category_id`, `shop_id`, `name`, `description`, `created_at`, `updated_at`, `comments_count`) VALUES
+	(1, 7, 1, '恋するドールと想いのキセキOriginal Soundtrack', 'sdflkjsdfaljkdfasljkadfsljkdlfaskjafdjksl', '2017-11-05 10:57:29', '2017-11-14 06:51:11', 4),
+	(3, 2, 1, 'セイバー TYPE-MOON RACING Ver. 「Fate/stay night」 1/7 PVC製塗装済み完成品', '', '2017-11-09 10:13:03', '2017-11-09 10:13:03', 1),
+	(4, 2, 1, 'ランサー/スカサハ 「Fate/Grand Order」 1/7 PVC製塗装済み完成品', '', '2017-11-09 10:14:26', '2017-11-09 10:14:26', 0),
+	(16, 2, 1, 'asd asd', 'asd', '2017-11-10 03:51:07', '2017-11-10 12:14:34', 0);
 /*!40000 ALTER TABLE `ec_products` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.ec_product_colors
@@ -715,18 +874,24 @@ CREATE TABLE IF NOT EXISTS `ec_product_colors` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `price` varchar(255) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `index_ec_product_colors_on_product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.ec_product_colors: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_product_colors: ~7 rows (approximately)
 DELETE FROM `ec_product_colors`;
 /*!40000 ALTER TABLE `ec_product_colors` DISABLE KEYS */;
 INSERT INTO `ec_product_colors` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'Default', '200000', '2017-11-05 10:58:22', '2017-11-05 10:58:22');
+	(1, 1, 'Default', 200000, '2017-11-05 10:58:22', '2017-11-05 10:58:22'),
+	(2, 2, 'adadasasd', 12334, '2017-11-08 11:00:15', '2017-11-08 11:00:15'),
+	(3, 3, 'Default', 18500, '2017-11-09 10:13:03', '2017-11-09 10:13:03'),
+	(4, 4, 'Default', 12500, '2017-11-09 10:14:26', '2017-11-09 10:14:26'),
+	(25, 16, 'asdasd', 12312, '2017-11-10 03:51:07', '2017-11-10 03:51:07'),
+	(26, 1, 'Red', 12333, '2017-11-11 15:17:33', '2017-11-11 15:17:33'),
+	(27, 1, 'White', 25555, '2017-11-14 06:51:38', '2017-11-14 06:51:38');
 /*!40000 ALTER TABLE `ec_product_colors` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.ec_product_discounts
@@ -740,13 +905,17 @@ CREATE TABLE IF NOT EXISTS `ec_product_discounts` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `index_ec_product_discounts_on_product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.ec_product_discounts: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_product_discounts: ~5 rows (approximately)
 DELETE FROM `ec_product_discounts`;
 /*!40000 ALTER TABLE `ec_product_discounts` DISABLE KEYS */;
 INSERT INTO `ec_product_discounts` (`id`, `product_id`, `shop`, `system`, `created_at`, `updated_at`) VALUES
-	(1, 1, 0, 0, '2017-11-08 02:49:09', '2017-11-08 02:49:09');
+	(1, 1, 0.05, 0, '2017-11-08 02:49:09', '2017-11-14 06:50:54'),
+	(2, 2, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	(3, 3, 0, 0, '2017-11-09 10:13:03', '2017-11-09 10:13:03'),
+	(4, 4, 0, 0, '2017-11-09 10:14:27', '2017-11-09 10:14:27'),
+	(20, 16, 0, 0, '2017-11-10 03:51:08', '2017-11-10 03:51:08');
 /*!40000 ALTER TABLE `ec_product_discounts` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.ec_product_images
@@ -760,16 +929,11 @@ CREATE TABLE IF NOT EXISTS `ec_product_images` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `index_ec_product_images_on_product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.ec_product_images: ~4 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_product_images: ~0 rows (approximately)
 DELETE FROM `ec_product_images`;
 /*!40000 ALTER TABLE `ec_product_images` DISABLE KEYS */;
-INSERT INTO `ec_product_images` (`id`, `product_id`, `image`, `nsfw`, `created_at`, `updated_at`) VALUES
-	(21, 1, 'index_parallax_1.jpg', 0, '2017-11-07 05:11:01', '2017-11-07 05:11:01'),
-	(22, 1, 'index_parallax_1_.jpg', 0, '2017-11-07 05:11:14', '2017-11-07 05:11:14'),
-	(23, 1, 'index_parallax_5.jpg', 0, '2017-11-07 05:18:50', '2017-11-07 05:18:50'),
-	(24, 1, 'index_parallax_3.jpg', 0, '2017-11-07 05:56:14', '2017-11-07 05:56:14');
 /*!40000 ALTER TABLE `ec_product_images` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.ec_product_storages
@@ -783,13 +947,22 @@ CREATE TABLE IF NOT EXISTS `ec_product_storages` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `index_ec_product_storages_on_color_id` (`color_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.ec_product_storages: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_product_storages: ~7 rows (approximately)
 DELETE FROM `ec_product_storages`;
 /*!40000 ALTER TABLE `ec_product_storages` DISABLE KEYS */;
 INSERT INTO `ec_product_storages` (`id`, `color_id`, `total`, `sold`, `created_at`, `updated_at`) VALUES
-	(1, 1, 20, 0, '2017-11-08 00:41:43', '2017-11-08 00:41:43');
+	(1, 1, 12, 0, '2017-11-08 00:41:43', '2017-11-11 15:25:43'),
+	(2, 2, 11, 0, '2017-11-08 11:00:15', '2017-11-08 11:00:15'),
+	(3, 3, 5, 0, '2017-11-09 10:13:03', '2017-11-09 10:13:03'),
+	(4, 4, 7, 0, '2017-11-09 10:14:26', '2017-11-09 10:14:26'),
+	(17, 21, 12, 0, '2017-11-10 03:32:59', '2017-11-10 03:32:59'),
+	(18, 22, 123, 0, '2017-11-10 03:43:42', '2017-11-10 03:43:42'),
+	(19, 24, 1, 0, '2017-11-10 03:47:35', '2017-11-10 03:47:35'),
+	(20, 25, 12, 0, '2017-11-10 03:51:08', '2017-11-10 03:51:08'),
+	(21, 26, 12, 0, '2017-11-11 15:17:37', '2017-11-11 15:17:37'),
+	(22, 27, 111, 0, '2017-11-14 06:51:38', '2017-11-14 06:51:38');
 /*!40000 ALTER TABLE `ec_product_storages` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.ec_shops
@@ -811,7 +984,7 @@ CREATE TABLE IF NOT EXISTS `ec_shops` (
   KEY `index_ec_shops_on_type` (`type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.ec_shops: ~1 rows (approximately)
+-- Dumping data for table nyoro2_development.ec_shops: ~0 rows (approximately)
 DELETE FROM `ec_shops`;
 /*!40000 ALTER TABLE `ec_shops` DISABLE KEYS */;
 INSERT INTO `ec_shops` (`id`, `user_id`, `type`, `name`, `website`, `phone`, `email`, `address`, `description`, `created_at`, `updated_at`) VALUES
@@ -831,9 +1004,9 @@ CREATE TABLE IF NOT EXISTS `feature_comments` (
   PRIMARY KEY (`id`),
   KEY `index_feature_comments_on_user_id` (`user_id`),
   KEY `index_feature_comments_on_commentable_type_and_commentable_id` (`commentable_type`,`commentable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
--- Dumping data for table nyoro2_development.feature_comments: ~13 rows (approximately)
+-- Dumping data for table nyoro2_development.feature_comments: ~15 rows (approximately)
 DELETE FROM `feature_comments`;
 /*!40000 ALTER TABLE `feature_comments` DISABLE KEYS */;
 INSERT INTO `feature_comments` (`id`, `user_id`, `commentable_type`, `commentable_id`, `body`, `created_at`, `updated_at`) VALUES
@@ -849,7 +1022,12 @@ INSERT INTO `feature_comments` (`id`, `user_id`, `commentable_type`, `commentabl
 	(12, 1, 'Db::Company', 5, 'こｄｓｆじゃｄｓｆｊｋだふぁｄｆｊかｄｓｆｊぁｄｓｆｊｌｋ', '2017-10-15 02:13:38', '2017-10-15 02:13:38'),
 	(13, 1, 'Db::Song', 1, 'hello', '2017-10-15 04:43:04', '2017-10-15 04:43:04'),
 	(14, 1, 'Db::Album', 1, 'asadasdsasd', '2017-10-22 04:41:00', '2017-10-22 04:41:00'),
-	(15, 1, 'Db::Album', 2, 'こんにちは', '2017-10-22 08:51:40', '2017-10-22 08:51:40');
+	(15, 1, 'Db::Album', 2, 'こんにちは', '2017-10-22 08:51:40', '2017-10-22 08:51:40'),
+	(17, 1, 'Ec::Product', 1, 'hurray', '2017-11-18 04:00:03', '2017-11-18 04:00:03'),
+	(18, 1, 'Ec::Product', 1, 'hurray', '2017-11-18 04:01:57', '2017-11-18 04:01:57'),
+	(19, 1, 'Ec::Product', 1, 'hurray', '2017-11-18 04:03:50', '2017-11-18 04:03:50'),
+	(20, 1, 'Ec::Product', 1, 'yaay', '2017-11-18 04:04:06', '2017-11-18 04:04:06'),
+	(21, 1, 'Ec::Product', 3, 'asddas', '2017-11-20 15:06:31', '2017-11-20 15:06:31');
 /*!40000 ALTER TABLE `feature_comments` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.feature_logs
@@ -1013,7 +1191,7 @@ CREATE TABLE IF NOT EXISTS `feature_ratings` (
   PRIMARY KEY (`id`),
   KEY `index_feature_ratings_on_user_id` (`user_id`),
   KEY `index_feature_ratings_on_rateable_type_and_rateable_id` (`rateable_type`,`rateable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table nyoro2_development.feature_ratings: ~4 rows (approximately)
 DELETE FROM `feature_ratings`;
@@ -1022,7 +1200,8 @@ INSERT INTO `feature_ratings` (`id`, `user_id`, `rateable_type`, `rateable_id`, 
 	(2, 2, 'Db::Album', 1, 7, '2017-10-15 08:40:18', '2017-10-15 08:40:18'),
 	(15, 1, 'Db::Album', 1, 8, '2017-10-17 04:08:34', '2017-10-23 08:44:59'),
 	(16, 1, 'Db::Album', 4, 9, '2017-10-21 09:02:41', '2017-10-21 09:04:08'),
-	(17, 1, 'Db::Album', 6, 6, '2017-10-21 09:03:40', '2017-10-21 09:03:40');
+	(17, 1, 'Db::Album', 6, 6, '2017-10-21 09:03:40', '2017-10-21 09:03:40'),
+	(18, 1, 'Ec::Product', 1, 10, '2017-11-18 09:39:04', '2017-11-18 09:39:04');
 /*!40000 ALTER TABLE `feature_ratings` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.schema_migrations
@@ -1074,7 +1253,12 @@ INSERT INTO `schema_migrations` (`version`) VALUES
 	('20171023072709'),
 	('20171024091748'),
 	('20171024092609'),
-	('20171104072816');
+	('20171104072816'),
+	('20171118035626'),
+	('20171123125407'),
+	('20171125065839'),
+	('20171125070154'),
+	('20171125071228');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 
 -- Dumping structure for table nyoro2_development.users
@@ -1122,7 +1306,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `user_name`, `email`, `encrypted_password`, `reset_password_token`, `reset_password_sent_at`, `remember_created_at`, `sign_in_count`, `current_sign_in_at`, `last_sign_in_at`, `current_sign_in_ip`, `last_sign_in_ip`, `confirmation_token`, `confirmed_at`, `confirmation_sent_at`, `unconfirmed_email`, `failed_attempts`, `unlock_token`, `locked_at`, `first_name`, `last_name`, `name_pronounce`, `avatar`, `provider`, `uid`, `created_at`, `updated_at`, `country_id`) VALUES
-	(1, 'moonlight8978', 'bach.bach.1812@gmail.com', '$2a$11$Wy3uSzLqsi/Fz7YsuXyW6eXcKGOvWZ4bcUHUDcFo7G.ppmhAOWx36', NULL, NULL, '2017-10-27 07:31:25', 82, '2017-11-08 00:46:54', '2017-11-08 00:46:50', '127.0.0.1', '127.0.0.1', 'yC-HzUukJ2U2NygrUyMj', '2017-09-29 08:43:07', '2017-09-29 08:41:26', NULL, 0, NULL, NULL, 'ひろし', '鈴木', '', NULL, NULL, NULL, '2017-09-19 10:25:59', '2017-11-08 00:46:54', 1),
+	(1, 'moonlight8978', 'bach.bach.1812@gmail.com', '$2a$11$Wy3uSzLqsi/Fz7YsuXyW6eXcKGOvWZ4bcUHUDcFo7G.ppmhAOWx36', NULL, NULL, '2017-11-22 04:11:59', 94, '2017-11-22 04:11:59', '2017-11-15 14:15:49', '127.0.0.1', '127.0.0.1', 'yC-HzUukJ2U2NygrUyMj', '2017-09-29 08:43:07', '2017-09-29 08:41:26', NULL, 0, NULL, NULL, 'ひろし', '鈴木', '', NULL, NULL, NULL, '2017-09-19 10:25:59', '2017-11-22 04:11:59', 1),
 	(2, 'depzai', 'lesi.bich.181297@gmail.com', '$2a$11$JEP04UfK4cd4RDWW.nNzzOJHl9vdsGOvpiyTV3ADq3fFHsvZjhjNK', NULL, NULL, NULL, 1, '2017-09-29 08:09:32', '2017-09-29 08:09:32', '127.0.0.1', '127.0.0.1', 'mvDRDSYp5USgJS9Ni6m1', '2017-09-29 15:09:20', '2017-09-29 08:08:29', NULL, 0, NULL, NULL, 'ひろし', '鈴木', 'すずきひろし', NULL, 'google_oauth2', '104325539789436039537', '2017-09-29 08:08:29', '2017-09-29 08:13:05', 1),
 	(4, NULL, 'moonlight8978@gmail.com', '$2a$11$ISKmyDR4pvQApaiQ5WSmOeMoz3sFhvxyMtstLy1DQ0C4B9xoaJ3b2', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 'meRzgiaGGpDcn8zgAzNu', NULL, '2017-10-27 07:30:53', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'facebook', '1405224559595957', '2017-10-27 07:30:53', '2017-10-27 07:30:53', NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
