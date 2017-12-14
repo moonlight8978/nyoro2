@@ -45,5 +45,8 @@ module Nyoro2
 	# Disable assets auto generator
 	config.generators.stylesheets = false
 	config.generators.javascripts = false
+
+    # Don't generate system test files.
+    config.generators.system_tests = nil
   end
 end
