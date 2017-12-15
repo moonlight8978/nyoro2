@@ -1,0 +1,12 @@
+= content_for :title do
+  = '予約'
+
+= content_for :side_nav do
+  = render 'shop/side_nav'
+
+div class="b-box b-box"
+  - @invoices.each do |invoice|
+    div class="b-box-row"
+      div = "#{invoice.original_invoice.last_name} #{invoice.original_invoice.first_name}"
+      div = invoice.order.status
+      div = invoice.total

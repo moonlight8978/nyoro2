@@ -1,7 +1,7 @@
 class EcForm::Invoice
   include ActiveModel::Dirty
   include ActiveModel::Model
-  
+
   # An order is required to create a new invoice
   attr_accessor :order
 
@@ -22,14 +22,15 @@ class EcForm::Invoice
 
   def save
     if valid?
-      
+
     else
-      
+
     end
   end
 
   def assign(params)
     invoice.assign_attributes(params)
-    p invoice
   end
+
+  alias_method :build, :assign
 end

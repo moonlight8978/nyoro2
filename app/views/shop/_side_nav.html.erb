@@ -26,6 +26,13 @@
       </li>
     <% end %>
 
+    <%= link_to shop_orders_path do %>
+      <li class="list-group-item list-group-item-action <%= current_page?(shop_orders_path) ? 'active' : '' %>">
+        <i class="fa fa-fw fa-line-chart"></i>
+        予約
+      </li>
+    <% end %>
+
     <%= link_to shop_products_path do %>
       <li class="list-group-item list-group-item-action <%= current_page?(shop_products_path) ? 'active' : '' %>">
         <i class="fa fa-fw fa-calculator"></i>

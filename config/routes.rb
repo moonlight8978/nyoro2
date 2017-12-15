@@ -127,6 +127,8 @@ Rails.application.routes.draw do
       resources :products do
         delete 'destroy_multiple', on: :collection
       end
+
+      resources :orders, only: [:index, :show]
     end
 
     resources :products, only: [] do

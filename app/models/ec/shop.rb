@@ -5,6 +5,8 @@ class Ec::Shop < ApplicationRecord
     class_name: :'User'
   has_many :products,
     class_name: :'Ec::Product'
+  has_many :invoices,
+    class_name: :'Ec::Invoice::ShopInvoice'
 
   def approved?
     type == 'Ec::ApprovedShop'

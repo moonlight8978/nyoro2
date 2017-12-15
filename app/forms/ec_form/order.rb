@@ -13,8 +13,6 @@ class EcForm::Order
 
   validates :shipping,
     presence: true
-  validates :payment_method,
-    presence: true
 
   def order
     @order ||= Ec::Order.new(user: user)
@@ -28,26 +26,20 @@ class EcForm::Order
   def all_valid?
     valid?
     invoice_form.valid?
-    
+
     valid? && invoice_form.valid?
   end
 
   # @param args [Hash] not optional arguments
-  # @option args [Parameters] :order_params
-  # @option args [Parameters] :invoice_params
-  #
-  # @return [true, false]
-  def save(**args)
-    if all_valid?
-      
-    else
-      
-    end
+  # @option args [Parameters] :order_params order params
+  # @option args [Parameters] :invoice_params invoice params
+  def assign(**args)
+    @order_params = args[:order_params]
+    @invoice_params = args[:invoice_params]
+    order.assign_attributes(@order_params)
+    invoice_form.build(@invoice_params)
+    p @invoice_params
   end
 
-  # @param (see #save)
-  def assign(**args)
-    order.assign_attributes(args[:order_params])
-    invoice_form.assign(args[:invoice_params])
-  end
+  alias_method :build, :assign
 end

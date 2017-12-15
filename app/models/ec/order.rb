@@ -6,16 +6,16 @@ class Ec::Order < ApplicationRecord
   belongs_to :user,
     class_name: 'User'
   belongs_to :payment,
-    class_name: 'Ec::Payment'
+    class_name: 'Ec::Payment', optional: true
   belongs_to :shipping,
     class_name: 'Ec::Order::Shipping'
   has_many :products,
     class_name: 'Ec::Order::Product'
-  has_one :invoice, 
+  has_one :invoice,
     class_name: 'Ec::Invoice::OriginalInvoice'
 
   # scopes
-  
+
   # class methods
 
   # validates
